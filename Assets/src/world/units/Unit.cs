@@ -38,7 +38,7 @@ namespace game.world.units {
 				transform.localPosition = new Vector3 (0, 0, Layer.Unit);
 
 				sr = gameObject.AddComponent<SpriteRenderer> ();
-				sr.sprite = Resources.Load<Sprite> ("Circle");
+				sr.sprite = Resources.Load<Sprite> ("Sprite/Circle");
 				sr.color = Color.green;
 			}
 

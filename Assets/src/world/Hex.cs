@@ -25,6 +25,11 @@ namespace game.world {
 			transform.localPosition = GameManager.l.HexPixel (loc);
 		}
 
+
+		public void Select() {
+			//model.sr.color = Color.yellow;
+		}
+
 		private class HexModel : MonoBehaviour {
 			SpriteRenderer sr;
 			Hex h;
@@ -35,7 +40,7 @@ namespace game.world {
 				transform.localScale = new Vector3 (1.9f, 1.9f, 0);
 
 				sr = gameObject.AddComponent<SpriteRenderer> ();
-				sr.sprite = Resources.Load <Sprite>("Hexagon");
+				sr.sprite = Resources.Load <Sprite>("Sprites/Hexagon");
 
 			}
 		}
