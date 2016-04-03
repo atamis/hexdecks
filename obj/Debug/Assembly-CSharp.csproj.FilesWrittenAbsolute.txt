@@ -1,0 +1,17 @@
+/Users/NickCare/Oberlin/CSCI/cs361/hexdecks/hexdecks/Temp/bin/Debug/UnityEngine.dll
+/Users/NickCare/Oberlin/CSCI/cs361/hexdecks/hexdecks/Temp/bin/Debug/UnityEditor.dll
+/Users/NickCare/Oberlin/CSCI/cs361/hexdecks/hexdecks/Temp/bin/Debug/UnityEngine.Networking.dll
+/Users/NickCare/Oberlin/CSCI/cs361/hexdecks/hexdecks/Temp/bin/Debug/UnityEngine.UI.dll
+/Users/NickCare/Oberlin/CSCI/cs361/hexdecks/hexdecks/Temp/bin/Debug/Mono.Cecil.dll
+/Users/NickCare/Oberlin/CSCI/cs361/hexdecks/hexdecks/Temp/bin/Debug/Unity.SerializationLogic.dll
+/Users/NickCare/Oberlin/CSCI/cs361/hexdecks/hexdecks/Temp/bin/Debug/Unity.DataContract.dll
+/Users/NickCare/Oberlin/CSCI/cs361/hexdecks/hexdecks/Temp/bin/Debug/ICSharpCode.NRefactory.dll
+/Users/NickCare/Oberlin/CSCI/cs361/hexdecks/hexdecks/Temp/bin/Debug/Unity.UNetWeaver.dll
+/Users/NickCare/Oberlin/CSCI/cs361/hexdecks/hexdecks/Temp/bin/Debug/Unity.UNetWeaver.dll.mdb
+/Users/NickCare/Oberlin/CSCI/cs361/hexdecks/hexdecks/Temp/bin/Debug/Unity.CecilTools.dll
+/Users/NickCare/Oberlin/CSCI/cs361/hexdecks/hexdecks/Temp/bin/Debug/Mono.Cecil.Pdb.dll
+/Users/NickCare/Oberlin/CSCI/cs361/hexdecks/hexdecks/Temp/bin/Debug/Mono.Cecil.Mdb.dll
+/Users/NickCare/Oberlin/CSCI/cs361/hexdecks/hexdecks/Temp/bin/Debug/Assembly-CSharp.dll.mdb
+/Users/NickCare/Oberlin/CSCI/cs361/hexdecks/hexdecks/Temp/bin/Debug/Assembly-CSharp.dll
+/Users/NickCare/Oberlin/CSCI/cs361/hexdecks/hexdecks/obj/Debug/Assembly-CSharp.dll
+/Users/NickCare/Oberlin/CSCI/cs361/hexdecks/hexdecks/obj/Debug/Assembly-CSharp.dll.mdb
