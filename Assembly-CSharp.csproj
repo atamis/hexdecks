@@ -46,6 +46,12 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\src\GameManager.cs" />
+     <Compile Include="Assets\src\tcg\Actor.cs" />
+     <Compile Include="Assets\src\tcg\Card.cs" />
+     <Compile Include="Assets\src\tcg\Deck.cs" />
+     <Compile Include="Assets\src\tcg\MinionCard.cs" />
+     <Compile Include="Assets\src\tcg\Player.cs" />
+     <Compile Include="Assets\src\tcg\SpellCard.cs" />
      <Compile Include="Assets\src\ui\GameCamera.cs" />
      <Compile Include="Assets\src\world\Hex.cs" />
      <Compile Include="Assets\src\world\Layer.cs" />
@@ -53,6 +59,9 @@
      <Compile Include="Assets\src\world\math\HexLoc.cs" />
      <Compile Include="Assets\src\world\math\Layout.cs" />
      <Compile Include="Assets\src\world\math\Orientation.cs" />
+     <Compile Include="Assets\src\world\units\HeroUnit.cs" />
+     <Compile Include="Assets\src\world\units\MinionUnit.cs" />
+     <Compile Include="Assets\src\world\units\PlayerUnit.cs" />
      <Compile Include="Assets\src\world\units\Unit.cs" />
  <Reference Include="UnityEngine.Networking">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>

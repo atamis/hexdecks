@@ -44,8 +44,9 @@ namespace game.world {
 			// TODO
 		}
 
-		public void addUnit(HexLoc hl) {
-			Unit u = new Unit (hl);
+		public void addUnit(Unit u, HexLoc hl) {
+			hexes [hl].unit = u;
+			u.loc = hl;
 		}
 
 		public void deleteUnit() {
