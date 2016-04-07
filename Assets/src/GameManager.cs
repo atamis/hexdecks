@@ -44,8 +44,8 @@ namespace game {
             ui = gameObject.AddComponent<UIManager>();
             ui.init(map, player);
 
-            var enemy = new GameObject("EvilTim").AddComponent<MinionUnit>();
-            enemy.init(map, map.map[new HexLoc(1, 1)], 20);
+            var enemy = new GameObject("EvilTim").AddComponent<EnemyUnit>();
+            enemy.init(map, map.map[new HexLoc(1, 1)]);
 
             //this.selected = null;
         }
@@ -61,7 +61,9 @@ namespace game {
 
 		void Update() {
             if (player.nextCommand != null) {
+                print("Executing command " + player.nextCommand);
                 player.nextCommand.Act(map);
+                player.nextCommand = null;
             }
 		}
 

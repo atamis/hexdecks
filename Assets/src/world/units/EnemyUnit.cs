@@ -2,7 +2,7 @@
 using System.Collections;
 
 namespace game.world.units {
-	class MinionUnit : Unit {
+	class EnemyUnit : Unit {
         public void init(WorldMap w, Hex h) {
             base.init(w, h, 2);
         }
