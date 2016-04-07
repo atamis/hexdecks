@@ -35,10 +35,14 @@ namespace game {
 			l = new Layout(Orientation.Pointy, new Vector2(1, 1), new Vector2(0, 0));
 			map = new WorldMap (l);
 
-			map.addUnit (new HeroUnit("Tim"), new HexLoc (0, 0));
+            var hero = new GameObject("Tim").AddComponent<HeroUnit>();
+            hero.init(map, map.map[new HexLoc(0, 0)]);
 
-			//this.selected = null;
-		}
+            var enemy = new GameObject("EvilTim").AddComponent<MinionUnit>();
+            enemy.init(map, map.map[new HexLoc(1, 1)], 20);
+
+            //this.selected = null;
+        }
 			
 		public void MakeDuel() {
 			// TODO
@@ -47,8 +51,8 @@ namespace game {
 		public Hex GetHexAtMouse() {
 			Vector3 worldPos = Camera.main.ScreenToWorldPoint (Input.mousePosition);
 			HexLoc l = map.l.PixelHex (worldPos);
-			if (map.hexes.ContainsKey (l)) {
-				Hex h = map.hexes [l];
+			if (map.map.ContainsKey (l)) {
+				Hex h = map.map [l];
 				return h;
 			}
 			return null;

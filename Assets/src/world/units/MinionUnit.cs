@@ -3,36 +3,13 @@ using System.Collections;
 
 namespace game.world.units {
 	class MinionUnit : Unit {
-		private MinionModel model;
+        public void init(WorldMap w, Hex h) {
+            base.init(w, h, 2);
+        }
 
-		public MinionUnit(string name, int health) {
-			this.name = name;
-			this.health = health;
+        public override Sprite getSprite() {
+            return Resources.Load<Sprite>("Sprites/Square");
+        }
 
-			model = new GameObject ("Minion Model").AddComponent<MinionModel> ();
-			model.init (this);
-
-			model.transform.position = GameManager.l.HexPixel (loc);
-		}
-			
-		private class MinionModel : MonoBehaviour {
-			SpriteRenderer sr;
-			MinionUnit mu;
-
-			public void init(MinionUnit mu) {
-				this.mu = mu;
-
-				gameObject.transform.localPosition = new Vector3 (0, 0, Layer.Unit);
-
-				sr = gameObject.AddComponent<SpriteRenderer> ();
-				sr.sprite = Resources.Load<Sprite> ("Sprite/Square");
-
-				sr.color = Color.cyan;
-			}
-
-			void Update() {
-
-			}
-		}
-	}
+    }
 }

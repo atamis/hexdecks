@@ -11,7 +11,7 @@ using game.world.math;
 namespace game.world {
 	class WorldMap {
 		GameObject hFolder; GameObject uFolder;
-		public Dictionary<HexLoc, Hex> hexes;
+		public Dictionary<HexLoc, Hex> map;
 		public Layout l;
 
 		// TODO
@@ -21,7 +21,7 @@ namespace game.world {
 			this.l = l;
 
 			hFolder = new GameObject ("Hex Map");
-			hexes = new Dictionary<HexLoc, Hex> ();
+			map = new Dictionary<HexLoc, Hex> ();
 
 			// create the map
 			for (int i = 0; i < 20; i++) {
@@ -37,16 +37,11 @@ namespace game.world {
 
 			h.transform.parent = hFolder.transform;
 
-			hexes.Add (hl, h);
+			map.Add (hl, h);
 		}
 
 		public void deleteHex(HexLoc hl) {
 			// TODO
-		}
-
-		public void addUnit(Unit u, HexLoc hl) {
-			hexes [hl].unit = u;
-			u.loc = hl;
 		}
 
 		public void deleteUnit() {

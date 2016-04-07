@@ -27,7 +27,7 @@ namespace game.tcg {
 		}
 
 		public override void OnPlay(HexLoc hl) {
-			GameManager.map.addUnit (new MinionUnit ("", 5), hl);
+			//GameManager.map.addUnit (new MinionUnit ("", 5), hl);
 		}
 
 		/*
