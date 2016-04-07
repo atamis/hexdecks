@@ -1,11 +1,12 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
     <ProjectGuid>{831FC142-61E3-E36C-8BDA-28176E4F2D9A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -45,29 +46,28 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\src\GameManager.cs" />
-     <Compile Include="Assets\src\Layer.cs" />
-     <Compile Include="Assets\src\tcg\Actor.cs" />
-     <Compile Include="Assets\src\tcg\Card.cs" />
-     <Compile Include="Assets\src\tcg\Deck.cs" />
-     <Compile Include="Assets\src\tcg\MinionCard.cs" />
-     <Compile Include="Assets\src\tcg\Player.cs" />
-     <Compile Include="Assets\src\tcg\SpellCard.cs" />
-     <Compile Include="Assets\src\ui\GameCamera.cs" />
-     <Compile Include="Assets\src\world\Hex.cs" />
-     <Compile Include="Assets\src\world\WorldMap.cs" />
-     <Compile Include="Assets\src\world\math\HexLoc.cs" />
-     <Compile Include="Assets\src\world\math\Layout.cs" />
-     <Compile Include="Assets\src\world\math\Orientation.cs" />
-     <Compile Include="Assets\src\world\units\HeroUnit.cs" />
-     <Compile Include="Assets\src\world\units\MinionUnit.cs" />
-     <Compile Include="Assets\src\world\units\Unit.cs" />
- <Reference Include="UnityEngine.UI">
- <HintPath>D:/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
- </Reference>
- <Reference Include="UnityEngine.Networking">
- <HintPath>D:/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
- </Reference>
+    <Compile Include="Assets\src\GameManager.cs" />
+    <Compile Include="Assets\src\Layer.cs" />
+    <Compile Include="Assets\src\tcg\Card.cs" />
+    <Compile Include="Assets\src\tcg\Command.cs" />
+    <Compile Include="Assets\src\tcg\Deck.cs" />
+    <Compile Include="Assets\src\tcg\Player.cs" />
+    <Compile Include="Assets\src\ui\GameCamera.cs" />
+    <Compile Include="Assets\src\ui\UIManager.cs" />
+    <Compile Include="Assets\src\world\Hex.cs" />
+    <Compile Include="Assets\src\world\WorldMap.cs" />
+    <Compile Include="Assets\src\world\math\HexLoc.cs" />
+    <Compile Include="Assets\src\world\math\Layout.cs" />
+    <Compile Include="Assets\src\world\math\Orientation.cs" />
+    <Compile Include="Assets\src\world\units\HeroUnit.cs" />
+    <Compile Include="Assets\src\world\units\MinionUnit.cs" />
+    <Compile Include="Assets\src\world\units\Unit.cs" />
+    <Reference Include="UnityEngine.UI">
+      <HintPath>D:/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.Networking">
+      <HintPath>D:/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -77,5 +77,4 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  
 </Project>

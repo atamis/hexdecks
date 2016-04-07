@@ -39,6 +39,7 @@ namespace game.tcg {
 
 			void Update() {
 
+
 			}
 		}
 	}

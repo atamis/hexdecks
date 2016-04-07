@@ -20,6 +20,7 @@ namespace game {
 	class GameManager : MonoBehaviour {
 		public static WorldMap map;
 		public static Layout l;
+        public static UIManager ui;
 
 		GameCamera gc;
 		bool battling;
@@ -38,6 +39,11 @@ namespace game {
             var hero = new GameObject("Tim").AddComponent<HeroUnit>();
             hero.init(map, map.map[new HexLoc(0, 0)]);
 
+            player = new Player(hero);
+
+            ui = gameObject.AddComponent<UIManager>();
+            ui.init(map, player);
+
             var enemy = new GameObject("EvilTim").AddComponent<MinionUnit>();
             enemy.init(map, map.map[new HexLoc(1, 1)], 20);
 
@@ -48,60 +54,15 @@ namespace game {
 			// TODO
 		}
 
-		public Hex GetHexAtMouse() {
-			Vector3 worldPos = Camera.main.ScreenToWorldPoint (Input.mousePosition);
-			HexLoc l = map.l.PixelHex (worldPos);
-			if (map.map.ContainsKey (l)) {
-				Hex h = map.map [l];
-				return h;
-			}
-			return null;
-		}
-
 		// Clamp down the duel arena
 		public void ClampArena() {
 
 		}
 
 		void Update() {
-			if (selected != null) {
-				selected.Select ();
-			}
-
-			if (Input.GetMouseButtonUp (0)) {
-				switch (state) {
-				case GameState.Default:
-					this.selected = GetHexAtMouse ();
-					if (selected != null) {
-						state = GameState.Selected;
-					} else {
-						state = GameState.Default;
-					}
-					break;
-
-				case GameState.Selected:
-					this.selected = GetHexAtMouse ();
-					if (selected != null) {
-						state = GameState.Selected;
-					} else {
-						state = GameState.Default;
-					}
-					break;
-
-				}
-			} else if (Input.GetMouseButton (1)) {
-				switch (state) {
-				case GameState.Default:
-					break;
-
-				case GameState.Selected:
-					Hex h = GetHexAtMouse ();
-					h.unit = selected.unit;
-					selected.unit = null;
-					break;
-
-				}
-			}
+            if (player.nextCommand != null) {
+                player.nextCommand.Act(map);
+            }
 		}
 
 		// Drag and drog logic
