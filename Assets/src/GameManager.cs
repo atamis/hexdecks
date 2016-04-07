@@ -2,7 +2,9 @@
 using System.Collections;
 using game.world;
 using game.world.math;
+using game.world.units;
 using game.ui;
+using game.tcg;
 /*
  * Andrew Amis, Nick Care, Robert Tomcik (2016)
  * The main HexDecks manager, references to the scenes should direct here
@@ -18,11 +20,14 @@ namespace game {
 	class GameManager : MonoBehaviour {
 		public static WorldMap map;
 		public static Layout l;
+        public static UIManager ui;
 
 		GameCamera gc;
 		bool battling;
 		GameState state;
 		Hex selected;
+
+		public Player player;
 
 		void Awake() {
 			gc = new GameObject ("Game Camera").AddComponent<GameCamera> ();
@@ -30,54 +35,55 @@ namespace game {
 
 			l = new Layout(Orientation.Pointy, new Vector2(1, 1), new Vector2(0, 0));
 			map = new WorldMap (l);
-			//map.addUnit (new HexLoc (0, 0));
 
-			//this.selected = null;
-		}
+            var hero = new GameObject("Tim").AddComponent<HeroUnit>();
+            hero.init(map, map.map[new HexLoc(0, 0)]);
+
+            player = new Player(hero);
+
+            ui = gameObject.AddComponent<UIManager>();
+            ui.init(map, player);
+
+            var enemy = new GameObject("EvilTim").AddComponent<MinionUnit>();
+            enemy.init(map, map.map[new HexLoc(1, 1)], 20);
+
+            //this.selected = null;
+        }
 			
-		public Hex GetHexAtMouse() {
-			Vector3 worldPos = Camera.main.ScreenToWorldPoint (Input.mousePosition);
-			HexLoc l = map.l.PixelHex (worldPos);
-			if (map.hexes.ContainsKey (l)) {
-				Hex h = map.hexes [l];
-				return h;
-			}
-			return null;
+		public void MakeDuel() {
+			// TODO
 		}
 
+		// Clamp down the duel arena
 		public void ClampArena() {
 
 		}
 
 		void Update() {
-			/*
-			if (Input.GetMouseButtonUp (0)) {
-				switch (state) {
-				case GameState.Default:
-					this.selected = GetHexAtMouse ();
-					//selected.Select ();
-					break;
+            if (player.nextCommand != null) {
+                player.nextCommand.Act(map);
+            }
+		}
 
-				case GameState.Selected:
-					this.selected = GetHexAtMouse ();
-					//selected.Select ();
-					break;
+		// Drag and drog logic
+		private class DragTest : MonoBehaviour {
+			Vector3 screenPoint;
+			Vector3 offset;
 
-				}
-			} else if (Input.GetMouseButton (1)) {
-				switch (state) {
-				case GameState.Default:
-					break;
-
-				case GameState.Selected:
-					Hex h = GetHexAtMouse ();
-					h.unit = selected.unit;
-					selected.unit = null;
-					break;
-
-				}
+			void OnMouseDown() {
+				screenPoint = Camera.main.WorldToScreenPoint (gameObject.transform.position);
+				offset = gameObject.transform.position - Camera.main.ScreenToWorldPoint(new Vector3(
+					Input.mousePosition.x, 
+					Input.mousePosition.y, 
+					screenPoint.z));
 			}
-			*/
+
+			void OnMouseDrag() {
+				Vector3 curScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z);
+
+				Vector3 curPosition   = Camera.main.ScreenToWorldPoint(curScreenPoint) + offset;
+				transform.position = curPosition;
+			}
 		}
 	}
 }

@@ -7,45 +7,83 @@
 using UnityEngine;
 using System.Collections;
 using game.world.math;
+using game.tcg;
 
 namespace game.world.units {
-	class Unit {
-		UnitModel model;
-		public Hex h { get; set; }
-		public HexLoc loc { get; set; }
+	class Unit : MonoBehaviour {
+        UnitModel model;
 
-		public Unit(HexLoc loc) {
-			this.loc = loc;
+        private Hex _h;
+		public Hex h {
+            get {
+                return _h;
+            }
+            set {
+                if (_h != null) {
+                    _h.unit = null;
+                }
 
-			model = new GameObject ("Unit Model").AddComponent<UnitModel> ();
-			model.init (this);
+                _h = value;
+                
+                if (_h != null) {
+                    transform.parent = _h.transform;
+                    _h.unit = this;
+                }
+            }
+        }
 
-			model.transform.position = GameManager.l.HexPixel (loc);
+        public int health;
+        private WorldMap w;
+
+        public void init(WorldMap w, Hex h, int health) {
+            this.w = w;
+            this.h = h;
+            this.health = health;
+
+
+            var obj = new GameObject("Unit Model");
+            obj.transform.parent = transform;
+            model = obj.AddComponent<UnitModel>();
+
+            model.init(this);
+
+        }
+
+        public virtual Sprite getSprite() {
+            return Resources.Load<Sprite>("Sprites/Circle"); ;
+        }
+
+        void Update() {
+            transform.localPosition = new Vector3(0, 0, 0);
+        }
+
+        public void Die() {
+            Destroy(model);
+            Destroy(this.gameObject);
 		}
 
-		public void Destroy() {
-			Object.Destroy (this.model);
+        private class UnitModel : MonoBehaviour {
+            SpriteRenderer sr;
+            Unit u;
 
-		}
+            public void init(Unit u) {
+                this.u = u;
 
-		private class UnitModel : MonoBehaviour {
-			private SpriteRenderer sr;
-			Unit u;
+                gameObject.transform.localPosition = LayerV.HeroUnit;
 
-			public void init(Unit u) {
-				this.u = u;
+                sr = gameObject.AddComponent<SpriteRenderer>();
+                sr.sprite = u.getSprite();
 
-				transform.localPosition = new Vector3 (0, 0, Layer.Unit);
+                sr.color = new Color(0, 0, 0);
+            }
 
-				sr = gameObject.AddComponent<SpriteRenderer> ();
-				sr.sprite = Resources.Load<Sprite> ("Sprite/Circle");
-				sr.color = Color.green;
-			}
+            void Update() {
+                transform.localPosition = LayerV.HeroUnit;
+                sr.sprite = u.getSprite();
+            }
+        }
+    }
 
-			void Update() {
-
-			}
-		}
-	}
 }
+
 

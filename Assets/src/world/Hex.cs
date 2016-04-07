@@ -25,13 +25,12 @@ namespace game.world {
 			transform.localPosition = GameManager.l.HexPixel (loc);
 		}
 
-
 		public void Select() {
-			//model.sr.color = Color.yellow;
+			model.sr.color = Color.yellow;
 		}
 
 		private class HexModel : MonoBehaviour {
-			SpriteRenderer sr;
+			public SpriteRenderer sr;
 			Hex h;
 
 			public void init(Hex h) {
