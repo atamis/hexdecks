@@ -30,7 +30,21 @@ namespace game.world {
 			model.sr.color = Color.yellow;
 		}
 
-		private class HexModel : MonoBehaviour {
+        public List<Hex> Neighbors() {
+            List<Hex> n = new List<Hex>();
+
+            for (int i = 0; i < 6; i++) {
+                HexLoc l = loc.Neighbor(i);
+                if (wm.map.ContainsKey(l)) {
+                    n.Add(wm.map[l]);
+                }
+            }
+
+            return n;
+        }
+
+
+        private class HexModel : MonoBehaviour {
 			public SpriteRenderer sr;
 			Hex h;
 
