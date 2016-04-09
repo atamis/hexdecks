@@ -27,6 +27,8 @@ namespace game {
 		private GameCamera gc;
 		private GameState state;
 
+		public static Card selected;
+
 		void Awake() {
 			// initialize the camera
 			gc = new GameObject ("Game Camera").AddComponent<GameCamera> ();
@@ -45,8 +47,8 @@ namespace game {
 
 
 
-			ui = gameObject.AddComponent<UIManager>();
-			ui.init(world, p);
+			//ui = gameObject.AddComponent<UIManager>();
+			//ui.init(world, p);
 
 			var enemy = new GameObject("EvilTim").AddComponent<EnemyUnit>();
 			enemy.init(world, world.map[new HexLoc(1, 1)]);

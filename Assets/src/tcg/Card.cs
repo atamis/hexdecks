@@ -51,7 +51,7 @@ namespace game.tcg {
 			}
 
 			void Update() {
-				gameObject.transform.position = Camera.main.ViewportToWorldPoint(new Vector3(0,1,10)); // Covert to Viewport Space
+				gameObject.transform.position = Camera.main.ViewportToWorldPoint(new Vector3(10,10,10)); // Covert to Viewport Space
 			}
 
 			void OnMouseEnter() {

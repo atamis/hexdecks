@@ -9,46 +9,35 @@ using System.Text;
 using UnityEngine;
 
 namespace game.ui {
-    class UIManager : MonoBehaviour {
-        private Player p;
-        private WorldMap w;
-		GameObject guiCards;
+	class UIManager : MonoBehaviour {
+		GameObject uiFolder;
 
-        public void init(WorldMap w, Player p) {
-            this.w = w;
-            this.p = p;
+		void Awake() {
+			uiFolder = new GameObject ("UI Folder");
 
-			List<Card> cards = new List<Card> ();
+			// back panel
+			var obj = GameObject.CreatePrimitive (PrimitiveType.Quad);
+			obj.transform.parent = uiFolder.transform;
+		}
 
-			guiCards = new GameObject ("Cards");
-			for (int i = 0; i < 5; i++) {
-				Card c = new GameObject ("Card" + i).AddComponent<Card> ();
-				c.init ();
-
-				c.transform.parent = guiCards.transform;
+		public Hex GetHexAtMouse() {
+			Vector3 worldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+			HexLoc l = GameManager.l.PixelHex(worldPos);
+			if (GameManager.world.map.ContainsKey(l)) {
+				Hex h = GameManager.world.map[l];
+				return h;
 			}
-        }
+			return null;
+		}
 
-        public Hex GetHexAtMouse() {
-            Vector3 worldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            HexLoc l = w.l.PixelHex(worldPos);
-            if (w.map.ContainsKey(l)) {
-                Hex h = w.map[l];
-                return h;
-            }
-            return null;
-        }
+		void Update() {
+			// Update card positions
 
-        void Update() {
-            if (Input.GetMouseButtonUp(0)) {
-                Hex h = GetHexAtMouse();
+			if (Input.GetMouseButtonUp(0)) {
+				//Hex h = GetHexAtMouse();
 
-                //p.nextCommand = new MoveCommand(p.hero, h);
-            }
-        }
-
-        void OnGUI() {
-			
-        }
-    }
+				//GameManager.p.nextCommand = new MoveCommand(p.hero, h);
+			}
+		}
+	}
 }

@@ -11,6 +11,11 @@ using game.tcg;
 using System;
 
 namespace game.world.units {
+	[System.Serializable]
+	public struct UnitData {
+		public int loc;
+	}
+
 	class Unit : MonoBehaviour {
         UnitModel model;
 

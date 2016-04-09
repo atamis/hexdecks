@@ -9,18 +9,19 @@ using game.world.units;
 using game.world.math;
 
 namespace game.world {
+	[System.Serializable]
+	struct WorldData {
+		public List<HexData> hdata;
+	}
+
 	class WorldMap {
-		GameObject hFolder; GameObject uFolder;
 		public Dictionary<HexLoc, Hex> map;
 		public Layout l;
 
 		public WorldMap(Layout l) {
 			this.l = l;
 
-			hFolder = new GameObject ("Hex Map");
 			map = new Dictionary<HexLoc, Hex> ();
-
-			// create the map
 			for (int i = 0; i < 20; i++) {
 				for (int j = 0; j < 20; j++) {
 					addHex (new HexLoc (i, j));
@@ -29,20 +30,8 @@ namespace game.world {
 		}
 
 		public void addHex(HexLoc hl) {
-			Hex h = new GameObject ("Hex" + hl.ToString()).AddComponent<Hex> ();
-			h.init (hl);
-
-			h.transform.parent = hFolder.transform;
-
+			Hex h = new Hex (hl);
 			map.Add (hl, h);
-		}
-
-		public void deleteHex(HexLoc hl) {
-			// TODO
-		}
-
-		public void deleteUnit() {
-			// TODO
 		}
 	}
 }
