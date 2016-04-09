@@ -79,6 +79,18 @@ namespace game.world.units {
             return Resources.Load<Sprite>("Sprites/Triangle");
         }
 
+        private List<Hex> ValidTargets() {
+            List<Hex> targets = new List<Hex>(HexLoc.hex_directions.Length);
+
+            foreach(HexLoc dir in HexLoc.hex_directions) {
+                var nloc = h.loc + dir + dir;
+                if (w.map.ContainsKey(nloc)) {
+                    targets.Add(w.map[nloc]);
+                }
+            }
+
+            return targets;
+        }
 
         public override void NewTurn() {
             base.NewTurn();
@@ -104,10 +116,18 @@ namespace game.world.units {
             }
 
             if (persuing) {
-                var dist = h.loc.Distance(target.h.loc);
-                if (dist == 2) {
-                    target.ApplyDamage(1);
-                } else if (dist == 1) {
+                int dist = h.loc.Distance(target.h.loc);
+
+                var targets = ValidTargets();
+
+                foreach(Hex t in targets) {
+                    if (t.unit == target) {
+                        target.ApplyDamage(1);
+                        return;
+                    }
+                }
+
+                if (dist == 1) {
                     var nhex = h.loc + (h.loc - target.h.loc);
                     if (w.map.ContainsKey(nhex) && w.map[nhex].Passable()) {
                         h = w.map[nhex];
