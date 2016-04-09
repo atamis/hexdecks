@@ -16,8 +16,57 @@ namespace game.world.units {
     }
 
     class MeleeEnemy : EnemyUnit {
+        private bool persuing = false;
+        private HeroUnit target;
+
+        public override Sprite getSprite()
+        {
+            return Resources.Load<Sprite>("Sprites/Square");
+        }
+
         public override void NewTurn() {
             base.NewTurn();
+            print(persuing + ", " + target);
+
+            if (!persuing)
+            {
+                foreach (KeyValuePair<HexLoc, Hex> kv in w.map)
+                {
+                    var hex = kv.Value;
+                    if (hex.unit != null &&
+                        hex.unit.GetType() == typeof(HeroUnit))
+                    {
+                        var hero = (HeroUnit)hex.unit;
+
+
+
+                        if (h.loc.Distance(hex.loc) <= 3)
+                        {
+                            persuing = true;
+                            target = hero;
+                            break;
+                        }
+
+                    }
+                }
+            }
+
+            if (persuing)
+            {
+                var dist = h.loc.Distance(target.h.loc);
+                if (dist == 1)
+                {
+                    target.ApplyDamage(1);
+                }
+                else {
+                    var path = WorldPathfinding.Pathfind(w, h, target.h);
+                    var next = path.First.Next.Value;
+                    if (next.unit == null)
+                    {
+                        h = next;
+                    }
+                }
+            }
         }
 
     }
