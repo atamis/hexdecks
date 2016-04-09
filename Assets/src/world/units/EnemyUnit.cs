@@ -12,4 +12,18 @@ namespace game.world.units {
         }
 
     }
+
+    class MeleeEnemy : EnemyUnit {
+        public override void NewTurn() {
+            base.NewTurn();
+        }
+
+    }
+
+    class RangedEnemy : EnemyUnit {
+        public override void NewTurn() {
+            base.NewTurn();
+        }
+
+    }
 }

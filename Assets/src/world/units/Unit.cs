@@ -65,6 +65,10 @@ namespace game.world.units {
             return Resources.Load<Sprite>("Sprites/Circle"); ;
         }
 
+        public virtual void NewTurn() {
+
+        }
+
         void Update() {
             transform.localPosition = new Vector3(0, 0, 0);
         }

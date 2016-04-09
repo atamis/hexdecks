@@ -7,6 +7,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using game.world.units;
 using game.world.math;
+using System;
 
 namespace game.world {
 	class WorldMap {
@@ -47,5 +48,11 @@ namespace game.world {
 		public void deleteUnit() {
 			// TODO
 		}
-	}
+
+        internal void NewTurn() {
+            foreach(KeyValuePair<HexLoc, Hex> kv in map) {
+                kv.Value.NewTurn();
+            }
+        }
+    }
 }

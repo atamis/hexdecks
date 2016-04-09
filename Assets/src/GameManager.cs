@@ -64,6 +64,7 @@ namespace game {
                 print("Executing command " + player.nextCommand);
                 player.nextCommand.Act(map);
                 player.nextCommand = null;
+                map.NewTurn();
             }
 		}
 

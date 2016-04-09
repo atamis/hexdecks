@@ -8,6 +8,7 @@ using UnityEngine;
 using System.Collections;
 using game.world.math;
 using game.world.units;
+using System;
 
 namespace game.world {
 	class Hex : MonoBehaviour {
@@ -43,5 +44,9 @@ namespace game.world {
 
 			}
 		}
-	}
+
+        internal void NewTurn() {
+            unit.NewTurn();
+        }
+    }
 }
