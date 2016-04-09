@@ -12,10 +12,21 @@ namespace game.ui {
     class UIManager : MonoBehaviour {
         private Player p;
         private WorldMap w;
+		GameObject guiCards;
 
         public void init(WorldMap w, Player p) {
             this.w = w;
             this.p = p;
+
+			List<Card> cards = new List<Card> ();
+
+			guiCards = new GameObject ("Cards");
+			for (int i = 0; i < 5; i++) {
+				Card c = new GameObject ("Card" + i).AddComponent<Card> ();
+				c.init ();
+
+				c.transform.parent = guiCards.transform;
+			}
         }
 
         public Hex GetHexAtMouse() {
@@ -27,18 +38,17 @@ namespace game.ui {
             }
             return null;
         }
-        
 
         void Update() {
             if (Input.GetMouseButtonUp(0)) {
                 Hex h = GetHexAtMouse();
 
-                p.nextCommand = new MoveCommand(p.hero, h);
+                //p.nextCommand = new MoveCommand(p.hero, h);
             }
         }
 
         void OnGUI() {
-
+			
         }
     }
 }

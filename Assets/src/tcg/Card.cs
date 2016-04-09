@@ -13,10 +13,14 @@ namespace game.tcg {
 	class Card : MonoBehaviour {
 		public string name { get; set; }
 		public int cost { get; set; }
-		private BoxCollider2D coll;
 
-		public Card() {
+		private CardModel model;
 
+		public void init() {
+			model = new GameObject ("Card Model").AddComponent<CardModel> ();
+			model.init (this);
+
+			model.transform.parent = transform;
 		}
 
 		public virtual void OnPlay(HexLoc hl) {
@@ -29,6 +33,7 @@ namespace game.tcg {
 
 		private class CardModel : MonoBehaviour {
 			SpriteRenderer sr;
+			BoxCollider2D coll;
 			private Card c;
 
 			public void init(Card c) {
@@ -36,11 +41,18 @@ namespace game.tcg {
 
 				sr = gameObject.AddComponent<SpriteRenderer> ();
 				sr.sprite = Resources.Load<Sprite> ("Sprites/Square");
+				sr.material = new Material (Shader.Find ("Sprites/Default"));
+
+				coll = gameObject.AddComponent<BoxCollider2D> ();
+				coll.isTrigger = true;
 			}
 
 			void Update() {
+				gameObject.transform.position = Camera.main.ViewportToWorldPoint(new Vector3(0,1,10)); // Covert to Viewport Space
+			}
 
-
+			void OnMouseEnter() {
+				Debug.Log ("Entered Card");
 			}
 		}
 	}

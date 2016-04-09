@@ -48,6 +48,7 @@
      <Compile Include="Assets\src\GameManager.cs" />
      <Compile Include="Assets\src\Layer.cs" />
      <Compile Include="Assets\src\tcg\Card.cs" />
+     <Compile Include="Assets\src\tcg\CardManager.cs" />
      <Compile Include="Assets\src\tcg\Command.cs" />
      <Compile Include="Assets\src\tcg\Deck.cs" />
      <Compile Include="Assets\src\tcg\Player.cs" />

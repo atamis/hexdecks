@@ -5,7 +5,6 @@ using game.world.units;
 
 namespace game.tcg {
 	class Player {
-
         public List<Card> library;
         
         public Deck deck { get; set; }
