@@ -12,6 +12,10 @@ using System;
 using System.Collections.Generic;
 
 namespace game.world {
+    public enum TileType {
+        Normal, Water, Wall
+    }
+
 	class Hex : MonoBehaviour {
 		private HexModel model;
         private WorldMap w;
@@ -31,10 +35,12 @@ namespace game.world {
 
         public HexLoc loc { get; set; }
 		public Unit unit { get; set; }
+        public TileType tileType;
 
 		public void init(WorldMap w, HexLoc loc) {
 			this.loc = loc;
             this.w = w;
+            tileType = TileType.Normal;
 
 			model = new GameObject ("Hex Model").AddComponent<HexModel> ();
 			model.init (this);
@@ -48,7 +54,14 @@ namespace game.world {
 		}
 
         internal bool Passable() {
-            return true;
+            switch(tileType) {
+                case TileType.Normal:
+                    return true;
+                case TileType.Wall:
+                case TileType.Water:
+                default:
+                    return false;
+            }
         }
 
         public List<Hex> Neighbors() {
@@ -64,6 +77,13 @@ namespace game.world {
             return n;
         }
 
+        
+        internal void NewTurn() {
+            if (unit != null && unit.Updated == false) {
+                unit.Updated = true;
+                unit.NewTurn();
+            }
+        }
 
         private class HexModel : MonoBehaviour {
 			public SpriteRenderer sr;
@@ -78,13 +98,20 @@ namespace game.world {
 				sr.sprite = Resources.Load <Sprite>("Sprites/Hexagon");
 
 			}
-		}
 
-        internal void NewTurn() {
-            if (unit != null && unit.Updated == false) {
-                unit.Updated = true;
-                unit.NewTurn();
+            void Update() {
+                switch (h.tileType) {
+                    case TileType.Wall:
+                        sr.color = new Color(0.2f, 0.2f, 0.2f);
+                        break;
+                    case TileType.Water:
+                        sr.color = new Color(0, 0, 0.5f);
+                        break;
+                }
+
             }
+
         }
+
     }
 }

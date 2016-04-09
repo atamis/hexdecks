@@ -34,22 +34,15 @@ namespace game {
 			gc.init (Camera.main);
 
 			l = new Layout(Orientation.Pointy, new Vector2(1, 1), new Vector2(0, 0));
-			map = new WorldMap (l);
+            map = LevelLoader.LoadLevel(l, "level1");
 
-            var hero = new GameObject("Tim").AddComponent<HeroUnit>();
-            hero.init(map, map.map[new HexLoc(0, 0)]);
+            var hero = map.hero;
 
             player = new Player(hero);
 
             ui = gameObject.AddComponent<UIManager>();
             ui.init(map, player);
-
-            var renemy = new GameObject("RangedEvilTim").AddComponent<RangedEnemy>();
-            renemy.init(map, map.map[new HexLoc(5, 5)]);
-
-            var menemy = new GameObject("MeleeEvilTim").AddComponent<MeleeEnemy>();
-            menemy.init(map, map.map[new HexLoc(5, 6)]);
-
+            
             //this.selected = null;
         }
 			

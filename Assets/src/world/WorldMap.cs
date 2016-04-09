@@ -14,6 +14,7 @@ namespace game.world {
 		GameObject hFolder; GameObject uFolder;
 		public Dictionary<HexLoc, Hex> map;
 		public Layout l;
+        public HeroUnit hero;
 
 		// TODO
 		// Hex Shaped Map
@@ -24,21 +25,17 @@ namespace game.world {
 			hFolder = new GameObject ("Hex Map");
 			map = new Dictionary<HexLoc, Hex> ();
 
-			// create the map
-			for (int i = 0; i < 20; i++) {
-				for (int j = 0; j < 20; j++) {
-					addHex (new HexLoc (i, j));
-				}
-			}
 		}
 
-		public void addHex(HexLoc hl) {
+		public Hex addHex(HexLoc hl) {
 			Hex h = new GameObject ("Hex" + hl.ToString()).AddComponent<Hex> ();
 			h.init (this, hl);
 
 			h.transform.parent = hFolder.transform;
 
 			map.Add (hl, h);
+
+            return h;
 		}
 
 		public void deleteHex(HexLoc hl) {
