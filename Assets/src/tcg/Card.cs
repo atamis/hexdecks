@@ -13,7 +13,7 @@ namespace game.tcg {
 
 	abstract class Card {
 		public string name { get; set; }
-        public string bodyText { get; set; };
+        public string bodyText { get; set; }
 		public int cost { get; set; }
         
         abstract public bool CanPlay(WorldMap w, Hex h);

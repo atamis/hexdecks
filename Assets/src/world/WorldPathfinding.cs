@@ -1,4 +1,4 @@
-﻿using game.math;
+﻿using game.world.math;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +18,7 @@ namespace game.world {
         }
 
         public static LinkedList<Hex> Pathfind(WorldMap w, Hex start, Hex goal) {
-            if (!goal.b.Passable()) {
+            if (!goal.Passable()) {
                 return null;
             }
             try {
@@ -43,7 +43,7 @@ namespace game.world {
                             n.pathfind = new PathfindingInfo();
                         }
 
-                        if (n.b.Passable() && tentativeGscore < n.pathfind.gScore) {
+                        if (n.Passable() && tentativeGscore < n.pathfind.gScore) {
                             openHexes.Add(n);
                             //UnityEngine.Debug.Log(n.b.Passable() + " " + n.pathfind.ToString() + " " + tentativeGscore.ToString());
 

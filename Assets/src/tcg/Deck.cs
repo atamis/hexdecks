@@ -9,7 +9,7 @@ namespace game.tcg {
 			this.cards = new List<Card> ();
 
 			for (int i = 0; i < 10; i++) {
-				cards.Add (new Card ());
+				//cards.Add (new Card ());
 			}
 		}
 

@@ -34,7 +34,7 @@ namespace game.world {
 
 		public void addHex(HexLoc hl) {
 			Hex h = new GameObject ("Hex" + hl.ToString()).AddComponent<Hex> ();
-			h.init (hl);
+			h.init (this, hl);
 
 			h.transform.parent = hFolder.transform;
 
