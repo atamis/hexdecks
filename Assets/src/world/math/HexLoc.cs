@@ -2,7 +2,7 @@
 
 namespace game.world.math {
 	struct HexLoc {
-		static HexLoc[] hex_directions = {
+		public static HexLoc[] hex_directions = {
 			new HexLoc(1, 0, -1), new HexLoc(1, -1, 0), new HexLoc(0, -1, 1),
 			new HexLoc(-1, 0, 1), new HexLoc(-1, 1, 0), new HexLoc(0, 1, -1)
 		};

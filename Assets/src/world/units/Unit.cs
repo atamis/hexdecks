@@ -46,6 +46,7 @@ namespace game.world.units {
 
         public int health;
         public WorldMap w;
+        internal bool Updated;
 
         public void init(WorldMap w, Hex h, int health) {
             this.w = w;

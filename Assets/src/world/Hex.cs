@@ -16,6 +16,18 @@ namespace game.world {
 		private HexModel model;
         private WorldMap w;
         internal WorldPathfinding.PathfindingInfo pathfind;
+        private bool _updated;
+        internal bool Updated {
+            get {
+                return _updated;
+            }
+            set {
+                _updated = value;
+                if (unit != null && value == false) {
+                    unit.Updated = false;
+                }
+            }
+        }
 
         public HexLoc loc { get; set; }
 		public Unit unit { get; set; }
@@ -69,7 +81,8 @@ namespace game.world {
 		}
 
         internal void NewTurn() {
-            if (unit != null) {
+            if (unit != null && unit.Updated == false) {
+                unit.Updated = true;
                 unit.NewTurn();
             }
         }

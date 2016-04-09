@@ -50,8 +50,14 @@ namespace game.world {
 		}
 
         internal void NewTurn() {
-            foreach(KeyValuePair<HexLoc, Hex> kv in map) {
-                kv.Value.NewTurn();
+            foreach (KeyValuePair<HexLoc, Hex> kv in map) {
+                kv.Value.Updated = false;
+            }
+            foreach (KeyValuePair<HexLoc, Hex> kv in map) {
+                if (!kv.Value.Updated) {
+                    kv.Value.Updated = true;
+                    kv.Value.NewTurn();
+                }
             }
         }
     }
