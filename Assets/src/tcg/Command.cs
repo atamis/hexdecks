@@ -27,8 +27,7 @@ namespace game.tcg {
 
         public override void Act(WorldMap w) {
             if (h.unit != null && h.unit != u) {
-                h.unit.health--;
-                h.unit.CheckDeath();
+                h.unit.ApplyDamage(1);
             }
 
             if (h.unit == null) {

@@ -33,7 +33,9 @@ namespace game.ui {
             if (Input.GetMouseButtonUp(0)) {
                 Hex h = GetHexAtMouse();
 
-                p.nextCommand = new MoveCommand(p.hero, h);
+                if (h != null) {
+                    p.nextCommand = new MoveCommand(p.hero, h);
+                }
             }
         }
 

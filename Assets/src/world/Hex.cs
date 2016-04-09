@@ -69,7 +69,9 @@ namespace game.world {
 		}
 
         internal void NewTurn() {
-            unit.NewTurn();
+            if (unit != null) {
+                unit.NewTurn();
+            }
         }
     }
 }

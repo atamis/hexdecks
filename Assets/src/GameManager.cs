@@ -44,8 +44,11 @@ namespace game {
             ui = gameObject.AddComponent<UIManager>();
             ui.init(map, player);
 
-            var enemy = new GameObject("EvilTim").AddComponent<EnemyUnit>();
-            enemy.init(map, map.map[new HexLoc(1, 1)]);
+            var renemy = new GameObject("RangedEvilTim").AddComponent<RangedEnemy>();
+            renemy.init(map, map.map[new HexLoc(5, 5)]);
+
+            var menemy = new GameObject("MeleeEvilTim").AddComponent<MeleeEnemy>();
+            menemy.init(map, map.map[new HexLoc(5, 6)]);
 
             //this.selected = null;
         }

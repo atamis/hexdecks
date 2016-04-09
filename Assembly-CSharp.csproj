@@ -55,6 +55,7 @@
      <Compile Include="Assets\src\ui\UIManager.cs" />
      <Compile Include="Assets\src\world\Hex.cs" />
      <Compile Include="Assets\src\world\WorldMap.cs" />
+     <Compile Include="Assets\src\world\WorldPathfinding.cs" />
      <Compile Include="Assets\src\world\math\HexLoc.cs" />
      <Compile Include="Assets\src\world\math\Layout.cs" />
      <Compile Include="Assets\src\world\math\Orientation.cs" />

@@ -45,7 +45,7 @@ namespace game.world.units {
         }
 
         public int health;
-        private WorldMap w;
+        public WorldMap w;
 
         public void init(WorldMap w, Hex h, int health) {
             this.w = w;
@@ -59,6 +59,12 @@ namespace game.world.units {
 
             model.init(this);
 
+        }
+
+        internal void ApplyDamage(int v) {
+            print("Applying " + v + " damage");
+            health = health - v;
+            CheckDeath();
         }
 
         public virtual Sprite getSprite() {
