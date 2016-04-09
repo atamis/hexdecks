@@ -2,6 +2,7 @@
 using System.Collections;
 using game.world;
 using game.world.math;
+using System.Collections.Generic;
 
 namespace game.tcg {
 	public enum Targets {
@@ -10,37 +11,17 @@ namespace game.tcg {
 		Hero,
 	};
 
-	class Card {
+	abstract class Card {
 		public string name { get; set; }
+        public string bodyText { get; set; };
 		public int cost { get; set; }
+        
+        abstract public bool CanPlay(WorldMap w, Hex h);
 
-		public Card() {
+        public abstract void OnPlay(WorldMap w, Hex h);
 
-		}
-
-		public virtual void OnPlay(HexLoc hl) {
-
-		}
-
-		public virtual bool ValidTarget(Hex h) {
-			return false;
-		}
-
-		private class CardModel : MonoBehaviour {
-			SpriteRenderer sr;
-			private Card c;
-
-			public void init(Card c) {
-				this.c = c;
-
-				sr = gameObject.AddComponent<SpriteRenderer> ();
-				sr.sprite = Resources.Load<Sprite> ("Sprites/Square");
-			}
-
-			void Update() {
-
-
-			}
-		}
+        public abstract List<Hex> ValidTargets(WorldMap w, Hex h); 
+        
+        
 	}
 }
