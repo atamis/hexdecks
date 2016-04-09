@@ -14,57 +14,50 @@ using game.tcg;
 namespace game {
 	enum GameState {
 		Default,
+		Paused,
 		Selected,
 	}
 
 	class GameManager : MonoBehaviour {
-		public static WorldMap map;
+		public static WorldMap world;
+		public static Player p;
 		public static Layout l;
-        public static UIManager ui;
+		public static UIManager ui;
 
-		GameCamera gc;
-		bool battling;
-		GameState state;
-		Hex selected;
-
-		public Player player;
+		private GameCamera gc;
+		private GameState state;
 
 		void Awake() {
+			// initialize the camera
 			gc = new GameObject ("Game Camera").AddComponent<GameCamera> ();
 			gc.init (Camera.main);
 
+			// initialize the map
 			l = new Layout(Orientation.Pointy, new Vector2(1, 1), new Vector2(0, 0));
-			map = new WorldMap (l);
+			world = new WorldMap (l);
 
-            var hero = new GameObject("Tim").AddComponent<HeroUnit>();
-            hero.init(map, map.map[new HexLoc(0, 0)]);
+			// add the hero
+			var hero = new GameObject("Tim").AddComponent<HeroUnit>();
+			hero.init(world, world.map[new HexLoc(0, 0)]);
 
-            player = new Player(hero);
+			p = new Player(hero);
 
-            ui = gameObject.AddComponent<UIManager>();
-            ui.init(map, player);
 
-            var enemy = new GameObject("EvilTim").AddComponent<EnemyUnit>();
-            enemy.init(map, map.map[new HexLoc(1, 1)]);
 
-            //this.selected = null;
-        }
-			
-		public void MakeDuel() {
-			// TODO
-		}
 
-		// Clamp down the duel arena
-		public void ClampArena() {
+			ui = gameObject.AddComponent<UIManager>();
+			ui.init(world, p);
 
+			var enemy = new GameObject("EvilTim").AddComponent<EnemyUnit>();
+			enemy.init(world, world.map[new HexLoc(1, 1)]);
 		}
 
 		void Update() {
-            if (player.nextCommand != null) {
-                print("Executing command " + player.nextCommand);
-                player.nextCommand.Act(map);
-                player.nextCommand = null;
-            }
+			if (p.nextCommand != null) {
+				print("Executing command " + p.nextCommand);
+				p.nextCommand.Act(world);
+				p.nextCommand = null;
+			}
 		}
 	}
 }

@@ -14,6 +14,7 @@ namespace game.world {
 		private HexModel model;
 		public HexLoc loc { get; set; }
 		public Unit unit { get; set; }
+		bool selected;
 
 		public void init(HexLoc loc) {
 			this.loc = loc;
@@ -23,10 +24,21 @@ namespace game.world {
 
 			model.transform.parent = transform;
 			transform.localPosition = GameManager.l.HexPixel (loc);
+
+			selected = false;
 		}
 
 		public void Select() {
-			model.sr.color = Color.yellow;
+			if (selected == true) {
+				model.sr.color = Color.yellow;
+			} else {
+				model.sr.color = Color.white;
+			}
+
+		}
+
+		public void Highlight() {
+		
 		}
 
 		private class HexModel : MonoBehaviour {

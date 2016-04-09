@@ -5,12 +5,12 @@ using game.world.units;
 
 namespace game.tcg {
 	class Player {
-        public List<Card> library;
+		public List<Card> library;
+		public HeroUnit hero { get; set; } 
         
-        public Deck deck { get; set; }
+        // for rendering
+		public Deck deck { get; set; }
         public List<Card> hand { get; set; }
-
-        public HeroUnit hero { get; set; }
 
         public Command nextCommand;
 

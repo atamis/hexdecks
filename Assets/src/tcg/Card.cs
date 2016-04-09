@@ -9,12 +9,14 @@ namespace game.tcg {
 		Minion,
 		Hero,
 	};
-		
+
+	// TODO
+	// need list of targets
+
 	class Card : MonoBehaviour {
+		private CardModel model;
 		public string name { get; set; }
 		public int cost { get; set; }
-
-		private CardModel model;
 
 		public void init() {
 			model = new GameObject ("Card Model").AddComponent<CardModel> ();
@@ -35,6 +37,7 @@ namespace game.tcg {
 			SpriteRenderer sr;
 			BoxCollider2D coll;
 			private Card c;
+			bool hovering;
 
 			public void init(Card c) {
 				this.c = c;
@@ -52,7 +55,21 @@ namespace game.tcg {
 			}
 
 			void OnMouseEnter() {
+				// iterate through the valid casting locations (impassable terrain is invalid)
 				Debug.Log ("Entered Card");
+			}
+
+			void OnMouseExit() {
+				// move down, unhighlight targets
+				Debug.Log ("Left Card");
+			}
+
+			void OnMouseDown() {
+				// Set the current playing target to this card
+				// Hightlight or lock card in position
+
+				// OnMouseEnter Hex -> highlight card effect
+				Debug.Log ("Clicked");
 			}
 		}
 	}
