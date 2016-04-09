@@ -60,7 +60,7 @@ c = chest
                 var line = lines[x];
                 for(int y = 0; y < line.Length; y++) {
                     var chr = line[y];
-                    UnityEngine.Debug.Log(chr + ", " + (int) chr);
+                    //UnityEngine.Debug.Log(chr + ", " + (int) chr);
 
                     // Only \r needed, but both for clarity.
                     // Needed because windows uses \r\n for newlines

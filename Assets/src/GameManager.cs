@@ -58,8 +58,14 @@ namespace game {
 		void Update() {
             if (player.nextCommand != null) {
                 print("Executing command " + player.nextCommand);
-                player.nextCommand.Act(map);
+
+                // We need to null out Player#nextCommand before executing
+                // command because otherwise, if the command errors out,
+                // the null out statement won't get executed, and the game
+                // will attempt to execute the command again next turn.
+                var cmd = player.nextCommand;
                 player.nextCommand = null;
+                cmd.Act(map);
                 map.NewTurn();
             }
 		}

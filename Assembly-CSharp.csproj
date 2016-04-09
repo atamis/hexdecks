@@ -62,6 +62,7 @@
      <Compile Include="Assets\src\world\math\Orientation.cs" />
      <Compile Include="Assets\src\world\units\EnemyUnit.cs" />
      <Compile Include="Assets\src\world\units\HeroUnit.cs" />
+     <Compile Include="Assets\src\world\units\HexNotPassableError.cs" />
      <Compile Include="Assets\src\world\units\HexOccupiedError.cs" />
      <Compile Include="Assets\src\world\units\Unit.cs" />
      <None Include="Assets\Resources\Levels\level1.txt" />

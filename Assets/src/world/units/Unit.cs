@@ -25,8 +25,13 @@ namespace game.world.units {
                 }
 
 
-                if (value != null && value.unit != null) {
-                    throw new HexOccupiedError(_h);
+                if (value != null) {
+                    if (value.unit != null) {
+                        throw new HexOccupiedError(value);
+                    }
+                    if (!value.Passable()) {
+                        throw new HexNotPassableError(value);
+                    }
                 }
 
                 _h = value;
