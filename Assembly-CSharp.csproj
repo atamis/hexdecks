@@ -58,8 +58,9 @@
      <Compile Include="Assets\src\world\math\HexLoc.cs" />
      <Compile Include="Assets\src\world\math\Layout.cs" />
      <Compile Include="Assets\src\world\math\Orientation.cs" />
+     <Compile Include="Assets\src\world\units\EnemyUnit.cs" />
      <Compile Include="Assets\src\world\units\HeroUnit.cs" />
-     <Compile Include="Assets\src\world\units\MinionUnit.cs" />
+     <Compile Include="Assets\src\world\units\HexOccupiedError.cs" />
      <Compile Include="Assets\src\world\units\Unit.cs" />
  <Reference Include="UnityEngine.Networking">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>

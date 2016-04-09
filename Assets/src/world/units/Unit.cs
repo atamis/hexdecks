@@ -8,6 +8,7 @@ using UnityEngine;
 using System.Collections;
 using game.world.math;
 using game.tcg;
+using System;
 
 namespace game.world.units {
 	class Unit : MonoBehaviour {
@@ -23,12 +24,23 @@ namespace game.world.units {
                     _h.unit = null;
                 }
 
+
+                if (value != null && value.unit != null) {
+                    throw new HexOccupiedError(_h);
+                }
+
                 _h = value;
                 
                 if (_h != null) {
                     transform.parent = _h.transform;
                     _h.unit = this;
                 }
+            }
+        }
+
+        public void CheckDeath() {
+            if (health <= 0) {
+                Die();
             }
         }
 
@@ -58,6 +70,7 @@ namespace game.world.units {
         }
 
         public void Die() {
+            h = null;
             Destroy(model);
             Destroy(this.gameObject);
 		}

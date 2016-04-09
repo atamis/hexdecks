@@ -14,9 +14,6 @@ namespace game.world {
 		public Dictionary<HexLoc, Hex> map;
 		public Layout l;
 
-		// TODO
-		// Hex Shaped Map
-
 		public WorldMap(Layout l) {
 			this.l = l;
 

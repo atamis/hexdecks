@@ -9,10 +9,11 @@ namespace game.tcg {
 		Minion,
 		Hero,
 	};
-
-	class Card {
+		
+	class Card : MonoBehaviour {
 		public string name { get; set; }
 		public int cost { get; set; }
+		private BoxCollider2D coll;
 
 		public Card() {
 

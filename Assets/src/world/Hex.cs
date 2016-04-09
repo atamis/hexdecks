@@ -40,6 +40,7 @@ namespace game.world {
 
 				sr = gameObject.AddComponent<SpriteRenderer> ();
 				sr.sprite = Resources.Load <Sprite>("Sprites/Hexagon");
+				sr.material = new Material (Shader.Find ("Sprites/Diffuse"));
 
 			}
 		}
