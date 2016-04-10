@@ -34,13 +34,37 @@ namespace game.world {
         }
 
         public HexLoc loc { get; set; }
-		public Unit unit { get; set; }
+        private Unit _unit;
+		public Unit unit {
+            get {
+                return _unit;
+            }
+            set {
+                if (_unit == null && value != null) {
+                    foreach (Trigger t in triggers) {
+                        t.UnitEnter(value);
+                    }
+                }
+
+                if (_unit != null && value == null) {
+                    foreach (Trigger t in triggers) {
+                        t.UnitLeave(unit);
+                    }
+                }
+
+                _unit = value;
+
+            }
+        }
         public TileType tileType;
+
+        public List<Trigger> triggers;
 
 		public void init(WorldMap w, HexLoc loc) {
 			this.loc = loc;
             this.w = w;
             tileType = TileType.Normal;
+            triggers = new List<Trigger>();
 
 			model = new GameObject ("Hex Model").AddComponent<HexModel> ();
 			model.init (this);

@@ -107,6 +107,9 @@ c = chest
                                 var renemy = new GameObject("RangedEvilTim").AddComponent<RangedEnemy>();
                                 renemy.init(w, h);
                                 break;
+                            case 'e':
+                                new GameObject("EndLevelTrigger").AddComponent<EndLevelTrigger>().init(h);
+                                break;
                             default:
                                 // Not Implemented: e, M, c
                                 break;

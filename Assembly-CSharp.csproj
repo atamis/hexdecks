@@ -55,6 +55,7 @@
      <Compile Include="Assets\src\ui\UIManager.cs" />
      <Compile Include="Assets\src\world\Hex.cs" />
      <Compile Include="Assets\src\world\LevelLoader.cs" />
+     <Compile Include="Assets\src\world\Trigger.cs" />
      <Compile Include="Assets\src\world\WorldMap.cs" />
      <Compile Include="Assets\src\world\WorldPathfinding.cs" />
      <Compile Include="Assets\src\world\math\HexLoc.cs" />
@@ -66,6 +67,7 @@
      <Compile Include="Assets\src\world\units\HexOccupiedError.cs" />
      <Compile Include="Assets\src\world\units\Unit.cs" />
      <None Include="Assets\Resources\Levels\level1.txt" />
+     <None Include="Assets\Resources\Levels\level2.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>D:/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

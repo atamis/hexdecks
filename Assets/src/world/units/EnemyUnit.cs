@@ -26,7 +26,6 @@ namespace game.world.units {
 
         public override void NewTurn() {
             base.NewTurn();
-            print(persuing + ", " + target);
 
             if (!persuing)
             {
@@ -97,7 +96,6 @@ namespace game.world.units {
 
         public override void NewTurn() {
             base.NewTurn();
-            print(persuing + ", " + target);
 
             if (!persuing) {
                 var hero = w.hero;

@@ -39,8 +39,9 @@ namespace game.ui {
             }
         }
 
-        void OnGUI() {
-
+        void OnGUI()
+        {
+            if (p != null) GUI.Label(new Rect(150, 10, 100, 30), "Health: " + p.hero.health);
         }
     }
 }
