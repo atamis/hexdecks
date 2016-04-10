@@ -26,12 +26,16 @@ namespace game.tcg {
         }
 
         public override void Act(WorldMap w) {
-            if (h.unit != null && h.unit != u) {
-                h.unit.ApplyDamage(1);
+            var path = WorldPathfinding.Pathfind(w, u.h, h);
+            var next = path.First.Next.Value;
+
+
+            if (next.unit != null && next.unit != u) {
+                next.unit.ApplyDamage(1);
             }
 
-            if (h.unit == null) {
-                u.h = h;
+            if (next.unit == null) {
+                u.h = next;
             }
         }
     }
