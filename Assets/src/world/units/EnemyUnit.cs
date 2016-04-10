@@ -6,7 +6,7 @@ using game.world.math;
 namespace game.world.units {
 	class EnemyUnit : Unit {
         public void init(WorldMap w, Hex h) {
-            base.init(w, h, 2);
+            base.init(w, h, 1);
         }
 
         public override Sprite getSprite() {
@@ -69,6 +69,14 @@ namespace game.world.units {
             }
         }
 
+    }
+
+    class BigMeleeEnemy: MeleeEnemy
+    {
+        public new void init(WorldMap w, Hex h)
+        {
+            base.init(w, h, 2);
+        }
     }
 
     class RangedEnemy : EnemyUnit {

@@ -82,6 +82,10 @@ c = chest
                                 var menemy = new GameObject("MeleeEvilTim").AddComponent<MeleeEnemy>();
                                 menemy.init(w, h);
                                 break;
+                            case 'M':
+                                var bigmenemy = new GameObject("BigMeleeEvilTim").AddComponent<BigMeleeEnemy>();
+                                bigmenemy.init(w, h);
+                                break;
                             case 'r':
                                 var renemy = new GameObject("RangedEvilTim").AddComponent<RangedEnemy>();
                                 renemy.init(w, h);
