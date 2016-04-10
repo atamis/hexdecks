@@ -19,22 +19,22 @@ namespace game.world {
 		public Dictionary<HexLoc, Hex> map;
 		public Layout l;
         public HeroUnit hero;
+		GameObject hFolder;
 
 		public WorldMap(Layout l) {
 			this.l = l;
 
+			hFolder = new GameObject ("Hexes");
+
 			map = new Dictionary<HexLoc, Hex> ();
-			/*
-			for (int i = 0; i < 20; i++) {
-				for (int j = 0; j < 20; j++) {
-					addHex (new HexLoc (i, j));
-				}
-			}
-			*/
 		}
 
 		public Hex addHex(HexLoc hl) {
-			Hex h = new Hex (hl);
+			Hex h = new GameObject ("Hex " + hl.ToString ()).AddComponent<Hex> ();
+			h.init (this, hl);
+
+			h.transform.parent = hFolder.transform;
+
 			map.Add(hl, h);
 			return h;
 		}

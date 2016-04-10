@@ -69,6 +69,7 @@ namespace game.tcg {
 			}
 
 			void OnMouseDown() {
+				
 				// Set the current playing target to this card
 				// Hightlight or lock card in position
 

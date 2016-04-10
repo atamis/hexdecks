@@ -20,7 +20,7 @@ namespace game.world {
         Normal, Water, Wall
     }
 
-    class Hex {
+	class Hex : MonoBehaviour {
         private HexModel model;
         public TileType tileType;
 		private WorldMap w;
@@ -42,9 +42,11 @@ namespace game.world {
             }
         }
 
-        public Hex(HexLoc loc) {
+		public void init(WorldMap w, HexLoc loc) {
             this.loc = loc;
-            this.w = GameManager.world;
+            this.w = w;
+			this.transform.position = GameManager.l.HexPixel (loc);
+
             tileType = TileType.Normal;
 
             model = new GameObject ("Hex Model").AddComponent<HexModel> ();
@@ -96,9 +98,7 @@ namespace game.world {
 
 				gameObject.hideFlags = HideFlags.HideInHierarchy; // hide from heirarchy
 
-				Vector3 tmp = GameManager.l.HexPixel (h.loc);
-				transform.position = new Vector3 (tmp.x, tmp.y, Layer.Board);
-
+				transform.localPosition = new Vector3 (h.transform.position.x, h.transform.position.y, Layer.Board);
 				transform.localScale = new Vector3 (1.9f, 1.9f, 0);
 
 				sr = gameObject.AddComponent<SpriteRenderer> ();

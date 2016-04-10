@@ -27,7 +27,7 @@ namespace game {
 		private GameCamera gc;
 		private GameState state;
 
-		public static Card selected;
+		//public static Card selected;
 
 		void Awake() {
 			// initialize the camera
@@ -36,26 +36,13 @@ namespace game {
 
 			// initialize the map
 			l = new Layout(Orientation.Pointy, new Vector2(1, 1), new Vector2(0, 0));
-			world = world = LevelLoader.LoadLevel(l, "level1");
+			world = LevelLoader.LoadLevel(l, "level1");
 
-			// add the hero
-			var hero = world.hero;
-			hero = new GameObject("Tim").AddComponent<HeroUnit>();
-			//hero.init(world, world.map[new HexLoc(0, 0)]);
-
-			// new or old
-
-			p = new Player(hero);
-
-            //ui = gameObject.AddComponent<UIManager>();
-            //ui.init(map, player);
-
-            //this.selected = null;
+			p = new Player(world.hero);
+            
 			ui = gameObject.AddComponent<UIManager>();
-			//ui.init(world, p);
 
-			//var enemy = new GameObject("EvilTim").AddComponent<EnemyUnit>();
-			//enemy.init(world, world.map[new HexLoc(1, 1)]);
+			//this.selected = null;
 		}
 
 		void Update() {

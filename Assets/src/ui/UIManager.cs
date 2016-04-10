@@ -10,10 +10,10 @@ using UnityEngine;
 
 namespace game.ui {
 	class UIManager : MonoBehaviour {
-		GameObject uiFolder;
+		//GameObject uiFolder;
 
 		void Awake() {
-			uiFolder = new GameObject ("UI Folder");
+			//uiFolder = new GameObject ("UI Folder");
 
 			/*
 			// back panel
@@ -41,9 +41,8 @@ namespace game.ui {
 			// Update card positions
 
 			if (Input.GetMouseButtonUp(0)) {
-				//Hex h = GetHexAtMouse();
-
-				//GameManager.p.nextCommand = new MoveCommand(p.hero, h);
+				Hex h = GetHexAtMouse();
+				GameManager.p.nextCommand = new MoveCommand(GameManager.p.hero, h);
 			}
 		}
 	}
