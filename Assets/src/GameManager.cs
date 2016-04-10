@@ -26,6 +26,7 @@ namespace game {
 		bool battling;
 		GameState state;
 		Hex selected;
+        AudioSource audioS;
 
 		public Player player;
 
@@ -34,7 +35,7 @@ namespace game {
 			gc.init (Camera.main);
 
 			l = new Layout(Orientation.Pointy, new Vector2(1, 1), new Vector2(0, 0));
-            map = LevelLoader.LoadLevel(l, "level1");
+            map = LevelLoader.LoadLevel(l, "level1", this);
 
             var trigger = new GameObject("Trigger").AddComponent<LogTrigger>();
             trigger.init(map.map[new HexLoc(2, 2)]);
@@ -46,7 +47,9 @@ namespace game {
 
             ui = gameObject.AddComponent<UIManager>();
             ui.init(map, player);
-            
+
+            audioS = gameObject.AddComponent<AudioSource>();
+            audioS.spatialBlend = 0.0f;
             //this.selected = null;
         }
 			

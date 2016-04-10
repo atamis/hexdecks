@@ -15,12 +15,14 @@ namespace game.world {
 		public Dictionary<HexLoc, Hex> map;
 		public Layout l;
         public HeroUnit hero;
+        public GameManager gm;
 
 		// TODO
 		// Hex Shaped Map
 
-		public WorldMap(Layout l) {
+		public WorldMap(Layout l, GameManager gm) {
 			this.l = l;
+            this.gm = gm;
 
 			hFolder = new GameObject ("Hex Map");
 			map = new Dictionary<HexLoc, Hex> ();

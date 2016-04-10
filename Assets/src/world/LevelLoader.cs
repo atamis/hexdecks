@@ -21,8 +21,8 @@ M = big melee
 c = chest
 */
 
-        public static WorldMap Default(Layout l) {
-            WorldMap w = new WorldMap(l);
+        public static WorldMap Default(Layout l, GameManager gm) {
+            WorldMap w = new WorldMap(l, gm);
 
             for (int i = 0; i < 20; i++) {
                 for (int j = 0; j < 20; j++) {
@@ -62,14 +62,14 @@ c = chest
             }
         }
 
-        public static WorldMap LoadLevel(Layout l, string name) {
+        public static WorldMap LoadLevel(Layout l, string name, GameManager gm) {
             TextAsset lvl = Resources.Load<TextAsset>("Levels/" + name);
 
             if (lvl == null) {
                 return null;
             }
 
-            WorldMap w = new WorldMap(l);
+            WorldMap w = new WorldMap(l, gm);
 
             var lines = lvl.text.Split('\n');
 
