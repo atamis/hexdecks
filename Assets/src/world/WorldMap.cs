@@ -24,16 +24,18 @@ namespace game.world {
 			this.l = l;
 
 			map = new Dictionary<HexLoc, Hex> ();
+			/*
 			for (int i = 0; i < 20; i++) {
 				for (int j = 0; j < 20; j++) {
 					addHex (new HexLoc (i, j));
 				}
 			}
+			*/
 		}
 
 		public Hex addHex(HexLoc hl) {
 			Hex h = new Hex (hl);
-			map.add(hl, h);
+			map.Add(hl, h);
 			return h;
 		}
 

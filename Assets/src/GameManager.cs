@@ -36,42 +36,40 @@ namespace game {
 
 			// initialize the map
 			l = new Layout(Orientation.Pointy, new Vector2(1, 1), new Vector2(0, 0));
-
-			world = new WorldMap (l);
+			world = world = LevelLoader.LoadLevel(l, "level1");
 
 			// add the hero
-			var hero = new GameObject("Tim").AddComponent<HeroUnit>();
-			hero.init(world, world.map[new HexLoc(0, 0)]);
+			var hero = world.hero;
+			hero = new GameObject("Tim").AddComponent<HeroUnit>();
+			//hero.init(world, world.map[new HexLoc(0, 0)]);
 
 			// new or old
-			var hero = map.hero;
+
 			p = new Player(hero);
 
-            map = LevelLoader.LoadLevel(l, "level1");
-
-            ui = gameObject.AddComponent<UIManager>();
-            ui.init(map, player);
+            //ui = gameObject.AddComponent<UIManager>();
+            //ui.init(map, player);
 
             //this.selected = null;
 			ui = gameObject.AddComponent<UIManager>();
 			//ui.init(world, p);
 
-			var enemy = new GameObject("EvilTim").AddComponent<EnemyUnit>();
-			enemy.init(world, world.map[new HexLoc(1, 1)]);
+			//var enemy = new GameObject("EvilTim").AddComponent<EnemyUnit>();
+			//enemy.init(world, world.map[new HexLoc(1, 1)]);
 		}
 
 		void Update() {
-            if (player.nextCommand != null) {
-                print("Executing command " + player.nextCommand);
+            if (p.nextCommand != null) {
+                print("Executing command " + p.nextCommand);
 
                 // We need to null out Player#nextCommand before executing
                 // command because otherwise, if the command errors out,
                 // the null out statement won't get executed, and the game
                 // will attempt to execute the command again next turn.
-                var cmd = player.nextCommand;
-                player.nextCommand = null;
-                cmd.Act(map);
-                map.NewTurn();
+                var cmd = p.nextCommand;
+                p.nextCommand = null;
+                cmd.Act(world);
+                world.NewTurn();
             }
 		}
 	}

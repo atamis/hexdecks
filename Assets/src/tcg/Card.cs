@@ -16,13 +16,15 @@ namespace game.tcg {
 		Hero,
 	};
 
-	abstract class Card {
+	// TODO
+	// Abstract Card
+	abstract class Card : MonoBehaviour {
 		private CardModel model;
-		public string name { get; set; }
+		public string title { get; set; }
         public string bodyText { get; set; }
 		public int cost { get; set; }
 
-        abstract public bool CanPlay(WorldMap w, Hex h);
+        public abstract bool CanPlay(WorldMap w, Hex h);
 
 		public abstract void OnPlay(WorldMap w, Hex h);
 

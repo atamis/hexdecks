@@ -27,9 +27,8 @@ namespace game.tcg {
 			this.deck = new Deck();
 			hand = new List<Card>();
 			for (int i = 0; i < 5; i++) {
-				Card c = new GameObject ("Card" + i).AddComponent<Card> ();
-
-				c.init ();
+				//Card c = new GameObject ("Card" + i).AddComponent<Card> ();
+				//c.init ();
 			}
 			library = new List<Card>();
 

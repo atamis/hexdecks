@@ -44,7 +44,7 @@ namespace game.world {
 
         public Hex(HexLoc loc) {
             this.loc = loc;
-            this.w = GameManager.w;
+            this.w = GameManager.world;
             tileType = TileType.Normal;
 
             model = new GameObject ("Hex Model").AddComponent<HexModel> ();
@@ -121,10 +121,7 @@ namespace game.world {
             }
 
             void OnMouseEnter() {
-				switch (GameState) {
-				default:
-					break;
-				}
+				
 				sr.color = Color.red;
 				//Debug.Log ("Entered Hex");
 			}
@@ -135,15 +132,6 @@ namespace game.world {
 			}
 
 			void OnMouseDown() {
-				switch (GameState) {
-				case GameState.Default:
-					break;
-				default:
-					break;
-				}
-				if (GameManager.selected != null) {
-					GameManager.selected.OnPlay ();
-				}
 				//Debug.Log ("Clicked Hex");
 			}
         }
