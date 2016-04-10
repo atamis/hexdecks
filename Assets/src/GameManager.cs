@@ -37,6 +37,7 @@ namespace game {
             map = LevelLoader.LoadLevel(l, "level1");
 
             var hero = map.hero;
+            gc.setLocation(l.HexPixel(map.hero.h.loc));
 
             player = new Player(hero);
 
