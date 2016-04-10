@@ -121,7 +121,9 @@ namespace game.world.units {
                 if (dist == 1) {
                     var nhex = h.loc + (h.loc - target.h.loc);
                     if (w.map.ContainsKey(nhex) && w.map[nhex].Passable()) {
-                        h = w.map[nhex];
+                        if (w.map[nhex].unit == null) {
+                            h = w.map[nhex];
+                        }
                     }
                 } else {
                     var path = WorldPathfinding.Pathfind(w, h, target.h);
