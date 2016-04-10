@@ -36,6 +36,9 @@ namespace game {
 			l = new Layout(Orientation.Pointy, new Vector2(1, 1), new Vector2(0, 0));
             map = LevelLoader.LoadLevel(l, "level1");
 
+            var trigger = new GameObject("Trigger").AddComponent<LogTrigger>();
+            trigger.init(map.map[new HexLoc(2, 2)]);
+
             var hero = map.hero;
 
             player = new Player(hero);
