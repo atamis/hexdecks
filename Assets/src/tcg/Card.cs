@@ -4,6 +4,11 @@ using game.world;
 using game.world.math;
 
 namespace game.tcg {
+	[System.Serializable]
+	public struct CardData {
+		public string name;
+	}
+
 	public enum Targets {
 		Empty,
 		Minion,
@@ -15,7 +20,7 @@ namespace game.tcg {
 
 	class Card : MonoBehaviour {
 		private CardModel model;
-		public string name { get; set; }
+		//public string name { get; set; }
 		public int cost { get; set; }
 
 		public void init() {
@@ -51,7 +56,7 @@ namespace game.tcg {
 			}
 
 			void Update() {
-				gameObject.transform.position = Camera.main.ViewportToWorldPoint(new Vector3(10,10,10)); // Covert to Viewport Space
+				gameObject.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(-1,-1, 10)); // Covert to Viewport Space
 			}
 
 			void OnMouseEnter() {

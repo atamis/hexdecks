@@ -7,10 +7,11 @@ namespace game.tcg {
 	[System.Serializable]
 	public struct PlayerData {
 		public string name;
+		public List<CardData> cards;
 	}
 
 	class Player {
-		public HeroUnit hero { get; set; } // how to load this??
+		public HeroUnit hero { get; set; }
 		public List<Card> library;
 
 
@@ -25,7 +26,14 @@ namespace game.tcg {
 
 			this.deck = new Deck();
 			hand = new List<Card>();
+			for (int i = 0; i < 5; i++) {
+				Card c = new GameObject ("Card" + i).AddComponent<Card> ();
+
+				c.init ();
+			}
 			library = new List<Card>();
+
+		
 		}
 
 		public void NewTurn() {

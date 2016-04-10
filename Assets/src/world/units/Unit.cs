@@ -37,7 +37,7 @@ namespace game.world.units {
                 _h = value;
                 
                 if (_h != null) {
-                    transform.parent = _h.transform;
+                    //transform.parent = _h.transform;
                     _h.unit = this;
                 }
             }

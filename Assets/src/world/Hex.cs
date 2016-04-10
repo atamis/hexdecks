@@ -13,9 +13,8 @@ namespace game.world {
 	public struct HexData {
 		public UnitData u;
 	}
-}
-namespace game.world {
-	class Hex : MonoBehaviour {
+
+	class Hex {
 		private HexModel model;
 		private bool highlighted;
 
@@ -43,8 +42,9 @@ namespace game.world {
 
 				gameObject.hideFlags = HideFlags.HideInHierarchy; // hide from heirarchy
 
-				transform.position = GameManager.l.HexPixel (h.loc);
-				//transform.localPosition = new Vector3 (0, 0, Layer.Board);
+				Vector3 tmp = GameManager.l.HexPixel (h.loc);
+				transform.position = new Vector3 (tmp.x, tmp.y, Layer.Board);
+
 				transform.localScale = new Vector3 (1.9f, 1.9f, 0);
 
 				sr = gameObject.AddComponent<SpriteRenderer> ();
@@ -60,17 +60,30 @@ namespace game.world {
 			}
 
 			void OnMouseEnter() {
+				switch (GameState) {
+				default:
+					break;
+				}
 				sr.color = Color.red;
-				Debug.Log ("Entered Hex");
+				//Debug.Log ("Entered Hex");
 			}
 
 			void OnMouseExit() {
 				sr.color = Color.white;
-				Debug.Log ("Exited Hex");
+				//Debug.Log ("Exited Hex");
 			}
 
 			void OnMouseDown() {
-				Debug.Log ("Clicked Hex");
+				switch (GameState) {
+				case GameState.Default:
+					break;
+				default:
+					break;
+				}
+				if (GameManager.selected != null) {
+					GameManager.selected.OnPlay ();
+				}
+				//Debug.Log ("Clicked Hex");
 			}
 		}
 	}

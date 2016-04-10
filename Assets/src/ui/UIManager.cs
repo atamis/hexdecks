@@ -15,9 +15,16 @@ namespace game.ui {
 		void Awake() {
 			uiFolder = new GameObject ("UI Folder");
 
+			/*
 			// back panel
 			var obj = GameObject.CreatePrimitive (PrimitiveType.Quad);
 			obj.transform.parent = uiFolder.transform;
+
+			Material mat = obj.GetComponent<Renderer>().material;
+			mat.shader = Shader.Find ("Sprites/Default");
+			mat.mainTexture = Resources.Load<Texture2D> ("Sprites/Square");
+			*/
+			
 		}
 
 		public Hex GetHexAtMouse() {

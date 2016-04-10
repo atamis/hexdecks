@@ -12,7 +12,7 @@ using game.tcg;
  */
 
 namespace game {
-	enum GameState {
+	public enum GameState {
 		Default,
 		Paused,
 		Selected,
@@ -47,7 +47,7 @@ namespace game {
 
 
 
-			//ui = gameObject.AddComponent<UIManager>();
+			ui = gameObject.AddComponent<UIManager>();
 			//ui.init(world, p);
 
 			var enemy = new GameObject("EvilTim").AddComponent<EnemyUnit>();
@@ -60,6 +60,12 @@ namespace game {
 				p.nextCommand.Act(world);
 				p.nextCommand = null;
 			}
+
+			/*
+			 * when in the selected state:
+			 * highlight after effect
+			 * orientation from source
+			 */
 		}
 	}
 }
