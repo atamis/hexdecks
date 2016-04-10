@@ -93,5 +93,7 @@ namespace game {
 				transform.position = curPosition;
 			}
 		}
+
+        
 	}
 }
