@@ -67,6 +67,7 @@
      <Compile Include="Assets\src\world\units\HexOccupiedError.cs" />
      <Compile Include="Assets\src\world\units\Unit.cs" />
      <None Include="Assets\Resources\Levels\level1.txt" />
+     <None Include="Assets\Resources\Levels\level2.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>D:/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
