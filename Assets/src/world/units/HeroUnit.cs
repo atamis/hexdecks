@@ -6,7 +6,7 @@ namespace game.world.units {
     class HeroUnit : Unit {
 
         public void init(WorldMap w, Hex h) {
-            base.init(w, h, 20);
+            base.init(w, h, 15);
         }
     }
 }
