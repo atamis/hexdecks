@@ -45,6 +45,23 @@ c = chest
 
         }
 
+        private static bool isTileChar(char c) {
+            switch (c) {
+                case '_':
+                case 'W':
+                case 'w':
+                case 'e':
+                case 'p':
+                case 'm':
+                case 'r':
+                case 'M':
+                case 'c':
+                    return true;
+                default:
+                    return false;
+            }
+        }
+
         public static WorldMap LoadLevel(Layout l, string name) {
             TextAsset lvl = Resources.Load<TextAsset>("Levels/" + name);
 
@@ -64,7 +81,7 @@ c = chest
 
                     // Only \r needed, but both for clarity.
                     // Needed because windows uses \r\n for newlines
-                    if (chr != '\n' && chr != '\r') {
+                    if (isTileChar(chr)) {
                         var h = w.addHex(new HexLoc(y, x));
                         switch (chr) {
                             case 'W':
@@ -81,6 +98,10 @@ c = chest
                             case 'm':
                                 var menemy = new GameObject("MeleeEvilTim").AddComponent<MeleeEnemy>();
                                 menemy.init(w, h);
+                                break;
+                            case 'M':
+                                var bigmenemy = new GameObject("BigMeleeEvilTim").AddComponent<BigMeleeEnemy>();
+                                bigmenemy.init(w, h);
                                 break;
                             case 'r':
                                 var renemy = new GameObject("RangedEvilTim").AddComponent<RangedEnemy>();

@@ -6,7 +6,7 @@ using game.world.math;
 namespace game.world.units {
 	class EnemyUnit : Unit {
         public void init(WorldMap w, Hex h) {
-            base.init(w, h, 2);
+            base.init(w, h, 1);
         }
 
         public override Sprite getSprite() {
@@ -30,24 +30,14 @@ namespace game.world.units {
 
             if (!persuing)
             {
-                foreach (KeyValuePair<HexLoc, Hex> kv in w.map)
+                var hero = w.hero;
+                Hex heroHex = hero.h;
+                var path = WorldPathfinding.Pathfind(w, h, heroHex);
+
+                if (path.Count <= 4)
                 {
-                    var hex = kv.Value;
-                    if (hex.unit != null &&
-                        hex.unit.GetType() == typeof(HeroUnit))
-                    {
-                        var hero = (HeroUnit)hex.unit;
-
-
-
-                        if (h.loc.Distance(hex.loc) <= 3)
-                        {
-                            persuing = true;
-                            target = hero;
-                            break;
-                        }
-
-                    }
+                    persuing = true;
+                    target = hero;
                 }
             }
 
@@ -69,6 +59,14 @@ namespace game.world.units {
             }
         }
 
+    }
+
+    class BigMeleeEnemy: MeleeEnemy
+    {
+        public new void init(WorldMap w, Hex h)
+        {
+            base.init(w, h, 2);
+        }
     }
 
     class RangedEnemy : EnemyUnit {
@@ -97,21 +95,14 @@ namespace game.world.units {
             print(persuing + ", " + target);
 
             if (!persuing) {
-                foreach (KeyValuePair<HexLoc, Hex> kv in w.map) {
-                    var hex = kv.Value;
-                    if (hex.unit != null &&
-                        hex.unit.GetType() == typeof(HeroUnit)) {
-                        var hero = (HeroUnit)hex.unit;
+                var hero = w.hero;
+                Hex heroHex = hero.h;
+                var path = WorldPathfinding.Pathfind(w, h, heroHex);
 
-
-
-                        if (h.loc.Distance(hex.loc) <= 4) {
-                            persuing = true;
-                            target = hero;
-                            break;
-                        }
-
-                    }
+                if (path.Count <= 5)
+                {
+                    persuing = true;
+                    target = hero;
                 }
             }
 
@@ -130,7 +121,9 @@ namespace game.world.units {
                 if (dist == 1) {
                     var nhex = h.loc + (h.loc - target.h.loc);
                     if (w.map.ContainsKey(nhex) && w.map[nhex].Passable()) {
-                        h = w.map[nhex];
+                        if (w.map[nhex].unit == null) {
+                            h = w.map[nhex];
+                        }
                     }
                 } else {
                     var path = WorldPathfinding.Pathfind(w, h, target.h);
