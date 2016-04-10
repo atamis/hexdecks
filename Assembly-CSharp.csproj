@@ -48,19 +48,29 @@
      <Compile Include="Assets\src\GameManager.cs" />
      <Compile Include="Assets\src\Layer.cs" />
      <Compile Include="Assets\src\tcg\Card.cs" />
+<<<<<<< HEAD
      <Compile Include="Assets\src\tcg\CardManager.cs" />
+=======
+>>>>>>> master
      <Compile Include="Assets\src\tcg\Command.cs" />
      <Compile Include="Assets\src\tcg\Deck.cs" />
      <Compile Include="Assets\src\tcg\Player.cs" />
      <Compile Include="Assets\src\ui\GameCamera.cs" />
      <Compile Include="Assets\src\ui\UIManager.cs" />
      <Compile Include="Assets\src\world\Hex.cs" />
+<<<<<<< HEAD
      <Compile Include="Assets\src\world\WorldMap.cs" />
+=======
+     <Compile Include="Assets\src\world\LevelLoader.cs" />
+     <Compile Include="Assets\src\world\WorldMap.cs" />
+     <Compile Include="Assets\src\world\WorldPathfinding.cs" />
+>>>>>>> master
      <Compile Include="Assets\src\world\math\HexLoc.cs" />
      <Compile Include="Assets\src\world\math\Layout.cs" />
      <Compile Include="Assets\src\world\math\Orientation.cs" />
      <Compile Include="Assets\src\world\units\EnemyUnit.cs" />
      <Compile Include="Assets\src\world\units\HeroUnit.cs" />
+<<<<<<< HEAD
      <Compile Include="Assets\src\world\units\HexOccupiedError.cs" />
      <Compile Include="Assets\src\world\units\Unit.cs" />
  <Reference Include="UnityEngine.Networking">
@@ -68,6 +78,17 @@
  </Reference>
  <Reference Include="UnityEngine.UI">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
+=======
+     <Compile Include="Assets\src\world\units\HexNotPassableError.cs" />
+     <Compile Include="Assets\src\world\units\HexOccupiedError.cs" />
+     <Compile Include="Assets\src\world\units\Unit.cs" />
+     <None Include="Assets\Resources\Levels\level1.txt" />
+ <Reference Include="UnityEngine.UI">
+ <HintPath>D:/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.Networking">
+ <HintPath>D:/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
+>>>>>>> master
  </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

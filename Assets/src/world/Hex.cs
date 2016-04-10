@@ -1,7 +1,9 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using game.world.math;
 using game.world.units;
+using System;
+using System.Collections.Generic;
 /*
  * Andrew Amis, Nick Care, Robert Tomcik (2016)
  * The Hex Class
@@ -9,35 +11,87 @@ using game.world.units;
  */
 
 namespace game.world {
-	[System.Serializable]
+    [System.Serializable]
 	public struct HexData {
 		public UnitData u;
 	}
 
-	class Hex {
-		private HexModel model;
-		private bool highlighted;
+    public enum TileType {
+        Normal, Water, Wall
+    }
 
-		public HexLoc loc { get; set; }
-		public Unit unit { get; set; }
+    class Hex {
+        private HexModel model;
+        public TileType tileType;
+		private WorldMap w;
 
-		public Hex(HexLoc loc) {
-			this.loc = loc;
+        public HexLoc loc { get; set; }
+        public Unit unit { get; set; }
 
-			model = new GameObject ("Hex Model").AddComponent<HexModel> ();
+        internal WorldPathfinding.PathfindingInfo pathfind;
+        private bool _updated;
+        internal bool Updated {
+            get {
+                return _updated;
+            }
+            set {
+                _updated = value;
+                if (unit != null && value == false) {
+                    unit.Updated = false;
+                }
+            }
+        }
+
+        public Hex(HexLoc loc) {
+            this.loc = loc;
+            this.w = GameManager.w;
+            tileType = TileType.Normal;
+
+            model = new GameObject ("Hex Model").AddComponent<HexModel> ();
 			model.init (this);
-		}
+        }
 
-		public override string ToString() {
-			return "Hex " + loc.ToString();
-		}
+        internal bool Passable() {
+            switch(tileType) {
+                case TileType.Normal:
+                    return true;
+                case TileType.Wall:
+                case TileType.Water:
+                default:
+                    return false;
+            }
+        }
 
-		private class HexModel : MonoBehaviour {
-			private SpriteRenderer sr;
-			private Hex h;
+        internal void NewTurn() {
+            if (unit != null && unit.Updated == false) {
+                unit.Updated = true;
+                unit.NewTurn();
+            }
+        }
+
+        public List<Hex> Neighbors() {
+            List<Hex> n = new List<Hex>();
+
+            for (int i = 0; i < 6; i++) {
+                HexLoc l = loc.Neighbor(i);
+                if (w.map.ContainsKey(l)) {
+                    n.Add(w.map[l]);
+                }
+            }
+
+            return n;
+        }
+
+        public override string ToString() {
+            return "Hex " + loc.ToString();
+        }
+
+        private class HexModel : MonoBehaviour {
+            private SpriteRenderer sr;
 			private BoxCollider2D coll;
+            private Hex h;
 
-			public void init(Hex h) {
+            public void init(Hex h) {
 				this.h = h;
 
 				gameObject.hideFlags = HideFlags.HideInHierarchy; // hide from heirarchy
@@ -53,13 +107,20 @@ namespace game.world {
 
 				coll = gameObject.AddComponent<BoxCollider2D> ();
 				coll.isTrigger = true;
-			}
+            }
 
-			void Update() {
+            void Update() {
+                switch (h.tileType) {
+                    case TileType.Wall:
+                        sr.color = new Color(0.2f, 0.2f, 0.2f);
+                        break;
+                    case TileType.Water:
+                        sr.color = new Color(0, 0, 0.5f);
+                        break;
+                }
+            }
 
-			}
-
-			void OnMouseEnter() {
+            void OnMouseEnter() {
 				switch (GameState) {
 				default:
 					break;
@@ -68,7 +129,7 @@ namespace game.world {
 				//Debug.Log ("Entered Hex");
 			}
 
-			void OnMouseExit() {
+            void OnMouseExit() {
 				sr.color = Color.white;
 				//Debug.Log ("Exited Hex");
 			}
@@ -85,6 +146,6 @@ namespace game.world {
 				}
 				//Debug.Log ("Clicked Hex");
 			}
-		}
-	}
+        }
+    }
 }

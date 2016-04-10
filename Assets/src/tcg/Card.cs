@@ -2,6 +2,7 @@
 using System.Collections;
 using game.world;
 using game.world.math;
+using System.Collections.Generic;
 
 namespace game.tcg {
 	[System.Serializable]
@@ -15,27 +16,23 @@ namespace game.tcg {
 		Hero,
 	};
 
-	// TODO
-	// need list of targets
-
-	class Card : MonoBehaviour {
+	abstract class Card {
 		private CardModel model;
-		//public string name { get; set; }
+		public string name { get; set; }
+        public string bodyText { get; set; }
 		public int cost { get; set; }
+
+        abstract public bool CanPlay(WorldMap w, Hex h);
+
+		public abstract void OnPlay(WorldMap w, Hex h);
+
+        public abstract List<Hex> ValidTargets(WorldMap w, Hex h);
 
 		public void init() {
 			model = new GameObject ("Card Model").AddComponent<CardModel> ();
 			model.init (this);
 
 			model.transform.parent = transform;
-		}
-
-		public virtual void OnPlay(HexLoc hl) {
-
-		}
-
-		public virtual bool ValidTarget(Hex h) {
-			return false;
 		}
 
 		private class CardModel : MonoBehaviour {

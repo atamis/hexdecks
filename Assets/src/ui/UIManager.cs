@@ -24,7 +24,7 @@ namespace game.ui {
 			mat.shader = Shader.Find ("Sprites/Default");
 			mat.mainTexture = Resources.Load<Texture2D> ("Sprites/Square");
 			*/
-			
+
 		}
 
 		public Hex GetHexAtMouse() {

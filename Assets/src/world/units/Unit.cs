@@ -30,8 +30,13 @@ namespace game.world.units {
                 }
 
 
-                if (value != null && value.unit != null) {
-                    throw new HexOccupiedError(_h);
+                if (value != null) {
+                    if (value.unit != null) {
+                        throw new HexOccupiedError(value);
+                    }
+                    if (!value.Passable()) {
+                        throw new HexNotPassableError(value);
+                    }
                 }
 
                 _h = value;
@@ -50,7 +55,8 @@ namespace game.world.units {
         }
 
         public int health;
-        private WorldMap w;
+        public WorldMap w;
+        internal bool Updated;
 
         public void init(WorldMap w, Hex h, int health) {
             this.w = w;
@@ -66,8 +72,18 @@ namespace game.world.units {
 
         }
 
+        internal void ApplyDamage(int v) {
+            print("Applying " + v + " damage");
+            health = health - v;
+            CheckDeath();
+        }
+
         public virtual Sprite getSprite() {
             return Resources.Load<Sprite>("Sprites/Circle"); ;
+        }
+
+        public virtual void NewTurn() {
+
         }
 
         void Update() {
