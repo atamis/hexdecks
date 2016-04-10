@@ -118,7 +118,9 @@ namespace game.world {
         }
 
         public override void UnitEnter(Unit u) {
-            endingGame = true;
+            if (u.GetType() == typeof(HeroUnit)) {
+                endingGame = true;
+            }
         }
 
         public override void UnitLeave(Unit u) {
