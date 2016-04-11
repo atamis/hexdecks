@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace game.ui {
     class UIManager : MonoBehaviour {
@@ -42,6 +43,11 @@ namespace game.ui {
         void OnGUI()
         {
             if (p != null) GUI.Label(new Rect(150, 10, 100, 30), "Health: " + p.hero.health);
+
+            if (GUI.Button(new Rect(750, 10, 100, 30), "Reset Level"))
+            {
+                SceneManager.LoadSceneAsync("Main");
+            }
         }
     }
 }
