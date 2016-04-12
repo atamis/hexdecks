@@ -32,6 +32,10 @@ namespace game.tcg {
 
         public override void Act(WorldMap w) {
             var path = WorldPathfinding.Pathfind(w, u.h, h);
+
+            if (path.First.Next == null) {
+                return;
+            }
             var next = path.First.Next.Value;
 
 
@@ -43,6 +47,47 @@ namespace game.tcg {
             if (next.unit == null) {
                 u.h = next;
             }
+        }
+    }
+
+    class AOECommand : Command {
+        private HeroUnit u;
+
+        public AOECommand(HeroUnit u) : base() {
+            this.u = u;
+        }
+
+        public override void Act(WorldMap w) {
+            foreach(Hex h in u.h.Neighbors()) {
+                if (h.unit != null) {
+                    // WARNING: friendly fire
+                    h.unit.ApplyDamage(1);
+                }
+            }
+        }
+    }
+
+    class InvincibleCommand : Command {
+        private HeroUnit u;
+
+        public InvincibleCommand(HeroUnit u) : base() {
+            this.u = u;
+        }
+
+        public override void Act(WorldMap w) {
+            u.invincible.duration = 2;
+        }
+    }
+
+    class DoubleActionCommand : Command {
+        private Player p;
+
+        public DoubleActionCommand(Player p) : base() {
+            this.p = p;
+        }
+
+        public override void Act(WorldMap w) {
+            p.turns = 2;
         }
     }
 }

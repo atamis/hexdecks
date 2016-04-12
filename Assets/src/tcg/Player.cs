@@ -14,9 +14,11 @@ namespace game.tcg {
         public HeroUnit hero { get; set; }
 
         public Command nextCommand;
+        public int turns;
 
         public Player(HeroUnit hero) {
             this.hero = hero;
+            this.turns = 1;
 
             this.deck = new Deck();
             hand = new List<Card>();

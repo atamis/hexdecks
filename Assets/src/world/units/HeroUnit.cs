@@ -4,9 +4,8 @@ using game.world.math;
 
 namespace game.world.units {
     class HeroUnit : Unit {
-
         public void init(WorldMap w, Hex h) {
-            base.init(w, h, 15);
+            base.init(w, h, 10);
         }
     }
 }

@@ -71,9 +71,15 @@ namespace game {
                 // the null out statement won't get executed, and the game
                 // will attempt to execute the command again next turn.
                 var cmd = player.nextCommand;
+                player.turns--;
                 player.nextCommand = null;
                 cmd.Act(map);
-                map.NewTurn();
+                ui.NextTurn();
+                if (player.turns == 0) {
+                    map.NewTurn();
+                    player.turns = 1;
+                }
+                
             }
 		}
 

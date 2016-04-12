@@ -52,11 +52,13 @@ namespace game.world.units {
         public int health;
         public WorldMap w;
         internal bool Updated;
+        internal TemporaryEffect invincible;
 
         public void init(WorldMap w, Hex h, int health) {
             this.w = w;
             this.h = h;
             this.health = health;
+            invincible = new TemporaryEffect();
 
 
             var obj = new GameObject("Unit Model");
@@ -68,8 +70,10 @@ namespace game.world.units {
         }
 
         internal void ApplyDamage(int v) {
-            print("Applying " + v + " damage");
-            health = health - v;
+            if (!invincible.isActive()) {
+                print("Applying " + v + " damage");
+                health = health - v;
+            }
             CheckDeath();
         }
 
@@ -78,7 +82,7 @@ namespace game.world.units {
         }
 
         public virtual void NewTurn() {
-
+            invincible.NewTurn();
         }
 
         void Update() {
@@ -113,6 +117,20 @@ namespace game.world.units {
         }
     }
 
+    class TemporaryEffect {
+        public int duration;
+        public TemporaryEffect() {
+
+        }
+
+        public bool isActive() {
+            return duration > 0;
+        }
+
+        internal void NewTurn() {
+            duration--;
+        }
+    }
 }
 
 
