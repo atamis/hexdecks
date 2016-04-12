@@ -19,11 +19,13 @@ namespace game.tcg {
 		public List<Card> hand { get; set; }
 
 		public Command nextCommand;
+		public int turns;
 
 		public Player(HeroUnit hero) {
 			this.hero = hero;
-
+			this.turns = 1;
 			this.deck = new Deck();
+
 			hand = new List<Card>();
 
 			for (int i = 0; i < 5; i++) {

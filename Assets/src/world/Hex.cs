@@ -24,9 +24,31 @@ namespace game.world {
         private HexModel model;
         public TileType tileType;
 		private WorldMap w;
+        public List<Trigger> triggers;
 
         public HexLoc loc { get; set; }
-        public Unit unit { get; set; }
+        private Unit _unit;
+		public Unit unit {
+            get {
+                return _unit;
+            }
+            set {
+                if (_unit == null && value != null) {
+                    foreach (Trigger t in triggers) {
+                        t.UnitEnter(value);
+                    }
+                }
+
+                if (_unit != null && value == null) {
+                    foreach (Trigger t in triggers) {
+                        t.UnitLeave(unit);
+                    }
+                }
+
+                _unit = value;
+
+            }
+        }
 
         internal WorldPathfinding.PathfindingInfo pathfind;
         private bool _updated;
@@ -48,6 +70,7 @@ namespace game.world {
 			this.transform.position = GameManager.l.HexPixel (loc);
 
             tileType = TileType.Normal;
+            triggers = new List<Trigger>();
 
             model = new GameObject ("Hex Model").AddComponent<HexModel> ();
 			model.init (this);

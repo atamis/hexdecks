@@ -19,10 +19,11 @@ namespace game.world {
 		public Dictionary<HexLoc, Hex> map;
 		public Layout l;
         public HeroUnit hero;
-		GameObject hFolder;
+        public GameManager gm;
 
-		public WorldMap(Layout l) {
+		public WorldMap(Layout l, GameManager gm) {
 			this.l = l;
+            this.gm = gm;
 
 			hFolder = new GameObject ("Hexes");
 
