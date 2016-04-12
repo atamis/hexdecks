@@ -75,7 +75,7 @@ namespace game {
                 player.nextCommand = null;
                 cmd.Act(map);
                 ui.NextTurn();
-                if (player.turns == 0) {
+                if (player.turns <= 0) {
                     map.NewTurn();
                     player.turns = 1;
                 }

@@ -52,6 +52,8 @@ namespace game.world {
             foreach (KeyValuePair<HexLoc, Hex> kv in map) {
                 kv.Value.Updated = false;
             }
+
+            // Consider updating from the hero outward.
             foreach (KeyValuePair<HexLoc, Hex> kv in map) {
                 if (!kv.Value.Updated) {
                     kv.Value.Updated = true;
