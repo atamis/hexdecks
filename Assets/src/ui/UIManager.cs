@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace game.ui {
     class UIManager : MonoBehaviour {
@@ -62,7 +63,7 @@ namespace game.ui {
         void OnGUI()
         {
             if (p != null) GUI.Label(new Rect(150, 10, 100, 30), "Health: " + p.hero.health);
-
+            
             GUI.color = Color.yellow;
 
             GUI.Label(new Rect(150, 30, 250, 20), "[1] Invincible" + "(" + invincibleCD + ")");
@@ -70,6 +71,11 @@ namespace game.ui {
             GUI.Label(new Rect(150, 50, 250, 20), "[2] 1 damage to surounding hexes" + "(" + aoeCD + ")");
 
             GUI.Label(new Rect(150, 70, 250, 20), "[3] Gain 2 actions" + "(" + twoactionCD + ")");
+
+            if (GUI.Button(new Rect(750, 10, 100, 30), "Reset Level")) {
+                SceneManager.LoadSceneAsync("Main");
+            }
+
         }
 
         internal void NextTurn() {
