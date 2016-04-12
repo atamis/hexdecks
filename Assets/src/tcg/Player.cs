@@ -14,7 +14,6 @@ namespace game.tcg {
 		public HeroUnit hero { get; set; }
 		public List<Card> library;
 
-
 		// for rendering
 		public Deck deck { get; set; }
 		public List<Card> hand { get; set; }
@@ -26,13 +25,12 @@ namespace game.tcg {
 
 			this.deck = new Deck();
 			hand = new List<Card>();
+
 			for (int i = 0; i < 5; i++) {
-				//Card c = new GameObject ("Card" + i).AddComponent<Card> ();
-				//c.init ();
+				Card c = new GameObject ("Card" + i).AddComponent<FireballCard> ();
+				c.init ();
 			}
 			library = new List<Card>();
-
-		
 		}
 
 		public void NewTurn() {

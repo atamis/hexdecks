@@ -14,7 +14,6 @@ using game.tcg;
 namespace game {
 	public enum GameState {
 		Default,
-		Paused,
 		Selected,
 	}
 
@@ -23,9 +22,9 @@ namespace game {
 		public static Player p;
 		public static Layout l;
 		public static UIManager ui;
+		public static GameState state;
 
 		private GameCamera gc;
-		private GameState state;
 
 		//public static Card selected;
 
@@ -42,6 +41,7 @@ namespace game {
             
 			ui = gameObject.AddComponent<UIManager>();
 
+			state = GameState.Default;
 			//this.selected = null;
 		}
 

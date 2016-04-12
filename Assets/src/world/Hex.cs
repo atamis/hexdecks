@@ -51,6 +51,8 @@ namespace game.world {
 
             model = new GameObject ("Hex Model").AddComponent<HexModel> ();
 			model.init (this);
+
+			model.transform.parent = transform;
         }
 
         internal bool Passable() {
@@ -84,19 +86,25 @@ namespace game.world {
             return n;
         }
 
+		public void Highlight(Color c) {
+			this.model.sr.color = c;
+		}
+
         public override string ToString() {
             return "Hex " + loc.ToString();
         }
 
         private class HexModel : MonoBehaviour {
-            private SpriteRenderer sr;
-			private BoxCollider2D coll;
+			public SpriteRenderer sr;
+			private PolygonCollider2D coll;
+			private Rigidbody2D rig;
             private Hex h;
 
             public void init(Hex h) {
 				this.h = h;
+				this.tag = "Hex";
 
-				gameObject.hideFlags = HideFlags.HideInHierarchy; // hide from heirarchy
+				//gameObject.hideFlags = HideFlags.HideInHierarchy; // hide from heirarchy
 
 				transform.localPosition = new Vector3 (h.transform.position.x, h.transform.position.y, Layer.Board);
 				transform.localScale = new Vector3 (1.9f, 1.9f, 0);
@@ -105,8 +113,11 @@ namespace game.world {
 				sr.sprite = Resources.Load <Sprite>("Sprites/Hexagon");
 				sr.material = new Material (Shader.Find ("Sprites/Default"));
 
-				coll = gameObject.AddComponent<BoxCollider2D> ();
+				coll = gameObject.AddComponent<PolygonCollider2D> ();
 				coll.isTrigger = true;
+
+				rig = gameObject.AddComponent<Rigidbody2D> ();
+				rig.gravityScale = 0.0f;
             }
 
             void Update() {
@@ -120,19 +131,8 @@ namespace game.world {
                 }
             }
 
-            void OnMouseEnter() {
-				
-				sr.color = Color.red;
-				//Debug.Log ("Entered Hex");
-			}
-
-            void OnMouseExit() {
-				sr.color = Color.white;
-				//Debug.Log ("Exited Hex");
-			}
-
-			void OnMouseDown() {
-				//Debug.Log ("Clicked Hex");
+			public void SetColor(Color c) {
+				this.sr.color = c;
 			}
         }
     }

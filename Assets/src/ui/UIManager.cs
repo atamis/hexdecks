@@ -8,23 +8,28 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
+/*
+ * TODO
+ * Card Locations
+ * 
+ */
+
 namespace game.ui {
+	public enum GameState {
+		Default,
+		Selected,
+	}
+
 	class UIManager : MonoBehaviour {
-		//GameObject uiFolder;
+		private List<GameObject> objs;
 
 		void Awake() {
-			//uiFolder = new GameObject ("UI Folder");
+			objs = new List<GameObject> ();
 
-			/*
-			// back panel
-			var obj = GameObject.CreatePrimitive (PrimitiveType.Quad);
-			obj.transform.parent = uiFolder.transform;
-
-			Material mat = obj.GetComponent<Renderer>().material;
-			mat.shader = Shader.Find ("Sprites/Default");
-			mat.mainTexture = Resources.Load<Texture2D> ("Sprites/Square");
-			*/
-
+			for (int i = 0; i < 3; i++) {
+				var obj = GameObject.CreatePrimitive (PrimitiveType.Quad);
+				objs.Add (obj);
+			}
 		}
 
 		public Hex GetHexAtMouse() {
@@ -37,12 +42,18 @@ namespace game.ui {
 			return null;
 		}
 
+
 		void Update() {
 			// Update card positions
+			foreach (GameObject o in objs) {
+				o.transform.position = Camera.main.ScreenToWorldPoint (new Vector3 (100, 100, 10));
+			}
 
 			if (Input.GetMouseButtonUp(0)) {
 				Hex h = GetHexAtMouse();
-				GameManager.p.nextCommand = new MoveCommand(GameManager.p.hero, h);
+				if (h != null) {
+					GameManager.p.nextCommand = new MoveCommand(GameManager.p.hero, h);
+				}
 			}
 		}
 	}
