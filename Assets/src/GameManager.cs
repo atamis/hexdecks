@@ -21,6 +21,7 @@ namespace game {
 		public static WorldMap map;
 		public static Layout l;
         public static UIManager ui;
+        public static CombatTextManager ctm;
 
 		GameCamera gc;
 		bool battling;
@@ -33,6 +34,8 @@ namespace game {
 		void Awake() {
 			gc = new GameObject ("Game Camera").AddComponent<GameCamera> ();
 			gc.init (Camera.main);
+
+            ctm = new GameObject("Combat Text").AddComponent<CombatTextManager>();
 
 			l = new Layout(Orientation.Pointy, new Vector2(1, 1), new Vector2(0, 0));
             map = LevelLoader.LoadLevel(l, "level1", this);

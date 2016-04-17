@@ -72,6 +72,7 @@ namespace game.world.units {
         internal void ApplyDamage(int v) {
             if (!invincible.isActive()) {
                 print("Applying " + v + " damage");
+                GameManager.ctm.AddText(transform.position, "-" + v);
                 health = health - v;
             }
             CheckDeath();
