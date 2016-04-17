@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using game.world.units;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -124,7 +124,7 @@ namespace game.world {
         }
 
         public override void UnitLeave(Unit u) {
-            
+
         }
 
         public override Sprite getSprite() {

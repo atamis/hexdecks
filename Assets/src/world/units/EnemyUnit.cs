@@ -1,7 +1,7 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using game.world.math;
+using game.math;
 
 namespace game.world.units {
 	class EnemyUnit : Unit {
@@ -136,8 +136,6 @@ namespace game.world.units {
                     }
                 }
             }
-
-
         }
     }
 }

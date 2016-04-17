@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Runtime.Serialization;
 
 namespace game.world.units {
@@ -8,7 +8,7 @@ namespace game.world.units {
 
         public HexOccupiedError() {
         }
-        
+
 
         public HexOccupiedError(Hex h) : base("Couldn't move to " + h + ", unit already there") {
             this.h = h;

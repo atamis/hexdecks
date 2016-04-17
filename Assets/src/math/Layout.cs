@@ -1,10 +1,10 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
 
-namespace game.world.math {
+namespace game.math {
 	struct Layout {
 		public Orientation or;
 		public Vector2 size;

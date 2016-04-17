@@ -1,9 +1,7 @@
-﻿using UnityEngine;
-using System.Collections;
-using game.world.math;
+using UnityEngine;
 
 namespace game.world.units {
-    class HeroUnit : Unit {
+	class HeroUnit : Unit {
         public void init(WorldMap w, Hex h) {
             base.init(w, h, 10);
         }

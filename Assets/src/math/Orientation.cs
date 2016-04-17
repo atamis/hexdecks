@@ -1,9 +1,9 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace game.world.math {
+namespace game.math {
 	struct Orientation {
 		public float f0, f1, f2, f3;
 		public float b0, b1, b2, b3;

@@ -1,10 +1,15 @@
-﻿using System;
+using System;
 
-namespace game.world.math {
+namespace game.math {
 	struct HexLoc {
 		public static HexLoc[] hex_directions = {
 			new HexLoc(1, 0, -1), new HexLoc(1, -1, 0), new HexLoc(0, -1, 1),
 			new HexLoc(-1, 0, 1), new HexLoc(-1, 1, 0), new HexLoc(0, 1, -1)
+		};
+
+		public static HexLoc[] hex_diagonals = {
+			new HexLoc(2, -1, -1), new HexLoc(1, 1, -2), new HexLoc(-1, 2, -1),
+			new HexLoc(-2, 1, 1), new HexLoc(-1, -1, 2), new HexLoc(1, -2, 1)
 		};
 
 		public int q, r, s;
@@ -71,6 +76,15 @@ namespace game.world.math {
 
 		public HexLoc Neighbor(int direction) {
 			return this + Direction(direction);
+		}
+
+		public HexLoc Diagonal(int direction) {
+			return this + hex_diagonals [direction % 6];
+		}
+
+		// TODO
+		public HexLoc Rotate() {
+			return this;
 		}
 
 		public override String ToString() {

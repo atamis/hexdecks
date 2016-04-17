@@ -1,7 +1,7 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections.Generic;
-using game.world.math;
 using game.world.units;
+using game.tcg.cards;
 
 namespace game.tcg {
 	[System.Serializable]
@@ -12,10 +12,7 @@ namespace game.tcg {
 
 	class Player {
 		public HeroUnit hero { get; set; }
-		public List<Card> library;
-
-		// for rendering
-		public Deck deck { get; set; }
+		public Dictionary<Card, bool> library;
 		public List<Card> hand { get; set; }
 
 		public Command nextCommand;
@@ -24,7 +21,6 @@ namespace game.tcg {
 		public Player(HeroUnit hero) {
 			this.hero = hero;
 			this.turns = 1;
-			this.deck = new Deck();
 
 			hand = new List<Card>();
 
@@ -32,13 +28,10 @@ namespace game.tcg {
 				Card c = new GameObject ("Card" + i).AddComponent<FireballCard> ();
 				c.init ();
 			}
-			library = new List<Card>();
+			//library = new List<Card>();
 		}
 
 		public void NewTurn() {
-			if (hand.Count < 3) {
-				deck.DrawCards (1);
-			}
 		}
 	}
 }

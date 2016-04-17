@@ -1,10 +1,11 @@
-﻿using UnityEngine;
-using System.Collections;
+using UnityEngine;
+using System.Collections.Generic;
 using game.world;
-using game.world.math;
+using game.math;
 using game.world.units;
 using game.ui;
 using game.tcg;
+
 /*
  * Andrew Amis, Nick Care, Robert Tomcik (2016)
  * The main HexDecks manager, references to the scenes should direct here
@@ -21,7 +22,7 @@ namespace game {
 		public static WorldMap world;
 		public static Player p;
 		public static Layout l;
-		public static UIManager ui;
+		public static WorldUI ui;
 		public static GameState state;
 
 		GameCamera gc;
@@ -38,34 +39,23 @@ namespace game {
 
 			// initialize the map
 			l = new Layout(Orientation.Pointy, new Vector2(1, 1), new Vector2(0, 0));
-            map = LevelLoader.LoadLevel(l, "level1", this);
+            world = SaveManager.LoadLevel(l, "level1", this);
 
             var trigger = new GameObject("Trigger").AddComponent<LogTrigger>();
-            trigger.init(map.map[new HexLoc(2, 2)]);
+            trigger.init(world.map[new HexLoc(2, 2)]);
 
-            var hero = map.hero;
-            gc.setLocation(l.HexPixel(map.hero.h.loc));
+            var hero = world.hero;
+            gc.setLocation(l.HexPixel(world.hero.h.loc));
 
-            player = new Player(hero);
+            p = new Player(hero);
 
-            ui = gameObject.AddComponent<UIManager>();
-            ui.init(map, player);
+			ui = gameObject.AddComponent<WorldUI>();
+			ui.init(world, p);
 
             audioS = gameObject.AddComponent<AudioSource>();
             audioS.spatialBlend = 0.0f;
             //this.selected = null;
         }
-
-		public void MakeDuel() {
-			// TODO
-		}
-
-		// Clamp down the duel arena
-		public void ClampArena() {
-
-			state = GameState.Default;
-			//this.selected = null;
-		}
 
 		void Update() {
             if (p.nextCommand != null) {
@@ -75,14 +65,14 @@ namespace game {
                 // command because otherwise, if the command errors out,
                 // the null out statement won't get executed, and the game
                 // will attempt to execute the command again next turn.
-                var cmd = player.nextCommand;
-                player.turns--;
-                player.nextCommand = null;
-                cmd.Act(map);
+                var cmd = p.nextCommand;
+				p.turns--;
+                p.nextCommand = null;
+                cmd.Act(world);
                 ui.NextTurn();
-                if (player.turns == 0) {
-                    map.NewTurn();
-                    player.turns = 1;
+                if (p.turns == 0) {
+					world.NewTurn();
+                    world.turns = 1;
                 }
 
             }

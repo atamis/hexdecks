@@ -1,13 +1,8 @@
-﻿/*
- * Andrew Amis, Nick Care, Robert Tomcik (2016)
- * The WorldMap class
- *
- */
 using UnityEngine;
+using System;
 using System.Collections.Generic;
 using game.world.units;
-using game.world.math;
-using System;
+using game.math;
 
 namespace game.world {
 	[System.Serializable]
@@ -17,17 +12,20 @@ namespace game.world {
 
 	class WorldMap {
 		public Dictionary<HexLoc, Hex> map;
+        private GameObject hFolder;
+
 		public Layout l;
         public HeroUnit hero;
         public GameManager gm;
+		public int turns { get; set; }
 
 		public WorldMap(Layout l, GameManager gm) {
 			this.l = l;
             this.gm = gm;
-
-			hFolder = new GameObject ("Hexes");
+			this.turns = 0;
 
 			map = new Dictionary<HexLoc, Hex> ();
+            hFolder = new GameObject("Hexes");
 		}
 
 		public Hex addHex(HexLoc hl) {

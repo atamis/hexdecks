@@ -38,11 +38,11 @@ namespace game.ui {
 				}
 			}
 
-			var scroll = Input.GetAxis("Mouse ScrollWheel");
+			//var scroll = Input.GetAxis("Mouse ScrollWheel");
 
 			// Scroll up is a positive change, but increasing size
 			// zooms out, so we subtract.
-			cam.orthographicSize -= scroll;
+			//cam.orthographicSize -= scroll;
 
 			// Ensure 1 <= size <= 20.
 			cam.orthographicSize = System.Math.Min(System.Math.Max(1, cam.orthographicSize), 20);

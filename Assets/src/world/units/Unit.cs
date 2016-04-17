@@ -1,12 +1,6 @@
-﻿/*
- * Andrew Amis, Nick Care, Robert Tomcik (2016)
- * The Unit class
- *
- */
-
 using UnityEngine;
 using System.Collections;
-using game.world.math;
+using game.math;
 using game.tcg;
 using System;
 
@@ -40,17 +34,11 @@ namespace game.world.units {
                 }
 
                 _h = value;
-                
+
                 if (_h != null) {
                     transform.parent = _h.transform;
                     _h.unit = this;
                 }
-            }
-        }
-
-        public void CheckDeath() {
-            if (health <= 0) {
-                Die();
             }
         }
 
@@ -72,6 +60,12 @@ namespace game.world.units {
 
             model.init(this);
 
+        }
+
+        public void CheckDeath() {
+            if (health <= 0) {
+                Die();
+            }
         }
 
         internal void ApplyDamage(int v) {
@@ -137,5 +131,3 @@ namespace game.world.units {
         }
     }
 }
-
-

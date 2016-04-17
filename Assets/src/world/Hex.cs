@@ -1,14 +1,7 @@
 using UnityEngine;
-using System.Collections;
-using game.world.math;
-using game.world.units;
-using System;
 using System.Collections.Generic;
-/*
- * Andrew Amis, Nick Care, Robert Tomcik (2016)
- * The Hex Class
- *
- */
+using game.world.units;
+using game.math;
 
 namespace game.world {
     [System.Serializable]
@@ -126,6 +119,7 @@ namespace game.world {
             public void init(Hex h) {
 				this.h = h;
 				this.tag = "Hex";
+				this.gameObject.layer = LayerMask.NameToLayer("HexLayer");
 
 				//gameObject.hideFlags = HideFlags.HideInHierarchy; // hide from heirarchy
 

@@ -1,5 +1,5 @@
-﻿using game.world;
-using game.world.math;
+using game.world;
+using game.math;
 using game.world.units;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Text;
 using UnityEngine;
 
 namespace game.world {
-    class LevelLoader {
+    class SaveManager {
 /*
 _ = normal
 W = wall
