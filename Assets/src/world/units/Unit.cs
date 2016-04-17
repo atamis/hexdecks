@@ -98,7 +98,6 @@ namespace game.world.units {
 
             if (healthShown)
             {
-                Debug.Log("Showing health of enemy at: " + h.loc);
                 pips.model.sr.enabled = true;
             }
             else
