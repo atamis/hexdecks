@@ -51,7 +51,6 @@ namespace game.tcg.cards {
 				Dragging,
 			};
 			private CardState state;
-			private List<Hex> cache; // cache of tiles to unhighlight
 
 			private Vector3 screenPoint;
 			public Vector3 origin;

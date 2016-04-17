@@ -30,6 +30,8 @@ namespace game.tcg.cards {
 
 		public override List<Hex> PreCast (Hex h, int dir) {
 			List<Hex> tmp = new List<Hex> ();
+			tmp.Add (GameManager.world.map [h.loc.Neighbor (0).Rotate(1)]);
+			List<Hex> tmp = new List<Hex> ();
 			tmp.Add(GameManager.world.map[h.loc.Neighbor (0)]); 
 			tmp.Add(GameManager.world.map[h.loc.Neighbor (1)]);
 			tmp.Add(GameManager.world.map[h.loc.Diagonal (0)]);

@@ -23,7 +23,6 @@ namespace game {
 		public static Player p;
 		public static Layout l;
 		public static WorldUI ui;
-		public static GameState state;
 
 		GameCamera gc;
 		bool battling;
