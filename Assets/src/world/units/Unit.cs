@@ -50,6 +50,7 @@ namespace game.world.units {
         }
 
         public int health;
+        public EnemyHealthBar pips;
         public WorldMap w;
         internal bool Updated;
         internal TemporaryEffect invincible;
@@ -59,8 +60,13 @@ namespace game.world.units {
             this.w = w;
             this.h = h;
             this.health = health;
+
             invincible = new TemporaryEffect();
             healthShown = false;
+
+            pips = gameObject.AddComponent<EnemyHealthBar>();
+            pips.transform.parent = transform;
+            pips.init(this);
 
             var obj = new GameObject("Unit Model");
             obj.transform.parent = transform;
@@ -80,7 +86,7 @@ namespace game.world.units {
         }
 
         public virtual Sprite getSprite() {
-            return Resources.Load<Sprite>("Sprites/Circle"); ;
+            return Resources.Load<Sprite>("Sprites/Circle");
         }
 
         public virtual void NewTurn() {
@@ -92,11 +98,12 @@ namespace game.world.units {
 
             if (healthShown)
             {
-                //Debug.Log("Showing health of enemy at: " + h.loc);
+                Debug.Log("Showing health of enemy at: " + h.loc);
+                pips.model.sr.enabled = true;
             }
             else
             {
-
+                pips.model.sr.enabled = false;
             }
         }
 
@@ -123,7 +130,7 @@ namespace game.world.units {
             public void init(Unit u) {
                 this.u = u;
 
-                gameObject.transform.localPosition = LayerV.HeroUnit;
+                transform.localPosition = LayerV.HeroUnit;
 
                 sr = gameObject.AddComponent<SpriteRenderer>();
                 sr.sprite = u.getSprite();
