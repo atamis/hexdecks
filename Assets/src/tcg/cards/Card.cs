@@ -30,7 +30,7 @@ namespace game.tcg.cards {
 
 		public abstract List<Hex> ValidTargets (WorldMap w, Hex h);
 
-		public abstract List<Hex> PreCast(Hex h);
+		public abstract List<Hex> PreCast(Hex h, int direction);
 
 		public CardData Serialize() {
 			return new CardData() {

@@ -28,7 +28,7 @@ namespace game.tcg.cards {
             return tmp;
         }
 
-		public override List<Hex> PreCast (Hex h) {
+		public override List<Hex> PreCast (Hex h, int dir) {
 			List<Hex> tmp = new List<Hex> ();
 			tmp.Add(GameManager.world.map[h.loc.Neighbor (0)]); 
 			tmp.Add(GameManager.world.map[h.loc.Neighbor (1)]);

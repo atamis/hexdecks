@@ -104,6 +104,13 @@ namespace game.ui {
 
 			void Update() {
 				Hex h = MathLib.GetHexAtMouse ();
+
+				if (cache != null) {
+					foreach (Hex h2 in cache) {
+						h2.Highlight (Color.white);
+					}
+				}
+
 				switch (this.state) {
 					case ActionState.Default:
 						if (Input.GetMouseButtonDown(0)) {
@@ -113,13 +120,8 @@ namespace game.ui {
 						}
 						break;
 				case ActionState.Selected:
-					if (cache != null) {
-						foreach (Hex h2 in cache) {
-							h2.Highlight (Color.white);
-						}
-					}
 					if (h != null) {
-						//cache = selected.PreCast(h, MathLib.GetOrientation(h, GameManager.p));
+						cache = selected.PreCast(h, 0); //MathLib.GetOrientation(h.loc, ui.p.hero.h.loc)
 						foreach (Hex h2 in cache) {
 							h2.Highlight (Color.red);
 						}

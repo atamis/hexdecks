@@ -46,21 +46,24 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\src\GameManager.cs" />
-     <Compile Include="Assets\src\Layer.cs" />
-     <Compile Include="Assets\src\tcg\Card.cs" />
+     <Compile Include="Assets\src\math\HexLoc.cs" />
+     <Compile Include="Assets\src\math\Layout.cs" />
+     <Compile Include="Assets\src\math\MathLib.cs" />
+     <Compile Include="Assets\src\math\Orientation.cs" />
      <Compile Include="Assets\src\tcg\Command.cs" />
-     <Compile Include="Assets\src\tcg\Deck.cs" />
      <Compile Include="Assets\src\tcg\Player.cs" />
+     <Compile Include="Assets\src\tcg\cards\Card.cs" />
+     <Compile Include="Assets\src\tcg\cards\FireballCard.cs" />
      <Compile Include="Assets\src\ui\GameCamera.cs" />
-     <Compile Include="Assets\src\ui\UIManager.cs" />
+     <Compile Include="Assets\src\ui\IntroUI.cs" />
+     <Compile Include="Assets\src\ui\LibraryUI.cs" />
+     <Compile Include="Assets\src\ui\WorldUI.cs" />
      <Compile Include="Assets\src\world\Hex.cs" />
-     <Compile Include="Assets\src\world\LevelLoader.cs" />
+     <Compile Include="Assets\src\world\Layer.cs" />
+     <Compile Include="Assets\src\world\SaveManager.cs" />
      <Compile Include="Assets\src\world\Trigger.cs" />
      <Compile Include="Assets\src\world\WorldMap.cs" />
      <Compile Include="Assets\src\world\WorldPathfinding.cs" />
-     <Compile Include="Assets\src\world\math\HexLoc.cs" />
-     <Compile Include="Assets\src\world\math\Layout.cs" />
-     <Compile Include="Assets\src\world\math\Orientation.cs" />
      <Compile Include="Assets\src\world\units\EnemyUnit.cs" />
      <Compile Include="Assets\src\world\units\HeroUnit.cs" />
      <Compile Include="Assets\src\world\units\HexNotPassableError.cs" />
