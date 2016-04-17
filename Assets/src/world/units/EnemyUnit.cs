@@ -5,6 +5,7 @@ using game.world.math;
 
 namespace game.world.units {
 	class EnemyUnit : Unit {
+
         public void init(WorldMap w, Hex h) {
             base.init(w, h, 1);
         }
@@ -12,7 +13,6 @@ namespace game.world.units {
         public override Sprite getSprite() {
             return Resources.Load<Sprite>("Sprites/Square");
         }
-
     }
 
     class MeleeEnemy : EnemyUnit {

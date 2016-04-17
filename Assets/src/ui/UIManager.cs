@@ -13,6 +13,10 @@ namespace game.ui {
     class UIManager : MonoBehaviour {
         private Player p;
         private WorldMap w;
+        private Hex currHex;
+        private Hex lastHex;
+        private Unit currUnit;
+        private Unit lastUnit;
 
         private int invincibleCD;
         private int aoeCD;
@@ -58,6 +62,35 @@ namespace game.ui {
                 p.nextCommand = new DoubleActionCommand(p);
             }
 
+            HandleEnemyHealthDisplay();
+
+        }
+
+        public void HandleEnemyHealthDisplay()
+        {
+            lastUnit = currUnit;
+            currHex = GetHexAtMouse();
+
+            if (currHex != null)
+            {
+                currUnit = currHex.unit;
+            }
+
+            if (currUnit != lastUnit && lastUnit != null)
+            {
+                if (lastUnit.GetType().IsSubclassOf(typeof(EnemyUnit)))
+                {
+                    lastUnit.hideHealth();
+                }
+            }
+
+            if (currUnit != null)
+            {
+                if (currUnit.GetType().IsSubclassOf(typeof(EnemyUnit)))
+                {
+                    currUnit.showHealth();
+                }
+            }
         }
 
         void OnGUI()

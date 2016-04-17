@@ -53,13 +53,14 @@ namespace game.world.units {
         public WorldMap w;
         internal bool Updated;
         internal TemporaryEffect invincible;
+        public bool healthShown;
 
         public void init(WorldMap w, Hex h, int health) {
             this.w = w;
             this.h = h;
             this.health = health;
             invincible = new TemporaryEffect();
-
+            healthShown = false;
 
             var obj = new GameObject("Unit Model");
             obj.transform.parent = transform;
@@ -88,6 +89,15 @@ namespace game.world.units {
 
         void Update() {
             transform.localPosition = new Vector3(0, 0, 0);
+
+            if (healthShown)
+            {
+                //Debug.Log("Showing health of enemy at: " + h.loc);
+            }
+            else
+            {
+
+            }
         }
 
         public void Die() {
@@ -95,6 +105,16 @@ namespace game.world.units {
             Destroy(model);
             Destroy(this.gameObject);
 		}
+
+        public void showHealth()
+        {
+            healthShown = true;
+        }
+
+        public void hideHealth()
+        {
+            healthShown = false;
+        }
 
         private class UnitModel : MonoBehaviour {
             SpriteRenderer sr;
