@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using game.world;
+using System;
 
 namespace game.tcg.cards {
 	class FireballCard : Card {
@@ -12,8 +13,9 @@ namespace game.tcg.cards {
 		}
 
 		public override void OnPlay(WorldMap w, Hex h) {
+            print(h.unit);
 			if (h.unit != null) {
-				h.unit.health -= 3;
+                h.unit.ApplyDamage(3);
 			}
 		}
 
@@ -34,5 +36,13 @@ namespace game.tcg.cards {
 			tmp.Add (GameManager.world.map [h.loc.Diagonal (0).Rotate (dir)]);
 			return tmp;
 		}
-	}
+
+        public override string GetName() {
+            return "Fireball";
+        }
+
+        public override string GetCardText() {
+            return "Deal 3 damage to an enemy";
+        }
+    }
 }
