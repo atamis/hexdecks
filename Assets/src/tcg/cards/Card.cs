@@ -122,6 +122,7 @@ namespace game.tcg.cards {
 				Hex h = MathLib.GetHexAtMouse ();
 				if (h != null && this.targets.Contains(h)) {
 					c.OnPlay (GameManager.world, h);
+					Destroy (this);
 				}
 				this.state = CardState.Default;
 			}

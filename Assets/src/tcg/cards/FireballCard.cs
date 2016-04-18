@@ -12,8 +12,10 @@ namespace game.tcg.cards {
 		}
 
 		public override void OnPlay(WorldMap w, Hex h) {
-			if (h.unit != null) {
-				h.unit.health -= 3;
+			foreach (Hex h2 in h.Neighbors()) {
+				if (h.unit != null) {
+					h.unit.ApplyDamage (1);
+				}
 			}
 		}
 
@@ -28,11 +30,7 @@ namespace game.tcg.cards {
 		}
 
 		public override List<Hex> PreCast (Hex h, int dir) {
-			List<Hex> tmp = new List<Hex> ();
-			tmp.Add (GameManager.world.map [h.loc.Neighbor (0).Rotate (dir)]);
-			tmp.Add (GameManager.world.map [h.loc.Neighbor (1).Rotate (dir)]);
-			tmp.Add (GameManager.world.map [h.loc.Diagonal (0).Rotate (dir)]);
-			return tmp;
+			return null;
 		}
 	}
 }

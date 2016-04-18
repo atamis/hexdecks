@@ -42,11 +42,12 @@ namespace game.world.units {
             }
         }
 
+		internal TemporaryEffect invincible;
         public int health;
         public EnemyHealthBar pips;
         public WorldMap w;
         internal bool Updated;
-        internal TemporaryEffect invincible;
+        
         public bool healthShown;
 
         public void init(WorldMap w, Hex h, int health) {

@@ -57,6 +57,7 @@
      <Compile Include="Assets\src\tcg\cards\Card.cs" />
      <Compile Include="Assets\src\tcg\cards\FireballCard.cs" />
      <Compile Include="Assets\src\tcg\cards\FlashHealCard.cs" />
+     <Compile Include="Assets\src\tcg\cards\JumpBlockCard.cs" />
      <Compile Include="Assets\src\ui\GameCamera.cs" />
      <Compile Include="Assets\src\ui\IntroUI.cs" />
      <Compile Include="Assets\src\ui\LibraryUI.cs" />
