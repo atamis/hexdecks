@@ -43,6 +43,7 @@ namespace game.ui {
 				i++;
 			}
 
+			//////////
 			if (Input.GetKeyUp(KeyCode.Alpha1) && invincibleCD == 0) {
 				invincibleCD = 5;
 				p.nextCommand = new InvincibleCommand(w.hero);
@@ -119,15 +120,15 @@ namespace game.ui {
 							}
 						}
 						break;
-				case ActionState.Selected:
-					if (h != null) {
-						cache = selected.PreCast(h, 0); //MathLib.GetOrientation(h.loc, ui.p.hero.h.loc)
-						foreach (Hex h2 in cache) {
-							h2.Highlight (Color.red);
-						}
-					}
 
-					break;
+					case ActionState.Selected:
+						if (h != null) {
+							cache = selected.PreCast(h, 1); //
+							foreach (Hex h2 in cache) {
+								h2.Highlight (Color.red);
+							}
+						}
+						break;
 				}
 			}
 

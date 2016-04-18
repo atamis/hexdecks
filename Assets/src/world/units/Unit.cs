@@ -43,16 +43,23 @@ namespace game.world.units {
         }
 
         public int health;
+        public EnemyHealthBar pips;
         public WorldMap w;
         internal bool Updated;
         internal TemporaryEffect invincible;
+        public bool healthShown;
 
         public void init(WorldMap w, Hex h, int health) {
             this.w = w;
             this.h = h;
             this.health = health;
-            invincible = new TemporaryEffect();
 
+            invincible = new TemporaryEffect();
+            healthShown = false;
+
+            pips = gameObject.AddComponent<EnemyHealthBar>();
+            pips.transform.parent = transform;
+            pips.init(this);
 
             var obj = new GameObject("Unit Model");
             obj.transform.parent = transform;
@@ -71,13 +78,14 @@ namespace game.world.units {
         internal void ApplyDamage(int v) {
             if (!invincible.isActive()) {
                 print("Applying " + v + " damage");
+                GameManager.ctm.AddText(transform.position, "-" + v);
                 health = health - v;
             }
             CheckDeath();
         }
 
         public virtual Sprite getSprite() {
-            return Resources.Load<Sprite>("Sprites/Circle"); ;
+            return Resources.Load<Sprite>("Sprites/Circle");
         }
 
         public virtual void NewTurn() {
@@ -86,6 +94,15 @@ namespace game.world.units {
 
         void Update() {
             transform.localPosition = new Vector3(0, 0, 0);
+
+            if (healthShown)
+            {
+                pips.model.sr.enabled = true;
+            }
+            else
+            {
+                pips.model.sr.enabled = false;
+            }
         }
 
         public void Die() {
@@ -94,6 +111,16 @@ namespace game.world.units {
             Destroy(this.gameObject);
 		}
 
+        public void showHealth()
+        {
+            healthShown = true;
+        }
+
+        public void hideHealth()
+        {
+            healthShown = false;
+        }
+
         private class UnitModel : MonoBehaviour {
             SpriteRenderer sr;
             Unit u;
@@ -101,7 +128,7 @@ namespace game.world.units {
             public void init(Unit u) {
                 this.u = u;
 
-                gameObject.transform.localPosition = LayerV.HeroUnit;
+                transform.localPosition = LayerV.HeroUnit;
 
                 sr = gameObject.AddComponent<SpriteRenderer>();
                 sr.sprite = u.getSprite();

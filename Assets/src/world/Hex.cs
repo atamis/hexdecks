@@ -102,13 +102,15 @@ namespace game.world {
             return n;
         }
 
+		public override string ToString() {
+			return "Hex " + loc.ToString();
+		}
+
 		public void Highlight(Color c) {
 			this.model.sr.color = c;
 		}
 
-        public override string ToString() {
-            return "Hex " + loc.ToString();
-        }
+        
 
         private class HexModel : MonoBehaviour {
 			public SpriteRenderer sr;

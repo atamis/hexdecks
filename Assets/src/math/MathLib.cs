@@ -14,6 +14,7 @@ namespace game.math {
 			return null;
 		}
 
+
 		public static int GetOrientation(HexLoc target, HexLoc origin) {
 			for (int i = 0; i < 5; i++) {
 				if (origin + HexLoc.hex_directions[i] == target) {

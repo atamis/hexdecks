@@ -30,7 +30,7 @@ namespace game.tcg {
         public override void Act(WorldMap w) {
             var path = WorldPathfinding.Pathfind(w, u.h, h);
 
-            if (path.First.Next == null) {
+            if (path.Count < 2) {
                 return;
             }
             var next = path.First.Next.Value;

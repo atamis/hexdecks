@@ -82,9 +82,16 @@ namespace game.math {
 			return this + hex_diagonals [direction % 6];
 		}
 
-		// TODO
-		public HexLoc Rotate() {
-			return this;
+		public HexLoc Rotate60() {
+			return new HexLoc (-s, -q, -r);
+		}
+
+		public HexLoc Rotate(int steps) {
+			HexLoc l = this;
+			for (int i = 0; i < steps; i++) {
+				l = l.Rotate60 ();
+			}
+			return l;
 		}
 
 		public override String ToString() {

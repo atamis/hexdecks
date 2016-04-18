@@ -25,7 +25,7 @@ namespace game.tcg {
 			hand = new List<Card>();
 
 			for (int i = 0; i < 5; i++) {
-				Card c = new GameObject ("Card" + i).AddComponent<FireballCard> ();
+				Card c = new GameObject ("Card" + i).AddComponent<FlashHealCard> ();
 				c.init ();
 			}
 			//library = new List<Card>();

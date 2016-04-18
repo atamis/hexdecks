@@ -1,8 +1,15 @@
 using UnityEngine;
+using System;
 using System.Collections.Generic;
 using game.world;
-using game.math;
 using game.ui;
+using game.math;
+using game.tcg;
+
+// TODO
+// Cards as commands
+// Fix Colliders
+// Registering new cards
 
 namespace game.tcg.cards {
 	[System.Serializable]
@@ -10,11 +17,30 @@ namespace game.tcg.cards {
 		public int id;
 	}
 
+	class CardCommand : Command {
+		public override void Act(WorldMap w) {
+			// How do I fit this into a command?
+		}
+	}
+
 	abstract class Card : MonoBehaviour {
 		private CardModel model;
-		public string title { get; set; }
-		public string bodyText { get; set; }
-		public int cost { get; set; }
+
+		public string GetText() {
+			return "";
+		}
+
+		public Sprite GetSprite() {
+			return Resources.Load<Sprite> ("Sprites/Circle");
+		}
+
+		public abstract List<Hex> ValidTargets (WorldMap w, Hex h); 
+
+		public abstract List<Hex> PreCast(Hex h, int direction);
+
+		public abstract bool CanPlay (WorldMap w, Hex h);
+
+		public abstract void OnPlay (WorldMap w, Hex h);
 
 		public void init() {
 			model = new GameObject ("Card Model").AddComponent<CardModel> ();
@@ -24,39 +50,22 @@ namespace game.tcg.cards {
 			model.transform.position = new Vector2 (1, 1);
 		}
 
-		public abstract bool CanPlay (WorldMap w, Hex h);
-
-		public abstract void OnPlay (WorldMap w, Hex h);
-
-		public abstract List<Hex> ValidTargets (WorldMap w, Hex h);
-
-		public abstract List<Hex> PreCast(Hex h, int direction);
-
-		public CardData Serialize() {
-			return new CardData() {
-				//id = this.id;
-			};
-		}
-
-		public static Card Deserialize(CardData data) {
-			return null;
-		}
-
 		private class CardModel : MonoBehaviour {
-			private SpriteRenderer sr;
-			private BoxCollider2D coll;
-
 			private enum CardState {
 				Default,
 				Dragging,
 			};
 			private CardState state;
 
+			private SpriteRenderer sr;
+			private BoxCollider2D coll;
+
 			private Vector3 screenPoint;
 			public Vector3 origin;
 			private GameObject target;
 
 			private Card c;
+			private List<Hex> targets;
 
 			public void init(Card c) {
 				this.c = c;
@@ -82,34 +91,38 @@ namespace game.tcg.cards {
 			void SetOrigin(Vector3 pos) {
 				this.origin = pos;
 			}
-				
+
+			// DONE
 			void OnMouseEnter() {
-				foreach (Hex h in this.c.ValidTargets(GameManager.world, GameManager.p.hero.h)) {
-					h.Highlight(Color.red);
+				this.targets = this.c.ValidTargets (GameManager.world, GameManager.world.hero.h);
+				foreach (Hex h in this.targets) {
+					h.Highlight (Color.red);
 				}
 			}
 
+			// DONE
 			void OnMouseExit() {
-				// Highlight valid targets
-				foreach (Hex h in this.c.ValidTargets(GameManager.world, GameManager.p.hero.h)) {
-					h.Highlight(Color.white);
+				foreach (Hex h in this.targets) {
+					h.Highlight (Color.white);
 				}
-			}
-
-			void OnMouseStay() {
-				// TODO Render Helper Model
 			}
 
 			void OnMouseDown() {
-				WorldUI.selected = this.c;
-				GameObject.FindGameObjectWithTag ("Cursor").SendMessage ("SetState", 1);
+				//WorldUI.selected = this.c;
+				//GameObject.FindGameObjectWithTag ("Cursor").SendMessage ("SetState", 1);
 
 				this.state = CardState.Dragging;
 				screenPoint = Camera.main.WorldToScreenPoint(gameObject.transform.position);
 			}
 
 			void OnMouseUp() {
-				GameObject.FindGameObjectWithTag ("Cursor").SendMessage ("SetState", 2);
+				//WorldUI.selected = null;
+				//GameObject.FindGameObjectWithTag ("Cursor").SendMessage ("SetState", 2);
+
+				Hex h = MathLib.GetHexAtMouse ();
+				if (h != null && this.targets.Contains(h)) {
+					c.OnPlay (GameManager.world, h);
+				}
 				this.state = CardState.Default;
 			}
 
@@ -117,46 +130,9 @@ namespace game.tcg.cards {
 				Vector3 curPos = new Vector3 (Input.mousePosition.x, Input.mousePosition.y, screenPoint.z);
 				transform.position = Camera.main.ScreenToWorldPoint (curPos);
 			}
-
-			void OnTriggerEnter2D() {
-
-			}
-			/*
-			void OnMouseUp() {
-				this.state = CardState.Default;
-				Hex h = MathLib.GetHexAtMouse();
-
-				if (h != null) {
-					this.c.OnPlay (GameManager.world, h);
-					Debug.Log ("Played Card");
-					Destroy(this.c);
-				}
-
-				foreach (Hex h2 in this.cache) {
-					h2.Highlight (Color.white);
-				}
-			}
-
-			
-			void OnMouseOver() {
-				// Highlight valid targets
-
-
-				// render the helper model
-				switch (this.state) {
-				case CardState.Default:
-					// TODO RENDER HELPER MODEL
-					break;
-				default:
-					break;
-				}
-			}
-			*/
 		}
 
 		private class CardHelperModel : MonoBehaviour {
-			private TextMesh text;
-
 			public void init() {
 
 			}

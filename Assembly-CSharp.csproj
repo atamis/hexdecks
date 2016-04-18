@@ -45,19 +45,24 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\src\CombatTextManager.cs" />
      <Compile Include="Assets\src\GameManager.cs" />
      <Compile Include="Assets\src\math\HexLoc.cs" />
      <Compile Include="Assets\src\math\Layout.cs" />
      <Compile Include="Assets\src\math\MathLib.cs" />
      <Compile Include="Assets\src\math\Orientation.cs" />
+     <Compile Include="Assets\src\tcg\CardManager.cs" />
      <Compile Include="Assets\src\tcg\Command.cs" />
      <Compile Include="Assets\src\tcg\Player.cs" />
      <Compile Include="Assets\src\tcg\cards\Card.cs" />
      <Compile Include="Assets\src\tcg\cards\FireballCard.cs" />
+     <Compile Include="Assets\src\tcg\cards\FlashHealCard.cs" />
      <Compile Include="Assets\src\ui\GameCamera.cs" />
      <Compile Include="Assets\src\ui\IntroUI.cs" />
      <Compile Include="Assets\src\ui\LibraryUI.cs" />
+     <Compile Include="Assets\src\ui\UIManager.cs" />
      <Compile Include="Assets\src\ui\WorldUI.cs" />
+     <Compile Include="Assets\src\world\EnemyHealthBar.cs" />
      <Compile Include="Assets\src\world\Hex.cs" />
      <Compile Include="Assets\src\world\Layer.cs" />
      <Compile Include="Assets\src\world\SaveManager.cs" />

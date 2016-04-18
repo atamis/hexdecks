@@ -23,6 +23,7 @@ namespace game {
 		public static Player p;
 		public static Layout l;
 		public static WorldUI ui;
+        public static CombatTextManager ctm;
 
 		GameCamera gc;
 		bool battling;
@@ -36,7 +37,8 @@ namespace game {
 			gc = new GameObject ("Game Camera").AddComponent<GameCamera> ();
 			gc.init (Camera.main);
 
-			// initialize the map
+            ctm = new GameObject("Combat Text").AddComponent<CombatTextManager>();
+
 			l = new Layout(Orientation.Pointy, new Vector2(1, 1), new Vector2(0, 0));
             world = SaveManager.LoadLevel(l, "level1", this);
 
@@ -69,9 +71,9 @@ namespace game {
                 p.nextCommand = null;
                 cmd.Act(world);
                 ui.NextTurn();
-                if (p.turns == 0) {
-					world.NewTurn();
-                    world.turns = 1;
+                if (p.turns <= 0) {
+                    world.NewTurn();
+                    p.turns = 1;
                 }
 
             }
