@@ -22,26 +22,24 @@ namespace game.ui {
 		private int aoeCD;
 		private int twoactionCD;
 
+		private CardManager cm;
+
 		public void init(WorldMap w, Player p) {
 			this.w = w;
 			this.p = p;
+
+			ch = new GameObject ("Cursor Helper").AddComponent<CursorHelper> ();
+			ch.init (this);
+
+			cm = new GameObject ("Card Manager").AddComponent<CardManager> ();
+			cm.init ();
 		}
 
 		void Awake() {
-			ch = new GameObject ("Cursor Helper").AddComponent<CursorHelper> ();
-			ch.init (this);
+
 		}
 
 		void Update() {
-			// update card locations
-			float offset = Screen.height * .3f;
-			int i = 1;
-
-			foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Card")) {
-				Vector3 pos = Camera.main.ScreenToWorldPoint(new Vector3(offset * i, Screen.height / 2 - Screen.height * .4f, 1));
-				obj.SendMessage("SetOrigin", pos);
-				i++;
-			}
 
 			//////////
 			if (Input.GetKeyUp(KeyCode.Alpha1) && invincibleCD == 0) {

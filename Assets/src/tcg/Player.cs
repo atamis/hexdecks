@@ -10,39 +10,51 @@ namespace game.tcg {
 		public List<CardData> cards;
 	}
 		
-	class Player {
-		
-
-		public HeroUnit hero { get; set; }
-		public Dictionary<Card, bool> library;
+	class Player {			
 		public List<Card> hand { get; set; }
 		public List<Card> graveyard { get; set; }
+		public List<Card> deck { get; set; }
 
+		public HeroUnit hero { get; set; }
 		public Command nextCommand;
 		public int turns;
 
-		public Player(HeroUnit hero) {
-			this.hero = hero;
+		public Player(HeroUnit u) {
+			this.hero = u;
 			this.turns = 1;
 
 			hand = new List<Card>();
+			deck = new List<Card> ();
+			graveyard = new List<Card> ();
 
-			for (int i = 0; i < 5; i++) {
-				Card c = new GameObject ("Card" + i).AddComponent<FireballCard> ();
-				c.init ();
+			Card c = new GameObject ("Card").AddComponent<FireballCard> ();
+			c.init (this);
 
-				Card c1 = new GameObject ("Card" + i).AddComponent<FireballCard> ();
-				c1.init ();
+			Card c1 = new GameObject ("Card").AddComponent<FireballCard> ();
+			c1.init (this);
 
-				Card c2 = new GameObject ("Card" + i).AddComponent<FlashHealCard> ();
-				c2.init ();
+			Card c2 = new GameObject ("Card").AddComponent<FlashHealCard> ();
+			c2.init (this);
+
+			hand.Add (c); hand.Add (c1); hand.Add (c2);
+		}
+			
+		public void DiscardHand() {
+			foreach (Card c in hand) {
+				graveyard.Add (c);
+				hand.Remove (c);
 			}
-			//library = new List<Card>();
 		}
 
-
+		public void DrawCards(int amount) {
+			for (int i = 0; i < amount; i++) {
+				hand.Add (deck [i]);
+				deck.RemoveAt (i);
+			}
+		}
 
 		public void NewTurn() {
+			
 		}
 	}
 }

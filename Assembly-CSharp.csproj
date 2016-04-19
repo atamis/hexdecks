@@ -51,6 +51,7 @@
      <Compile Include="Assets\src\math\Layout.cs" />
      <Compile Include="Assets\src\math\MathLib.cs" />
      <Compile Include="Assets\src\math\Orientation.cs" />
+     <Compile Include="Assets\src\tcg\CardLib.cs" />
      <Compile Include="Assets\src\tcg\CardManager.cs" />
      <Compile Include="Assets\src\tcg\Command.cs" />
      <Compile Include="Assets\src\tcg\Player.cs" />

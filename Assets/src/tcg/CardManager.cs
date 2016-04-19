@@ -3,32 +3,24 @@ using System.Collections.Generic;
 using game.tcg.cards;
 
 namespace game.tcg {
-	static class CardManager {
-		public static Dictionary<int, System.Type> card_dict;
+	class CardManager : MonoBehaviour {
+		private Player p;
 
-		public static void Shuffle<T>(this IList<T> l) {
-			System.Random rng = new System.Random ();
+		public void init() {
+			this.p = GameManager.p;
+		}
 
-			int n = l.Count;
-			while (n > 1) {
-				n--;
-				int k = rng.Next (n + 1);
-				T value = l [k];
-				l [k] = l [n];
-				l [n] = value;
+		void Update() {
+			// update card locations
+			float offset = Screen.height * .3f;
+			int i = 1;
+
+			foreach (Card c in p.hand) {
+				Vector3 pos = Camera.main.ScreenToWorldPoint(new Vector3(offset * i, Screen.height / 2 - Screen.height * .4f, 1));
+				c.SetOrigin (pos);
+				i++;
 			}
 		}
-			
-		public static void RegisterCard<T>(int id) where T : Card {
-			card_dict.Add (id, typeof(T));
-		}
-
-		/*
-		public static Card CreateCard(int id) {
-			var a = card_dict [id];
-			var c = new GameObject ("Card").AddComponent<a.GetType()>();
-		}
-		*/
 	}
 
 }

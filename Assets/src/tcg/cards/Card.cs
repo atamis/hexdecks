@@ -25,6 +25,7 @@ namespace game.tcg.cards {
 
 	abstract class Card : MonoBehaviour {
 		private CardModel model;
+		private Player p;
 
 		public string GetText() {
 			return "";
@@ -44,7 +45,16 @@ namespace game.tcg.cards {
 
 		public abstract void OnPlay (WorldMap w, Hex h);
 
-		public void init() {
+		public void SetOrigin(Vector3 pos) {
+			this.model.origin = pos;
+		}
+
+		public void DestroyCard() {
+			DestroyImmediate(this.model);
+			Destroy (this);
+		}
+
+		public void init(Player p) {
 			model = new GameObject ("Card Model").AddComponent<CardModel> ();
 			model.init (this);
 
@@ -106,7 +116,6 @@ namespace game.tcg.cards {
                     builder = tm.text;
                 }
 
-
                 //tm.text = c.GetName() + "\n" + c.GetCardText();
                 tm.fontSize = 148;
                 tm.characterSize = 0.01f;
@@ -157,7 +166,14 @@ namespace game.tcg.cards {
 				Hex h = MathLib.GetHexAtMouse ();
 				if (h != null && this.targets.Contains(h)) {
 					c.OnPlay (GameManager.world, h);
-					Destroy (this);
+					GameManager.p.graveyard.Add (this.c);
+					GameManager.p.hand.Remove (this.c);
+					GameManager.p.DrawCards (1);
+					foreach (Hex h2 in this.targets) {
+						h2.Highlight (Color.white);
+					}
+
+					this.c.gameObject.SetActive (false);
 				}
 
 				this.state = CardState.Default;
