@@ -26,10 +26,7 @@ namespace game.tcg.cards {
 			w.hero.h = h;
 			w.hero.invincible.duration = 1;
 		}
-
-		public override bool CanPlay (WorldMap w, Hex h) {
-			return false;
-		}
+        
 	}
 }
 

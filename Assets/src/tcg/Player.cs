@@ -27,16 +27,23 @@ namespace game.tcg {
 
 			hand = new List<Card>();
 
-			for (int i = 0; i < 5; i++) {
-				Card c = new GameObject ("Card" + i).AddComponent<FireballCard> ();
-				c.init ();
+			//for (int i = 0; i < 5; i++) {
+			Card c = new GameObject ("Card" + 0).AddComponent<FireballCard> ();
+			c.init ();
+            hand.Add(c);
 
-				Card c1 = new GameObject ("Card" + i).AddComponent<FireballCard> ();
-				c1.init ();
+			Card c1 = new GameObject ("Card" + 1).AddComponent<FireballCard> ();
+			c1.init ();
+            hand.Add(c1);
 
-				Card c2 = new GameObject ("Card" + i).AddComponent<FlashHealCard> ();
-				c2.init ();
-			}
+			Card c2 = new GameObject ("Card" + 2).AddComponent<FlashHealCard> ();
+			c2.init ();
+            hand.Add(c2);
+
+            Card c3 = new GameObject("Card " + 3).AddComponent<JumpAttackCard>();
+            c3.init();
+            hand.Add(c3);
+			//}
 			//library = new List<Card>();
 		}
 

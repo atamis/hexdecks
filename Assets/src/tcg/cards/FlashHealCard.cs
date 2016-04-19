@@ -18,10 +18,6 @@ namespace game.tcg.cards {
 			Destroy (this);
 		}
 
-		public override bool CanPlay (WorldMap w, Hex h) {
-			return false;
-		}
-
         public override string GetName() {
             return "Heal";
         }

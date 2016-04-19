@@ -5,13 +5,6 @@ using System;
 
 namespace game.tcg.cards {
 	class FireballCard : Card {
-		public override bool CanPlay(WorldMap w, Hex h) {
-			if (h.unit != null) {
-				return true;
-			}
-			return false;
-		}
-
 		public override void OnPlay(WorldMap w, Hex h) {
 			foreach (Hex h2 in h.Neighbors()) {
 				if (h.unit != null) {

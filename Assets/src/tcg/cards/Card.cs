@@ -38,9 +38,7 @@ namespace game.tcg.cards {
 
         public abstract string GetCardText();
 
-		public abstract List<Hex> ValidTargets (WorldMap w, Hex h); 
-
-		public abstract bool CanPlay (WorldMap w, Hex h);
+		public abstract List<Hex> ValidTargets (WorldMap w, Hex h);
 
 		public abstract void OnPlay (WorldMap w, Hex h);
 
