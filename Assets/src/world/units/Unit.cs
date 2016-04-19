@@ -102,12 +102,12 @@ namespace game.world.units {
 
         public virtual void showAtkPattern()
         {
-            
+
         }
 
         public virtual void hideAtkPattern()
         {
-            
+
         }
 
         public virtual void Die() {
