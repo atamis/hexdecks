@@ -27,18 +27,27 @@ namespace game.tcg {
 			deck = new List<Card> ();
 			graveyard = new List<Card> ();
 
-			Card c = new GameObject ("Card").AddComponent<FireballCard> ();
+			Card c = new GameObject ("Card" + 0).AddComponent<FireballCard> ();
 			c.init (this);
+			hand.Add(c);
 
-			Card c1 = new GameObject ("Card").AddComponent<FireballCard> ();
+			Card c1 = new GameObject ("Card" + 1).AddComponent<FireballCard> ();
 			c1.init (this);
+			hand.Add(c1);
 
-			Card c2 = new GameObject ("Card").AddComponent<FlashHealCard> ();
+			Card c2 = new GameObject ("Card" + 2).AddComponent<FlashHealCard> ();
 			c2.init (this);
+			hand.Add(c2);
 
-			hand.Add (c); hand.Add (c1); hand.Add (c2);
+			Card c3 = new GameObject("Card " + 3).AddComponent<JumpAttackCard>();
+			c3.init(this);
+			hand.Add(c3);
+
+			Card c4 = new GameObject("Card " + 4).AddComponent<KnockBackCard>();
+			c4.init(this);
+			hand.Add(c4);
 		}
-			
+
 		public void DiscardHand() {
 			foreach (Card c in hand) {
 				graveyard.Add (c);

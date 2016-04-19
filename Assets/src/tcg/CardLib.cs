@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace game.tcg {
 	static class CardLib {
-		public static Dictionary<int, System.Type> card_dict;
+		//public static Dictionary<int, System.Type> card_dict;
 
 		public static void Shuffle<T>(this IList<T> l) {
 			System.Random rng = new System.Random ();
@@ -22,7 +22,6 @@ namespace game.tcg {
 		public static void RegisterCard<T>(int id) where T : Card {
 			card_dict.Add (id, typeof(T));
 		}
-
 		
 		public static Card CreateCard(int id) {
 			var a = card_dict [id];
