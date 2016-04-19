@@ -43,9 +43,13 @@ namespace game.tcg {
             Card c3 = new GameObject("Card " + 3).AddComponent<JumpAttackCard>();
             c3.init();
             hand.Add(c3);
-			//}
-			//library = new List<Card>();
-		}
+
+            Card c4 = new GameObject("Card " + 4).AddComponent<KnockBackCard>();
+            c4.init();
+            hand.Add(c4);
+            //}
+            //library = new List<Card>();
+        }
 
 
 
