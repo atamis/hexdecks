@@ -35,7 +35,7 @@ namespace game.world.units {
                 }
 
                 _h = value;
-                
+
                 if (_h != null) {
                     transform.parent = _h.transform;
                     _h.unit = this;
@@ -134,7 +134,7 @@ namespace game.world.units {
                 sr = gameObject.AddComponent<SpriteRenderer>();
                 sr.sprite = u.getSprite();
 
-                sr.color = new Color(0, 0, 0);
+                sr.color = new Color(1, 1, 1);
             }
 
             void Update() {
@@ -159,5 +159,3 @@ namespace game.world.units {
         }
     }
 }
-
-

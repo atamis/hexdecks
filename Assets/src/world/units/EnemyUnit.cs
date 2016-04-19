@@ -21,7 +21,7 @@ namespace game.world.units {
 
         public override Sprite getSprite()
         {
-            return Resources.Load<Sprite>("Sprites/Square");
+            return Resources.Load<Sprite>("Sprites/Enemies/T_GoblinIdle1");
         }
 
         public override void NewTurn() {
@@ -64,7 +64,7 @@ namespace game.world.units {
     {
         public override Sprite getSprite()
         {
-            return Resources.Load<Sprite>("Sprites/Pentagon");
+            return Resources.Load<Sprite>("Sprites/Enemies/T_ShieldGoblinIdle1");
         }
 
         public new void init(WorldMap w, Hex h)
@@ -78,7 +78,7 @@ namespace game.world.units {
         private HeroUnit target;
 
         public override Sprite getSprite() {
-            return Resources.Load<Sprite>("Sprites/Triangle");
+            return Resources.Load<Sprite>("Sprites/Enemies/T_BowGoblinIdle1");
         }
 
         private List<Hex> ValidTargets() {
