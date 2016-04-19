@@ -17,8 +17,9 @@ namespace game.world {
     }
 
 	class Hex : MonoBehaviour {
-		private HexModel model;
+		public HexModel model;
         private WorldMap w;
+        public bool selected;
         internal WorldPathfinding.PathfindingInfo pathfind;
         private bool _updated;
         internal bool Updated {
@@ -65,6 +66,7 @@ namespace game.world {
             this.w = w;
             tileType = TileType.Normal;
             triggers = new List<Trigger>();
+            selected = false;
 
 			model = new GameObject ("Hex Model").AddComponent<HexModel> ();
 			model.init (this);
@@ -73,9 +75,15 @@ namespace game.world {
 			transform.localPosition = GameManager.l.HexPixel (loc);
 		}
 
-		public void Select() {
-			model.sr.color = Color.yellow;
+		public void Select()
+        {
+            selected = true;
 		}
+
+        public void Deselect()
+        {
+            selected = false;
+        }
 
         internal bool Passable() {
             switch(tileType) {
@@ -109,7 +117,7 @@ namespace game.world {
             }
         }
 
-        private class HexModel : MonoBehaviour {
+        public class HexModel : MonoBehaviour {
 			public SpriteRenderer sr;
 			Hex h;
 
@@ -125,6 +133,16 @@ namespace game.world {
 
             void Update() {
                 switch (h.tileType) {
+                    case TileType.Normal:
+                        if (h.selected)
+                        {
+                            sr.color = Color.yellow;
+                        }
+                        else
+                        {
+                            sr.color = Color.white;
+                        }
+                        break;
                     case TileType.Wall:
                         sr.color = new Color(0.2f, 0.2f, 0.2f);
                         break;

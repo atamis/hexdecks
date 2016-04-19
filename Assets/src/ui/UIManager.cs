@@ -62,11 +62,11 @@ namespace game.ui {
                 p.nextCommand = new DoubleActionCommand(p);
             }
 
-            HandleEnemyHealthDisplay();
+            HandleEnemyMouseOver();
 
         }
 
-        public void HandleEnemyHealthDisplay()
+        public void HandleEnemyMouseOver()
         {
             lastUnit = currUnit;
             currHex = GetHexAtMouse();
@@ -80,7 +80,7 @@ namespace game.ui {
             {
                 if (lastUnit.GetType().IsSubclassOf(typeof(EnemyUnit)))
                 {
-                    lastUnit.hideHealth();
+                    lastUnit.mouseExit();
                 }
             }
 
@@ -88,7 +88,7 @@ namespace game.ui {
             {
                 if (currUnit.GetType().IsSubclassOf(typeof(EnemyUnit)))
                 {
-                    currUnit.showHealth();
+                    currUnit.mouseEnter();
                 }
             }
         }

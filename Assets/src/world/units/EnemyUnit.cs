@@ -58,6 +58,31 @@ namespace game.world.units {
             }
         }
 
+        public override void showAtkPattern()
+        {
+            foreach (Hex neighbor in h.Neighbors())
+            {
+                if (neighbor.tileType == TileType.Normal)
+                {
+                    neighbor.Select();
+                }
+            }
+        }
+
+        public override void hideAtkPattern()
+        {
+            if (h != null)
+            {
+                foreach (Hex neighbor in h.Neighbors().ToArray())
+                {
+                    if (neighbor.tileType == TileType.Normal)
+                    {
+                        neighbor.Deselect();
+                    }
+                }
+            }
+        }
+
     }
 
     class BigMeleeEnemy: MeleeEnemy
@@ -138,6 +163,31 @@ namespace game.world.units {
             }
 
 
+        }
+
+        public override void showAtkPattern()
+        {
+            foreach (Hex target in ValidTargets())
+            {
+                if (target.tileType == TileType.Normal)
+                {
+                    target.Select();
+                }
+            }
+        }
+
+        public override void hideAtkPattern()
+        {
+            if (h != null)
+            {
+                foreach (Hex target in ValidTargets())
+                {
+                    if (target.tileType == TileType.Normal)
+                    {
+                        target.Deselect();
+                    }
+                }
+            }
         }
     }
 }

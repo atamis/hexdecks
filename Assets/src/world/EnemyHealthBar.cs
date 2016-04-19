@@ -45,6 +45,7 @@ namespace game.world
                 setSprite();
 
                 sr.color = new Color(1, 1, 1);
+                sr.enabled = false;
             }
 
             private void setSprite()
