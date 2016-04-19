@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using game.world;
+using System;
 
 namespace game.tcg.cards {
 	class FlashHealCard : Card {
@@ -21,8 +22,12 @@ namespace game.tcg.cards {
 			return false;
 		}
 
-		public override List<Hex> PreCast (Hex h, int dir) {
-			return null;
-		}
-	}
+        public override string GetName() {
+            return "Heal";
+        }
+
+        public override string GetCardText() {
+            return "Heal yourself for 2";
+        }
+    }
 }

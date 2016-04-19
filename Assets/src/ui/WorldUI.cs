@@ -123,7 +123,7 @@ namespace game.ui {
 
 					case ActionState.Selected:
 						if (h != null) {
-							cache = selected.PreCast(h, 1); //
+							//cache = selected.PreCast(h, 1); //
 							foreach (Hex h2 in cache) {
 								h2.Highlight (Color.red);
 							}

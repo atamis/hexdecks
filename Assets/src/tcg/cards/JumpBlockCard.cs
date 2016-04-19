@@ -4,6 +4,13 @@ using game.world;
 
 namespace game.tcg.cards {
 	class JumpBlockCard : Card {
+		public override string GetName () {
+			return "Jump Block";
+		}
+
+		public override string GetCardText () {
+			return "Jump forward and become invicible until end of turn";
+		}
 
 		public override List<Hex> ValidTargets(WorldMap w, Hex h) {
 			List<Hex> tmp = new List<Hex> ();
@@ -22,10 +29,6 @@ namespace game.tcg.cards {
 
 		public override bool CanPlay (WorldMap w, Hex h) {
 			return false;
-		}
-
-		public override List<Hex> PreCast (Hex h, int dir) {
-			return null;
 		}
 	}
 }

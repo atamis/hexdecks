@@ -34,9 +34,11 @@ namespace game.tcg.cards {
 			return Resources.Load<Sprite> ("Sprites/Circle");
 		}
 
-		public abstract List<Hex> ValidTargets (WorldMap w, Hex h); 
+        public abstract string GetName();
 
-		public abstract List<Hex> PreCast(Hex h, int direction);
+        public abstract string GetCardText();
+
+		public abstract List<Hex> ValidTargets (WorldMap w, Hex h); 
 
 		public abstract bool CanPlay (WorldMap w, Hex h);
 
@@ -59,6 +61,8 @@ namespace game.tcg.cards {
 
 			private SpriteRenderer sr;
 			private BoxCollider2D coll;
+            private TextMesh tm;
+            private GameObject textObj;
 
 			private Vector3 screenPoint;
 			public Vector3 origin;
@@ -75,14 +79,45 @@ namespace game.tcg.cards {
 				sr = gameObject.AddComponent<SpriteRenderer> ();
 				sr.sprite = Resources.Load<Sprite> ("Sprites/Square");
 				sr.material = new Material (Shader.Find ("Sprites/Default"));
-				sr.color = Color.green;
+				sr.color = Color.white;
 
 				coll = gameObject.AddComponent<BoxCollider2D> ();
 				coll.size = new Vector3 (1.0f, 1.0f, 0);
 				coll.isTrigger = true;
-			}
 
-			void Update() {
+                var font = Resources.Load<Font>("Fonts/LeagueSpartan-Bold");
+
+                textObj = new GameObject("Card Text");
+                textObj.transform.parent = transform;
+                textObj.transform.localPosition = new Vector3(-0.5f, 0.5f, -0.1f);
+
+                tm = textObj.AddComponent<TextMesh>();
+
+                var text = c.GetName() + "\n" + c.GetCardText();
+                tm.text = "";
+                var builder = "";
+                string[] parts = text.Split(' ');
+
+                for (int i = 0; i < parts.Length; i++) {
+                    tm.text += parts[i] + " ";
+                    if (tm.GetComponent<Renderer>().bounds.extents.x > 3f) {
+                        tm.text = builder.TrimEnd() + System.Environment.NewLine + parts[i] + " ";
+                    }
+                    builder = tm.text;
+                }
+
+
+                //tm.text = c.GetName() + "\n" + c.GetCardText();
+                tm.fontSize = 148;
+                tm.characterSize = 0.01f;
+                tm.color = Color.black;
+                tm.font = font;
+
+                tm.GetComponent<Renderer>().material = font.material;
+
+            }
+
+            void Update() {
 				if (this.state != CardState.Dragging) {
 					transform.position = Vector3.MoveTowards (transform.position, origin, 1.0f);
 				}
@@ -124,6 +159,7 @@ namespace game.tcg.cards {
 					c.OnPlay (GameManager.world, h);
 					Destroy (this);
 				}
+
 				this.state = CardState.Default;
 			}
 

@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using game.world;
+using System;
 
 namespace game.tcg.cards {
 	class FireballCard : Card {
@@ -29,8 +30,12 @@ namespace game.tcg.cards {
 			return tmp;
 		}
 
-		public override List<Hex> PreCast (Hex h, int dir) {
-			return null;
-		}
-	}
+        public override string GetName() {
+            return "Fireball";
+        }
+
+        public override string GetCardText() {
+            return "Deal 3 damage to an enemy";
+        }
+    }
 }
