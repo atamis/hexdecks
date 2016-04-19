@@ -18,6 +18,7 @@ namespace game.world {
         public TileType tileType;
 		private WorldMap w;
         public List<Trigger> triggers;
+		private bool selected { get; set; }
 
         public HexLoc loc { get; set; }
         private Unit _unit;
@@ -64,11 +65,21 @@ namespace game.world {
 
             tileType = TileType.Normal;
             triggers = new List<Trigger>();
+            selected = false;
 
             model = new GameObject ("Hex Model").AddComponent<HexModel> ();
 			model.init (this);
 
 			model.transform.parent = transform;
+			transform.localPosition = GameManager.l.HexPixel (loc);
+		}
+
+		public void Select() {
+            selected = true;
+		}
+
+        public void Deselect() {
+            selected = false;
         }
 
         internal bool Passable() {
@@ -110,9 +121,7 @@ namespace game.world {
 			this.model.sr.color = c;
 		}
 
-        
-
-        private class HexModel : MonoBehaviour {
+        public class HexModel : MonoBehaviour {
 			public SpriteRenderer sr;
 			private PolygonCollider2D coll;
 			private Rigidbody2D rig;
@@ -129,7 +138,7 @@ namespace game.world {
 				transform.localScale = new Vector3 (1.9f, 1.9f, 0);
 
 				sr = gameObject.AddComponent<SpriteRenderer> ();
-				sr.sprite = Resources.Load <Sprite>("Sprites/Hexagon");
+				sr.sprite = Resources.Load <Sprite>("Sprites/Tiles/T_Ground");
 				sr.material = new Material (Shader.Find ("Sprites/Default"));
 
 				coll = gameObject.AddComponent<PolygonCollider2D> ();
@@ -141,7 +150,16 @@ namespace game.world {
 
             void Update() {
                 switch (h.tileType) {
-                    case TileType.Wall:
+					case TileType.Normal:
+					if (Input.GetKeyDown (KeyCode.LeftShift)) {
+						if (h.selected) {
+							sr.color = Color.yellow;
+						} else {
+							sr.color = Color.white;
+							}
+						}
+						break;
+					case TileType.Wall:
                         sr.color = new Color(0.2f, 0.2f, 0.2f);
                         break;
                     case TileType.Water:

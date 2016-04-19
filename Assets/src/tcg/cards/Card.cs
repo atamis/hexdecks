@@ -166,7 +166,7 @@ namespace game.tcg.cards {
 					c.OnPlay (GameManager.world, h);
 					GameManager.p.graveyard.Add (this.c);
 					GameManager.p.hand.Remove (this.c);
-					GameManager.p.DrawCards (1);
+					//GameManager.p.DrawCards (1);
 					foreach (Hex h2 in this.targets) {
 						h2.Highlight (Color.white);
 					}

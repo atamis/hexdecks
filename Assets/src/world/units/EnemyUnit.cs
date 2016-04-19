@@ -21,7 +21,7 @@ namespace game.world.units {
 
         public override Sprite getSprite()
         {
-            return Resources.Load<Sprite>("Sprites/Square");
+            return Resources.Load<Sprite>("Sprites/Enemies/T_GoblinIdle1");
         }
 
         public override void NewTurn() {
@@ -58,13 +58,38 @@ namespace game.world.units {
             }
         }
 
+        public override void showAtkPattern()
+        {
+            foreach (Hex neighbor in h.Neighbors())
+            {
+                if (neighbor.tileType == TileType.Normal)
+                {
+                    neighbor.Select();
+                }
+            }
+        }
+
+        public override void hideAtkPattern()
+        {
+            if (h != null)
+            {
+                foreach (Hex neighbor in h.Neighbors().ToArray())
+                {
+                    if (neighbor.tileType == TileType.Normal)
+                    {
+                        neighbor.Deselect();
+                    }
+                }
+            }
+        }
+
     }
 
     class BigMeleeEnemy: MeleeEnemy
     {
         public override Sprite getSprite()
         {
-            return Resources.Load<Sprite>("Sprites/Pentagon");
+            return Resources.Load<Sprite>("Sprites/Enemies/T_ShieldGoblinIdle1");
         }
 
         public new void init(WorldMap w, Hex h)
@@ -78,7 +103,7 @@ namespace game.world.units {
         private HeroUnit target;
 
         public override Sprite getSprite() {
-            return Resources.Load<Sprite>("Sprites/Triangle");
+            return Resources.Load<Sprite>("Sprites/Enemies/T_BowGoblinIdle1");
         }
 
         private List<Hex> ValidTargets() {
@@ -133,6 +158,31 @@ namespace game.world.units {
                     var next = path.First.Next.Value;
                     if (next.unit == null) {
                         h = next;
+                    }
+                }
+            }
+        }
+
+        public override void showAtkPattern()
+        {
+            foreach (Hex target in ValidTargets())
+            {
+                if (target.tileType == TileType.Normal)
+                {
+                    target.Select();
+                }
+            }
+        }
+
+        public override void hideAtkPattern()
+        {
+            if (h != null)
+            {
+                foreach (Hex target in ValidTargets())
+                {
+                    if (target.tileType == TileType.Normal)
+                    {
+                        target.Deselect();
                     }
                 }
             }

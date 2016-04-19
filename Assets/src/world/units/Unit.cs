@@ -49,6 +49,8 @@ namespace game.world.units {
         internal bool Updated;
         
         public bool healthShown;
+        public bool mousedOver;
+        public bool lastFrameMousedOver;
 
         public void init(WorldMap w, Hex h, int health) {
             this.w = w;
@@ -56,7 +58,7 @@ namespace game.world.units {
             this.health = health;
 
             invincible = new TemporaryEffect();
-            healthShown = false;
+            mousedOver = false;
 
             pips = gameObject.AddComponent<EnemyHealthBar>();
             pips.transform.parent = transform;
@@ -90,36 +92,42 @@ namespace game.world.units {
         }
 
         public virtual void NewTurn() {
+            hideAtkPattern();
             invincible.NewTurn();
         }
 
         void Update() {
             transform.localPosition = new Vector3(0, 0, 0);
 
-            if (healthShown)
-            {
-                pips.model.sr.enabled = true;
-            }
-            else
-            {
-                pips.model.sr.enabled = false;
-            }
         }
 
-        public void Die() {
+        public virtual void showAtkPattern()
+        {
+
+        }
+
+        public virtual void hideAtkPattern()
+        {
+
+        }
+
+        public virtual void Die() {
+            hideAtkPattern();
             h = null;
             Destroy(model);
             Destroy(this.gameObject);
 		}
 
-        public void showHealth()
+        public void mouseEnter()
         {
-            healthShown = true;
+            pips.model.sr.enabled = true;
+            showAtkPattern();
         }
 
-        public void hideHealth()
+        public void mouseExit()
         {
-            healthShown = false;
+            pips.model.sr.enabled = false;
+            hideAtkPattern();
         }
 
         private class UnitModel : MonoBehaviour {
@@ -134,7 +142,7 @@ namespace game.world.units {
                 sr = gameObject.AddComponent<SpriteRenderer>();
                 sr.sprite = u.getSprite();
 
-                sr.color = new Color(0, 0, 0);
+                sr.color = new Color(1, 1, 1);
             }
 
             void Update() {

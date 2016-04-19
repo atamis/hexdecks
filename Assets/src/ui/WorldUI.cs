@@ -24,6 +24,11 @@ namespace game.ui {
 
 		private CardManager cm;
 
+		private Hex currHex;
+		private Hex lastHex;
+		private Unit currUnit;
+		private Unit lastUnit;
+
 		public void init(WorldMap w, Player p) {
 			this.w = w;
 			this.p = p;
@@ -35,13 +40,10 @@ namespace game.ui {
 			cm.init ();
 		}
 
-		void Awake() {
-
-		}
-
 		void Update() {
 
 			//////////
+			/*
 			if (Input.GetKeyUp(KeyCode.Alpha1) && invincibleCD == 0) {
 				invincibleCD = 5;
 				p.nextCommand = new InvincibleCommand(w.hero);
@@ -56,6 +58,9 @@ namespace game.ui {
 				twoactionCD = 5;
 				p.nextCommand = new DoubleActionCommand(p);
 			}
+			*/
+			HandleEnemyMouseOver();
+
 		}
 
 		void OnGUI() {
@@ -63,21 +68,47 @@ namespace game.ui {
 
 			GUI.color = Color.yellow;
 
-			GUI.Label(new Rect(150, 30, 250, 20), "[1] Invincible" + "(" + invincibleCD + ")");
+			//GUI.Label(new Rect(150, 30, 250, 20), "[1] Invincible" + "(" + invincibleCD + ")");
 
-			GUI.Label(new Rect(150, 50, 250, 20), "[2] 1 damage to surounding hexes" + "(" + aoeCD + ")");
+			//GUI.Label(new Rect(150, 50, 250, 20), "[2] 1 damage to surounding hexes" + "(" + aoeCD + ")");
 
-			GUI.Label(new Rect(150, 70, 250, 20), "[3] Gain 2 actions" + "(" + twoactionCD + ")");
+			//GUI.Label(new Rect(150, 70, 250, 20), "[3] Gain 2 actions" + "(" + twoactionCD + ")");
 
 			if (GUI.Button(new Rect(750, 10, 100, 30), "Reset Level")) {
 				SceneManager.LoadSceneAsync("Main");
 			}
 		}
 
+		public void HandleEnemyMouseOver() {
+			lastUnit = currUnit;
+			currHex = MathLib.GetHexAtMouse();
+
+			if (currHex != null)
+			{
+				currUnit = currHex.unit;
+			}
+
+			if (currUnit != lastUnit && lastUnit != null)
+			{
+				if (lastUnit.GetType().IsSubclassOf(typeof(EnemyUnit)))
+				{
+					lastUnit.mouseExit();
+				}
+			}
+
+			if (currUnit != null)
+			{
+				if (currUnit.GetType().IsSubclassOf(typeof(EnemyUnit)))
+				{
+					currUnit.mouseEnter();
+				}
+			}
+		}
+
 		internal void NextTurn() {
-			invincibleCD = Math.Max(0, invincibleCD - 1);
-			aoeCD = Math.Max(0, aoeCD - 1);
-			twoactionCD = Math.Max(0, twoactionCD - 1);
+			//invincibleCD = Math.Max(0, invincibleCD - 1);
+			//aoeCD = Math.Max(0, aoeCD - 1);
+			//twoactionCD = Math.Max(0, twoactionCD - 1);
 		}
 
 		private class CursorHelper : MonoBehaviour {
