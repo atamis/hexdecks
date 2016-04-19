@@ -61,7 +61,6 @@
      <Compile Include="Assets\src\ui\GameCamera.cs" />
      <Compile Include="Assets\src\ui\IntroUI.cs" />
      <Compile Include="Assets\src\ui\LibraryUI.cs" />
-     <Compile Include="Assets\src\ui\UIManager.cs" />
      <Compile Include="Assets\src\ui\WorldUI.cs" />
      <Compile Include="Assets\src\world\EnemyHealthBar.cs" />
      <Compile Include="Assets\src\world\Hex.cs" />
