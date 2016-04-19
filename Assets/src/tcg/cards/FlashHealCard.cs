@@ -15,7 +15,6 @@ namespace game.tcg.cards {
 		public override void OnPlay (WorldMap w, Hex h) {
 			GameManager.ctm.AddText (h.transform.position, "+2");
 			h.unit.health += 2;
-			Destroy (this);
 		}
 
         public override string GetName() {

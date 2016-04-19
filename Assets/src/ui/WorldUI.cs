@@ -143,7 +143,7 @@ namespace game.ui {
 
 				switch (this.state) {
 					case ActionState.Default:
-						if (Input.GetMouseButtonDown(0)) {
+						if (Input.GetMouseButtonDown(1)) {
 							if (h != null && ui.p.nextCommand == null) {
 								ui.p.nextCommand = new MoveCommand (ui.p.hero, h);
 							}
@@ -152,7 +152,6 @@ namespace game.ui {
 
 					case ActionState.Selected:
 						if (h != null) {
-							//cache = selected.PreCast(h, 1); //
 							foreach (Hex h2 in cache) {
 								h2.Highlight (Color.red);
 							}

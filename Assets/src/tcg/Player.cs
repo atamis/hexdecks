@@ -46,6 +46,21 @@ namespace game.tcg {
 			Card c4 = new GameObject("Card " + 4).AddComponent<KnockBackCard>();
 			c4.init(this);
 			hand.Add(c4);
+
+			//
+			Card c5 = new GameObject("Card " + 4).AddComponent<KnockBackCard>();
+			c5.init(this);
+			deck.Add(c5);
+
+			/*
+			Card c6 = new GameObject ("Card" + 0).AddComponent<FireballCard> ();
+			c6.init (this);
+			deck.Add(c6);
+
+			Card c7 = new GameObject ("Card" + 0).AddComponent<FireballCard> ();
+			c7.init (this);
+			deck.Add(c7);
+			*/
 		}
 
 		public void DiscardHand() {
@@ -56,6 +71,15 @@ namespace game.tcg {
 		}
 
 		public void DrawCards(int amount) {
+			if (amount > deck.Count) {
+				foreach (Card c in graveyard) {
+					c.gameObject.SetActive (true);
+					deck.Add (c);
+				}
+				//graveyard.Clear ();
+				//CardLib.Shuffle (deck);
+			}
+
 			for (int i = 0; i < amount; i++) {
 				hand.Add (deck [i]);
 				deck.RemoveAt (i);
