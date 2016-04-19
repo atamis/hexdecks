@@ -109,7 +109,7 @@ namespace game.world {
             return n;
         }
 
-        
+
         internal void NewTurn() {
             if (unit != null && unit.Updated == false) {
                 unit.Updated = true;
@@ -127,7 +127,7 @@ namespace game.world {
 				transform.localScale = new Vector3 (1.9f, 1.9f, 0);
 
 				sr = gameObject.AddComponent<SpriteRenderer> ();
-				sr.sprite = Resources.Load <Sprite>("Sprites/Hexagon");
+				sr.sprite = Resources.Load <Sprite>("Sprites/Tiles/T_Ground");
 
 			}
 
