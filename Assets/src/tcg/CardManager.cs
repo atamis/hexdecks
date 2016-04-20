@@ -1,28 +1,37 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections.Generic;
 using game.tcg.cards;
 
 namespace game.tcg {
 	class CardManager : MonoBehaviour {
-		private Player p;
 
-		public void init() {
-			this.p = GameManager.p;
-		}
+		// Card registery
+		private class CardRegistery<T> {
+			static readonly Dictionary<int, Func<T>> _dict = new Dictionary<int, Func<T>>();
 
-		void Update() {
-			// update card locations
-			float offset = Screen.height * .3f;
-			int i = 1;
+			private CardRegistery() { }
 
-			foreach (Card c in p.hand) {
-				Vector3 pos = Camera.main.ScreenToWorldPoint(new Vector3(offset * i, Screen.height / 2 - Screen.height * .4f, 1));
-				c.SetOrigin (pos);
-				i++;
+			public static T Create(int id) {
+				Func<T> constructor = null;
+				if (_dict.TryGetValue (id, out constructor)) {
+					return constructor();
+				}
+				throw new ArgumentException (String.Format("No type is registered for id {0}", 0));
+			}
+
+			public static void Register(int id, Func<T> constructor) {
+				_dict.Add (id, constructor);
 			}
 		}
+
+		void Awake() {
+			CardRegistery<TCGCard>.Register (1, () => new FireballCard());
+		}
+
+		public static TCGCard GetCard(int id) {
+			return CardRegistery<TCGCard>.Create (id);
+		}
 	}
-
 }
-
 

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 
 namespace game.math {
 	struct HexLoc {
@@ -99,3 +99,4 @@ namespace game.math {
 		}
 	}
 }
+

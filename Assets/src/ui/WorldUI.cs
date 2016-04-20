@@ -1,180 +1,156 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using game;
-using game.tcg;
-using game.tcg.cards;
-using game.world;
-using game.math;
-using game.world.units;
+using System.Collections.Generic;
+
+// TODO
+// TOOLTIPS
 
 namespace game.ui {
-    class WorldUI : MonoBehaviour {
-		public static Card selected;
-		private CursorHelper ch;
-		private Player p;
-		private WorldMap w;
+	class WorldUI : GameUI {
+        private UIInfobar ib;
+        static internal Font font;
+		private UIHexMenu menu;
 
-		private int invincibleCD;
-		private int aoeCD;
-		private int twoactionCD;
+        void Awake() {
+            //uiFolder = new GameObject("UI Elements");
+			font = Resources.Load<Font>("Fonts/LeagueSpartan-Bold");
 
-		private CardManager cm;
+            ib = new GameObject("Infobar").AddComponent<UIInfobar>();
+            ib.init();
 
-		private Hex currHex;
-		private Hex lastHex;
-		private Unit currUnit;
-		private Unit lastUnit;
+			ib.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width / 2, Screen.height * .1f, 1));
 
-		public void init(WorldMap w, Player p) {
-			this.w = w;
-			this.p = p;
-
-			ch = new GameObject ("Cursor Helper").AddComponent<CursorHelper> ();
-			ch.init (this);
-
-			cm = new GameObject ("Card Manager").AddComponent<CardManager> ();
-			cm.init ();
-		}
-
-		void Update() {
-
-			//////////
 			/*
-			if (Input.GetKeyUp(KeyCode.Alpha1) && invincibleCD == 0) {
-				invincibleCD = 5;
-				p.nextCommand = new InvincibleCommand(w.hero);
-			}
+			Color[] cs = new Color[] { Color.red, Color.blue, Color.cyan, Color.green, Color.magenta };
+			for (int i = 0; i < 5; i++) {
+				UICard c = new GameObject ("Card").AddComponent<UICard> ();
+				c.init ();
+				c.SetColor (cs [i]);
 
-			if (Input.GetKeyUp(KeyCode.Alpha2) && aoeCD == 0) {
-				aoeCD = 5;
-				p.nextCommand = new AOECommand(w.hero);
-			}
+				float px = (Screen.width / 2) + 100 * Mathf.Cos(0.7853f + i*.3141f);
+				float py = 100 * Mathf.Sin (0.7853f + i *.3141f);
 
-			if (Input.GetKeyUp(KeyCode.Alpha3) && twoactionCD == 0) {
-				twoactionCD = 5;
-				p.nextCommand = new DoubleActionCommand(p);
+				c.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(px, py, 1));
+				c.transform.localEulerAngles = new Vector3(0, 0, 45 + (i * 18));
 			}
 			*/
-			HandleEnemyMouseOver();
 
-		}
+			menu = new GameObject ("Menu").AddComponent<UIHexMenu>();
+			menu.gameObject.SetActive (false);
+        }
 
-		void OnGUI() {
-			if (p != null) GUI.Label(new Rect(150, 10, 100, 30), "Health: " + p.hero.health);
+        void Update() {
+			if (Input.GetKeyDown (KeyCode.Escape)) {
+				this.menu.gameObject.SetActive (!menu.gameObject.activeSelf);
+			}
+        }
 
-			GUI.color = Color.yellow;
+		public abstract class CustomUIFeature : MonoBehaviour {
+			private SpriteRenderer sr;
+			private TextMesh tm;
+			private GameObject textObj;
 
-			//GUI.Label(new Rect(150, 30, 250, 20), "[1] Invincible" + "(" + invincibleCD + ")");
+			public abstract string GetText();
 
-			//GUI.Label(new Rect(150, 50, 250, 20), "[2] 1 damage to surounding hexes" + "(" + aoeCD + ")");
+			public abstract string GetTooltip();
 
-			//GUI.Label(new Rect(150, 70, 250, 20), "[3] Gain 2 actions" + "(" + twoactionCD + ")");
+			public abstract Sprite GetSprite();
 
-			if (GUI.Button(new Rect(750, 10, 100, 30), "Reset Level")) {
-				SceneManager.LoadSceneAsync("Main");
+			public void init() {
+				sr = gameObject.AddComponent<SpriteRenderer> ();
+				sr.sprite = GetSprite();
+
+				textObj = new GameObject("UI Text");
+				textObj.transform.parent = transform;
+				textObj.transform.localPosition = new Vector3(0, 0, -0.5f);
+
+				tm = textObj.AddComponent<TextMesh>();
+				tm.text = GetText ();
+				tm.color = Color.black;
+				tm.alignment = TextAlignment.Center;
+				tm.anchor = TextAnchor.MiddleCenter;
+				tm.fontSize = 148;
+				tm.characterSize = 0.04f;
+				tm.font = WorldUI.font;
+				tm.GetComponent<Renderer>().material = font.material;
+			}
+
+			void OnMouseOver() {
+				// Make a tooltip
 			}
 		}
 
-		public void HandleEnemyMouseOver() {
-			lastUnit = currUnit;
-			currHex = MathLib.GetHexAtMouse();
+        private class UIInfobar : MonoBehaviour {
+            private UIHealthFeature hf;
+			private UIBuffFeature bf;
+			private UIActionFeature af;
 
-			if (currHex != null)
-			{
-				currUnit = currHex.unit;
-			}
+            public void init() {
+				// HEALTH FEATURE
+                hf = new GameObject("Health Feature").AddComponent<UIHealthFeature>();
+                hf.init();
 
-			if (currUnit != lastUnit && lastUnit != null)
-			{
-				if (lastUnit.GetType().IsSubclassOf(typeof(EnemyUnit)))
+				hf.transform.parent = transform;
+				hf.transform.localPosition = new Vector2 (0, 0);
+
+				// BUFFs FEATURE
+				bf = new GameObject ("Buff Feature").AddComponent<UIBuffFeature> ();
+				bf.init ();
+
+				bf.transform.parent = transform;
+				bf.transform.localPosition = new Vector2 (-1.5f, 0);
+
+				// ACTIONS FEATURE
+				af = new GameObject ("Action Feature").AddComponent<UIActionFeature> ();
+				af.init ();
+
+				af.transform.parent = transform;
+				af.transform.localPosition = new Vector2 (1.5f, 0);
+            }
+
+            private class UIHealthFeature : CustomUIFeature {
+                public override Sprite GetSprite() {
+                    return Resources.Load<Sprite>("Sprites/UI_Heart");
+                }
+
+				public override string GetText() {
+					return "1";
+				}
+
+				public override string GetTooltip ()
 				{
-					lastUnit.mouseExit();
+					return "Tooltip";
+				}
+            }
+
+			private class UIBuffFeature : CustomUIFeature {
+				public override Sprite GetSprite () {
+					return Resources.Load<Sprite> ("Sprites/Circle");
+				}
+
+				public override string GetText () {
+					return "1";
+				}
+
+				public override string GetTooltip () {
+					return "Tooltip";
 				}
 			}
 
-			if (currUnit != null)
-			{
-				if (currUnit.GetType().IsSubclassOf(typeof(EnemyUnit)))
-				{
-					currUnit.mouseEnter();
-				}
-			}
-		}
-
-		internal void NextTurn() {
-			//invincibleCD = Math.Max(0, invincibleCD - 1);
-			//aoeCD = Math.Max(0, aoeCD - 1);
-			//twoactionCD = Math.Max(0, twoactionCD - 1);
-		}
-
-		private class CursorHelper : MonoBehaviour {
-			private enum ActionState {
-				Default,
-				Selected
-			};
-
-			private ActionState state;
-			private BoxCollider2D coll;
-			private WorldUI ui;
-			private List<Hex> cache;
-
-			public void init(WorldUI ui) {
-				this.ui = ui;
-				this.tag = "Cursor";
-				this.name = "CursorHelper";
-
-				coll = gameObject.AddComponent<BoxCollider2D> ();
-				coll.size = new Vector3 (0.1f, 0.1f, 0);
-				coll.isTrigger = true;
-			}
-
-			void Update() {
-				Hex h = MathLib.GetHexAtMouse ();
-
-				if (cache != null) {
-					foreach (Hex h2 in cache) {
-						h2.Highlight (Color.white);
-					}
+			private class UIActionFeature : CustomUIFeature {
+				public override Sprite GetSprite () {
+					return Resources.Load<Sprite> ("Sprites/Circle");
 				}
 
-				switch (this.state) {
-					case ActionState.Default:
-						if (Input.GetMouseButtonDown(1)) {
-							if (h != null && ui.p.nextCommand == null) {
-								ui.p.nextCommand = new MoveCommand (ui.p.hero, h);
-							}
-						}
-						break;
+				public override string GetText () {
+					return "";
+				}
 
-					case ActionState.Selected:
-						if (h != null) {
-							foreach (Hex h2 in cache) {
-								h2.Highlight (Color.red);
-							}
-						}
-						break;
+				public override string GetTooltip () {
+					return "Tooltip";
 				}
 			}
+        }
 
-			void SetState(int state_id) {
-				this.state = (ActionState)state_id;
-			}
 
-			void OnTriggerEnter2D(Collider2D coll) {
-				if (coll.gameObject.tag == "Hex" && this.state == ActionState.Selected) {
-					coll.gameObject.SendMessage ("SetColor", Color.red);
-				}
-			}
-
-			void OnTriggerExit2D(Collider2D coll) { 
-				if (coll.gameObject.tag == "Hex") {
-					coll.gameObject.SendMessage ("SetColor", Color.white);
-				}
-			}
-		}
     }
 }
