@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
+using game.math;
 using game.tcg;
 using game.tcg.cards;
+using game.world;
 
 namespace game.ui {
 	class UICard : MonoBehaviour {
@@ -34,10 +36,12 @@ namespace game.ui {
 		}
 
 		void Update() {
-
+			if (this.state != CardState.Dragging) {
+				transform.position = Vector3.MoveTowards (transform.position, origin, 1.0f);
+			}
 		}
 
-		void SetOrigin(Vector3 pos) {
+		public void SetOrigin(Vector3 pos) {
 			this.origin = pos;
 		}
 
@@ -58,7 +62,9 @@ namespace game.ui {
 		}
 
 		void OnMouseUp() {
-			CardManager.GetCard (this.id).OnPlay();
+			Hex h = MathLib.GetHexAtMouse ();
+			//CardManager.GetCard (this.id).OnPlay();
+			this.state = CardState.Default;
 		}
 	}
 }

@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace game.ui {
 	class WorldUI : GameUI {
-        private UIInfobar ib;
+        private WorldHUD ib;
         static internal Font font;
 		private UIHexMenu menu;
 
@@ -14,12 +14,9 @@ namespace game.ui {
             //uiFolder = new GameObject("UI Elements");
 			font = Resources.Load<Font>("Fonts/LeagueSpartan-Bold");
 
-            ib = new GameObject("Infobar").AddComponent<UIInfobar>();
+			ib = new GameObject("Infobar").AddComponent<WorldHUD>();
             ib.init();
 
-			ib.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width / 2, Screen.height * .1f, 1));
-
-			/*
 			Color[] cs = new Color[] { Color.red, Color.blue, Color.cyan, Color.green, Color.magenta };
 			for (int i = 0; i < 5; i++) {
 				UICard c = new GameObject ("Card").AddComponent<UICard> ();
@@ -31,14 +28,18 @@ namespace game.ui {
 
 				c.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(px, py, 1));
 				c.transform.localEulerAngles = new Vector3(0, 0, 45 + (i * 18));
+
+				c.SetOrigin (Camera.main.ScreenToWorldPoint(new Vector3(px, py, 1)));
 			}
-			*/
+
 
 			menu = new GameObject ("Menu").AddComponent<UIHexMenu>();
 			menu.gameObject.SetActive (false);
         }
 
         void Update() {
+			ib.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width / 2, Screen.height * .1f, 1));
+
 			if (Input.GetKeyDown (KeyCode.Escape)) {
 				this.menu.gameObject.SetActive (!menu.gameObject.activeSelf);
 			}
@@ -79,7 +80,7 @@ namespace game.ui {
 			}
 		}
 
-        private class UIInfobar : MonoBehaviour {
+        private class WorldHUD : MonoBehaviour {
             private UIHealthFeature hf;
 			private UIBuffFeature bf;
 			private UIActionFeature af;

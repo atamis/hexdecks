@@ -1,19 +1,14 @@
 ﻿using UnityEngine;
-using System.Collections;
 
-public class HeroUnit : MonoBehaviour
-{
+namespace game.world.units {
+	class HeroUnit : Unit {
+		public void init(WorldMap w, Hex h) {
+			base.init(w, h, 10);
+		}
 
-	// Use this for initialization
-	void Start ()
-	{
-	
-	}
-	
-	// Update is called once per frame
-	void Update ()
-	{
-	
+		public override Sprite getSprite() {
+			return Resources.Load<Sprite>("Sprites/Hero/T_HeroIdle1");
+		}
 	}
 }
 
