@@ -52,19 +52,19 @@ namespace game.world
             {
                 if (b.u.health == 4)
                 {
-                    sr.sprite = Resources.Load<Sprite>("Sprites/T_HealthPip4");
+                    sr.sprite = Resources.Load<Sprite>("Sprites/UI/T_HealthPip4");
                 }
                 else if (b.u.health == 3)
                 {
-                    sr.sprite = Resources.Load<Sprite>("Sprites/T_HealthPip3");
+                    sr.sprite = Resources.Load<Sprite>("Sprites/UI/T_HealthPip3");
                 }
                 else if (b.u.health == 2)
                 {
-                    sr.sprite = Resources.Load<Sprite>("Sprites/T_HealthPip2");
+                    sr.sprite = Resources.Load<Sprite>("Sprites/UI/T_HealthPip2");
                 }
                 else if (b.u.health == 1)
                 {
-                    sr.sprite = Resources.Load<Sprite>("Sprites/T_HealthPip");
+                    sr.sprite = Resources.Load<Sprite>("Sprites/UI/T_HealthPip");
                 }
             }
 
