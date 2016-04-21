@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 using game.math;
 using game.tcg;
 using game.tcg.cards;
@@ -20,6 +20,7 @@ namespace game.ui {
 		private BoxCollider2D bc;
 
 		private int id; // Card ID
+		private List<Hex> targets;
 
 		public void init() {
 			this.tag = "Card";
@@ -36,9 +37,12 @@ namespace game.ui {
 		}
 
 		void Update() {
+			/*
 			if (this.state != CardState.Dragging) {
 				transform.position = Vector3.MoveTowards (transform.position, origin, 1.0f);
 			}
+			*/
+
 		}
 
 		public void SetOrigin(Vector3 pos) {
@@ -63,8 +67,23 @@ namespace game.ui {
 
 		void OnMouseUp() {
 			Hex h = MathLib.GetHexAtMouse ();
-			//CardManager.GetCard (this.id).OnPlay();
+			if (h != null) {
+				CardManager.GetCard (this.id).OnPlay(GameManager.world, h);
+			}
 			this.state = CardState.Default;
+		}
+
+		void OnMouseEnter() {
+			this.targets = CardManager.GetCard (this.id).ValidTargets (GameManager.world, GameManager.world.hero.h);
+			foreach (Hex h in this.targets) {
+				h.Highlight (Color.red);
+			}
+		}
+
+		void OnMouseExit() {
+			foreach (Hex h in this.targets) {
+				h.Highlight (Color.white);
+			}
 		}
 	}
 }

@@ -26,7 +26,9 @@ namespace game.tcg {
 		}
 
 		void Awake() {
-			CardRegistery<TCGCard>.Register (1, () => new FireballCard());
+			CardRegistery<TCGCard>.Register (0, () => new FireballCard());
+			CardRegistery<TCGCard>.Register (1, () => new FlashHealCard());
+			CardRegistery<TCGCard>.Register (2, () => new JumpAttackCard());
 		}
 
 		public static TCGCard GetCard(int id) {

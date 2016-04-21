@@ -3,9 +3,8 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>10.0.20506</ProductVersion>
+    <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <RootNamespace></RootNamespace>
     <ProjectGuid>{831FC142-61E3-E36C-8BDA-28176E4F2D9A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -34,57 +33,57 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.XML" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="UnityEngine">
-      <HintPath>/Applications/Unity/Unity.app/Contents/Frameworks/Managed/UnityEngine.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\Applications\Unity\Unity.app\Contents\Frameworks\Managed\UnityEngine.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor">
-      <HintPath>/Applications/Unity/Unity.app/Contents/Frameworks/Managed/UnityEditor.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\Applications\Unity\Unity.app\Contents\Frameworks\Managed\UnityEditor.dll</HintPath>
     </Reference>
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\src\GameManager.cs" />
-     <Compile Include="Assets\src\Player.cs" />
-     <Compile Include="Assets\src\common\AudioManager.cs" />
-     <Compile Include="Assets\src\common\Layer.cs" />
-     <Compile Include="Assets\src\math\HexLoc.cs" />
-     <Compile Include="Assets\src\math\Layout.cs" />
-     <Compile Include="Assets\src\math\MathLib.cs" />
-     <Compile Include="Assets\src\math\Orientation.cs" />
-     <Compile Include="Assets\src\render\SpriteOutline.cs" />
-     <Compile Include="Assets\src\tcg\CardManager.cs" />
-     <Compile Include="Assets\src\tcg\cards\FireballCard.cs" />
-     <Compile Include="Assets\src\tcg\cards\FlashHealCard.cs" />
-     <Compile Include="Assets\src\tcg\cards\JumpAttackCard.cs" />
-     <Compile Include="Assets\src\tcg\cards\TCGCard.cs" />
-     <Compile Include="Assets\src\ui\GameCamera.cs" />
-     <Compile Include="Assets\src\ui\GameUI.cs" />
-     <Compile Include="Assets\src\ui\NotificationManager.cs" />
-     <Compile Include="Assets\src\ui\UICard.cs" />
-     <Compile Include="Assets\src\ui\UIHexMenu.cs" />
-     <Compile Include="Assets\src\ui\WorldUI.cs" />
-     <Compile Include="Assets\src\world\Hex.cs" />
-     <Compile Include="Assets\src\world\SaveManager.cs" />
-     <Compile Include="Assets\src\world\Trigger.cs" />
-     <Compile Include="Assets\src\world\WorldMap.cs" />
-     <Compile Include="Assets\src\world\WorldPathfinding.cs" />
-     <Compile Include="Assets\src\world\units\EnemyHealthBar.cs" />
-     <Compile Include="Assets\src\world\units\EnemyUnit.cs" />
-     <Compile Include="Assets\src\world\units\HeroUnit.cs" />
-     <Compile Include="Assets\src\world\units\HexNotPassableError.cs" />
-     <Compile Include="Assets\src\world\units\HexOccupiedError.cs" />
-     <Compile Include="Assets\src\world\units\Unit.cs" />
-     <None Include="Assets\Resources\Levels\level2.txt" />
-     <None Include="Assets\Resources\Levels\level1.txt" />
-     <None Include="Assets\Resources\Shaders\OutlineShader.shader" />
- <Reference Include="UnityEngine.Networking">
- <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
- </Reference>
- <Reference Include="UnityEngine.UI">
- <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
- </Reference>
+    <Compile Include="Assets\src\GameManager.cs" />
+    <Compile Include="Assets\src\Player.cs" />
+    <Compile Include="Assets\src\common\AudioManager.cs" />
+    <Compile Include="Assets\src\common\Layer.cs" />
+    <Compile Include="Assets\src\math\HexLoc.cs" />
+    <Compile Include="Assets\src\math\Layout.cs" />
+    <Compile Include="Assets\src\math\MathLib.cs" />
+    <Compile Include="Assets\src\math\Orientation.cs" />
+    <Compile Include="Assets\src\render\SpriteOutline.cs" />
+    <Compile Include="Assets\src\tcg\CardManager.cs" />
+    <Compile Include="Assets\src\tcg\cards\FireballCard.cs" />
+    <Compile Include="Assets\src\tcg\cards\FlashHealCard.cs" />
+    <Compile Include="Assets\src\tcg\cards\JumpAttackCard.cs" />
+    <Compile Include="Assets\src\tcg\cards\TCGCard.cs" />
+    <Compile Include="Assets\src\ui\GameCamera.cs" />
+    <Compile Include="Assets\src\ui\GameUI.cs" />
+    <Compile Include="Assets\src\ui\NotificationManager.cs" />
+    <Compile Include="Assets\src\ui\UICard.cs" />
+    <Compile Include="Assets\src\ui\UIHexMenu.cs" />
+    <Compile Include="Assets\src\ui\WorldUI.cs" />
+    <Compile Include="Assets\src\world\Hex.cs" />
+    <Compile Include="Assets\src\world\SaveManager.cs" />
+    <Compile Include="Assets\src\world\Trigger.cs" />
+    <Compile Include="Assets\src\world\WorldMap.cs" />
+    <Compile Include="Assets\src\world\WorldPathfinding.cs" />
+    <Compile Include="Assets\src\world\units\EnemyHealthBar.cs" />
+    <Compile Include="Assets\src\world\units\EnemyUnit.cs" />
+    <Compile Include="Assets\src\world\units\HeroUnit.cs" />
+    <Compile Include="Assets\src\world\units\HexNotPassableError.cs" />
+    <Compile Include="Assets\src\world\units\HexOccupiedError.cs" />
+    <Compile Include="Assets\src\world\units\Unit.cs" />
+    <None Include="Assets\Resources\Levels\level2.txt" />
+    <None Include="Assets\Resources\Levels\level1.txt" />
+    <None Include="Assets\Resources\Shaders\OutlineShader.shader" />
+    <Reference Include="UnityEngine.Networking">
+      <HintPath>..\..\..\..\..\..\Applications\Unity\Unity.app\Contents\UnityExtensions\Unity\Networking\UnityEngine.Networking.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>..\..\..\..\..\..\Applications\Unity\Unity.app\Contents\UnityExtensions\Unity\GUISystem\UnityEngine.UI.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -94,5 +93,7 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  
+  <ItemGroup>
+    <Folder Include="Assets\src\" />
+  </ItemGroup>
 </Project>

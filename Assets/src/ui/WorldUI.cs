@@ -1,17 +1,15 @@
 using UnityEngine;
 using System.Collections.Generic;
+using game.tcg;
 
 // TODO
 // TOOLTIPS
 
 namespace game.ui {
 	class WorldUI : GameUI {
-		static internal Font font;
-
         private WorldHUD ib;
 		private UIHexMenu menu;
-		private ScreenOverlay overlay;
-
+	
         void Awake() {
             //uiFolder = new GameObject("UI Elements");
 			font = Resources.Load<Font>("Fonts/LeagueSpartan-Bold");
@@ -19,59 +17,16 @@ namespace game.ui {
 			ib = new GameObject("Infobar").AddComponent<WorldHUD>();
             ib.init();
 
-			Color[] cs = new Color[] { Color.red, Color.blue, Color.cyan, Color.green, Color.magenta };
-
-			for (int i = 0; i < 5; i++) {
-				UICard c = new GameObject ("Card").AddComponent<UICard> ();
-				c.init ();
-				c.SetColor (cs [i]);
-
-				float px = (Screen.width / 2) + 100 * Mathf.Cos(0.7853f + i*.3141f);
-				float py = 100 * Mathf.Sin (0.7853f + i *.3141f);
-
-				c.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(px, py, 1));
-				c.transform.localEulerAngles = new Vector3(0, 0, 45 + (i * 18));
-
-				c.SetOrigin (Camera.main.ScreenToWorldPoint(new Vector3(px, py, 1)));
-			}
-
 			menu = new GameObject ("Menu").AddComponent<UIHexMenu>();
 			menu.gameObject.SetActive (false);
 
 			overlay = new GameObject("Overlay").AddComponent<ScreenOverlay> ();
+
+			CardManager cm = gameObject.AddComponent<CardManager> ();
         }
 
-		internal class ScreenOverlay : MonoBehaviour {
-			private SpriteRenderer sr;
-			private float fadeSpeed = 1.5f;
-
-			void Awake() {
-				gameObject.layer = LayerMask.NameToLayer ("UI");
-				//gameObject.hideFlags = HideFlags.HideInHierarchy;
-
-				sr = gameObject.AddComponent<SpriteRenderer> ();
-				sr.sprite = Resources.Load<Sprite> ("Sprites/Square");
-				sr.color = Color.black;
-			}
-
-			void Start() {
-				float h_screen = Camera.main.orthographicSize * 2;
-				float w_screen = h_screen / Screen.height * Screen.width;
-				transform.localScale = new Vector3(w_screen / sr.sprite.bounds.size.x, h_screen * sr.sprite.bounds.size.y, 1);
-			}
-
-			public void FadeToClear(Color start) {
-				sr.color = Color.Lerp (sr.color, Color.clear, fadeSpeed * Time.deltaTime);
-			}
-
-			void Update() {
-				FadeToClear (Color.black);
-			}
-				
-		}
-
         void Update() {
-			ib.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width / 2, Screen.height * .1f, 1));
+			ib.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width / 2, Screen.height * .1f, 10));
 
 			if (Input.GetKeyDown (KeyCode.Escape)) {
 				this.menu.gameObject.SetActive (!menu.gameObject.activeSelf);
@@ -114,36 +69,84 @@ namespace game.ui {
 		}
 
         private class WorldHUD : MonoBehaviour {
+			private List<UICard> cards;
             private UIHealthFeature hf;
 			private UIBuffFeature bf;
 			private UIActionFeature af;
+			private SpriteRenderer sr;
+
+			Color[] cs = new Color[] { Color.red, Color.blue, Color.cyan, Color.green, Color.magenta };
 
             public void init() {
+				sr = gameObject.AddComponent<SpriteRenderer> ();
+				sr.sprite = Resources.Load<Sprite> ("Sprites/UI/T_MainPanelNoIcons");
+
 				// HEALTH FEATURE
                 hf = new GameObject("Health Feature").AddComponent<UIHealthFeature>();
                 hf.init();
 
 				hf.transform.parent = transform;
-				hf.transform.localPosition = new Vector2 (0, 0);
+				hf.transform.localPosition = new Vector3 (0, 0, -1);
 
 				// BUFFs FEATURE
 				bf = new GameObject ("Buff Feature").AddComponent<UIBuffFeature> ();
 				bf.init ();
 
 				bf.transform.parent = transform;
-				bf.transform.localPosition = new Vector2 (-1.5f, 0);
+				bf.transform.localPosition = new Vector3 (-1.5f, 0, -1);
 
 				// ACTIONS FEATURE
 				af = new GameObject ("Action Feature").AddComponent<UIActionFeature> ();
 				af.init ();
 
 				af.transform.parent = transform;
-				af.transform.localPosition = new Vector2 (1.5f, 0);
+				af.transform.localPosition = new Vector3 (1.5f, 0, -1);
+
+				// CARDS
+				cards = new List<UICard> ();
+				for (int i = 0; i < 5; i++) {
+					UICard c = new GameObject ("Card").AddComponent<UICard> ();
+					c.init ();
+					c.SetColor (cs [i]);
+
+					c.transform.parent = transform;
+					//c.SetOrigin (Camera.main.ScreenToWorldPoint(new Vector3(px, py, 1)));
+					cards.Add(c);
+				}
             }
+
+			public Vector3[] card_locs = new Vector3[] { 
+				new Vector3 (0, 0, 0),
+				new Vector3 (Screen.width * .40f, Screen.height * .6f, 10), 
+				new Vector3 (Screen.width * .45f, Screen.height * .6f, 10), 
+				new Vector3 (Screen.width * .50f, Screen.height * .6f, 10),
+				new Vector3 (Screen.width * .55f, Screen.height * .6f, 10),
+				new Vector3 (Screen.width * .60f, Screen.height * .6f, 10), 
+				new Vector3 (Screen.width * .65f, Screen.height * .6f, 10),
+			};
+
+			void Update() {
+				int i = 0;
+
+				foreach (UICard c in cards) {
+					c.transform.localPosition = card_locs[i];
+					//c.transform.localEulerAngles = new Vector3 (0, 0, 45 + (i * 18));
+
+					/*
+					float px = (Screen.width / 2) + 3 * Mathf.Cos(0.7853f + i*.3141f);
+					float py = (Screen.height * 0.1f) + 3 * Mathf.Sin (0.7853f + i *.3141f);
+
+					c.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(px, py, 8));
+					c.transform.localEulerAngles = ;
+					*/
+
+					i++;
+				}
+			}
 
             private class UIHealthFeature : CustomUIFeature {
                 public override Sprite GetSprite() {
-                    return Resources.Load<Sprite>("Sprites/UI_Heart");
+                    return Resources.Load<Sprite>("Sprites/UI/T_Heart");
                 }
 
 				public override string GetText() {
@@ -158,7 +161,7 @@ namespace game.ui {
 
 			private class UIBuffFeature : CustomUIFeature {
 				public override Sprite GetSprite () {
-					return Resources.Load<Sprite> ("Sprites/Circle");
+					return Resources.Load<Sprite> ("Sprites/UI/T_LightningIcon");
 				}
 
 				public override string GetText () {
@@ -172,7 +175,7 @@ namespace game.ui {
 
 			private class UIActionFeature : CustomUIFeature {
 				public override Sprite GetSprite () {
-					return Resources.Load<Sprite> ("Sprites/Circle");
+					return Resources.Load<Sprite> ("Sprites/UI/T_PlusIcon");
 				}
 
 				public override string GetText () {
@@ -184,7 +187,5 @@ namespace game.ui {
 				}
 			}
         }
-
-
     }
 }

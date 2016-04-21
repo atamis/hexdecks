@@ -1,15 +1,22 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
+using game.world;
 
-public class FlashHealCard : MonoBehaviour {
+namespace game.tcg.cards {
+	class FlashHealCard : TCGCard {
+		public override string GetName () {
+			return "Flash Heal";
+		}
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+		public override List<Hex> ValidTargets (WorldMap wm, Hex h) {
+			List<Hex> tmp = new List<Hex> ();
+			tmp.Add (GameManager.world.hero.h);
+			return tmp;
+		}
+
+		public override void OnPlay (WorldMap wm, Hex h) {
+			GameManager.ntm.AddText (h.transform.position, "+2");
+			h.unit.health += 2;
+		}
 	}
 }
