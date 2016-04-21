@@ -37,12 +37,10 @@ namespace game.ui {
 		}
 
 		void Update() {
-			/*
+			
 			if (this.state != CardState.Dragging) {
 				transform.position = Vector3.MoveTowards (transform.position, origin, 1.0f);
 			}
-			*/
-
 		}
 
 		public void SetOrigin(Vector3 pos) {

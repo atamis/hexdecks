@@ -109,6 +109,7 @@ namespace game.ui {
 					c.init ();
 					c.SetColor (cs [i]);
 
+					c.transform.localPosition = new Vector3 (0, 1, 0);
 					c.transform.parent = transform;
 					//c.SetOrigin (Camera.main.ScreenToWorldPoint(new Vector3(px, py, 1)));
 					cards.Add(c);
@@ -116,30 +117,15 @@ namespace game.ui {
             }
 
 			public Vector3[] card_locs = new Vector3[] { 
-				new Vector3 (0, 0, 0),
-				new Vector3 (Screen.width * .40f, Screen.height * .6f, 10), 
-				new Vector3 (Screen.width * .45f, Screen.height * .6f, 10), 
-				new Vector3 (Screen.width * .50f, Screen.height * .6f, 10),
-				new Vector3 (Screen.width * .55f, Screen.height * .6f, 10),
-				new Vector3 (Screen.width * .60f, Screen.height * .6f, 10), 
-				new Vector3 (Screen.width * .65f, Screen.height * .6f, 10),
+				new Vector3 (2f, .75f, 0), new Vector3 (1f, 1f, 0), new Vector3 (0f, 1.25f, 0), 
+				new Vector3 (-1f, 1f, 0), new Vector3 (-2f, .75f, 0),
 			};
-
+				
 			void Update() {
 				int i = 0;
-
 				foreach (UICard c in cards) {
-					c.transform.localPosition = card_locs[i];
-					//c.transform.localEulerAngles = new Vector3 (0, 0, 45 + (i * 18));
-
-					/*
-					float px = (Screen.width / 2) + 3 * Mathf.Cos(0.7853f + i*.3141f);
-					float py = (Screen.height * 0.1f) + 3 * Mathf.Sin (0.7853f + i *.3141f);
-
-					c.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(px, py, 8));
-					c.transform.localEulerAngles = ;
-					*/
-
+					c.SetOrigin(transform.position + card_locs[i]);
+					//c.transform.localEulerAngles = new Vector3 (0, 0, 45 + 18 * i);
 					i++;
 				}
 			}
