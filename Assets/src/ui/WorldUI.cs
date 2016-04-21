@@ -6,9 +6,11 @@ using System.Collections.Generic;
 
 namespace game.ui {
 	class WorldUI : GameUI {
+		static internal Font font;
+
         private WorldHUD ib;
-        static internal Font font;
 		private UIHexMenu menu;
+		private ScreenOverlay overlay;
 
         void Awake() {
             //uiFolder = new GameObject("UI Elements");
@@ -18,6 +20,7 @@ namespace game.ui {
             ib.init();
 
 			Color[] cs = new Color[] { Color.red, Color.blue, Color.cyan, Color.green, Color.magenta };
+
 			for (int i = 0; i < 5; i++) {
 				UICard c = new GameObject ("Card").AddComponent<UICard> ();
 				c.init ();
@@ -32,10 +35,40 @@ namespace game.ui {
 				c.SetOrigin (Camera.main.ScreenToWorldPoint(new Vector3(px, py, 1)));
 			}
 
-
 			menu = new GameObject ("Menu").AddComponent<UIHexMenu>();
 			menu.gameObject.SetActive (false);
+
+			overlay = new GameObject("Overlay").AddComponent<ScreenOverlay> ();
         }
+
+		internal class ScreenOverlay : MonoBehaviour {
+			private SpriteRenderer sr;
+			private float fadeSpeed = 1.5f;
+
+			void Awake() {
+				gameObject.layer = LayerMask.NameToLayer ("UI");
+				//gameObject.hideFlags = HideFlags.HideInHierarchy;
+
+				sr = gameObject.AddComponent<SpriteRenderer> ();
+				sr.sprite = Resources.Load<Sprite> ("Sprites/Square");
+				sr.color = Color.black;
+			}
+
+			void Start() {
+				float h_screen = Camera.main.orthographicSize * 2;
+				float w_screen = h_screen / Screen.height * Screen.width;
+				transform.localScale = new Vector3(w_screen / sr.sprite.bounds.size.x, h_screen * sr.sprite.bounds.size.y, 1);
+			}
+
+			public void FadeToClear(Color start) {
+				sr.color = Color.Lerp (sr.color, Color.clear, fadeSpeed * Time.deltaTime);
+			}
+
+			void Update() {
+				FadeToClear (Color.black);
+			}
+				
+		}
 
         void Update() {
 			ib.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width / 2, Screen.height * .1f, 1));

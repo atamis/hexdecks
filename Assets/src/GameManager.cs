@@ -24,7 +24,7 @@ namespace game {
 			world = SaveManager.LoadLevel(l, "level1", this);
 
 			var hero = world.hero;
-			gc.setLocation(l.HexPixel(world.hero.h.loc));
+			//gc.setLocation(l.HexPixel(world.hero.h.loc));
 
 			var trigger = new GameObject("Trigger").AddComponent<LogTrigger>();
 			trigger.init(world.map[new HexLoc(2, 2)]);
