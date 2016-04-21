@@ -21,8 +21,6 @@ namespace game.ui {
 			menu.gameObject.SetActive (false);
 
 			overlay = new GameObject("Overlay").AddComponent<ScreenOverlay> ();
-
-			CardManager cm = gameObject.AddComponent<CardManager> ();
         }
 
         void Update() {
