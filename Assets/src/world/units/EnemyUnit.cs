@@ -18,12 +18,36 @@ namespace game.world.units {
 		private bool persuing = false;
 		private HeroUnit target;
 
-		public override Sprite getSprite()
-		{
-			return Resources.Load<Sprite>("Sprites/Enemies/T_GoblinIdle1");
-		}
+        Sprite[] sprites = new Sprite[2] {
+            Resources.Load<Sprite>("Sprites/Enemies/T_GoblinIdle1"),
+            Resources.Load<Sprite>("Sprites/Enemies/T_GoblinIdle2")
+        };
+        const float spriteInterval = .8f;
+        float lastSwitch;
+        int idx;
 
-		public override void NewTurn() {
+        public new void init(WorldMap w, Hex h)
+        {
+            base.init(w, h, 1);
+
+            idx = 0;
+            lastSwitch = timer;
+
+        }
+
+        public override Sprite getSprite()
+        {
+            if (timer >= lastSwitch + spriteInterval)
+            {
+                lastSwitch = timer;
+                idx = idx + 1;
+                idx = idx % 2;
+            }
+            return sprites[idx];
+        }
+        
+
+        public override void NewTurn() {
 			base.NewTurn();
 
 			if (!persuing)
@@ -70,26 +94,68 @@ namespace game.world.units {
 
 	class BigMeleeEnemy: MeleeEnemy
 	{
-		public override Sprite getSprite()
-		{
-			return Resources.Load<Sprite>("Sprites/Enemies/T_ShieldGoblinIdle1");
-		}
+        Sprite[] sprites = new Sprite[2] {
+            Resources.Load<Sprite>("Sprites/Enemies/T_ShieldGoblinIdle1"),
+            Resources.Load<Sprite>("Sprites/Enemies/T_ShieldGoblinIdle2")
+        };
+        const float spriteInterval = .8f;
+        float lastSwitch;
+        int idx;
 
-		public new void init(WorldMap w, Hex h)
-		{
-			base.init(w, h, 2);
-		}
-	}
+        public new void init(WorldMap w, Hex h)
+        {
+            base.init(w, h, 2);
+
+            idx = 0;
+            lastSwitch = timer;
+
+        }
+
+        public override Sprite getSprite()
+        {
+            if (timer >= lastSwitch + spriteInterval)
+            {
+                lastSwitch = timer;
+                idx = idx + 1;
+                idx = idx % 2;
+            }
+            return sprites[idx];
+        }
+    }
 
 	class RangedEnemy : EnemyUnit {
 		private bool persuing = false;
 		private HeroUnit target;
 
-		public override Sprite getSprite() {
-			return Resources.Load<Sprite>("Sprites/Enemies/T_BowGoblinIdle1");
-		}
+        Sprite[] sprites = new Sprite[2] {
+            Resources.Load<Sprite>("Sprites/Enemies/T_BowGoblinIdle1"),
+            Resources.Load<Sprite>("Sprites/Enemies/T_BowGoblinIdle2")
+        };
+        const float spriteInterval = .8f;
+        float lastSwitch;
+        int idx;
 
-		public override List<Hex> GetAttackPattern() {
+        public new void init(WorldMap w, Hex h)
+        {
+            base.init(w, h, 1);
+
+            idx = 0;
+            lastSwitch = timer;
+
+        }
+
+        public override Sprite getSprite()
+        {
+            if (timer >= lastSwitch + spriteInterval)
+            {
+                lastSwitch = timer;
+                idx = idx + 1;
+                idx = idx % 2;
+            }
+            return sprites[idx];
+        }
+
+        public override List<Hex> GetAttackPattern() {
 			List<Hex> targets = new List<Hex> ();
 
 			foreach (HexLoc dir in HexLoc.hex_directions) {
