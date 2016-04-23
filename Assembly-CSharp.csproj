@@ -54,11 +54,17 @@
      <Compile Include="Assets\src\math\MathLib.cs" />
      <Compile Include="Assets\src\math\Orientation.cs" />
      <Compile Include="Assets\src\render\SpriteOutline.cs" />
+     <Compile Include="Assets\src\tcg\CardLib.cs" />
      <Compile Include="Assets\src\tcg\Command.cs" />
+     <Compile Include="Assets\src\tcg\cards\DiscardHandCard.cs" />
+     <Compile Include="Assets\src\tcg\cards\DoubleActionCard.cs" />
      <Compile Include="Assets\src\tcg\cards\FireballCard.cs" />
      <Compile Include="Assets\src\tcg\cards\FlashHealCard.cs" />
      <Compile Include="Assets\src\tcg\cards\JumpAttackCard.cs" />
+     <Compile Include="Assets\src\tcg\cards\KnockBackCard.cs" />
      <Compile Include="Assets\src\tcg\cards\TCGCard.cs" />
+     <Compile Include="Assets\src\tcg\cards\TeleportCard.cs" />
+     <Compile Include="Assets\src\tcg\cards\TrapCard.cs" />
      <Compile Include="Assets\src\ui\GameCamera.cs" />
      <Compile Include="Assets\src\ui\GameUI.cs" />
      <Compile Include="Assets\src\ui\NotificationManager.cs" />
@@ -80,6 +86,7 @@
      <None Include="Assets\Resources\Levels\level2.txt" />
      <None Include="Assets\Resources\Levels\level1.txt" />
      <None Include="Assets\Resources\Shaders\OutlineShader.shader" />
+     <None Include="Assets\Resources\Levels\level3.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>D:/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

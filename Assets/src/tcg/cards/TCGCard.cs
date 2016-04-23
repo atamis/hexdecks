@@ -10,6 +10,12 @@ namespace game.tcg.cards {
 
 		public abstract List<Hex> ValidTargets(WorldMap wm, Hex h);
 
+        internal List<Hex> justHeroValid(WorldMap wm, Hex h) {
+            List<Hex> tmp = new List<Hex>();
+            tmp.Add(wm.hero.h);
+            return tmp;
+        }
+
 		public abstract void OnPlay(WorldMap wm, Hex h);
 
 		public abstract string GetName();

@@ -64,7 +64,7 @@ c = chest
 		}
 
         private static TCGCard randomCard(System.Random r) {
-            int i = r.Next(4);
+            int i = r.Next(8);
             switch(i) {
                 case 0:
                     return new FireballCard();
@@ -74,6 +74,14 @@ c = chest
                     return new JumpAttackCard();
                 case 3:
                     return new KnockBackCard();
+                case 4:
+                    return new DoubleActionCard();
+                case 5:
+                    return new DiscardHandCard();
+                case 6:
+                    return new TrapCard();
+                case 7:
+                    return new TeleportCard();
                 default:
                     return new FlashHealCard();
             }
