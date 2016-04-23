@@ -18,5 +18,11 @@ namespace game.tcg {
             }
         }
 
+        public static T RandomElement<T>(this List<T> l) {
+            System.Random rng = new System.Random();
+            int i = rng.Next(l.Count);
+            return l[i];
+        }
+
     }
 }

@@ -41,6 +41,11 @@ namespace game.world {
 
 		}
 
+        internal void Suicide() {
+            h = null;
+            Destroy(gameObject);
+        }
+
 		// These are called before the move. See Hex#unit
 		public abstract void UnitEnter(Unit u);
 
@@ -62,9 +67,7 @@ namespace game.world {
 				gameObject.transform.localPosition = LayerV.HeroUnit;
 
 				sr = gameObject.AddComponent<SpriteRenderer>();
-				sr.sprite = t.getSprite();
-
-				sr.color = new Color(0, 0, 0);
+                sr.sprite = t.getSprite();
 			}
 
 			void Update() {
@@ -141,7 +144,7 @@ namespace game.world {
         }
 
         public override Sprite getSprite() {
-            return Resources.Load<Sprite>("Sprites/Diamond");
+            return Resources.Load<Sprite>("Sprites/Tiles/T_Chest");
         }
 
         public override void UnitEnter(Unit u) {
@@ -149,12 +152,26 @@ namespace game.world {
                 print("Added " + c + " to the player's deck");
                 GameManager.p.deck.Add(c);
                 GameManager.ntm.AddText(GameManager.l.HexPixel(h.loc), "+card");
-                Destroy(gameObject);
+				Suicide();
             }
         }
 
         public override void UnitLeave(Unit u) {
             
+        }
+    }
+
+    class TrapTrigger : Trigger {
+        public override Sprite getSprite() {
+            return Resources.Load<Sprite>("Sprites/Diamond");
+        }
+
+        public override void UnitEnter(Unit u) {
+            u.ApplyDamage(5);
+            Suicide();
+        }
+
+        public override void UnitLeave(Unit u) {
         }
     }
 }

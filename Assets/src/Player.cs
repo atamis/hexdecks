@@ -29,6 +29,10 @@ namespace game {
             deck.Add(new JumpAttackCard());
             deck.Add(new KnockBackCard());
             deck.Add(new KnockBackCard());
+            deck.Add(new DoubleActionCard());
+            deck.Add(new DiscardHandCard());
+            deck.Add(new TrapCard());
+            deck.Add(new TeleportCard());
 
             deck.Shuffle();
 

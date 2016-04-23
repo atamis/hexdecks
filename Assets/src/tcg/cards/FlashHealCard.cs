@@ -9,9 +9,7 @@ namespace game.tcg.cards {
 		}
 
 		public override List<Hex> ValidTargets (WorldMap wm, Hex h) {
-			List<Hex> tmp = new List<Hex> ();
-			tmp.Add (wm.hero.h);
-			return tmp;
+			return justHeroValid(wm, h);
 		}
 
 		public override void OnPlay (WorldMap wm, Hex h) {
