@@ -13,6 +13,7 @@ namespace game.world.units {
 
 	abstract class Unit : MonoBehaviour {
 		UnitModel model;
+		public float timer;
 
 		private Hex _h;
 		public Hex h {
@@ -57,6 +58,7 @@ namespace game.world.units {
 			this.w = w;
 			this.h = h;
 			this.health = health;
+			this.timer = 0f;
 
 			invincible = new TemporaryEffect();
 			mousedOver = false;
@@ -100,7 +102,7 @@ namespace game.world.units {
 
 		void Update() {
 			transform.localPosition = new Vector3(0, 0, 0);
-
+			timer += Time.deltaTime;
 		}
 
 		public void ShowHealth(bool b) {

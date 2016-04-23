@@ -54,7 +54,6 @@
      <Compile Include="Assets\src\math\MathLib.cs" />
      <Compile Include="Assets\src\math\Orientation.cs" />
      <Compile Include="Assets\src\render\SpriteOutline.cs" />
-     <Compile Include="Assets\src\tcg\CardManager.cs" />
      <Compile Include="Assets\src\tcg\Command.cs" />
      <Compile Include="Assets\src\tcg\cards\FireballCard.cs" />
      <Compile Include="Assets\src\tcg\cards\FlashHealCard.cs" />

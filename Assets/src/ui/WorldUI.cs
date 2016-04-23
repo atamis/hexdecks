@@ -14,7 +14,6 @@ namespace game.ui {
 		private GameCamera gc;
 
         void Awake() {
-            //uiFolder = new GameObject("UI Elements");
 			font = Resources.Load<Font>("Fonts/LeagueSpartan-Bold");
 
 			ib = new GameObject("Infobar").AddComponent<WorldHUD>();
@@ -22,11 +21,10 @@ namespace game.ui {
 
 			menu = new GameObject ("Menu").AddComponent<UIHexMenu>();
 			menu.gameObject.SetActive (false);
-
-			CardManager cm = gameObject.AddComponent<CardManager> ();
         }
 
         void Update() {
+			// UPDATE HUD LOCATION
 			Vector3 pos = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width / 2, Screen.height * .1f, 10));
 			ib.transform.position = new Vector3 (pos.x, pos.y, Layer.HUD);
 
@@ -35,7 +33,7 @@ namespace game.ui {
 				this.ib.gameObject.SetActive (!ib.gameObject.activeSelf);
 			}
 
-			// handle movement
+			// HANDLE MOVEMENT
 			if (Input.GetMouseButtonUp (0)) {
 				RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
 				if (hit.collider != null) {
@@ -51,10 +49,10 @@ namespace game.ui {
         }
 
 		public abstract class CustomUIFeature : MonoBehaviour {
-			private SpriteRenderer sr;
+			internal SpriteRenderer sr;
 			private PolygonCollider2D coll;
 
-			private TextMesh tm;
+			internal TextMesh tm;
 			private GameObject textObj;
 
 			public abstract string GetText();
@@ -206,12 +204,15 @@ namespace game.ui {
                 }
 
 				public override string GetText() {
-					return "1";
+					return GameManager.world.hero.health.ToString();
 				}
 
-				public override string GetTooltip ()
-				{
+				public override string GetTooltip () {
 					return "Health";
+				}
+
+				void Update() {
+					this.tm.text = GetText ();
 				}
             }
 

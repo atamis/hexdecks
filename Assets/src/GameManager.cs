@@ -18,9 +18,6 @@ namespace game {
 			gc = new GameObject ("Game Camera").AddComponent<GameCamera> ();
 			gc.init (Camera.main);
 
-			ui = gameObject.AddComponent<WorldUI> ();
-			ntm = new GameObject ("Notification Manager").AddComponent<NotificationManager> ();
-
 			l = new Layout(Orientation.Pointy, new Vector2(1, 1), new Vector2(0, 0));
 			world = SaveManager.LoadLevel(l, "level1", this);
 
@@ -31,6 +28,10 @@ namespace game {
 			trigger.init(world.map[new HexLoc(2, 2)]);
 
 			p = new Player();
+
+			// Make sure this happens last 
+			ui = gameObject.AddComponent<WorldUI> ();
+			ntm = new GameObject ("Notification Manager").AddComponent<NotificationManager> ();
         }
 
         void Update() {

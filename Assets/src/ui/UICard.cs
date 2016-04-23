@@ -19,7 +19,7 @@ namespace game.ui {
 		private SpriteRenderer sr;
 		private BoxCollider2D bc;
 
-		private int id; // Card ID
+		private TCGCard card; // Card ID
 		private List<Hex> targets;
 
 		public void init() {
@@ -66,13 +66,13 @@ namespace game.ui {
 		void OnMouseUp() {
 			Hex h = MathLib.GetHexAtMouse ();
 			if (h != null) {
-				CardManager.GetCard (this.id).OnPlay(GameManager.world, h);
+				card.OnPlay(GameManager.world, h);
 			}
 			this.state = CardState.Default;
 		}
 
 		void OnMouseEnter() {
-			this.targets = CardManager.GetCard (this.id).ValidTargets (GameManager.world, GameManager.world.hero.h);
+			this.targets = card.ValidTargets (GameManager.world, GameManager.world.hero.h);
 			foreach (Hex h in this.targets) {
 				h.Highlight (Color.red);
 			}
