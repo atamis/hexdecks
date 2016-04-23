@@ -1,5 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
+using game.math;
+using game.world;
 using game.tcg;
 
 // TODO
@@ -9,9 +11,9 @@ namespace game.ui {
 	class WorldUI : GameUI {
         private WorldHUD ib;
 		private UIHexMenu menu;
-	
+		private GameCamera gc;
+
         void Awake() {
-            //uiFolder = new GameObject("UI Elements");
 			font = Resources.Load<Font>("Fonts/LeagueSpartan-Bold");
 
 			ib = new GameObject("Infobar").AddComponent<WorldHUD>();
@@ -19,21 +21,38 @@ namespace game.ui {
 
 			menu = new GameObject ("Menu").AddComponent<UIHexMenu>();
 			menu.gameObject.SetActive (false);
-
-			overlay = new GameObject("Overlay").AddComponent<ScreenOverlay> ();
         }
 
         void Update() {
-			ib.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width / 2, Screen.height * .1f, 10));
+			// UPDATE HUD LOCATION
+			Vector3 pos = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width / 2, Screen.height * .1f, 10));
+			ib.transform.position = new Vector3 (pos.x, pos.y, Layer.HUD);
 
 			if (Input.GetKeyDown (KeyCode.Escape)) {
 				this.menu.gameObject.SetActive (!menu.gameObject.activeSelf);
+				this.ib.gameObject.SetActive (!ib.gameObject.activeSelf);
+			}
+
+			// HANDLE MOVEMENT
+			if (Input.GetMouseButtonUp (0)) {
+				RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
+				if (hit.collider != null) {
+					if (hit.collider.gameObject.tag == "Hex") {
+						Hex h = MathLib.GetHexAtMouse();
+
+						if (h != null && GameManager.p.nextCommand == null) {
+							GameManager.p.nextCommand = new MoveCommand(GameManager.world.hero, h);
+						}
+					}
+				}
 			}
         }
 
 		public abstract class CustomUIFeature : MonoBehaviour {
-			private SpriteRenderer sr;
-			private TextMesh tm;
+			internal SpriteRenderer sr;
+			private PolygonCollider2D coll;
+
+			internal TextMesh tm;
 			private GameObject textObj;
 
 			public abstract string GetText();
@@ -41,6 +60,8 @@ namespace game.ui {
 			public abstract string GetTooltip();
 
 			public abstract Sprite GetSprite();
+
+			private UITooltip tooltip;
 
 			public void init() {
 				sr = gameObject.AddComponent<SpriteRenderer> ();
@@ -59,10 +80,54 @@ namespace game.ui {
 				tm.characterSize = 0.04f;
 				tm.font = WorldUI.font;
 				tm.GetComponent<Renderer>().material = font.material;
+
+				coll = gameObject.AddComponent<PolygonCollider2D> ();
+				coll.isTrigger = true;
+
+				tooltip = new GameObject ("UI Tooltip").AddComponent<UITooltip> ();
+				tooltip.init (GetTooltip());
+
+				tooltip.transform.parent = transform;
+				tooltip.gameObject.SetActive (false);
 			}
 
 			void OnMouseOver() {
-				// Make a tooltip
+				tooltip.gameObject.SetActive (true);
+			}
+
+			void OnMouseExit() {
+				tooltip.gameObject.SetActive (false);
+			}
+
+			private class UITooltip : MonoBehaviour {
+				private SpriteRenderer sr;
+				private string text;
+
+				private TextMesh tm;
+				private GameObject textObj;
+
+				public void init(string text) {
+					this.text = text;
+
+					textObj = new GameObject("UI Text");
+					textObj.transform.parent = transform;
+					textObj.transform.localPosition = new Vector3(0, 0, -0.5f);
+
+					tm = textObj.AddComponent<TextMesh>();
+					tm.text = this.text;
+					tm.color = Color.black;
+					tm.alignment = TextAlignment.Center;
+					tm.anchor = TextAnchor.MiddleCenter;
+					tm.fontSize = 148;
+					tm.characterSize = 0.04f;
+					tm.font = WorldUI.font;
+					tm.GetComponent<Renderer>().material = font.material;
+				}
+
+				void Update() {
+					Vector3 pos = Camera.main.ScreenToWorldPoint (Input.mousePosition);
+					transform.position = new Vector3(pos.x, pos.y, Layer.Tooltip);
+				}
 			}
 		}
 
@@ -73,9 +138,18 @@ namespace game.ui {
 			private UIActionFeature af;
 			private SpriteRenderer sr;
 
-			Color[] cs = new Color[] { Color.red, Color.blue, Color.cyan, Color.green, Color.magenta };
+			Color[] cs = new Color[] { 
+				Color.red, Color.blue, Color.cyan, Color.green, Color.magenta 
+			};
+
+			public Vector3[] card_locs = new Vector3[] { 
+				new Vector3 (2f, .75f, 0), new Vector3 (1f, 1f, 0), new Vector3 (0f, 1.25f, 0), 
+				new Vector3 (-1f, 1f, 0), new Vector3 (-2f, .75f, 0),
+			};
 
             public void init() {
+				this.gameObject.layer = LayerMask.NameToLayer ("UI");
+
 				sr = gameObject.AddComponent<SpriteRenderer> ();
 				sr.sprite = Resources.Load<Sprite> ("Sprites/UI/T_MainPanelNoIcons");
 
@@ -107,39 +181,21 @@ namespace game.ui {
 					c.init ();
 					c.SetColor (cs [i]);
 
+					c.transform.localPosition = new Vector3 (0, 1, 0);
 					c.transform.parent = transform;
 					//c.SetOrigin (Camera.main.ScreenToWorldPoint(new Vector3(px, py, 1)));
 					cards.Add(c);
 				}
             }
-
-			public Vector3[] card_locs = new Vector3[] { 
-				new Vector3 (0, 0, 0),
-				new Vector3 (Screen.width * .40f, Screen.height * .6f, 10), 
-				new Vector3 (Screen.width * .45f, Screen.height * .6f, 10), 
-				new Vector3 (Screen.width * .50f, Screen.height * .6f, 10),
-				new Vector3 (Screen.width * .55f, Screen.height * .6f, 10),
-				new Vector3 (Screen.width * .60f, Screen.height * .6f, 10), 
-				new Vector3 (Screen.width * .65f, Screen.height * .6f, 10),
-			};
-
+				
 			void Update() {
+				// UPDATE THE CARD LOCATIONS
 				int i = 0;
-
-				foreach (UICard c in cards) {
-					c.transform.localPosition = card_locs[i];
-					//c.transform.localEulerAngles = new Vector3 (0, 0, 45 + (i * 18));
-
-					/*
-					float px = (Screen.width / 2) + 3 * Mathf.Cos(0.7853f + i*.3141f);
-					float py = (Screen.height * 0.1f) + 3 * Mathf.Sin (0.7853f + i *.3141f);
-
-					c.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(px, py, 8));
-					c.transform.localEulerAngles = ;
-					*/
-
+				while (i < 5) {
+					cards [i].SetOrigin (transform.position + card_locs [i]);
 					i++;
 				}
+
 			}
 
             private class UIHealthFeature : CustomUIFeature {
@@ -148,12 +204,15 @@ namespace game.ui {
                 }
 
 				public override string GetText() {
-					return "1";
+					return GameManager.world.hero.health.ToString();
 				}
 
-				public override string GetTooltip ()
-				{
-					return "Tooltip";
+				public override string GetTooltip () {
+					return "Health";
+				}
+
+				void Update() {
+					this.tm.text = GetText ();
 				}
             }
 
@@ -163,11 +222,13 @@ namespace game.ui {
 				}
 
 				public override string GetText () {
+					// TODO
+					// Buff Duration
 					return "1";
 				}
 
 				public override string GetTooltip () {
-					return "Tooltip";
+					return "Buff";
 				}
 			}
 
@@ -181,7 +242,7 @@ namespace game.ui {
 				}
 
 				public override string GetTooltip () {
-					return "Tooltip";
+					return "Actions";
 				}
 			}
         }

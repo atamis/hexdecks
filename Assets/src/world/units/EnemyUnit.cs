@@ -4,8 +4,7 @@ using System.Collections.Generic;
 using game.math;
 
 namespace game.world.units {
-	class EnemyUnit : Unit {
-
+	abstract class EnemyUnit : Unit {
 		public void init(WorldMap w, Hex h) {
 			base.init(w, h, 1);
 		}
@@ -58,31 +57,15 @@ namespace game.world.units {
 			}
 		}
 
-		public override void showAtkPattern()
-		{
-			foreach (Hex neighbor in h.Neighbors())
-			{
-				if (neighbor.tileType == TileType.Normal)
-				{
-					neighbor.Select();
+		public override List<Hex> GetAttackPattern() {
+			List<Hex> targets = new List<Hex> ();
+			foreach (Hex neighbor in h.Neighbors()) {
+				if (neighbor.tileType == TileType.Normal) {
+					targets.Add (neighbor);
 				}
 			}
+			return targets;
 		}
-
-		public override void hideAtkPattern()
-		{
-			if (h != null)
-			{
-				foreach (Hex neighbor in h.Neighbors().ToArray())
-				{
-					if (neighbor.tileType == TileType.Normal)
-					{
-						neighbor.Deselect();
-					}
-				}
-			}
-		}
-
 	}
 
 	class BigMeleeEnemy: MeleeEnemy
@@ -106,16 +89,15 @@ namespace game.world.units {
 			return Resources.Load<Sprite>("Sprites/Enemies/T_BowGoblinIdle1");
 		}
 
-		private List<Hex> ValidTargets() {
-			List<Hex> targets = new List<Hex>(HexLoc.hex_directions.Length);
+		public override List<Hex> GetAttackPattern() {
+			List<Hex> targets = new List<Hex> ();
 
-			foreach(HexLoc dir in HexLoc.hex_directions) {
+			foreach (HexLoc dir in HexLoc.hex_directions) {
 				var nloc = h.loc + dir + dir;
 				if (w.map.ContainsKey(nloc)) {
 					targets.Add(w.map[nloc]);
 				}
 			}
-
 			return targets;
 		}
 
@@ -137,7 +119,7 @@ namespace game.world.units {
 			if (persuing) {
 				int dist = h.loc.Distance(target.h.loc);
 
-				var targets = ValidTargets();
+				var targets = GetAttackPattern();
 
 				foreach(Hex t in targets) {
 					if (t.unit == target) {
@@ -158,31 +140,6 @@ namespace game.world.units {
 					var next = path.First.Next.Value;
 					if (next.unit == null) {
 						h = next;
-					}
-				}
-			}
-		}
-
-		public override void showAtkPattern()
-		{
-			foreach (Hex target in ValidTargets())
-			{
-				if (target.tileType == TileType.Normal)
-				{
-					target.Select();
-				}
-			}
-		}
-
-		public override void hideAtkPattern()
-		{
-			if (h != null)
-			{
-				foreach (Hex target in ValidTargets())
-				{
-					if (target.tileType == TileType.Normal)
-					{
-						target.Deselect();
 					}
 				}
 			}

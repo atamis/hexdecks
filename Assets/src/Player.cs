@@ -1,10 +1,8 @@
-using UnityEngine;
 using System.Collections.Generic;
 using game.tcg.cards;
 using game.world;
 using game.world.units;
 using game.tcg;
-using game.ui;
 
 namespace game {
     class Player {
@@ -12,9 +10,10 @@ namespace game {
         public List<TCGCard> graveyard { get; set; }
         public List<TCGCard> deck { get; set; }
 
-        public HeroUnit hero { get; set; }
         public Command nextCommand;
-        public int turns;
+		public int turns;
+
+        public HeroUnit hero { get; set; }
 
         public Player(HeroUnit u) {
             this.hero = u;

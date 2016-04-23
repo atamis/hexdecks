@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 using game.math;
 using game.tcg;
 using System;
+using game.render;
 
 namespace game.world.units {
 	[System.Serializable]
@@ -10,8 +11,9 @@ namespace game.world.units {
 		public int loc;
 	}
 
-	class Unit : MonoBehaviour {
+	abstract class Unit : MonoBehaviour {
 		UnitModel model;
+		public float timer;
 
 		private Hex _h;
 		public Hex h {
@@ -56,6 +58,7 @@ namespace game.world.units {
 			this.w = w;
 			this.h = h;
 			this.health = health;
+			this.timer = 0f;
 
 			invincible = new TemporaryEffect();
 			mousedOver = false;
@@ -71,6 +74,8 @@ namespace game.world.units {
 			model.init(this);
 
 		}
+
+		public abstract List<Hex> GetAttackPattern ();
 
 		public void CheckDeath() {
 			if (health <= 0) {
@@ -92,47 +97,31 @@ namespace game.world.units {
 		}
 
 		public virtual void NewTurn() {
-			hideAtkPattern();
 			invincible.NewTurn();
 		}
 
 		void Update() {
 			transform.localPosition = new Vector3(0, 0, 0);
-
+			timer += Time.deltaTime;
 		}
 
-		public virtual void showAtkPattern()
-		{
-
-		}
-
-		public virtual void hideAtkPattern()
-		{
-
+		public void ShowHealth(bool b) {
+			pips.model.sr.enabled = b;
 		}
 
 		public virtual void Die() {
-			hideAtkPattern();
+			foreach (Hex hex in GetAttackPattern()) {
+				hex.Highlight (Color.white);
+			}
+
 			h = null;
 			Destroy(model);
 			Destroy(this.gameObject);
 		}
 
-		public void mouseEnter()
-		{
-			pips.model.sr.enabled = true;
-			showAtkPattern();
-		}
-
-		public void mouseExit()
-		{
-			pips.model.sr.enabled = false;
-			hideAtkPattern();
-		}
-
 		private class UnitModel : MonoBehaviour {
-			SpriteRenderer sr;
-			Unit u;
+			private SpriteRenderer sr;
+			private Unit u;
 
 			public void init(Unit u) {
 				this.u = u;
@@ -140,9 +129,12 @@ namespace game.world.units {
 				transform.localPosition = LayerV.HeroUnit;
 
 				sr = gameObject.AddComponent<SpriteRenderer>();
+				sr.material = new Material(Shader.Find("Custom/OutlineShader"));
 				sr.sprite = u.getSprite();
+				gameObject.AddComponent<SpriteOutline>();
 
 				sr.color = new Color(1, 1, 1);
+
 			}
 
 			void Update() {
