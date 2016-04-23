@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using game.math;
 using game.ui;
 using game.world;
+using game.tcg.cards;
 
 namespace game {
     class GameManager : MonoBehaviour {

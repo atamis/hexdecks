@@ -2,6 +2,7 @@
 using game.world.units;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using game.tcg.cards;
 
 namespace game.world {
 	abstract class Trigger : MonoBehaviour {
@@ -131,4 +132,29 @@ namespace game.world {
 			return Resources.Load<Sprite>("Sprites/Diamond");
 		}
 	}
+
+    class ChestTrigger : Trigger {
+        TCGCard c;
+        public void init(Hex h, TCGCard c) {
+            base.init(h);
+            this.c = c;
+        }
+
+        public override Sprite getSprite() {
+            return Resources.Load<Sprite>("Sprites/Diamond");
+        }
+
+        public override void UnitEnter(Unit u) {
+            if (u.GetType() == typeof(HeroUnit)) {
+                print("Added " + c + " to the player's deck");
+                GameManager.p.deck.Add(c);
+                GameManager.ntm.AddText(GameManager.world.l.HexPixel(h.loc), "+card");
+                Destroy(gameObject);
+            }
+        }
+
+        public override void UnitLeave(Unit u) {
+            
+        }
+    }
 }
