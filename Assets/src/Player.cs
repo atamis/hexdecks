@@ -27,8 +27,10 @@ namespace game {
             deck.Add(new FireballCard());
             deck.Add(new FlashHealCard());
             deck.Add(new JumpAttackCard());
+            deck.Add(new JumpAttackCard());
+            deck.Add(new JumpAttackCard());
 
-            DrawCards(3);
+            DrawCards(5);
         }
 
         public void DiscardHand() {

@@ -19,10 +19,18 @@ namespace game.ui {
 		private SpriteRenderer sr;
 		private BoxCollider2D bc;
 
-		private TCGCard card; // Card ID
+		private TCGCard card {
+            get {
+                return GameManager.p.hand[idx];
+            }
+        }
+        private int idx;
 		private List<Hex> targets;
+        private GameObject textObj;
+        private TextMesh tm;
 
-		public void init() {
+        public void init(int idx) {
+            this.idx = idx;
 			this.tag = "Card";
 			this.gameObject.layer = LayerMask.NameToLayer("CardLayer");
 
@@ -34,11 +42,43 @@ namespace game.ui {
 			bc = gameObject.AddComponent<BoxCollider2D> ();
 			bc.size = new Vector3 (1.0f, 1.0f, 0);
 			bc.isTrigger = true;
-		}
 
-		void Update() {
-			
-			if (this.state != CardState.Dragging) {
+            var font = Resources.Load<Font>("Fonts/LeagueSpartan-Bold");
+
+            textObj = new GameObject("Card Text");
+            textObj.transform.parent = transform;
+            textObj.transform.localPosition = new Vector3(-0.5f, 0.5f, -0.1f);
+
+            tm = textObj.AddComponent<TextMesh>();
+
+            /*var text = card.GetName();
+            tm.text = "";
+            var builder = "";
+            string[] parts = text.Split(' ');
+
+            for (int i = 0; i < parts.Length; i++) {
+                tm.text += parts[i] + " ";
+                if (tm.GetComponent<Renderer>().bounds.extents.x > 3f) {
+                    tm.text = builder.TrimEnd() + System.Environment.NewLine + parts[i] + " ";
+                }
+                builder = tm.text;
+            }*/
+
+            tm.text = card.GetName();
+            tm.fontSize = 148;
+            tm.characterSize = 0.01f;
+            tm.color = Color.black;
+            tm.font = font;
+
+            tm.GetComponent<Renderer>().material = font.material;
+
+
+        }
+
+        void Update() {
+            tm.text = card.GetName();
+
+            if (this.state != CardState.Dragging) {
 				transform.position = Vector3.MoveTowards (transform.position, origin, 1.0f);
 			}
 		}
@@ -66,7 +106,7 @@ namespace game.ui {
 		void OnMouseUp() {
 			Hex h = MathLib.GetHexAtMouse ();
 			if (h != null) {
-				card.OnPlay(GameManager.world, h);
+                GameManager.p.Play(card, h);
 			}
 			this.state = CardState.Default;
 		}
