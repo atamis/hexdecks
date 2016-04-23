@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
+using game.tcg.cards;
 
 namespace game.world {
 	class SaveManager {
@@ -62,8 +63,26 @@ c = chest
 			}
 		}
 
+        private static TCGCard randomCard(System.Random r) {
+            int i = r.Next(4);
+            switch(i) {
+                case 0:
+                    return new FireballCard();
+                case 1:
+                    return new FlashHealCard();
+                case 2:
+                    return new JumpAttackCard();
+                case 3:
+                    return new KnockBackCard();
+                default:
+                    return new FlashHealCard();
+            }
+        }
+
 		public static WorldMap LoadLevel(Layout l, string name, GameManager gm) {
 			TextAsset lvl = Resources.Load<TextAsset>("Levels/" + name);
+
+            System.Random r = new System.Random();
 
 			if (lvl == null) {
 				return null;
@@ -110,6 +129,9 @@ c = chest
 						case 'e':
 							new GameObject("EndLevelTrigger").AddComponent<EndLevelTrigger>().init(h);
 							break;
+                        case 'c':
+                                new GameObject("EndLevelTrigger").AddComponent<ChestTrigger>().init(h, randomCard(r));
+                                break;
 						default:
 							// Not Implemented: e, M, c
 							break;

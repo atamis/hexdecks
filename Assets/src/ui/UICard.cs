@@ -19,12 +19,20 @@ namespace game.ui {
 		private SpriteRenderer sr;
 		private BoxCollider2D bc;
 
-		private TCGCard card; // Card ID
+		private TCGCard card {
+            get {
+                return GameManager.p.hand[idx];
+            }
+        }
+        private int idx;
 		private List<Hex> targets;
+        private GameObject textObj;
+        private TextMesh tm;
 		private WorldUI ui;
 
-		public void init(WorldUI ui) {
+		public void init(WorldUI ui, int idx) {
 			this.ui = ui;
+            this.idx = idx;
 			this.tag = "Card";
 			this.gameObject.layer = LayerMask.NameToLayer("CardLayer");
 
@@ -36,14 +44,32 @@ namespace game.ui {
 			bc = gameObject.AddComponent<BoxCollider2D> ();
 			bc.size = new Vector3 (1.0f, 1.0f, 0);
 			bc.isTrigger = true;
+
+			var font = Resources.Load<Font>("Fonts/LeagueSpartan-Bold");
+
+			textObj = new GameObject("Card Text");
+			textObj.transform.parent = transform;
+			textObj.transform.localPosition = new Vector3(-0.5f, 0.5f, -0.1f);
+
+			tm = textObj.AddComponent<TextMesh>();
+
+			tm.text = card.GetName();
+			tm.fontSize = 148;
+			tm.characterSize = 0.01f;
+			tm.color = Color.black;
+			tm.font = font;
+
+			tm.GetComponent<Renderer>().material = font.material;
 		}
 
 		void Update() {
+			tm.text = card.GetName();
+
 			if (this.state != CardState.Dragging) {
 				transform.position = Vector3.MoveTowards (transform.position, origin, 1.0f);
 			}
 		}
-
+				
 		public void SetOrigin(Vector3 pos) {
 			this.origin = pos;
 		}
@@ -66,8 +92,8 @@ namespace game.ui {
 
 		void OnMouseUp() {
 			Hex h = MathLib.GetHexAtMouse (ui.gm.world);
-			if (h != null) {
-				card.OnPlay(ui.gm.world, h);
+			if (h != null && targets.Contains(h)) {
+                GameManager.p.Play(card, h);
 			}
 			this.state = CardState.Default;
 		}

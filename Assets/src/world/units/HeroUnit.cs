@@ -13,26 +13,27 @@ namespace game.world.units {
 		float lastSwitch;
 		int idx;
 
-		public void init(WorldMap w, Hex h) {
-			base.init(w, h, 10);
+        public void init(WorldMap w, Hex h)
+        {
+            base.init(w, h, 1);
+            idx = 0;
+            lastSwitch = timer;
+        }
 
-			idx = 0;
-			lastSwitch = timer;
+        public override Sprite getSprite()
+        {
+            if (timer >= lastSwitch + spriteInterval)
+            {
+                lastSwitch = timer;
+                idx = idx + 1;
+                idx = idx % 3;
+            }
+            return sprites[idx];
+        }
 
-		}
-
-		public override Sprite getSprite() {
-			if(timer >= lastSwitch + spriteInterval) {
-				lastSwitch = timer;
-				idx = idx + 1;
-				idx = idx % 3;
-			}
-			return sprites[idx];
-		}
-
-		public override List<Hex> GetAttackPattern ()
+        public override List<Hex> GetAttackPattern ()
 		{
-			return new List<Hex> ();
+			return new List<Hex>();
 		}
 	}
 }
