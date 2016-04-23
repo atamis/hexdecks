@@ -35,19 +35,19 @@ namespace game.ui {
 			this.gameObject.layer = LayerMask.NameToLayer("CardLayer");
 
 			sr = gameObject.AddComponent<SpriteRenderer> ();
-			sr.sprite = Resources.Load<Sprite> ("Sprites/Square");
+			sr.sprite = Resources.Load<Sprite> ("Sprites/UI/T_CardBase");
 			sr.material = new Material (Shader.Find ("Sprites/Default"));
 			sr.color = Color.white;
 
 			bc = gameObject.AddComponent<BoxCollider2D> ();
-			bc.size = new Vector3 (1.0f, 1.0f, 0);
+			bc.size = new Vector3 (1.0f, 1.33f, 0);
 			bc.isTrigger = true;
 
             var font = Resources.Load<Font>("Fonts/LeagueSpartan-Bold");
 
             textObj = new GameObject("Card Text");
             textObj.transform.parent = transform;
-            textObj.transform.localPosition = new Vector3(-0.5f, 0.5f, -0.1f);
+            textObj.transform.localPosition = new Vector3(-0.40f, 0.5f, -0.1f);
 
             tm = textObj.AddComponent<TextMesh>();
 
@@ -66,7 +66,7 @@ namespace game.ui {
 
             tm.text = card.GetName();
             tm.fontSize = 148;
-            tm.characterSize = 0.01f;
+            tm.characterSize = 0.008f;
             tm.color = Color.black;
             tm.font = font;
 
