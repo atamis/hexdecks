@@ -1,8 +1,12 @@
 using UnityEngine;
 using System.Collections.Generic;
+using game.tcg;
 
 namespace game {
     class Player {
+		public Command nextCommand;
+		public int turns;
+
 		public List<int> hand;
 		public List<int> cards;
 

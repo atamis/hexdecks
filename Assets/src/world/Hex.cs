@@ -192,7 +192,7 @@ namespace game.world {
 					}
 				}
 			}
-
+				
 			public void OnCollisionEnter2D(Collision2D coll) {
 				this.colliding = true;
 			}

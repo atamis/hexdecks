@@ -108,6 +108,10 @@ namespace game.world.units {
 		}
 
 		public virtual void Die() {
+			foreach (Hex hex in GetAttackPattern()) {
+				hex.Highlight (Color.white);
+			}
+
 			h = null;
 			Destroy(model);
 			Destroy(this.gameObject);

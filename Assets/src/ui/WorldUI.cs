@@ -1,5 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
+using game.math;
+using game.world;
 using game.tcg;
 
 // TODO
@@ -31,6 +33,20 @@ namespace game.ui {
 			if (Input.GetKeyDown (KeyCode.Escape)) {
 				this.menu.gameObject.SetActive (!menu.gameObject.activeSelf);
 				this.ib.gameObject.SetActive (!ib.gameObject.activeSelf);
+			}
+
+			// handle movement
+			if (Input.GetMouseButtonUp (0)) {
+				RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
+				if (hit.collider != null) {
+					if (hit.collider.gameObject.tag == "Hex") {
+						Hex h = MathLib.GetHexAtMouse();
+
+						if (h != null && GameManager.p.nextCommand == null) {
+							GameManager.p.nextCommand = new MoveCommand(GameManager.world.hero, h);
+						}
+					}
+				}
 			}
         }
 
