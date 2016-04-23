@@ -105,7 +105,7 @@ namespace game.ui {
 
 		void OnMouseUp() {
 			Hex h = MathLib.GetHexAtMouse ();
-			if (h != null) {
+			if (h != null && targets.Contains(h)) {
                 GameManager.p.Play(card, h);
 			}
 			this.state = CardState.Default;
