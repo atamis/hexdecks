@@ -8,6 +8,7 @@ namespace game.world.units {
 			Resources.Load<Sprite>("Sprites/Hero/T_HeroIdle2"),
 			Resources.Load<Sprite>("Sprites/Hero/T_HeroIdle3")
 		};
+
 		const float spriteInterval = .8f;
 		float lastSwitch;
 		int idx;
