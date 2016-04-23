@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 using game.math;
 using game.tcg;
 using System;
@@ -11,7 +11,7 @@ namespace game.world.units {
 		public int loc;
 	}
 
-	class Unit : MonoBehaviour {
+	abstract class Unit : MonoBehaviour {
 		UnitModel model;
 
 		private Hex _h;
@@ -73,6 +73,8 @@ namespace game.world.units {
 
 		}
 
+		public abstract List<Hex> GetAttackPattern ();
+
 		public void CheckDeath() {
 			if (health <= 0) {
 				Die();
@@ -93,7 +95,6 @@ namespace game.world.units {
 		}
 
 		public virtual void NewTurn() {
-			hideAtkPattern();
 			invincible.NewTurn();
 		}
 
@@ -102,33 +103,14 @@ namespace game.world.units {
 
 		}
 
-		public virtual void showAtkPattern()
-		{
-
-		}
-
-		public virtual void hideAtkPattern()
-		{
-
+		public void ShowHealth(bool b) {
+			pips.model.sr.enabled = b;
 		}
 
 		public virtual void Die() {
-			hideAtkPattern();
 			h = null;
 			Destroy(model);
 			Destroy(this.gameObject);
-		}
-
-		public void mouseEnter()
-		{
-			pips.model.sr.enabled = true;
-			showAtkPattern();
-		}
-
-		public void mouseExit()
-		{
-			pips.model.sr.enabled = false;
-			hideAtkPattern();
 		}
 
 		private class UnitModel : MonoBehaviour {

@@ -126,13 +126,12 @@ namespace game.world {
 			private PolygonCollider2D coll;
 			private Rigidbody2D rig;
 			private Hex h;
+			private bool colliding;
 
 			public void init(Hex h) {
 				this.h = h;
 				this.tag = "Hex";
 				this.gameObject.layer = LayerMask.NameToLayer("HexLayer");
-
-				//gameObject.hideFlags = HideFlags.HideInHierarchy; // hide from heirarchy
 
 				transform.localPosition = new Vector3 (h.transform.position.x, h.transform.position.y, Layer.Hex);
 				transform.localScale = new Vector3 (1.9f, 1.9f, 0);
@@ -170,6 +169,36 @@ namespace game.world {
 
 			public void SetColor(Color c) {
 				this.sr.color = c;
+			}
+
+			public void OnMouseOver() {
+				if (!colliding) {
+					if (this.h.unit != null) {
+						this.h.unit.ShowHealth (true);
+						foreach (Hex hex in h.unit.GetAttackPattern()) {
+							hex.Highlight (Color.yellow);
+						}
+					}
+				}
+			}
+
+			public void OnMouseExit() {
+				if (this.h.unit != null) {
+					if (this.h.unit != null) {
+						this.h.unit.ShowHealth (false);
+						foreach (Hex hex in h.unit.GetAttackPattern()) {
+							hex.Highlight (Color.white);
+						}
+					}
+				}
+			}
+
+			public void OnCollisionEnter2D(Collision2D coll) {
+				this.colliding = true;
+			}
+
+			public void OnCollisionExit2D(Collision2D coll) {
+				this.colliding = false;
 			}
 		}
 	}

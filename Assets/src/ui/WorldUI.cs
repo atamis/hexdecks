@@ -21,8 +21,6 @@ namespace game.ui {
 			menu = new GameObject ("Menu").AddComponent<UIHexMenu>();
 			menu.gameObject.SetActive (false);
 
-			overlay = new GameObject("Overlay").AddComponent<ScreenOverlay> ();
-
 			CardManager cm = gameObject.AddComponent<CardManager> ();
         }
 
@@ -32,6 +30,7 @@ namespace game.ui {
 
 			if (Input.GetKeyDown (KeyCode.Escape)) {
 				this.menu.gameObject.SetActive (!menu.gameObject.activeSelf);
+				this.ib.gameObject.SetActive (!ib.gameObject.activeSelf);
 			}
         }
 

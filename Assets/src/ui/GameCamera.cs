@@ -6,12 +6,15 @@ namespace game.ui {
 		Camera cam;
 		float speed = 1f;
 		private Vector3? goal;
+		ScreenOverlay overlay;
 
 		public void init(Camera cam) {
 			this.cam = cam;
 			this.cam.transform.parent = transform;
 			this.cam.backgroundColor = new Color(0.25f, 0.25f, 0.25f);
 			goal = null;
+
+			overlay = new GameObject("Overlay").AddComponent<ScreenOverlay> ();
 		}
 
 		public void setLocation(Vector3 v) {
@@ -29,6 +32,7 @@ namespace game.ui {
 
 		// Update is called once per frame
 		void Update() {
+			overlay.transform.parent = transform;
 
 			if (goal.HasValue) {
 				if (closeToGoal()) {
@@ -72,5 +76,35 @@ namespace game.ui {
 
 			}
 		}
+
+		private class ScreenOverlay : MonoBehaviour {
+			private SpriteRenderer sr;
+			private float fadeSpeed = 1.5f;
+
+			void Awake() {
+				gameObject.layer = LayerMask.NameToLayer ("UI");
+				//gameObject.hideFlags = HideFlags.HideInHierarchy;
+
+				sr = gameObject.AddComponent<SpriteRenderer> ();
+				sr.sprite = Resources.Load<Sprite> ("Sprites/Square");
+				sr.color = Color.black;
+			}
+
+			void Start() {
+				float h_screen = Camera.main.orthographicSize * 2;
+				float w_screen = h_screen / Screen.height * Screen.width;
+				transform.localScale = new Vector3(w_screen / sr.sprite.bounds.size.x, h_screen * sr.sprite.bounds.size.y, 1);
+			}
+
+			public void FadeToClear(Color start) {
+				sr.color = Color.Lerp (sr.color, Color.clear, fadeSpeed * Time.deltaTime);
+			}
+
+			void Update() {
+				FadeToClear (Color.black);
+			}
+		}
 	}
+
+
 }
