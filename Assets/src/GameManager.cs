@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 using System.Collections.Generic;
 using game.math;
 using game.ui;
@@ -6,34 +7,47 @@ using game.world;
 
 namespace game {
     class GameManager : MonoBehaviour {
-		public static WorldMap world;
-		public static Layout l;
-		public static NotificationManager ntm;
+		public static Layout l = new Layout(Orientation.Pointy, new Vector2(1, 1), new Vector2(0, 0));
 		public static Player p;
+		public static NotificationManager ntm;
 
-		private WorldUI ui;
-		private GameCamera gc;
+		private GameUI ui;
 
-        void Awake() {
-			gc = new GameObject ("Game Camera").AddComponent<GameCamera> ();
-			gc.init (Camera.main);
+		private WorldMap _world;
+		public WorldMap world {
+			get {
+				if (ui.GetType() != typeof(WorldUI)) {
+					throw new Exception ("Can't access world in IntroUI!");
+				}
+				return _world;
+			}
+			private set {
+				_world = value;
+			}
+		}
 
-			l = new Layout(Orientation.Pointy, new Vector2(1, 1), new Vector2(0, 0));
-			world = SaveManager.LoadLevel(l, "level1", this);
+		void Awake() {
+			ntm = new GameObject ("Notification Manager").AddComponent<NotificationManager> ();
+			p = new Player();
 
-			var hero = world.hero;
-			//gc.setLocation(l.HexPixel(world.hero.h.loc));
+			ui = gameObject.AddComponent<IntroUI> ();
+			ui.init (this);
+		}
+
+		public void LoadMap(string levelname) {
+			Destroy (this.ui);
+			ui = gameObject.AddComponent<WorldUI> ();
+
+			world = SaveManager.LoadLevel(l, levelname, this);
+			p.hero = world.hero;
 
 			var trigger = new GameObject("Trigger").AddComponent<LogTrigger>();
 			trigger.init(world.map[new HexLoc(2, 2)]);
 
-			p = new Player();
-
-			// Make sure this happens last 
-			ui = gameObject.AddComponent<WorldUI> ();
-			ntm = new GameObject ("Notification Manager").AddComponent<NotificationManager> ();
-        }
-
+			ui.init (this);
+			ui.gc.setLocation(l.HexPixel(world.hero.h.loc));
+		}
+			
         void Update() {
 			if (p.nextCommand != null) {
 				print("Executing command " + p.nextCommand);

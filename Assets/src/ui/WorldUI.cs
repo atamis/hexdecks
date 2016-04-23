@@ -9,19 +9,22 @@ using game.tcg;
 
 namespace game.ui {
 	class WorldUI : GameUI {
+		public GameManager gm;
         private WorldHUD ib;
 		private UIHexMenu menu;
-		private GameCamera gc;
 
-        void Awake() {
-			font = Resources.Load<Font>("Fonts/LeagueSpartan-Bold");
+		public override void init(GameManager gm) {
+			this.gm = gm;
+
+			gc = new GameObject ("Game Camera").AddComponent<GameCamera> ();
+			gc.init (Camera.main);
 
 			ib = new GameObject("Infobar").AddComponent<WorldHUD>();
-            ib.init();
+			ib.init(this);
 
-			menu = new GameObject ("Menu").AddComponent<UIHexMenu>();
-			menu.gameObject.SetActive (false);
-        }
+			//menu = new GameObject ("Menu").AddComponent<UIHexMenu>();
+			//menu.gameObject.SetActive (false);
+		}
 
         void Update() {
 			// UPDATE HUD LOCATION
@@ -38,10 +41,10 @@ namespace game.ui {
 				RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
 				if (hit.collider != null) {
 					if (hit.collider.gameObject.tag == "Hex") {
-						Hex h = MathLib.GetHexAtMouse();
+						Hex h = MathLib.GetHexAtMouse(gm.world);
 
 						if (h != null && GameManager.p.nextCommand == null) {
-							GameManager.p.nextCommand = new MoveCommand(GameManager.world.hero, h);
+							GameManager.p.nextCommand = new MoveCommand(gm.world.hero, h);
 						}
 					}
 				}
@@ -63,7 +66,10 @@ namespace game.ui {
 
 			private UITooltip tooltip;
 
-			public void init() {
+			public WorldUI ui;
+
+			public void init(WorldUI ui) {
+				this.ui = ui;
 				sr = gameObject.AddComponent<SpriteRenderer> ();
 				sr.sprite = GetSprite();
 
@@ -147,7 +153,10 @@ namespace game.ui {
 				new Vector3 (-1f, 1f, 0), new Vector3 (-2f, .75f, 0),
 			};
 
-            public void init() {
+			private WorldUI ui;
+
+			public void init(WorldUI ui) {
+				this.ui = ui;
 				this.gameObject.layer = LayerMask.NameToLayer ("UI");
 
 				sr = gameObject.AddComponent<SpriteRenderer> ();
@@ -155,21 +164,21 @@ namespace game.ui {
 
 				// HEALTH FEATURE
                 hf = new GameObject("Health Feature").AddComponent<UIHealthFeature>();
-                hf.init();
+                hf.init(ui);
 
 				hf.transform.parent = transform;
 				hf.transform.localPosition = new Vector3 (0, 0, -1);
 
 				// BUFFs FEATURE
 				bf = new GameObject ("Buff Feature").AddComponent<UIBuffFeature> ();
-				bf.init ();
+				bf.init (ui);
 
 				bf.transform.parent = transform;
 				bf.transform.localPosition = new Vector3 (-1.5f, 0, -1);
 
 				// ACTIONS FEATURE
 				af = new GameObject ("Action Feature").AddComponent<UIActionFeature> ();
-				af.init ();
+				af.init (ui);
 
 				af.transform.parent = transform;
 				af.transform.localPosition = new Vector3 (1.5f, 0, -1);
@@ -178,7 +187,7 @@ namespace game.ui {
 				cards = new List<UICard> ();
 				for (int i = 0; i < 5; i++) {
 					UICard c = new GameObject ("Card").AddComponent<UICard> ();
-					c.init ();
+					c.init (ui);
 					c.SetColor (cs [i]);
 
 					c.transform.localPosition = new Vector3 (0, 1, 0);
@@ -204,7 +213,7 @@ namespace game.ui {
                 }
 
 				public override string GetText() {
-					return GameManager.world.hero.health.ToString();
+					return ui.gm.world.hero.health.ToString();
 				}
 
 				public override string GetTooltip () {

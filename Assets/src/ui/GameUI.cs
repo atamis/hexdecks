@@ -2,9 +2,11 @@
 using System.Collections;
 
 namespace game.ui {
-	class GameUI : MonoBehaviour {
-		
-		static internal Font font;
+	abstract class GameUI : MonoBehaviour {
+		public static Font font = Resources.Load<Font>("Fonts/LeagueSpartan-Bold");
+		internal GameCamera gc;
+
+		public abstract void init(GameManager gm);
 	}
 }
 

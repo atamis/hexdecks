@@ -48,6 +48,7 @@
      <Compile Include="Assets\src\GameManager.cs" />
      <Compile Include="Assets\src\IntroManager.cs" />
      <Compile Include="Assets\src\Player.cs" />
+     <Compile Include="Assets\src\WorldManager.cs" />
      <Compile Include="Assets\src\common\AudioManager.cs" />
      <Compile Include="Assets\src\common\Layer.cs" />
      <Compile Include="Assets\src\math\HexLoc.cs" />

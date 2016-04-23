@@ -21,8 +21,10 @@ namespace game.ui {
 
 		private TCGCard card; // Card ID
 		private List<Hex> targets;
+		private WorldUI ui;
 
-		public void init() {
+		public void init(WorldUI ui) {
+			this.ui = ui;
 			this.tag = "Card";
 			this.gameObject.layer = LayerMask.NameToLayer("CardLayer");
 
@@ -37,7 +39,6 @@ namespace game.ui {
 		}
 
 		void Update() {
-			
 			if (this.state != CardState.Dragging) {
 				transform.position = Vector3.MoveTowards (transform.position, origin, 1.0f);
 			}
@@ -64,15 +65,15 @@ namespace game.ui {
 		}
 
 		void OnMouseUp() {
-			Hex h = MathLib.GetHexAtMouse ();
+			Hex h = MathLib.GetHexAtMouse (ui.gm.world);
 			if (h != null) {
-				card.OnPlay(GameManager.world, h);
+				card.OnPlay(ui.gm.world, h);
 			}
 			this.state = CardState.Default;
 		}
 
 		void OnMouseEnter() {
-			this.targets = card.ValidTargets (GameManager.world, GameManager.world.hero.h);
+			this.targets = card.ValidTargets (ui.gm.world, ui.gm.world.hero.h);
 			foreach (Hex h in this.targets) {
 				h.Highlight (Color.red);
 			}

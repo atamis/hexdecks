@@ -4,11 +4,21 @@ using UnityEngine.SceneManagement;
 
 namespace game.ui {
 	class IntroUI : GameUI {
-		void Awake() {
-			font = Resources.Load<Font>("Fonts/LeagueSpartan-Bold");
+		internal GameManager gm;
+
+		/*
+		private string[] levels = new string[] { 
+			"tutorial",
+			"level1",
+			"level2",
+		};
+		*/
+
+		public override void init(GameManager gm) {
+			this.gm = gm;
 
 			UILoadButton b = new GameObject ("UI Load Button").AddComponent<UILoadButton> ();
-			b.init ();
+			b.init (this, "level1");
 		}
 
 		void Update() {
@@ -17,14 +27,23 @@ namespace game.ui {
 
 		private class UILoadButton : MonoBehaviour { 
 			private SpriteRenderer sr;
-			private string levelName;
+			private BoxCollider2D coll;
+			private string level;
+			private IntroUI ui;
 
-			public void init() {
+			public void init(IntroUI ui, string level) {
+				this.ui = ui;
+				this.level = level;
 
+				sr = gameObject.AddComponent<SpriteRenderer> ();
+				sr.sprite = Resources.Load<Sprite> ("Sprites/Square");
+
+				coll = gameObject.AddComponent<BoxCollider2D> ();
+				coll.isTrigger = true;
 			}
 
-			void OnMouseUp() {
-				SceneManager.LoadSceneAsync(levelName);
+			void OnMouseDown() {
+				ui.gm.LoadMap (level);
 			}
 		}
 	}
