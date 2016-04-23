@@ -31,6 +31,7 @@ namespace game {
             deck.Add(new KnockBackCard());
             deck.Add(new KnockBackCard());
             deck.Add(new DoubleActionCard());
+            deck.Add(new DiscardHandCard());
 
             deck.Shuffle();
 
