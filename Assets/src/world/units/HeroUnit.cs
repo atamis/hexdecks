@@ -15,7 +15,7 @@ namespace game.world.units {
 
         public void init(WorldMap w, Hex h)
         {
-            base.init(w, h, 1);
+            base.init(w, h, 10);
             idx = 0;
             lastSwitch = timer;
         }
