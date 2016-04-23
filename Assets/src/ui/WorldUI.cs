@@ -21,12 +21,12 @@ namespace game.ui {
 			this.gm = gm;
 			this.name = "UI";
 
-			gc = new GameObject ("Game Camera").AddComponent<GameCamera> ();
-			gc.init (Camera.main);
-
 			ib = new GameObject("Infobar").AddComponent<WorldHUD>();
 			ib.init(this);
 			ib.transform.parent = transform;
+
+			gc = new GameObject ("Game Camera").AddComponent<GameCamera> ();
+			gc.init (Camera.main);
 
 			//menu = new GameObject ("Menu").AddComponent<UIHexMenu>();
 			//menu.gameObject.SetActive (false);

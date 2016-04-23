@@ -54,6 +54,7 @@
      <Compile Include="Assets\src\math\Layout.cs" />
      <Compile Include="Assets\src\math\MathLib.cs" />
      <Compile Include="Assets\src\math\Orientation.cs" />
+     <Compile Include="Assets\src\render\ScreenFilter.cs" />
      <Compile Include="Assets\src\render\SpriteOutline.cs" />
      <Compile Include="Assets\src\tcg\CardLib.cs" />
      <Compile Include="Assets\src\tcg\Command.cs" />
@@ -86,6 +87,7 @@
      <Compile Include="Assets\src\world\units\Unit.cs" />
      <None Include="Assets\Resources\Levels\level2.txt" />
      <None Include="Assets\Resources\Levels\level1.txt" />
+     <None Include="Assets\Resources\Shaders\BloomShader.shader" />
      <None Include="Assets\Resources\Shaders\SceneShader.shader" />
      <None Include="Assets\Resources\Shaders\OutlineShader.shader" />
      <None Include="Assets\Resources\Levels\level3.txt" />
