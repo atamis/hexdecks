@@ -62,9 +62,7 @@ namespace game.world {
 				gameObject.transform.localPosition = LayerV.HeroUnit;
 
 				sr = gameObject.AddComponent<SpriteRenderer>();
-				sr.sprite = t.getSprite();
-
-				sr.color = new Color(0, 0, 0);
+				sr.sprite = t.getSprite()
 			}
 
 			void Update() {
@@ -141,7 +139,7 @@ namespace game.world {
         }
 
         public override Sprite getSprite() {
-            return Resources.Load<Sprite>("Sprites/Diamond");
+            return Resources.Load<Sprite>("Sprites/Tiles/T_Chest");
         }
 
         public override void UnitEnter(Unit u) {
