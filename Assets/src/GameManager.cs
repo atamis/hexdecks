@@ -27,7 +27,7 @@ namespace game {
 			var trigger = new GameObject("Trigger").AddComponent<LogTrigger>();
 			trigger.init(world.map[new HexLoc(2, 2)]);
 
-			p = new Player();
+			p = new Player(hero);
 
 			// Make sure this happens last 
 			ui = gameObject.AddComponent<WorldUI> ();
