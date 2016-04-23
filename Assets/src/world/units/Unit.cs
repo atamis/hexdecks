@@ -3,6 +3,7 @@ using System.Collections;
 using game.math;
 using game.tcg;
 using System;
+using game.render;
 
 namespace game.world.units {
 	[System.Serializable]
@@ -131,8 +132,8 @@ namespace game.world.units {
 		}
 
 		private class UnitModel : MonoBehaviour {
-			SpriteRenderer sr;
-			Unit u;
+			private SpriteRenderer sr;
+			private Unit u;
 
 			public void init(Unit u) {
 				this.u = u;
@@ -140,9 +141,12 @@ namespace game.world.units {
 				transform.localPosition = LayerV.HeroUnit;
 
 				sr = gameObject.AddComponent<SpriteRenderer>();
+				sr.material = new Material(Shader.Find("Custom/OutlineShader"));
 				sr.sprite = u.getSprite();
+				gameObject.AddComponent<SpriteOutline>();
 
 				sr.color = new Color(1, 1, 1);
+
 			}
 
 			void Update() {

@@ -9,7 +9,8 @@ namespace game.ui {
 	class WorldUI : GameUI {
         private WorldHUD ib;
 		private UIHexMenu menu;
-	
+		private GameCamera gc;
+
         void Awake() {
             //uiFolder = new GameObject("UI Elements");
 			font = Resources.Load<Font>("Fonts/LeagueSpartan-Bold");
@@ -26,7 +27,8 @@ namespace game.ui {
         }
 
         void Update() {
-			ib.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width / 2, Screen.height * .1f, 10));
+			Vector3 pos = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width / 2, Screen.height * .1f, 10));
+			ib.transform.position = new Vector3 (pos.x, pos.y, Layer.HUD);
 
 			if (Input.GetKeyDown (KeyCode.Escape)) {
 				this.menu.gameObject.SetActive (!menu.gameObject.activeSelf);
@@ -35,6 +37,8 @@ namespace game.ui {
 
 		public abstract class CustomUIFeature : MonoBehaviour {
 			private SpriteRenderer sr;
+			private PolygonCollider2D coll;
+
 			private TextMesh tm;
 			private GameObject textObj;
 
@@ -43,6 +47,8 @@ namespace game.ui {
 			public abstract string GetTooltip();
 
 			public abstract Sprite GetSprite();
+
+			private UITooltip tooltip;
 
 			public void init() {
 				sr = gameObject.AddComponent<SpriteRenderer> ();
@@ -61,10 +67,54 @@ namespace game.ui {
 				tm.characterSize = 0.04f;
 				tm.font = WorldUI.font;
 				tm.GetComponent<Renderer>().material = font.material;
+
+				coll = gameObject.AddComponent<PolygonCollider2D> ();
+				coll.isTrigger = true;
+
+				tooltip = new GameObject ("UI Tooltip").AddComponent<UITooltip> ();
+				tooltip.init (GetTooltip());
+
+				tooltip.transform.parent = transform;
+				tooltip.gameObject.SetActive (false);
 			}
 
 			void OnMouseOver() {
-				// Make a tooltip
+				tooltip.gameObject.SetActive (true);
+			}
+
+			void OnMouseExit() {
+				tooltip.gameObject.SetActive (false);
+			}
+
+			private class UITooltip : MonoBehaviour {
+				private SpriteRenderer sr;
+				private string text;
+
+				private TextMesh tm;
+				private GameObject textObj;
+
+				public void init(string text) {
+					this.text = text;
+
+					textObj = new GameObject("UI Text");
+					textObj.transform.parent = transform;
+					textObj.transform.localPosition = new Vector3(0, 0, -0.5f);
+
+					tm = textObj.AddComponent<TextMesh>();
+					tm.text = this.text;
+					tm.color = Color.black;
+					tm.alignment = TextAlignment.Center;
+					tm.anchor = TextAnchor.MiddleCenter;
+					tm.fontSize = 148;
+					tm.characterSize = 0.04f;
+					tm.font = WorldUI.font;
+					tm.GetComponent<Renderer>().material = font.material;
+				}
+
+				void Update() {
+					Vector3 pos = Camera.main.ScreenToWorldPoint (Input.mousePosition);
+					transform.position = new Vector3(pos.x, pos.y, Layer.Tooltip);
+				}
 			}
 		}
 
@@ -75,9 +125,18 @@ namespace game.ui {
 			private UIActionFeature af;
 			private SpriteRenderer sr;
 
-			Color[] cs = new Color[] { Color.red, Color.blue, Color.cyan, Color.green, Color.magenta };
+			Color[] cs = new Color[] { 
+				Color.red, Color.blue, Color.cyan, Color.green, Color.magenta 
+			};
+
+			public Vector3[] card_locs = new Vector3[] { 
+				new Vector3 (2f, .75f, 0), new Vector3 (1f, 1f, 0), new Vector3 (0f, 1.25f, 0), 
+				new Vector3 (-1f, 1f, 0), new Vector3 (-2f, .75f, 0),
+			};
 
             public void init() {
+				this.gameObject.layer = LayerMask.NameToLayer ("UI");
+
 				sr = gameObject.AddComponent<SpriteRenderer> ();
 				sr.sprite = Resources.Load<Sprite> ("Sprites/UI/T_MainPanelNoIcons");
 
@@ -115,19 +174,15 @@ namespace game.ui {
 					cards.Add(c);
 				}
             }
-
-			public Vector3[] card_locs = new Vector3[] { 
-				new Vector3 (2f, .75f, 0), new Vector3 (1f, 1f, 0), new Vector3 (0f, 1.25f, 0), 
-				new Vector3 (-1f, 1f, 0), new Vector3 (-2f, .75f, 0),
-			};
 				
 			void Update() {
+				// UPDATE THE CARD LOCATIONS
 				int i = 0;
-				foreach (UICard c in cards) {
-					c.SetOrigin(transform.position + card_locs[i]);
-					//c.transform.localEulerAngles = new Vector3 (0, 0, 45 + 18 * i);
+				while (i < 5) {
+					cards [i].SetOrigin (transform.position + card_locs [i]);
 					i++;
 				}
+
 			}
 
             private class UIHealthFeature : CustomUIFeature {
@@ -141,7 +196,7 @@ namespace game.ui {
 
 				public override string GetTooltip ()
 				{
-					return "Tooltip";
+					return "Health";
 				}
             }
 
@@ -151,11 +206,13 @@ namespace game.ui {
 				}
 
 				public override string GetText () {
+					// TODO
+					// Buff Duration
 					return "1";
 				}
 
 				public override string GetTooltip () {
-					return "Tooltip";
+					return "Buff";
 				}
 			}
 
@@ -169,7 +226,7 @@ namespace game.ui {
 				}
 
 				public override string GetTooltip () {
-					return "Tooltip";
+					return "Actions";
 				}
 			}
         }

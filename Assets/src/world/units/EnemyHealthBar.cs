@@ -39,7 +39,7 @@ namespace game.world
 				this.b = b;
 
 				transform.localScale = new Vector3(2, 2, 2);
-				transform.localPosition = LayerV.PseudoUI + new Vector3(0, .5f, 0);
+				transform.localPosition = LayerV.UnitFX + new Vector3(0, .5f, 0);
 				sr = gameObject.AddComponent<SpriteRenderer>();
 
 				setSprite();
@@ -69,7 +69,7 @@ namespace game.world
 
 			void Update()
 			{
-				transform.localPosition = LayerV.PseudoUI + new Vector3(0, .65f, 0);
+				transform.localPosition = LayerV.UnitFX + new Vector3(0, .65f, 0);
 				setSprite();
 			}
 		}

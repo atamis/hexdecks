@@ -36,9 +36,8 @@ namespace game {
 			}
 
 			void Update() {
-
 				transform.position = transform.position + new Vector3(0, 3, 0) * Time.deltaTime;
-				transform.position = new Vector3(transform.position.x, transform.position.y, Layer.PseudoUI);
+				transform.position = new Vector3(transform.position.x, transform.position.y, Layer.HUDFX);
 
 				var c = tm.color;
 				c.a -= Time.deltaTime/2;

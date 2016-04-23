@@ -94,6 +94,6 @@
   </Target>
   -->
   <ItemGroup>
-    <Folder Include="Assets\src\" />
+    <Folder Include="Assets\src\ui\" />
   </ItemGroup>
 </Project>

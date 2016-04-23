@@ -134,7 +134,7 @@ namespace game.world {
 
 				//gameObject.hideFlags = HideFlags.HideInHierarchy; // hide from heirarchy
 
-				transform.localPosition = new Vector3 (h.transform.position.x, h.transform.position.y, Layer.Board);
+				transform.localPosition = new Vector3 (h.transform.position.x, h.transform.position.y, Layer.Hex);
 				transform.localScale = new Vector3 (1.9f, 1.9f, 0);
 
 				sr = gameObject.AddComponent<SpriteRenderer> ();
