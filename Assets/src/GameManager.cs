@@ -11,8 +11,9 @@ namespace game {
 		public static Layout l = new Layout(Orientation.Pointy, new Vector2(1, 1), new Vector2(0, 0));
 		public static Player p;
 		public static NotificationManager ntm;
+		public static string level;
 
-		private GameUI ui;
+		private WorldUI ui;
 
 		private WorldMap _world;
 		public WorldMap world {
@@ -30,16 +31,11 @@ namespace game {
 		void Awake() {
 			ntm = new GameObject ("Notification Manager").AddComponent<NotificationManager> ();
 			p = new Player();
-
-			ui = gameObject.AddComponent<IntroUI> ();
-			ui.init (this);
 		}
 
-		public void LoadMap(string levelname) {
-			Destroy (this.ui);
+		void Start() {
 			ui = gameObject.AddComponent<WorldUI> ();
-
-			world = SaveManager.LoadLevel(l, levelname, this);
+			world = SaveManager.LoadLevel(l, level, this);
 			p.hero = world.hero;
 
 			var trigger = new GameObject("Trigger").AddComponent<LogTrigger>();

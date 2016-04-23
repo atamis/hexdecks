@@ -3,18 +3,18 @@ using System.Collections;
 using UnityEngine.SceneManagement;
 
 namespace game.ui {
-	class IntroUI : GameUI {
+	class IntroUI : MonoBehaviour {
 		internal GameManager gm;
+		private GameObject uiFeatures;
 
-		public override void init(GameManager gm) {
+		public void init() {
 			this.gm = gm;
+			this.name = "UI";
 
 			UILoadButton b = new GameObject ("UI Load Button").AddComponent<UILoadButton> ();
 			b.init (this, "level1");
-		}
 
-		void Update() {
-
+			b.transform.parent = transform;
 		}
 
 		private class UILoadButton : MonoBehaviour { 
@@ -35,7 +35,8 @@ namespace game.ui {
 			}
 
 			void OnMouseDown() {
-				ui.gm.LoadMap (level);
+				GameManager.level = level;
+				SceneManager.LoadSceneAsync ("Main");
 			}
 		}
 	}

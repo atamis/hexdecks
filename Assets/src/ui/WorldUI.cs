@@ -8,20 +8,25 @@ using game.tcg;
 // TOOLTIPS
 
 namespace game.ui {
-	class WorldUI : GameUI {
+	class WorldUI : MonoBehaviour {
+		public static Font font = Resources.Load<Font>("Fonts/LeagueSpartan-Bold");
+		internal GameCamera gc;
+
 		public GameManager gm;
         private WorldHUD ib;
 		private UIHexMenu menu;
 		private bool starting;
 
-		public override void init(GameManager gm) {
+		public void init(GameManager gm) {
 			this.gm = gm;
+			this.name = "UI";
 
 			gc = new GameObject ("Game Camera").AddComponent<GameCamera> ();
 			gc.init (Camera.main);
 
 			ib = new GameObject("Infobar").AddComponent<WorldHUD>();
 			ib.init(this);
+			ib.transform.parent = transform;
 
 			//menu = new GameObject ("Menu").AddComponent<UIHexMenu>();
 			//menu.gameObject.SetActive (false);

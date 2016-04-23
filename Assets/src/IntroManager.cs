@@ -1,15 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
+using game.ui;
 
-public class IntroManager : MonoBehaviour {
+namespace game {
+	class IntroManager : MonoBehaviour {
+		private IntroUI ui;
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+		void Awake() {
+			ui = gameObject.AddComponent<IntroUI> ();
+			ui.init ();
+		}
 	}
 }

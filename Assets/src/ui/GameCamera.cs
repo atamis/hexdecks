@@ -71,10 +71,6 @@ namespace game.ui {
 
 			// Include zoom-level to make zoomed-out movement faster.
 			transform.localPosition += control * Time.deltaTime * cam.orthographicSize;
-
-			if (Input.GetKeyDown (KeyCode.LeftShift) | Input.GetKeyDown (KeyCode.RightShift)) {
-
-			}
 		}
 
 		private class ScreenOverlay : MonoBehaviour {
