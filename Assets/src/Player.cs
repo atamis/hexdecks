@@ -28,7 +28,10 @@ namespace game {
             deck.Add(new FlashHealCard());
             deck.Add(new JumpAttackCard());
             deck.Add(new JumpAttackCard());
-            deck.Add(new JumpAttackCard());
+            deck.Add(new KnockBackCard());
+            deck.Add(new KnockBackCard());
+
+            deck.Shuffle();
 
             DrawCards(5);
         }
@@ -46,6 +49,7 @@ namespace game {
                 foreach (TCGCard c in graveyard) {
                     deck.Add(c);
                 }
+                deck.Shuffle();
                 graveyard.Clear();
             }
             hand.Add(deck[0]);
