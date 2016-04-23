@@ -33,6 +33,7 @@ namespace game {
             deck.Add(new DoubleActionCard());
             deck.Add(new DiscardHandCard());
             deck.Add(new TrapCard());
+            deck.Add(new TeleportCard());
 
             deck.Shuffle();
 
