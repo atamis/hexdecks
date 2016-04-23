@@ -157,4 +157,18 @@ namespace game.world {
             
         }
     }
+
+    class TrapTrigger : Trigger {
+        public override Sprite getSprite() {
+            return Resources.Load<Sprite>("Sprites/Diamond");
+        }
+
+        public override void UnitEnter(Unit u) {
+            u.ApplyDamage(5);
+            Destroy(gameObject);
+        }
+
+        public override void UnitLeave(Unit u) {
+        }
+    }
 }
