@@ -12,6 +12,7 @@ namespace game.ui {
 		public GameManager gm;
         private WorldHUD ib;
 		private UIHexMenu menu;
+		private bool starting;
 
 		public override void init(GameManager gm) {
 			this.gm = gm;

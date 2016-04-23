@@ -84,6 +84,7 @@
      <Compile Include="Assets\src\world\units\Unit.cs" />
      <None Include="Assets\Resources\Levels\level2.txt" />
      <None Include="Assets\Resources\Levels\level1.txt" />
+     <None Include="Assets\Resources\Shaders\SceneShader.shader" />
      <None Include="Assets\Resources\Shaders\OutlineShader.shader" />
  <Reference Include="UnityEngine.Networking">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>

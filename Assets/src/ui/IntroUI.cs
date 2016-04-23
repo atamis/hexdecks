@@ -6,14 +6,6 @@ namespace game.ui {
 	class IntroUI : GameUI {
 		internal GameManager gm;
 
-		/*
-		private string[] levels = new string[] { 
-			"tutorial",
-			"level1",
-			"level2",
-		};
-		*/
-
 		public override void init(GameManager gm) {
 			this.gm = gm;
 

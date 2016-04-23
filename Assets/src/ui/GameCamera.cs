@@ -2,11 +2,11 @@
 using System.Collections;
 
 namespace game.ui {
-	class GameCamera : MonoBehaviour { 
-		Camera cam;
+	class GameCamera : MonoBehaviour {
+		private ScreenOverlay overlay;
+		private Camera cam;
 		float speed = 1f;
 		private Vector3? goal;
-		ScreenOverlay overlay;
 
 		public void init(Camera cam) {
 			this.cam = cam;
