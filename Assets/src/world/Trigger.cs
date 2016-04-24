@@ -26,9 +26,11 @@ namespace game.world {
 		}
 
 		TriggerModel model;
+        private bool dead;
 
-		public virtual void init(Hex h) {
+        public virtual void init(Hex h) {
 			this.h = h;
+            this.dead = false;
 
 			transform.parent = h.transform;
 			transform.localPosition = new Vector3(0, 0, 0);
@@ -42,8 +44,7 @@ namespace game.world {
 		}
 
         internal void Suicide() {
-            h = null;
-            Destroy(gameObject);
+            this.dead = true;
         }
 
 		// These are called before the move. See Hex#unit
@@ -55,6 +56,10 @@ namespace game.world {
 
 		void Update() {
 			transform.localPosition = new Vector3(0, 0, 0);
+            if (dead) {
+                h = null;
+                Destroy(gameObject);
+            }
 		}
 
 		private class TriggerModel : MonoBehaviour {

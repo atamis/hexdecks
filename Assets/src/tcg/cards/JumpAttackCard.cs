@@ -19,11 +19,11 @@ namespace game.tcg.cards {
 				var h1 = w.map[loc1];
 				var h2 = w.map[loc2];
 
-				if (h1.Passable() && h2.unit != null) {
+				if (h1.Passable() && h1.unit == null && h2.unit != null) {
 					targets.Add(h2);
 				}
 
-				if (h1.tileType == TileType.Water && h2.unit == null) {
+				if ((h1.tileType == TileType.Water || h1.unit != null) && h2.unit == null) {
 					targets.Add(h2);
 				}
 

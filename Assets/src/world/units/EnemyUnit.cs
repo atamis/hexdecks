@@ -45,7 +45,7 @@ namespace game.world.units {
             }
             return sprites[idx];
         }
-        
+
 
         public override void NewTurn() {
 			base.NewTurn();
@@ -101,18 +101,29 @@ namespace game.world.units {
         const float spriteInterval = .8f;
         float lastSwitch;
         int idx;
+				bool gotHit;
 
         public new void init(WorldMap w, Hex h)
         {
             base.init(w, h, 2);
 
             idx = 0;
+						gotHit = false;
             lastSwitch = timer;
 
         }
 
         public override Sprite getSprite()
         {
+						if(gotHit == false && health == 1){
+								sprites = new Sprite[2] {
+				            Resources.Load<Sprite>("Sprites/Enemies/T_GoblinIdle1"),
+				            Resources.Load<Sprite>("Sprites/Enemies/T_GoblinIdle2")
+				        };
+								gotHit = true;
+
+						}
+
             if (timer >= lastSwitch + spriteInterval)
             {
                 lastSwitch = timer;
@@ -222,4 +233,3 @@ namespace game.world.units {
 		}
 	}
 }
-

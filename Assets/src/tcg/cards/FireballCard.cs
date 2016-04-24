@@ -11,21 +11,13 @@ namespace game.tcg.cards {
 		}
 		
 		public override List<Hex> ValidTargets (WorldMap wm, Hex h) {
-			List<Hex> tmp = new List<Hex> ();
-			foreach (Hex h2 in h.Neighbors()) {
-				if (h2.Passable ()) {
-					tmp.Add (h2);
-				}
-			}
-			return tmp;
+			return h.Neighbors();
 		}
 
 		public override void OnPlay (WorldMap wm, Hex h) {
-			foreach (Hex h2 in h.Neighbors()) {
-				if (h.unit != null) {
-					h.unit.ApplyDamage (1);
-				}
-			}
+            if (h.unit != null) {
+                h.unit.ApplyDamage(3);
+            }
 		}
 	}
 }
