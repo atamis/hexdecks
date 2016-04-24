@@ -159,7 +159,17 @@ namespace game.world.units {
 			List<Hex> targets = new List<Hex> ();
 
 			foreach (HexLoc dir in HexLoc.hex_directions) {
+                var loc1 = h.loc + dir;
 				var nloc = h.loc + dir + dir;
+
+                if (w.map.ContainsKey(loc1)) {
+                    if (w.map[loc1].tileType == TileType.Wall) {
+                        continue;
+                    }
+                } else {
+                    continue;
+                }
+
 				if (w.map.ContainsKey(nloc)) {
 					targets.Add(w.map[nloc]);
 				}

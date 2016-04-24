@@ -69,6 +69,7 @@
      <Compile Include="Assets\src\tcg\cards\TrapCard.cs" />
      <Compile Include="Assets\src\ui\GameCamera.cs" />
      <Compile Include="Assets\src\ui\IntroUI.cs" />
+     <Compile Include="Assets\src\ui\LibraryUI.cs" />
      <Compile Include="Assets\src\ui\NotificationManager.cs" />
      <Compile Include="Assets\src\ui\UICard.cs" />
      <Compile Include="Assets\src\ui\UIHexMenu.cs" />

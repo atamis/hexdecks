@@ -194,7 +194,7 @@ namespace game.ui {
 				for (int i = 0; i < 5; i++) {
 					UICard c = new GameObject ("Card").AddComponent<UICard> ();
 					c.init (ui, i);
-					c.SetColor (cs [i]);
+					//c.SetColor (cs [i]);
 
 					c.transform.localPosition = new Vector3 (0, 1, 0);
 					c.transform.parent = transform;

@@ -52,6 +52,7 @@ namespace game.ui {
 			private SpriteRenderer sr;
 			private BoxCollider2D coll;
 			private string level;
+
 			private GameObject textObj;
 			private TextMesh tm;
 			private BloomEffect be;
