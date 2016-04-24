@@ -189,8 +189,11 @@ namespace game.world {
 
 			public void OnMouseOver() {
 				if (!colliding) {
-					if (this.h.unit != null) {
-						this.h.unit.ShowHealth (true);
+					if (h.unit != null) {
+                        if (h.unit.GetType() != typeof(HeroUnit))
+                        {
+                            h.unit.ShowHealth(true);
+                        }
 						foreach (Hex hex in h.unit.GetAttackPattern()) {
 							hex.Highlight (Color.yellow);
 						}
