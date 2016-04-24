@@ -100,6 +100,20 @@ namespace game.world {
 			}
 		}
 
+		internal void refreshSprite(){
+			switch (this.tileType) {
+				case TileType.Normal:
+					model.sr.sprite = Resources.Load <Sprite>("Sprites/Tiles/T_Ground");
+					break;
+				case TileType.Wall:
+				model.sr.sprite = Resources.Load <Sprite>("Sprites/Tiles/T_Ground");
+					break;
+				case TileType.Water:
+				model.sr.sprite = Resources.Load <Sprite>("Sprites/Tiles/T_Water1");
+					break;
+			}
+		}
+
 		public List<Hex> Neighbors() {
 			List<Hex> n = new List<Hex>();
 
@@ -137,7 +151,9 @@ namespace game.world {
 				transform.localScale = new Vector3 (1.9f, 1.9f, 0);
 
 				sr = gameObject.AddComponent<SpriteRenderer> ();
+
 				sr.sprite = Resources.Load <Sprite>("Sprites/Tiles/T_Ground");
+
 				sr.material = new Material (Shader.Find ("Sprites/Default"));
 
 				coll = gameObject.AddComponent<PolygonCollider2D> ();
@@ -162,7 +178,7 @@ namespace game.world {
 					sr.color = new Color(0.2f, 0.2f, 0.2f);
 					break;
 				case TileType.Water:
-					sr.color = new Color(0, 0, 0.5f);
+					sr.color = new Color(1f, 1f, 1f);
 					break;
 				}
 			}
@@ -192,7 +208,7 @@ namespace game.world {
 					}
 				}
 			}
-				
+
 			public void OnCollisionEnter2D(Collision2D coll) {
 				this.colliding = true;
 			}

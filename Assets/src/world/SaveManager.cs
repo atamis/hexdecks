@@ -116,6 +116,7 @@ c = chest
 							break;
 						case 'w':
 							h.tileType = TileType.Water;
+							h.refreshSprite();
 							break;
 						case 'p':
 							var hero = new GameObject("Tim").AddComponent<HeroUnit>();
@@ -152,4 +153,3 @@ c = chest
 		}
 	}
 }
-

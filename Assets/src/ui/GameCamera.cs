@@ -2,7 +2,7 @@
 using System.Collections;
 
 namespace game.ui {
-	class GameCamera : MonoBehaviour { 
+	class GameCamera : MonoBehaviour {
 		Camera cam;
 		float speed = 1f;
 		private Vector3? goal;
@@ -11,7 +11,7 @@ namespace game.ui {
 		public void init(Camera cam) {
 			this.cam = cam;
 			this.cam.transform.parent = transform;
-			this.cam.backgroundColor = new Color(0.25f, 0.25f, 0.25f);
+			this.cam.backgroundColor = new Color(0.05f, 0.05f, 0.05f);
 			goal = null;
 
 			overlay = new GameObject("Overlay").AddComponent<ScreenOverlay> ();
