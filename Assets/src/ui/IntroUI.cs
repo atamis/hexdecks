@@ -9,17 +9,27 @@ namespace game.ui {
 		private GameObject uiFeatures;
 
 		public string[] levels = new string[] {
-			"level1",
+			"level1", "level2", "level3", "level1", "level2", "level3",
 		};
 
 		public void init() {
 			this.name = "UI";
 
+			Vector2[] pos = new Vector2[] {
+				new Vector2(-1.4f, 1.25f), new Vector2(-1.4f, 0f),
+				new Vector2(-1.4f, -1.25f), new Vector2(1.4f, 1.25f),
+				new Vector2(1.4f, 0f), new Vector2(1.4f, -1.25f),
+			};
+
+			int i = 0;
 			foreach (string lvl in levels) {
 				UILoadButton b = new GameObject ("UI Load Button").AddComponent<UILoadButton> ();
 				b.init (lvl);
 
+				b.transform.localPosition = pos [i];
 				b.transform.parent = transform;
+
+				i++;
 			}
 		}
 
@@ -59,6 +69,8 @@ namespace game.ui {
 
 			public void init(string level) {
 				this.level = level;
+
+				gameObject.transform.localScale = new Vector3 (.75f, .75f, 1);
 
 				sr = gameObject.AddComponent<SpriteRenderer> ();
 				sr.material = new Material (Shader.Find ("Custom/BloomShader"));

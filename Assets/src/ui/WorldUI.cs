@@ -21,12 +21,13 @@ namespace game.ui {
 			this.gm = gm;
 			this.name = "UI";
 
-			ib = new GameObject("Infobar").AddComponent<WorldHUD>();
-			ib.init(this);
-			ib.transform.parent = transform;
-
 			gc = new GameObject ("Game Camera").AddComponent<GameCamera> ();
 			gc.init (Camera.main);
+
+			ib = new GameObject("Infobar").AddComponent<WorldHUD>();
+			ib.init(this);
+
+			ib.transform.parent = gc.transform;
 
 			//menu = new GameObject ("Menu").AddComponent<UIHexMenu>();
 			//menu.gameObject.SetActive (false);
@@ -120,10 +121,14 @@ namespace game.ui {
 
 				public void init(string text) {
 					this.text = text;
+				
+					sr = gameObject.AddComponent<SpriteRenderer> ();
+					sr.sprite = Resources.Load<Sprite> ("Sprites/UI/T_Wood");
+					gameObject.transform.localScale = new Vector3 (.5f, .5f, 1);
 
 					textObj = new GameObject("UI Text");
 					textObj.transform.parent = transform;
-					textObj.transform.localPosition = new Vector3(0, 0, -0.5f);
+					textObj.transform.localPosition = new Vector3(0, 0, -1);
 
 					tm = textObj.AddComponent<TextMesh>();
 					tm.text = this.text;
@@ -131,7 +136,7 @@ namespace game.ui {
 					tm.alignment = TextAlignment.Center;
 					tm.anchor = TextAnchor.MiddleCenter;
 					tm.fontSize = 148;
-					tm.characterSize = 0.04f;
+					tm.characterSize = 0.03f;
 					tm.font = WorldUI.font;
 					tm.GetComponent<Renderer>().material = font.material;
 				}
