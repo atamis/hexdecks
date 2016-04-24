@@ -101,8 +101,9 @@ namespace game.world.units {
 		}
 
 		void Update() {
-			transform.localPosition = new Vector3(0, 0, 0);
-			timer += Time.deltaTime;
+			//transform.localPosition = new Vector3(0, 0, 0);
+            transform.localPosition = Vector3.Lerp(transform.localPosition, Vector3.zero, 0.3f);
+            timer += Time.deltaTime;
 		}
 
 		public void ShowHealth(bool b) {
@@ -127,6 +128,7 @@ namespace game.world.units {
 				this.u = u;
 
 				transform.localPosition = LayerV.HeroUnit;
+                
 
 				sr = gameObject.AddComponent<SpriteRenderer>();
 				sr.material = new Material(Shader.Find("Custom/OutlineShader"));
@@ -138,7 +140,6 @@ namespace game.world.units {
 			}
 
 			void Update() {
-				transform.localPosition = LayerV.HeroUnit;
 				sr.sprite = u.getSprite();
 			}
 		}
