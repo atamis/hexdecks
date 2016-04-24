@@ -16,6 +16,7 @@ namespace game.tcg.cards {
 
 
             h.unit.ApplyDamage(1);
+            h.unit.stunned.duration = 1;
 
             if (!w.map.ContainsKey(h.loc - dir)) {
                 return;
