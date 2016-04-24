@@ -15,8 +15,7 @@ namespace game {
 
         public HeroUnit hero { get; set; }
 
-        public Player(HeroUnit u) {
-            this.hero = u;
+        public Player() {
             this.turns = 1;
 
             hand = new List<TCGCard>();
@@ -34,6 +33,7 @@ namespace game {
             deck.Add(new DiscardHandCard());
             deck.Add(new TrapCard());
             deck.Add(new TeleportCard());
+            deck.Add(new WhirlwindCard());
 
             deck.Shuffle();
 

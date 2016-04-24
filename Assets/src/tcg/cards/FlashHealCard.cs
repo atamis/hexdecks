@@ -9,8 +9,8 @@ namespace game.tcg.cards {
 		}
 
 		public override List<Hex> ValidTargets (WorldMap wm, Hex h) {
-            return justHeroValid(wm, h);
-        }
+			return justHeroValid(wm, h);
+		}
 
 		public override void OnPlay (WorldMap wm, Hex h) {
 			GameManager.ntm.AddText (h.transform.position, "+2");

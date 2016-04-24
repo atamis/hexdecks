@@ -12,7 +12,9 @@ namespace game.world.units {
 		public override Sprite getSprite() {
 			return Resources.Load<Sprite>("Sprites/Square");
 		}
-	}
+
+        
+    }
 
 	class MeleeEnemy : EnemyUnit {
 		private bool persuing = false;
@@ -47,8 +49,7 @@ namespace game.world.units {
         }
 
 
-        public override void NewTurn() {
-			base.NewTurn();
+        public override void TurnActions() {
 
 			if (!persuing)
 			{
@@ -188,8 +189,7 @@ namespace game.world.units {
 			return targets;
 		}
 
-		public override void NewTurn() {
-			base.NewTurn();
+		public override void TurnActions() {
 
 			if (!persuing) {
 				var hero = w.hero;

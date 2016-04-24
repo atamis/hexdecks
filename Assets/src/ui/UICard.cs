@@ -28,8 +28,10 @@ namespace game.ui {
 		private List<Hex> targets;
         private GameObject textObj;
         private TextMesh tm;
+		private WorldUI ui;
 
-        public void init(int idx) {
+		public void init(WorldUI ui, int idx) {
+			this.ui = ui;
             this.idx = idx;
 			this.tag = "Card";
 			this.gameObject.layer = LayerMask.NameToLayer("CardLayer");
@@ -43,46 +45,31 @@ namespace game.ui {
 			bc.size = new Vector3 (1.0f, 1.33f, 0);
 			bc.isTrigger = true;
 
-            var font = Resources.Load<Font>("Fonts/LeagueSpartan-Bold");
+			var font = Resources.Load<Font>("Fonts/LeagueSpartan-Bold");
 
             textObj = new GameObject("Card Text");
             textObj.transform.parent = transform;
             textObj.transform.localPosition = new Vector3(-0.40f, 0.5f, -0.1f);
 
-            tm = textObj.AddComponent<TextMesh>();
+			tm = textObj.AddComponent<TextMesh>();
 
-            /*var text = card.GetName();
-            tm.text = "";
-            var builder = "";
-            string[] parts = text.Split(' ');
+			tm.text = card.GetName();
+			tm.fontSize = 148;
+			tm.characterSize = 0.008f;
+			tm.color = Color.black;
+			tm.font = font;
 
-            for (int i = 0; i < parts.Length; i++) {
-                tm.text += parts[i] + " ";
-                if (tm.GetComponent<Renderer>().bounds.extents.x > 3f) {
-                    tm.text = builder.TrimEnd() + System.Environment.NewLine + parts[i] + " ";
-                }
-                builder = tm.text;
-            }*/
+			tm.GetComponent<Renderer>().material = font.material;
+		}
 
-            tm.text = card.GetName();
-            tm.fontSize = 148;
-            tm.characterSize = 0.008f;
-            tm.color = Color.black;
-            tm.font = font;
+		void Update() {
+			tm.text = card.GetName();
 
-            tm.GetComponent<Renderer>().material = font.material;
-
-
-        }
-
-        void Update() {
-            tm.text = card.GetName();
-
-            if (this.state != CardState.Dragging) {
+			if (this.state != CardState.Dragging) {
 				transform.position = Vector3.MoveTowards (transform.position, origin, 1.0f);
 			}
 		}
-
+				
 		public void SetOrigin(Vector3 pos) {
 			this.origin = pos;
 		}
@@ -104,7 +91,7 @@ namespace game.ui {
 		}
 
 		void OnMouseUp() {
-			Hex h = MathLib.GetHexAtMouse ();
+			Hex h = MathLib.GetHexAtMouse (ui.gm.world);
 			if (h != null && targets.Contains(h)) {
                 GameManager.p.Play(card, h);
 			}
@@ -112,7 +99,7 @@ namespace game.ui {
 		}
 
 		void OnMouseEnter() {
-			this.targets = card.ValidTargets (GameManager.world, GameManager.world.hero.h);
+			this.targets = card.ValidTargets (ui.gm.world, ui.gm.world.hero.h);
 			foreach (Hex h in this.targets) {
 				h.Highlight (Color.red);
 			}

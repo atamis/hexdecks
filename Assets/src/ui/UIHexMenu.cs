@@ -1,9 +1,62 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 namespace game.ui {
 	class UIHexMenu : MonoBehaviour {
-		private class MenuPanel : MonoBehaviour {
+		private class ExitPanel : MenuPanel {
+			public override string GetText() {
+				return "Quit";
+			}
+
+			void OnMouseDown() {
+				SceneManager.LoadSceneAsync("Intro");
+			}
+		}
+
+		private class HelpPanel : MenuPanel {
+			public override string GetText() {
+				return "Help";
+			}
+
+			void OnMouseDown() {
+				
+			}
+		}
+
+		private class ResetPanel : MenuPanel {
+			public override string GetText() {
+				return "Reset";
+			}
+
+			void OnMouseDown() {
+				SceneManager.LoadSceneAsync("Reset");
+			}
+		}
+
+		private class LibraryPanel : MenuPanel {
+			public override string GetText() {
+				return "Library";
+			}
+
+			void OnMouseDown() {
+				SceneManager.LoadSceneAsync("Library");
+			}
+		}
+			
+		private class SettingsPanel : MenuPanel {
+			public override string GetText() {
+				return "Quit";
+			}
+		}
+
+		private class OtherPanel : MenuPanel {
+			public override string GetText() {
+				return "Quit";
+			}
+		}
+
+		private abstract class MenuPanel : MonoBehaviour {
 			private SpriteRenderer sr;
 			private TextMesh tm;
 			private GameObject textObj;
@@ -12,10 +65,11 @@ namespace game.ui {
 			private Vector3 origin;
 			private Vector3 target;
 
+			public abstract string GetText();
+
 			public void init(string label) {
 				sr = gameObject.AddComponent<SpriteRenderer> ();
 				sr.sprite = Resources.Load<Sprite> ("Sprites/Triangle");
-				sr.material = new Material (Shader.Find ("Custom/OutlineShader"));
 
 				coll = gameObject.AddComponent<PolygonCollider2D> ();
 				coll.isTrigger = true;
@@ -45,7 +99,6 @@ namespace game.ui {
 				sr.color = Color.white;
 			}
 		}
-
 
 		void Awake() {
 			List<MenuPanel> panels = new List<MenuPanel> ();

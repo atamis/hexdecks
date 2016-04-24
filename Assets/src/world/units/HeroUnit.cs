@@ -3,15 +3,15 @@ using System.Collections.Generic;
 
 namespace game.world.units {
 	class HeroUnit : Unit {
-        const float spriteInterval = .8f;
-        float lastSwitch;
-        int idx;
+		Sprite[] sprites = new Sprite[3] {
+			Resources.Load<Sprite>("Sprites/Hero/T_HeroIdle1"),
+			Resources.Load<Sprite>("Sprites/Hero/T_HeroIdle2"),
+			Resources.Load<Sprite>("Sprites/Hero/T_HeroIdle3")
+		};
 
-        Sprite[] sprites = new Sprite[3] {
-            Resources.Load<Sprite>("Sprites/Hero/T_HeroIdle1"),
-            Resources.Load<Sprite>("Sprites/Hero/T_HeroIdle2"),
-            Resources.Load<Sprite>("Sprites/Hero/T_HeroIdle3")
-        };
+		const float spriteInterval = .8f;
+		float lastSwitch;
+		int idx;
 
         public void init(WorldMap w, Hex h)
         {

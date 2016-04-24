@@ -3,10 +3,11 @@ using System.Collections;
 
 namespace game.ui {
 	class GameCamera : MonoBehaviour {
-		Camera cam;
+
+		private ScreenOverlay overlay;
+		private Camera cam;
 		float speed = 1f;
 		private Vector3? goal;
-		ScreenOverlay overlay;
 
 		public void init(Camera cam) {
 			this.cam = cam;
@@ -71,10 +72,6 @@ namespace game.ui {
 
 			// Include zoom-level to make zoomed-out movement faster.
 			transform.localPosition += control * Time.deltaTime * cam.orthographicSize;
-
-			if (Input.GetKeyDown (KeyCode.LeftShift) | Input.GetKeyDown (KeyCode.RightShift)) {
-
-			}
 		}
 
 		private class ScreenOverlay : MonoBehaviour {
@@ -82,9 +79,6 @@ namespace game.ui {
 			private float fadeSpeed = 1.5f;
 
 			void Awake() {
-				gameObject.layer = LayerMask.NameToLayer ("UI");
-				//gameObject.hideFlags = HideFlags.HideInHierarchy;
-
 				sr = gameObject.AddComponent<SpriteRenderer> ();
 				sr.sprite = Resources.Load<Sprite> ("Sprites/Square");
 				sr.color = Color.black;

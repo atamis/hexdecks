@@ -156,8 +156,8 @@ namespace game.world {
             if (u.GetType() == typeof(HeroUnit)) {
                 print("Added " + c + " to the player's deck");
                 GameManager.p.deck.Add(c);
-                GameManager.ntm.AddText(GameManager.world.l.HexPixel(h.loc), "+card");
-                Suicide();
+                GameManager.ntm.AddText(GameManager.l.HexPixel(h.loc), "+card");
+				Suicide();
             }
         }
 
