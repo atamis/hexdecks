@@ -45,6 +45,7 @@ namespace game.world.units {
 		}
 
 		internal TemporaryEffect invincible;
+        internal TemporaryEffect stunned;
 		public int health;
 		public EnemyHealthBar pips;
 		public WorldMap w;
@@ -61,6 +62,7 @@ namespace game.world.units {
 			this.timer = 0f;
 
 			invincible = new TemporaryEffect();
+            stunned = new TemporaryEffect();
 			mousedOver = false;
 
 			pips = gameObject.AddComponent<EnemyHealthBar>();
@@ -97,8 +99,18 @@ namespace game.world.units {
 		}
 
 		public virtual void NewTurn() {
-			invincible.NewTurn();
-		}
+            if (!stunned.isActive())
+            {
+                TurnActions();
+            }
+            invincible.NewTurn();
+            stunned.NewTurn();
+        }
+
+        public virtual void TurnActions()
+        {
+
+        }
 
 		void Update() {
 			//transform.localPosition = new Vector3(0, 0, 0);
