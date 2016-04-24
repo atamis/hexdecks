@@ -40,7 +40,7 @@ namespace game.ui {
 					if (hit.collider.gameObject.tag == "Hex") {
 						Hex h = MathLib.GetHexAtMouse();
 
-						if (h != null && GameManager.p.nextCommand == null) {
+						if (h != null && GameManager.world.hero.h != h && GameManager.p.nextCommand == null) {
 							GameManager.p.nextCommand = new MoveCommand(GameManager.world.hero, h);
 						}
 					}

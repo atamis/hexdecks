@@ -65,6 +65,7 @@
      <Compile Include="Assets\src\tcg\cards\TCGCard.cs" />
      <Compile Include="Assets\src\tcg\cards\TeleportCard.cs" />
      <Compile Include="Assets\src\tcg\cards\TrapCard.cs" />
+     <Compile Include="Assets\src\tcg\cards\WhirlwindCard.cs" />
      <Compile Include="Assets\src\ui\GameCamera.cs" />
      <Compile Include="Assets\src\ui\GameUI.cs" />
      <Compile Include="Assets\src\ui\NotificationManager.cs" />
