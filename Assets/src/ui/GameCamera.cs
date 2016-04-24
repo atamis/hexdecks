@@ -78,9 +78,6 @@ namespace game.ui {
 			private float fadeSpeed = 1.5f;
 
 			void Awake() {
-				gameObject.layer = LayerMask.NameToLayer ("UI");
-				//gameObject.hideFlags = HideFlags.HideInHierarchy;
-
 				sr = gameObject.AddComponent<SpriteRenderer> ();
 				sr.sprite = Resources.Load<Sprite> ("Sprites/Square");
 				sr.color = Color.black;

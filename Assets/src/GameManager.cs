@@ -11,7 +11,7 @@ namespace game {
 		public static Layout l = new Layout(Orientation.Pointy, new Vector2(1, 1), new Vector2(0, 0));
 		public static Player p;
 		public static NotificationManager ntm;
-		public static string level;
+		public static string level = "level1";
 
 		private WorldUI ui;
 

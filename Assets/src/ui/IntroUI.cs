@@ -5,21 +5,22 @@ using UnityEngine.SceneManagement;
 namespace game.ui {
 	class IntroUI : MonoBehaviour {
 		public static Font font = Resources.Load<Font>("Fonts/LeagueSpartan-Bold");
-		internal GameManager gm;
 		private GameObject uiFeatures;
 
 		public string[] levels = new string[] {
-			"level1", "level2", "level3", "level1", "level2", "level3",
+			"level1", "level2", 
+			"level3", "level1", 
+			"level2", "level3",
+		};
+
+		Vector2[] pos = new Vector2[] {
+			new Vector2(-1.4f, 1.25f), new Vector2(-1.4f, 0f),
+			new Vector2(-1.4f, -1.25f), new Vector2(1.4f, 1.25f),
+			new Vector2(1.4f, 0f), new Vector2(1.4f, -1.25f),
 		};
 
 		public void init() {
 			this.name = "UI";
-
-			Vector2[] pos = new Vector2[] {
-				new Vector2(-1.4f, 1.25f), new Vector2(-1.4f, 0f),
-				new Vector2(-1.4f, -1.25f), new Vector2(1.4f, 1.25f),
-				new Vector2(1.4f, 0f), new Vector2(1.4f, -1.25f),
-			};
 
 			int i = 0;
 			foreach (string lvl in levels) {
@@ -34,7 +35,6 @@ namespace game.ui {
 		}
 
 		private class UILoadButton : MonoBehaviour { 
-
 			[ExecuteInEditMode]
 			private class BloomEffect : MonoBehaviour {
 				private SpriteRenderer sr;
@@ -81,7 +81,7 @@ namespace game.ui {
 				coll = gameObject.AddComponent<BoxCollider2D> ();
 				coll.isTrigger = true;
 
-				textObj = new GameObject("Card Text");
+				textObj = new GameObject("Button Text");
 				textObj.transform.parent = transform;
 				textObj.transform.localPosition = new Vector3(0, 0, -0.1f);
 
@@ -105,6 +105,7 @@ namespace game.ui {
 			}
 
 			void OnMouseDown() {
+				//IntroManager.audio.PlayOneShot (Resources.Load<AudioClip> ("Audio/UI/MenuSelect"));
 				GameManager.level = level;
 				SceneManager.LoadSceneAsync ("Main");
 			}
