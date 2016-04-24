@@ -175,7 +175,7 @@ namespace game.world {
 					}
 					break;
 				case TileType.Wall:
-					sr.color = new Color(0.2f, 0.2f, 0.2f);
+					sr.color = new Color(0.3f, 0.3f, 0.3f);
 					break;
 				case TileType.Water:
 					sr.color = new Color(1f, 1f, 1f);
