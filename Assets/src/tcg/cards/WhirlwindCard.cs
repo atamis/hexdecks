@@ -33,5 +33,10 @@ namespace game.tcg.cards {
                 return targets.ToList();
             }
         }
+
+        public override string getDescription()
+        {
+            return "Deal 1 damage to all adjacent enemies.";
+        }
     }
 }

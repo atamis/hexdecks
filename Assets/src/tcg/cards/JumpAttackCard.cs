@@ -53,5 +53,10 @@ namespace game.tcg.cards {
 				w.hero.h = h;
 			}
 		}
-	}
+
+        public override string getDescription()
+        {
+            return "Attack an enemy two hexes away in a straight line, or jump over a water hex.";
+        }
+    }
 }

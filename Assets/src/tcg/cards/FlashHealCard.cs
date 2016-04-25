@@ -16,5 +16,10 @@ namespace game.tcg.cards {
 			GameManager.ntm.AddText (h.transform.position, "+2");
 			h.unit.health += 2;
 		}
-	}
+
+        public override string getDescription()
+        {
+            return "Gain 2 health.";
+        }
+    }
 }

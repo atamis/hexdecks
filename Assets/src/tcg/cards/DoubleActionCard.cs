@@ -17,5 +17,10 @@ namespace game.tcg.cards {
         public override void OnPlay(WorldMap wm, Hex h) {
             GameManager.p.turns = 2;
         }
+
+        public override string getDescription()
+        {
+            return "Gain 2 more actions this turn.";
+        }
     }
 }

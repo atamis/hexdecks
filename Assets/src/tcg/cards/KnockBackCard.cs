@@ -35,5 +35,10 @@ namespace game.tcg.cards {
             var targets = h.Neighbors().Where((x) => x.unit != null);
             return targets.ToList();
         }
+
+        public override string getDescription()
+        {
+            return "Knock adjacent enemy back 1 space, dealing 1 damage and stunning them for 1 turn.";
+        }
     }
 }
