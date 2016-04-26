@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using game.world.units;
 using game.math;
+using UnityEngine;
 
 namespace game.world {
 	[System.Serializable]
@@ -103,7 +104,9 @@ namespace game.world {
 		internal void refreshSprite(){
 			switch (this.tileType) {
 				case TileType.Normal:
-					model.sr.sprite = Resources.Load <Sprite>("Sprites/Tiles/T_Ground");
+					float random = Random.value;
+					if(random < .1f) model.sr.sprite = Resources.Load <Sprite>("Sprites/Tiles/T_Ground2");
+					else model.sr.sprite = Resources.Load <Sprite>("Sprites/Tiles/T_Ground1");
 					break;
 				case TileType.Wall:
 				model.sr.sprite = Resources.Load <Sprite>("Sprites/Tiles/T_Brick");
@@ -152,7 +155,9 @@ namespace game.world {
 
 				sr = gameObject.AddComponent<SpriteRenderer> ();
 
-				sr.sprite = Resources.Load <Sprite>("Sprites/Tiles/T_Ground");
+				float random = Random.value;
+				if(random < .25f) sr.sprite = Resources.Load <Sprite>("Sprites/Tiles/T_Ground2");
+				else sr.sprite = Resources.Load <Sprite>("Sprites/Tiles/T_Ground1");
 
 				sr.material = new Material (Shader.Find ("Sprites/Default"));
 
