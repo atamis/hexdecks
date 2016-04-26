@@ -99,6 +99,7 @@ namespace game.ui {
 		}
 
 		void OnMouseEnter() {
+            ui.magCard.card = card;
 			this.targets = card.ValidTargets (ui.gm.world, ui.gm.world.hero.h);
 			foreach (Hex h in this.targets) {
 				h.Highlight (Color.red);
@@ -106,7 +107,8 @@ namespace game.ui {
 		}
 
 		void OnMouseExit() {
-			foreach (Hex h in this.targets) {
+            ui.magCard.card = null;
+            foreach (Hex h in this.targets) {
 				h.Highlight (Color.white);
 			}
 		}

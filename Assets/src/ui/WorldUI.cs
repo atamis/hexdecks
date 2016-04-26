@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using game.math;
 using game.world;
 using game.tcg;
+using game.tcg.cards;
 
 // TODO
 // TOOLTIPS
@@ -13,6 +14,7 @@ namespace game.ui {
 		internal GameCamera gc;
 
 		public GameManager gm;
+        public MagnifiedCardModel magCard;
         private WorldHUD ib;
 		private UIHexMenu menu;
 		private bool starting;
@@ -28,6 +30,8 @@ namespace game.ui {
 			ib.init(this);
 
 			ib.transform.parent = gc.transform;
+
+            magCard = new GameObject("Magnified Card").AddComponent<MagnifiedCardModel>();
 
 			//menu = new GameObject ("Menu").AddComponent<UIHexMenu>();
 			//menu.gameObject.SetActive (false);
@@ -265,6 +269,106 @@ namespace game.ui {
 					return "Actions";
 				}
 			}
+        }
+
+        public class MagnifiedCardModel : MonoBehaviour {
+            public TCGCard card;
+            private SpriteRenderer sr;
+            private GameObject titleObj;
+            private TextMesh titleTm;
+
+            private GameObject descObj;
+            private TextMesh descTm;
+
+            private bool hovered;
+            private BoxCollider2D bc;
+
+            void Start() {
+                transform.localScale = new Vector3(2f, 2f, 1);
+
+                sr = gameObject.AddComponent<SpriteRenderer>();
+                sr.sprite = Resources.Load<Sprite>("Sprites/UI/T_CardBase");
+
+                var font = Resources.Load<Font>("Fonts/LeagueSpartan-Bold");
+
+                titleObj = new GameObject("Card Text");
+                titleObj.transform.parent = transform;
+                titleObj.transform.localPosition = new Vector3(-0.40f, 0.5f, -0.3f);
+                titleObj.transform.localScale = new Vector3(1f, 1f, 1f);
+
+                titleTm = titleObj.AddComponent<TextMesh>();
+
+                //titleTm.text = card.GetName();
+                titleTm.fontSize = 148;
+                titleTm.characterSize = 0.008f;
+                titleTm.color = Color.black;
+                titleTm.font = font;
+
+                titleTm.GetComponent<Renderer>().material = font.material;
+
+
+
+                descObj = new GameObject("Card Text");
+                descObj.transform.parent = transform;
+                descObj.transform.localPosition = new Vector3(-0.40f, 0.25f, -0.3f);
+                descObj.transform.localScale = new Vector3(1f, 1f, 1f);
+
+                descTm = descObj.AddComponent<TextMesh>();
+
+                //titleTm.text = card.GetName();
+                descTm.fontSize = 148;
+                descTm.characterSize = 0.006f;
+                descTm.color = Color.black;
+                descTm.font = font;
+
+                descTm.GetComponent<Renderer>().material = font.material;
+
+
+                bc = gameObject.AddComponent<BoxCollider2D>();
+                bc.size = new Vector3(1.0f, 1.33f, 0);
+                bc.isTrigger = true;
+
+
+                Hide();
+
+            }
+
+            void Show() {
+                sr.enabled = true;
+                titleTm.text = card.GetName();
+
+                string builder = "";
+                descTm.text = "";
+                float rowLimit = 0.83f; //find the sweet spot    
+                string text = card.getDescription();
+                string[] parts = text.Split(' ');
+                for (int i = 0; i < parts.Length; i++) {
+                    descTm.text += parts[i] + " ";
+                    if (descTm.GetComponent<Renderer>().bounds.extents.x > rowLimit) {
+                        descTm.text = builder.TrimEnd() + System.Environment.NewLine + parts[i] + " ";
+                    }
+                    builder = descTm.text;
+                }
+
+            }
+
+            void Hide() {
+                sr.enabled = false;
+                titleTm.text = "";
+                descTm.text = "";
+            }
+
+            void Update() {
+                Vector3 pos = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width * 5f / 6f, Screen.height * 0.75f, 10));
+                transform.position = new Vector3(pos.x, pos.y, Layer.HUD);
+
+
+                if (card != null) {
+                    Show();
+                } else {
+                    Hide();
+                }
+            }
         }
     }
 }
