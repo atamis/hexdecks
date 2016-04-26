@@ -8,15 +8,18 @@ namespace game.ui {
 		private Camera cam;
 		float speed = 1f;
 		private Vector3? goal;
+        public static AudioManager audiom;
 
-		public void init(Camera cam) {
+        public void init(Camera cam) {
 			this.cam = cam;
 			this.cam.transform.parent = transform;
 			this.cam.backgroundColor = new Color(0.05f, 0.05f, 0.05f);
 			goal = null;
 
 			overlay = new GameObject("Overlay").AddComponent<ScreenOverlay> ();
-		}
+
+            audiom = gameObject.AddComponent<AudioManager>();
+        }
 
 		public void setLocation(Vector3 v) {
 			goal = v;
