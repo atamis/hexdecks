@@ -16,6 +16,7 @@ namespace game.world {
 
 		public Layout l;
 		public HeroUnit hero;
+        public List<EnemyUnit> enemies;
 		public GameManager gm;
 		public int turns { get; set; }
 
@@ -26,6 +27,8 @@ namespace game.world {
 
 			map = new Dictionary<HexLoc, Hex> ();
 			hFolder = new GameObject("Hexes");
+
+            enemies = new List<EnemyUnit>();
 		}
 
 		public Hex addHex(HexLoc hl) {
@@ -43,13 +46,38 @@ namespace game.world {
 				kv.Value.Updated = false;
 			}
 
-			// Consider updating from the hero outward.
-			foreach (KeyValuePair<HexLoc, Hex> kv in map) {
-				if (!kv.Value.Updated) {
-					kv.Value.Updated = true;
-					kv.Value.NewTurn();
-				}
-			}
+            bool notDone = true;
+            while (notDone)
+            {
+                notDone = false;
+
+                foreach (EnemyUnit e in enemies)
+                {
+                    if (e.Updated == false)
+                    {
+                        e.NewTurn();
+                        if(e.Updated == true)
+                        {
+                            notDone = true;
+                        }
+                    }
+                }
+            }
+
+            foreach (EnemyUnit e in enemies)
+            {
+                e.Updated = true;
+            }
+
+            // Consider updating from the hero outward.
+            foreach (KeyValuePair<HexLoc, Hex> kv in map)
+            {
+                if (!kv.Value.Updated)
+                {
+                    kv.Value.Updated = true;
+                    kv.Value.NewTurn();
+                }
+            }
 		}
 	}
 }

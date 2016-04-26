@@ -36,6 +36,8 @@ namespace game {
 		void Start() {
 			ui = gameObject.AddComponent<WorldUI> ();
 			world = SaveManager.LoadLevel(l, level, this);
+            Debug.Log(world.enemies.Count);
+
 			p.hero = world.hero;
 
 			var trigger = new GameObject("Trigger").AddComponent<LogTrigger>();

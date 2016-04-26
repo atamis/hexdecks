@@ -62,6 +62,10 @@ namespace game.world.units {
 					persuing = true;
 					target = hero;
 				}
+                else
+                {
+                    Updated = true;
+                }
 			}
 
 			if (persuing)
@@ -70,6 +74,7 @@ namespace game.world.units {
 				if (dist == 1)
 				{
 					target.ApplyDamage(1);
+                    Updated = true;
 				}
 				else {
 					var path = WorldPathfinding.Pathfind(w, h, target.h);
@@ -77,6 +82,7 @@ namespace game.world.units {
 					if (next.unit == null)
 					{
 						h = next;
+                        Updated = true;
 					}
 				}
 			}
@@ -201,6 +207,10 @@ namespace game.world.units {
 					persuing = true;
 					target = hero;
 				}
+                else
+                {
+                    Updated = true;
+                }
 			}
 
 			if (persuing) {
@@ -211,6 +221,7 @@ namespace game.world.units {
 				foreach(Hex t in targets) {
 					if (t.unit == target) {
 						target.ApplyDamage(1);
+                        Updated = true;
 						return;
 					}
 				}
@@ -220,6 +231,7 @@ namespace game.world.units {
 					if (w.map.ContainsKey(nhex) && w.map[nhex].Passable()) {
 						if (w.map[nhex].unit == null) {
 							h = w.map[nhex];
+                            Updated = true;
 						}
 					}
 				} else {
@@ -227,6 +239,7 @@ namespace game.world.units {
 					var next = path.First.Next.Value;
 					if (next.unit == null) {
 						h = next;
+                        Updated = true;
 					}
 				}
 			}
