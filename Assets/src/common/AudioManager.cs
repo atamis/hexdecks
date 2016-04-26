@@ -11,8 +11,9 @@ namespace game {
         {
             soundtrack = gameObject.AddComponent<AudioSource>();
             track = Resources.Load<AudioClip>("Audio/Soundtrack/Track 1 Video game 2 Draft");
-            soundtrack.PlayOneShot(track);
+            soundtrack.clip = track;
             soundtrack.loop = true;
+            soundtrack.Play();
         }
 
         void Awake() {
