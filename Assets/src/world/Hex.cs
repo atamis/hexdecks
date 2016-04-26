@@ -136,6 +136,7 @@ namespace game.world {
 		}
 
 		public class HexModel : MonoBehaviour {
+			
 			public SpriteRenderer sr;
 			private PolygonCollider2D coll;
 			private Rigidbody2D rig;
@@ -148,13 +149,11 @@ namespace game.world {
 				this.gameObject.layer = LayerMask.NameToLayer("HexLayer");
 
 				transform.localPosition = new Vector3 (h.transform.position.x, h.transform.position.y, Layer.Hex);
-				transform.localScale = new Vector3 (1.9f, 1.9f, 0);
+				transform.localScale = new Vector3 (1.9f, 1.9f, 1);
 
 				sr = gameObject.AddComponent<SpriteRenderer> ();
-
+				//sr.material = new Material(Shader.Find("Sprites/Diffuse"));
 				sr.sprite = Resources.Load <Sprite>("Sprites/Tiles/T_Ground");
-
-				sr.material = new Material (Shader.Find ("Sprites/Default"));
 
 				coll = gameObject.AddComponent<PolygonCollider2D> ();
 				coll.isTrigger = true;

@@ -8,18 +8,28 @@ namespace game.ui {
 		private Camera cam;
 		float speed = 1f;
 		private Vector3? goal;
+		private bool locked;
 
 		public void init(Camera cam) {
 			this.cam = cam;
 			this.cam.transform.parent = transform;
 			this.cam.backgroundColor = new Color(0.05f, 0.05f, 0.05f);
 			goal = null;
+			locked = false;
+		}
 
+		void Start() {
 			overlay = new GameObject("Overlay").AddComponent<ScreenOverlay> ();
+			overlay.transform.parent = transform;
+			overlay.init (this);
 		}
 
 		public void setLocation(Vector3 v) {
 			goal = v;
+		}
+
+		public void SetLock(bool locked) {
+			this.locked = locked;
 		}
 
 		private bool closeToGoal() {
@@ -33,8 +43,6 @@ namespace game.ui {
 
 		// Update is called once per frame
 		void Update() {
-			overlay.transform.parent = transform;
-
 			if (goal.HasValue) {
 				if (closeToGoal()) {
 					goal = null;
@@ -43,42 +51,40 @@ namespace game.ui {
 				}
 			}
 
-			//var scroll = Input.GetAxis("Mouse ScrollWheel");
-
-			// Scroll up is a positive change, but increasing size
-			// zooms out, so we subtract.
-			//cam.orthographicSize -= scroll;
-
 			// Ensure 1 <= size <= 20.
 			cam.orthographicSize = System.Math.Min(System.Math.Max(1, cam.orthographicSize), 20);
 
-			var control = new Vector3(0, 0, 0);
+			if (locked == false) {
+				var control = new Vector3(0, 0, 0);
+				if (Input.GetKey(KeyCode.A)) {
+					control.x -= speed;
+				}
 
-			if (Input.GetKey(KeyCode.A)) {
-				control.x -= speed;
+				if (Input.GetKey(KeyCode.D)) {
+					control.x += speed;
+				}
+
+				if (Input.GetKey(KeyCode.W)) {
+					control.y += speed;
+				}
+
+				if (Input.GetKey(KeyCode.S)) {
+					control.y -= speed;
+				}
+
+				// Include zoom-level to make zoomed-out movement faster.
+				transform.localPosition += control * Time.deltaTime * cam.orthographicSize;
 			}
-
-			if (Input.GetKey(KeyCode.D)) {
-				control.x += speed;
-			}
-
-			if (Input.GetKey(KeyCode.W)) {
-				control.y += speed;
-			}
-
-			if (Input.GetKey(KeyCode.S)) {
-				control.y -= speed;
-			}
-
-			// Include zoom-level to make zoomed-out movement faster.
-			transform.localPosition += control * Time.deltaTime * cam.orthographicSize;
 		}
 
 		private class ScreenOverlay : MonoBehaviour {
-			private SpriteRenderer sr;
+			public SpriteRenderer sr;
+			private GameCamera gc;
 			private float fadeSpeed = 1.5f;
 
-			void Awake() {
+			public void init(GameCamera gc) {
+				this.gc = gc;
+
 				sr = gameObject.AddComponent<SpriteRenderer> ();
 				sr.sprite = Resources.Load<Sprite> ("Sprites/Square");
 				sr.color = Color.black;
@@ -92,6 +98,11 @@ namespace game.ui {
 
 			public void FadeToClear(Color start) {
 				sr.color = Color.Lerp (sr.color, Color.clear, fadeSpeed * Time.deltaTime);
+				/*
+				if (sr.color.a == 0) {
+					this.gc.locked = false;
+				}
+				*/
 			}
 
 			void Update() {

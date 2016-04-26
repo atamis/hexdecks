@@ -75,6 +75,7 @@
      <Compile Include="Assets\src\ui\NotificationManager.cs" />
      <Compile Include="Assets\src\ui\UICard.cs" />
      <Compile Include="Assets\src\ui\UIHexMenu.cs" />
+     <Compile Include="Assets\src\ui\UIMessageBox.cs" />
      <Compile Include="Assets\src\ui\UITooltip.cs" />
      <Compile Include="Assets\src\ui\WorldUI.cs" />
      <Compile Include="Assets\src\world\Hex.cs" />
