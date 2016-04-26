@@ -18,6 +18,8 @@ namespace game.tcg.cards {
 
 		public abstract void OnPlay(WorldMap wm, Hex h);
 
+        public abstract string getDescription();
+
 		public abstract string GetName();
 	}
 }

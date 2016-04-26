@@ -18,5 +18,10 @@ namespace game.tcg.cards {
         public override List<Hex> ValidTargets(WorldMap wm, Hex h) {
             return justHeroValid(wm, h);
         }
+
+        public override string getDescription()
+        {
+            return "Place a trap which deals 5 damage to anything which walks over it.";
+        }
     }
 }

@@ -21,6 +21,11 @@ namespace game.tcg.cards {
                 h.unit.ApplyDamage(3);
             }
 		}
-	}
+
+        public override string getDescription()
+        {
+            return "Deal 3 damage to an adjacent enemy.";
+        }
+    }
 }
 
