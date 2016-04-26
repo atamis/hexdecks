@@ -106,7 +106,7 @@ namespace game.world {
 					model.sr.sprite = Resources.Load <Sprite>("Sprites/Tiles/T_Ground");
 					break;
 				case TileType.Wall:
-				model.sr.sprite = Resources.Load <Sprite>("Sprites/Tiles/T_Ground");
+				model.sr.sprite = Resources.Load <Sprite>("Sprites/Tiles/T_Brick");
 					break;
 				case TileType.Water:
 				model.sr.sprite = Resources.Load <Sprite>("Sprites/Tiles/T_Water1");
@@ -175,7 +175,7 @@ namespace game.world {
 					}
 					break;
 				case TileType.Wall:
-					sr.color = new Color(0.3f, 0.3f, 0.3f);
+					sr.color = new Color(0.4f, 0.4f, 0.4f);
 					break;
 				case TileType.Water:
 					sr.color = new Color(1f, 1f, 1f);

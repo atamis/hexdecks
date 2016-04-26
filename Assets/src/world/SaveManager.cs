@@ -115,6 +115,7 @@ c = chest
 						switch (chr) {
 						case 'W':
 							h.tileType = TileType.Wall;
+							h.refreshSprite();
 							break;
 						case 'w':
 							h.tileType = TileType.Water;
