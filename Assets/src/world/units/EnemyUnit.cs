@@ -226,22 +226,65 @@ namespace game.world.units {
 					}
 				}
 
-				if (dist == 1) {
-					var nhex = h.loc + (h.loc - target.h.loc);
-					if (w.map.ContainsKey(nhex) && w.map[nhex].Passable()) {
-						if (w.map[nhex].unit == null) {
-							h = w.map[nhex];
+                if (dist == 1)
+                {
+                    var nhex = h.loc + (h.loc - target.h.loc);
+                    if (w.map.ContainsKey(nhex) && w.map[nhex].Passable())
+                    {
+                        if (w.map[nhex].unit == null)
+                        {
+                            h = w.map[nhex];
                             Updated = true;
-						}
-					}
-				} else {
-					var path = WorldPathfinding.Pathfind(w, h, target.h);
-					var next = path.First.Next.Value;
-					if (next.unit == null) {
-						h = next;
+                        }
+                    }
+                }
+                else if (dist == 2)
+                {
+                    List<Hex> attackHexes = new List<Hex>();
+
+                    foreach (HexLoc dir in HexLoc.hex_directions)
+                    {
+                        var nloc = w.hero.h.loc + dir + dir;
+
+                        if (w.map.ContainsKey(nloc))
+                        {
+                            if (w.map[nloc].tileType == TileType.Normal)
+                            {
+                                attackHexes.Add(w.map[nloc]);
+                            }
+                        }
+                    }
+
+                    List<Hex> neighbors = h.Neighbors();
+
+                    foreach (Hex neighbor in neighbors)
+                    {
+                        if (!Updated)
+                        {
+                            foreach (Hex t in attackHexes)
+                            {
+                                if (neighbor == t)
+                                {
+                                    if (t.unit == null)
+                                    {
+                                        h = t;
+                                        Updated = true;
+                                        continue;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                else {
+                    var path = WorldPathfinding.Pathfind(w, h, target.h);
+                    var next = path.First.Next.Value;
+                    if (next.unit == null)
+                    {
+                        h = next;
                         Updated = true;
-					}
-				}
+                    }
+                }
 			}
 		}
 	}
