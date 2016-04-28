@@ -31,5 +31,10 @@ namespace game.tcg.cards {
         public override List<Hex> ValidTargets(WorldMap wm, Hex h) {
             return justHeroValid(wm, h);
         }
+
+        public override string getDescription()
+        {
+            return "Teleport to a random hex up to 4 hexes away.";
+        }
     }
 }

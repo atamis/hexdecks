@@ -18,5 +18,10 @@ namespace game.tcg.cards {
         public override List<Hex> ValidTargets(WorldMap wm, Hex h) {
             return justHeroValid(wm, h);
         }
+
+        public override string getDescription()
+        {
+            return "Discard your hand and draw 5 cards.";
+        }
     }
 }

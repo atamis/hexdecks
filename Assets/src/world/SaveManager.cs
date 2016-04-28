@@ -115,6 +115,7 @@ c = chest
 						switch (chr) {
 						case 'W':
 							h.tileType = TileType.Wall;
+							h.refreshSprite();
 							break;
 						case 'w':
 							h.tileType = TileType.Water;
@@ -128,14 +129,17 @@ c = chest
 						case 'm':
 							var menemy = new GameObject("MeleeEvilTim").AddComponent<MeleeEnemy>();
 							menemy.init(w, h);
+                            w.enemies.Add(menemy);
 							break;
 						case 'M':
 							var bigmenemy = new GameObject("BigMeleeEvilTim").AddComponent<BigMeleeEnemy>();
 							bigmenemy.init(w, h);
+                            w.enemies.Add(bigmenemy);
 							break;
 						case 'r':
 							var renemy = new GameObject("RangedEvilTim").AddComponent<RangedEnemy>();
 							renemy.init(w, h);
+                            w.enemies.Add(renemy);
 							break;
 						case 'e':
 							new GameObject("EndLevelTrigger").AddComponent<EndLevelTrigger>().init(h);

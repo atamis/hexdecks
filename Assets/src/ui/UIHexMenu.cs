@@ -56,7 +56,7 @@ namespace game.ui {
 			}
 		}
 
-		private abstract class MenuPanel : MonoBehaviour {
+		private class MenuPanel : MonoBehaviour {
 			private SpriteRenderer sr;
 			private TextMesh tm;
 			private GameObject textObj;
@@ -65,7 +65,9 @@ namespace game.ui {
 			private Vector3 origin;
 			private Vector3 target;
 
-			public abstract string GetText();
+			public virtual string GetText() {
+				return "";
+			}
 
 			public void init(string label) {
 				sr = gameObject.AddComponent<SpriteRenderer> ();
@@ -109,7 +111,8 @@ namespace game.ui {
 			};
 
 			string[] labels = new string[] {
-				"Help", "Reset", "Library", "Quit", "Unknown", "Unknown",
+				"Help", "Reset", "Library", 
+				"Quit", "Unknown", "Unknown",
 			};
 
 			float scale = 2.0f;

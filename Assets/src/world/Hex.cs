@@ -103,10 +103,12 @@ namespace game.world {
 		internal void refreshSprite(){
 			switch (this.tileType) {
 				case TileType.Normal:
-					model.sr.sprite = Resources.Load <Sprite>("Sprites/Tiles/T_Ground");
+					float random = Random.value;
+					if(random < .1f) model.sr.sprite = Resources.Load <Sprite>("Sprites/Tiles/T_Ground2");
+					else model.sr.sprite = Resources.Load <Sprite>("Sprites/Tiles/T_Ground1");
 					break;
 				case TileType.Wall:
-				model.sr.sprite = Resources.Load <Sprite>("Sprites/Tiles/T_Ground");
+				model.sr.sprite = Resources.Load <Sprite>("Sprites/Tiles/T_Brick");
 					break;
 				case TileType.Water:
 				model.sr.sprite = Resources.Load <Sprite>("Sprites/Tiles/T_Water1");
@@ -153,7 +155,13 @@ namespace game.world {
 
 				sr = gameObject.AddComponent<SpriteRenderer> ();
 				//sr.material = new Material(Shader.Find("Sprites/Diffuse"));
-				sr.sprite = Resources.Load <Sprite>("Sprites/Tiles/T_Ground");
+
+				float random = Random.value;
+				if(random < .25f) {
+					sr.sprite = Resources.Load <Sprite>("Sprites/Tiles/T_Ground2");
+				} else {
+					sr.sprite = Resources.Load <Sprite>("Sprites/Tiles/T_Ground1");
+				}
 
 				coll = gameObject.AddComponent<PolygonCollider2D> ();
 				coll.isTrigger = true;
@@ -174,7 +182,7 @@ namespace game.world {
 					}
 					break;
 				case TileType.Wall:
-					sr.color = new Color(0.2f, 0.2f, 0.2f);
+					sr.color = new Color(0.4f, 0.4f, 0.4f);
 					break;
 				case TileType.Water:
 					sr.color = new Color(1f, 1f, 1f);

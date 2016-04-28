@@ -26,11 +26,11 @@ namespace game.ui {
 
 			ib = new GameObject("Infobar").AddComponent<WorldHUD>();
 			ib.init(this);
-
 			ib.transform.parent = gc.transform;
 
-			//menu = new GameObject ("Menu").AddComponent<UIHexMenu>();
-			//menu.gameObject.SetActive (false);
+			menu = new GameObject ("Menu").AddComponent<UIHexMenu>();
+			menu.gameObject.SetActive (false);
+			menu.transform.parent = gc.transform;
 		}
 
         void Update() {
@@ -238,7 +238,8 @@ namespace game.ui {
 
 			private class UIBuffFeature : CustomUIFeature {
 				public override Sprite GetSprite () {
-					return Resources.Load<Sprite> ("Sprites/UI/T_LightningIcon");
+					return Resources.Load<Sprite> ("Sprites/UI/T_PlusIcon");
+
 				}
 
 				public override string GetText () {
@@ -254,7 +255,7 @@ namespace game.ui {
 
 			private class UIActionFeature : CustomUIFeature {
 				public override Sprite GetSprite () {
-					return Resources.Load<Sprite> ("Sprites/UI/T_PlusIcon");
+					return Resources.Load<Sprite> ("Sprites/UI/T_LightningIcon");
 				}
 
 				public override string GetText () {
