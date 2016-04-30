@@ -15,7 +15,7 @@ namespace game.tcg.cards {
             var dir = w.hero.h.loc - h.loc;
 
             h.unit.stunned.duration = 1;
-            h.unit.ApplyDamage(1);
+            h.unit.ApplyDamage(1, w.hero);
 
             if (!w.map.ContainsKey(h.loc - dir)) {
                 return;
@@ -24,7 +24,7 @@ namespace game.tcg.cards {
             var dest = w.map[h.loc - dir];
 
             if (dest.unit != null) {
-                dest.unit.ApplyDamage(1);
+                dest.unit.ApplyDamage(1, w.hero);
             } else if (h.unit != null && dest.Passable()) {
                 h.unit.h = dest;
             }

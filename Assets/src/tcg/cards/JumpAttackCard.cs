@@ -48,7 +48,7 @@ namespace game.tcg.cards {
 			
 		public override void OnPlay (WorldMap w, Hex h) {
 			if (h.unit != null) {
-				h.unit.ApplyDamage(1);
+				h.unit.ApplyDamage(1, w.hero);
 			}
 
 			if (h.unit != null) {

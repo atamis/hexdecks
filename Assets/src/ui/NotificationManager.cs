@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace game {
 	public class NotificationManager : MonoBehaviour {
-		public void AddText(Vector3 loc, string text) {
+		public void AddText(Vector3 loc, string text, Color c) {
 			var obj = new GameObject("Floating Combat Text [" + text + "]");
 
 			obj.transform.parent = gameObject.transform;
@@ -10,7 +10,7 @@ namespace game {
 
 
 			var ft = obj.AddComponent<FloatingText>();
-			ft.init(text);
+			ft.init(text, c);
 		}
 
 		private class FloatingText : MonoBehaviour {
@@ -18,7 +18,7 @@ namespace game {
 			private TextMesh tm;
 			private float start;
 
-			public void init(string text) {
+			public void init(string text, Color c) {
 				this.text = text;
 				tm = gameObject.AddComponent<TextMesh>();
 
@@ -27,7 +27,7 @@ namespace game {
 				tm.text = text;
 				tm.fontSize = 148;
 				tm.characterSize = 0.04f;
-				tm.color = Color.black;
+				tm.color = c;
 				tm.font = font;
 
 				tm.GetComponent<Renderer>().material = font.material;

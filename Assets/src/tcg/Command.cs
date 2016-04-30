@@ -38,7 +38,7 @@ namespace game.tcg {
 
 			if (next.unit != null && next.unit != u) {
 				//audioS.PlayOneShot(attackSound);
-				next.unit.ApplyDamage(1);
+				next.unit.ApplyDamage(1, w.hero);
 			}
 
 			if (next.unit == null) {

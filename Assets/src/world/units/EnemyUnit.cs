@@ -80,7 +80,7 @@ namespace game.world.units {
 				var dist = h.loc.Distance(target.h.loc);
 				if (dist == 1)
 				{
-					target.ApplyDamage(1);
+					target.ApplyDamage(1, this);
                     Updated = true;
 				}
 				else {
@@ -228,7 +228,7 @@ namespace game.world.units {
 
 				foreach(Hex t in targets) {
 					if (t.unit == target) {
-						target.ApplyDamage(1);
+						target.ApplyDamage(1, this);
                         Updated = true;
 						return;
 					}

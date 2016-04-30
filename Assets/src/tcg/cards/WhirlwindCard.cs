@@ -17,7 +17,7 @@ namespace game.tcg.cards {
 
             foreach(Hex hex in targets)
             {
-                hex.unit.ApplyDamage(1);
+                hex.unit.ApplyDamage(1, w.hero);
             }
             
         }
