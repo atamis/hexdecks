@@ -197,12 +197,15 @@ namespace game.world.units {
 
 		public override void TurnActions() {
 
-			if (!persuing) {
+            List<Hex> neighbs = h.Neighbors();
+            List<Hex> hneighbs = w.hero.h.Neighbors();
+
+            if (!persuing) {
 				var hero = w.hero;
 				Hex heroHex = hero.h;
 				var path = WorldPathfinding.Pathfind(w, h, heroHex);
 
-				if (path.Count <= 5)
+                if (path.Count <= 5)
 				{
 					persuing = true;
 					target = hero;
@@ -237,6 +240,36 @@ namespace game.world.units {
                             Updated = true;
                         }
                     }
+
+                    if (!Updated) { 
+
+                        bool isSafe;
+
+                        foreach (Hex neighb in neighbs)
+                        {
+                            if (Updated == false)
+                            {
+                                isSafe = true;
+
+                                foreach (Hex hneighb in hneighbs)
+                                {
+                                    if (neighb == hneighb)
+                                    {
+                                        isSafe = false;
+                                    }
+                                }
+
+                                if (isSafe)
+                                {
+                                    if (neighb.unit == null && neighb.Passable())
+                                    {
+                                        h = neighb;
+                                        Updated = true;
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
                 else if (dist == 2)
                 {
@@ -255,9 +288,7 @@ namespace game.world.units {
                         }
                     }
 
-                    List<Hex> neighbors = h.Neighbors();
-
-                    foreach (Hex neighbor in neighbors)
+                    foreach (Hex neighbor in neighbs)
                     {
                         if (!Updated)
                         {
