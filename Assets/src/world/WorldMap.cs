@@ -17,6 +17,7 @@ namespace game.world {
 		public Layout l;
 		public HeroUnit hero;
         public List<EnemyUnit> enemies;
+        public List<SummonerEnemy> summoners;
 		public GameManager gm;
 		public int turns { get; set; }
 
@@ -29,6 +30,7 @@ namespace game.world {
 			hFolder = new GameObject("Hexes");
 
             enemies = new List<EnemyUnit>();
+            summoners = new List<SummonerEnemy>();
 		}
 
 		public Hex addHex(HexLoc hl) {
@@ -67,6 +69,14 @@ namespace game.world {
             foreach (EnemyUnit e in enemies)
             {
                 e.Updated = true;
+            }
+
+            foreach (SummonerEnemy s in summoners)
+            {
+                if(s.spawnTimer > 0)
+                {
+                    s.spawnTimer -= 1;
+                }
             }
 
             // Consider updating from the hero outward.

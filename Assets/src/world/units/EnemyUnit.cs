@@ -5,7 +5,10 @@ using game.math;
 
 namespace game.world.units {
 	abstract class EnemyUnit : Unit {
-		public void init(WorldMap w, Hex h) {
+        public bool persuing = false;
+        public HeroUnit target;
+
+        public void init(WorldMap w, Hex h) {
 			base.init(w, h, 1);
 		}
 
@@ -13,12 +16,16 @@ namespace game.world.units {
 			return Resources.Load<Sprite>("Sprites/Square");
 		}
 
+        public void setPersuing()
+        {
+            persuing = true;
+            target = w.hero;
+        }
+
         
     }
 
 	class MeleeEnemy : EnemyUnit {
-		private bool persuing = false;
-		private HeroUnit target;
 
         Sprite[] sprites = new Sprite[2] {
             Resources.Load<Sprite>("Sprites/Enemies/T_GoblinIdle1"),
@@ -142,8 +149,6 @@ namespace game.world.units {
     }
 
 	class RangedEnemy : EnemyUnit {
-		private bool persuing = false;
-		private HeroUnit target;
 
         Sprite[] sprites = new Sprite[2] {
             Resources.Load<Sprite>("Sprites/Enemies/T_BowGoblinIdle1"),
@@ -319,4 +324,147 @@ namespace game.world.units {
 			}
 		}
 	}
+
+    class SummonerEnemy : EnemyUnit
+    {
+        public int spawnTimer;
+        private const int spawnCD = 3;
+        private const int maxMinions = 2;
+        private List<MeleeEnemy> minions;
+
+        Sprite[] sprites = new Sprite[2] {
+            Resources.Load<Sprite>("Sprites/Enemies/T_BowGoblinIdle1"),
+            Resources.Load<Sprite>("Sprites/Enemies/T_BowGoblinIdle2")
+        };
+        const float spriteInterval = .8f;
+        float lastSwitch;
+        int idx;
+
+        public new void init(WorldMap w, Hex h)
+        {
+            base.init(w, h, 1);
+
+            idx = 0;
+            lastSwitch = timer;
+            spawnTimer = 0;
+            minions = new List<MeleeEnemy>();
+        }
+
+        public override Sprite getSprite()
+        {
+            if (timer >= lastSwitch + spriteInterval)
+            {
+                lastSwitch = timer;
+                idx = idx + 1;
+                idx = idx % 2;
+            }
+            return sprites[idx];
+        }
+
+        public override List<Hex> GetAttackPattern()
+        {
+            List<Hex> targets = new List<Hex>();
+
+            return targets;
+        }
+
+        public bool spawnMeleeEnemy()
+        {
+            foreach(MeleeEnemy e in minions.ToArray())
+            {
+                if(e == null)
+                {
+                    minions.Remove(e);
+                }
+            }
+
+            if(minions.Count < maxMinions)
+            {
+                List<Hex> neighbs = h.Neighbors();
+                List<Hex> openNeighbs = new List<Hex>(); 
+
+                foreach(Hex neighb in neighbs)
+                {
+                    if(neighb.Passable() && neighb.unit == null)
+                    {
+                        openNeighbs.Add(neighb);
+                    }
+                }
+
+                if(openNeighbs.Count > 0)
+                {
+                    System.Random rng = new System.Random();
+                    int i = rng.Next(openNeighbs.Count);
+
+                    MeleeEnemy minion = new GameObject("MeleeEvilTim").AddComponent<MeleeEnemy>();
+                    minion.init(w, openNeighbs[i]);
+                    minion.setPersuing();
+                    minions.Add(minion);
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }   
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public override void TurnActions()
+        {
+            List<Hex> neighbs = h.Neighbors();
+
+            if (!persuing)
+            {
+                var hero = w.hero;
+                Hex heroHex = hero.h;
+                var path = WorldPathfinding.Pathfind(w, h, heroHex);
+
+                if (path.Count <= 5)
+                {
+                    persuing = true;
+                    target = hero;
+                }
+            }
+
+            if (persuing)
+            {
+                if(spawnTimer == 0)
+                {
+                    if (spawnMeleeEnemy())
+                    {
+                        spawnTimer = spawnCD;
+                        Updated = true;
+                        return;
+                    }
+                }
+
+                Debug.Log("hit");
+
+                var dist = h.loc.Distance(target.h.loc);
+                foreach(Hex neighb in neighbs)
+                {
+
+                    Debug.Log("hit1");
+                    if (!Updated)
+                    {
+                        Debug.Log("hit2");
+                        if (neighb.Passable() && neighb.loc.Distance(target.h.loc) > dist)
+                        {
+                            Debug.Log("hit3");
+                            if (neighb.unit == null)
+                            {
+                                Debug.Log("hit4");
+                                h = neighb;
+                                Updated = true;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

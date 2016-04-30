@@ -57,6 +57,7 @@ c = chest
 			case 'r':
 			case 'M':
 			case 'c':
+            case 's':
 				return true;
 			default:
 				return false;
@@ -141,7 +142,13 @@ c = chest
 							renemy.init(w, h);
                             w.enemies.Add(renemy);
 							break;
-						case 'e':
+                        case 's':
+                            var senemy = new GameObject("SummonerEvilTim").AddComponent<SummonerEnemy>();
+                            senemy.init(w, h);
+                            w.enemies.Add(senemy);
+                            w.summoners.Add(senemy);
+                            break;
+                        case 'e':
 							new GameObject("EndLevelTrigger").AddComponent<EndLevelTrigger>().init(h);
 							break;
                         case 'c':
