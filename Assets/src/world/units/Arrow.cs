@@ -13,7 +13,7 @@ namespace game.world
 
 		public void init(Unit u) {
 			this.u = u;
-			transform.localPosition = LayerV.UnitFX + new Vector3(0, .5f, 0);
+			transform.localPosition = LayerV.UnitFX;
 
             var obj = new GameObject("Arrow model");
 			obj.transform.parent = transform;
@@ -30,6 +30,7 @@ namespace game.world
 		public class ArrowModel : MonoBehaviour {
 			public Arrow a;
 			public SpriteRenderer sr;
+            public static Vector3 defaultArrowDirection = new Vector3(-1, 0, 0);
 
             public void init(Arrow a)
             {
@@ -38,14 +39,24 @@ namespace game.world
                 //transform.localScale = new Vector3(2, 2, 2);
                 transform.localPosition = LayerV.UnitFX + new Vector3(0, 0, 0);
                 sr = gameObject.AddComponent<SpriteRenderer>();
-                sr.sprite = Resources.Load<Sprite>("Sprites/UI/T_PlusIcon");
+                sr.sprite = Resources.Load<Sprite>("Sprites/Enemies/Arrow");
 
                 sr.color = new Color(1, 1, 1);
             }
 
 			void Update() {
-                float speed = Time.deltaTime * 0.5f;
-				transform.localPosition += new Vector3(speed, speed, 0);
+                float speed = Time.deltaTime * 20f;
+                Vector3 direction = a.u.w.hero.transform.position - transform.position;
+
+                float angle = Mathf.Rad2Deg * Mathf.Atan2(direction.y, direction.x);
+
+                transform.eulerAngles = new Vector3(0, 0, angle + 180);
+                transform.localPosition += direction.normalized * speed;
+
+                if( (a.u.w.hero.transform.position - transform.position).magnitude < 0.1)
+                {
+                    Destroy(gameObject);
+                }
 			}
 		}
 	}
