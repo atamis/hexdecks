@@ -442,27 +442,25 @@ namespace game.world.units {
                     }
                 }
 
-                Debug.Log("hit");
-
+                List<Hex> openNeighbs = new List<Hex>();
                 var dist = h.loc.Distance(target.h.loc);
-                foreach(Hex neighb in neighbs)
+                foreach (Hex neighb in neighbs)
                 {
-
-                    Debug.Log("hit1");
-                    if (!Updated)
+                    if (neighb.Passable() && neighb.loc.Distance(target.h.loc) > dist)
                     {
-                        Debug.Log("hit2");
-                        if (neighb.Passable() && neighb.loc.Distance(target.h.loc) > dist)
+                        if (neighb.unit == null)
                         {
-                            Debug.Log("hit3");
-                            if (neighb.unit == null)
-                            {
-                                Debug.Log("hit4");
-                                h = neighb;
-                                Updated = true;
-                            }
+                            openNeighbs.Add(neighb);
                         }
                     }
+                }
+
+                if (openNeighbs.Count > 0)
+                {
+                    System.Random rng = new System.Random();
+                    int i = rng.Next(openNeighbs.Count);
+                    h = openNeighbs[i];
+                    Updated = true;
                 }
             }
         }
