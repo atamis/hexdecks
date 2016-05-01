@@ -35,8 +35,8 @@ namespace game {
             deck.Add(new TeleportCard());
             deck.Add(new WhirlwindCard());
             deck.Add(new BoulderCard());
-            deck.Add(new BoulderCard());
-            deck.Add(new BoulderCard());
+            deck.Add(new SlideCard());
+            deck.Add(new SlideCard());
 
             deck.Shuffle();
 
