@@ -7,10 +7,16 @@ namespace game.world.units {
 	abstract class EnemyUnit : Unit {
         public bool persuing = false;
         public HeroUnit target;
+        public bool attacking;
+        public float attackStart;
+        public Vector3 attackDirection;
 
         public void init(WorldMap w, Hex h) {
 			base.init(w, h, 1);
-		}
+            status.model.sr.enabled = true;
+            attacking = false;
+            attackStart = 0f;
+        }
 
 		public override Sprite getSprite() {
 			return Resources.Load<Sprite>("Sprites/Square");
@@ -20,6 +26,9 @@ namespace game.world.units {
         {
             persuing = true;
             target = w.hero;
+            status.asleep = false;
+            status.alert = true;
+            status.model.destroyZs();
         }
 
         
@@ -38,6 +47,7 @@ namespace game.world.units {
         public new void init(WorldMap w, Hex h)
         {
             base.init(w, h, 1);
+            status.model.sr.enabled = true;
 
             idx = 0;
             lastSwitch = timer;
@@ -56,6 +66,13 @@ namespace game.world.units {
         }
 
 
+        private void attackAnimation()
+        {
+            Vector2 direction = w.hero.transform.position - transform.position;
+
+        }
+
+
         public override void TurnActions() {
 
 			if (!persuing)
@@ -66,8 +83,7 @@ namespace game.world.units {
 
 				if (path.Count <= 4)
 				{
-					persuing = true;
-					target = hero;
+                    setPersuing();
 				}
                 else
                 {
@@ -81,6 +97,8 @@ namespace game.world.units {
 				if (dist == 1)
 				{
 					target.ApplyDamage(1, this);
+                    attacking = true;
+                    attackStart = timer;
                     Updated = true;
 				}
 				else {
@@ -104,7 +122,31 @@ namespace game.world.units {
 			}
 			return targets;
 		}
-	}
+
+        void Update()
+        {
+            transform.localPosition = Vector3.Lerp(transform.localPosition, Vector3.zero, 0.3f);
+            timer += Time.deltaTime;
+            attackDirection = transform.position - w.hero.transform.position;
+            float speed = Time.deltaTime * 3f;
+
+            if (attacking)
+            {
+                if(timer - attackStart <= 0.1f)
+                {
+                    transform.position += attackDirection * speed;
+                }
+                else if(timer - attackStart <= 0.2f)
+                {
+                    transform.position -= attackDirection * speed;
+                }
+                else
+                {
+                    attacking = false;
+                }
+            }
+        }
+    }
 
 	class BigMeleeEnemy: MeleeEnemy
 	{
@@ -120,6 +162,7 @@ namespace game.world.units {
         public new void init(WorldMap w, Hex h)
         {
             base.init(w, h, 2);
+            status.model.sr.enabled = true;
 
             idx = 0;
 						gotHit = false;
@@ -161,6 +204,7 @@ namespace game.world.units {
         public new void init(WorldMap w, Hex h)
         {
             base.init(w, h, 1);
+            status.model.sr.enabled = true;
 
             idx = 0;
             lastSwitch = timer;
@@ -212,9 +256,8 @@ namespace game.world.units {
 
                 if (path.Count <= 5)
 				{
-					persuing = true;
-					target = hero;
-				}
+                    setPersuing();
+                }
                 else
                 {
                     Updated = true;
@@ -229,6 +272,7 @@ namespace game.world.units {
 				foreach(Hex t in targets) {
 					if (t.unit == target) {
 						target.ApplyDamage(1, this);
+
                         Updated = true;
 						return;
 					}
@@ -343,6 +387,7 @@ namespace game.world.units {
         public new void init(WorldMap w, Hex h)
         {
             base.init(w, h, 1);
+            status.model.sr.enabled = true;
 
             idx = 0;
             lastSwitch = timer;
@@ -425,8 +470,7 @@ namespace game.world.units {
 
                 if (path.Count <= 5)
                 {
-                    persuing = true;
-                    target = hero;
+                    setPersuing();
                 }
             }
 

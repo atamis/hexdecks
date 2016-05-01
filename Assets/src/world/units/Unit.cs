@@ -48,7 +48,8 @@ namespace game.world.units {
         internal TemporaryEffect stunned;
 		public int health;
         public int maxHealth;
-		public EnemyHealthBar pips;
+		public EnemyHealthBar bar;
+        public EnemyStatus status;
 		public WorldMap w;
 		internal bool Updated;
 
@@ -67,11 +68,15 @@ namespace game.world.units {
             stunned = new TemporaryEffect();
 			mousedOver = false;
 
-			pips = gameObject.AddComponent<EnemyHealthBar>();
-			pips.transform.parent = transform;
-			pips.init(this);
+			bar = gameObject.AddComponent<EnemyHealthBar>();
+			bar.transform.parent = transform;
+			bar.init(this);
 
-			var obj = new GameObject("Unit Model");
+            status = gameObject.AddComponent<EnemyStatus>();
+            status.transform.parent = transform;
+            status.init(this);
+
+            var obj = new GameObject("Unit Model");
 			obj.transform.parent = transform;
 			model = obj.AddComponent<UnitModel>();
 
@@ -137,7 +142,7 @@ namespace game.world.units {
 		}
 
 		public void ShowHealth(bool b) {
-			pips.model.sr.enabled = b;
+			bar.model.sr.enabled = b;
 		}
 
 		public virtual void Die() {
