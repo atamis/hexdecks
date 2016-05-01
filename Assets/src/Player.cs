@@ -36,7 +36,7 @@ namespace game {
             deck.Add(new WhirlwindCard());
             deck.Add(new BoulderCard());
             deck.Add(new SlideCard());
-            deck.Add(new SlideCard());
+            deck.Add(new DisengageCard());
 
             deck.Shuffle();
 
