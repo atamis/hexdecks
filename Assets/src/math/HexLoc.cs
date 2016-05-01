@@ -42,12 +42,26 @@ namespace game.math {
 			return this == h;
 		}
 
+        private int normalizeInt(int i) {
+            if (i > 0) {
+                return 1;
+            }
+
+            if (i < 0) {
+                return -1;
+            }
+            
+            return 0;
+
+        }
+
         public HexLoc Normalize() {
             // This probably works.
 
-            var l = Distance(new HexLoc(0, 0, 0));
+            int qp = normalizeInt(q);
+            int rp = normalizeInt(r);
 
-            return new HexLoc(q/l, r/l, s/l);
+            return new HexLoc(qp, rp, -(qp + rp));
         }
 
 		public override int GetHashCode() {

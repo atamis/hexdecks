@@ -85,19 +85,23 @@
      <Compile Include="Assets\src\world\Trigger.cs" />
      <Compile Include="Assets\src\world\WorldMap.cs" />
      <Compile Include="Assets\src\world\WorldPathfinding.cs" />
+     <Compile Include="Assets\src\world\units\Arrow.cs" />
      <Compile Include="Assets\src\world\units\BoulderUnit.cs" />
      <Compile Include="Assets\src\world\units\EnemyHealthBar.cs" />
+     <Compile Include="Assets\src\world\units\EnemyStatus.cs" />
      <Compile Include="Assets\src\world\units\EnemyUnit.cs" />
+     <Compile Include="Assets\src\world\units\FloatingZ.cs" />
      <Compile Include="Assets\src\world\units\HeroUnit.cs" />
      <Compile Include="Assets\src\world\units\HexNotPassableError.cs" />
      <Compile Include="Assets\src\world\units\HexOccupiedError.cs" />
      <Compile Include="Assets\src\world\units\Unit.cs" />
-     <None Include="Assets\Resources\Levels\level2.txt" />
+     <None Include="Assets\Resources\Levels\levelx.txt" />
      <None Include="Assets\Resources\Levels\test.txt" />
      <None Include="Assets\Resources\Levels\level1.txt" />
      <None Include="Assets\Resources\Shaders\BloomShader.shader" />
      <None Include="Assets\Resources\Shaders\SceneShader.shader" />
      <None Include="Assets\Resources\Shaders\OutlineShader.shader" />
+     <None Include="Assets\Resources\Levels\level2.txt" />
      <None Include="Assets\Resources\Levels\level3.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>D:/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>

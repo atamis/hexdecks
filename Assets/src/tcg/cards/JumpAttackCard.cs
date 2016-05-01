@@ -9,7 +9,9 @@ namespace game.tcg.cards {
 
 		public override List<Hex> ValidTargets (WorldMap w, Hex h) {
 			List<Hex> targets = new List<Hex>(HexLoc.hex_directions.Length);
-            
+
+            var origin = w.hero.h;
+
             foreach (KeyValuePair<HexLoc, Hex> kv in w.map) {
                 var loc = kv.Key;
                 var hex = kv.Value;
@@ -19,6 +21,11 @@ namespace game.tcg.cards {
                 if (!hex.Passable()) continue;
 
                 if (hex.unit != null) continue;
+
+                var mid = origin.loc + (hex.loc - origin.loc).Normalize();
+                UnityEngine.Debug.Log((hex.loc - origin.loc) + ", " + (hex.loc - origin.loc).Normalize() + ", " + mid);
+
+                if (w.map.ContainsKey(mid) && w.map[mid].tileType == TileType.Wall) continue;
 
                 targets.Add(hex);
             }
