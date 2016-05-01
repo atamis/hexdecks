@@ -27,19 +27,22 @@ namespace game.world {
 				return _unit;
 			}
 			set {
-				if (_unit == null && value != null) {
+                var old = _unit;
+
+                _unit = value;
+
+                if (old == null && value != null) {
 					foreach (Trigger t in triggers) {
 						t.UnitEnter(value);
 					}
 				}
 
-				if (_unit != null && value == null) {
+				if (old != null && value == null) {
 					foreach (Trigger t in triggers) {
 						t.UnitLeave(unit);
 					}
 				}
 
-				_unit = value;
 
 			}
 		}

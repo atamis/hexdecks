@@ -47,7 +47,9 @@ namespace game.world.units {
 		internal TemporaryEffect invincible;
         internal TemporaryEffect stunned;
 		public int health;
-		public EnemyHealthBar pips;
+        public int maxHealth;
+		public EnemyHealthBar bar;
+        public EnemyStatus status;
 		public WorldMap w;
 		internal bool Updated;
 
@@ -59,17 +61,22 @@ namespace game.world.units {
 			this.w = w;
 			this.h = h;
 			this.health = health;
+            this.maxHealth = health;
 			this.timer = 0f;
 
 			invincible = new TemporaryEffect();
             stunned = new TemporaryEffect();
 			mousedOver = false;
 
-			pips = gameObject.AddComponent<EnemyHealthBar>();
-			pips.transform.parent = transform;
-			pips.init(this);
+			bar = gameObject.AddComponent<EnemyHealthBar>();
+			bar.transform.parent = transform;
+			bar.init(this);
 
-			var obj = new GameObject("Unit Model");
+            status = gameObject.AddComponent<EnemyStatus>();
+            status.transform.parent = transform;
+            status.init(this);
+
+            var obj = new GameObject("Unit Model");
 			obj.transform.parent = transform;
 			model = obj.AddComponent<UnitModel>();
 
@@ -102,7 +109,15 @@ namespace game.world.units {
 			CheckDeath();
 		}
 
-		public virtual Sprite getSprite() {
+        internal void ApplyHealing(int v, Unit source) {
+            var old = health;
+            health += v;
+            health = Math.Min(maxHealth, health);
+            GameManager.ntm.AddText(h.transform.position, "+" + (health - old), Color.green);
+
+        }
+
+        public virtual Sprite getSprite() {
 			return Resources.Load<Sprite>("Sprites/Circle");
 		}
 
@@ -127,7 +142,7 @@ namespace game.world.units {
 		}
 
 		public void ShowHealth(bool b) {
-			pips.model.sr.enabled = b;
+			bar.model.sr.enabled = b;
 		}
 
 		public virtual void Die() {
