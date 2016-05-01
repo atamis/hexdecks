@@ -47,6 +47,7 @@ namespace game.world.units {
 		internal TemporaryEffect invincible;
         internal TemporaryEffect stunned;
 		public int health;
+        public int maxHealth;
 		public EnemyHealthBar pips;
 		public WorldMap w;
 		internal bool Updated;
@@ -59,6 +60,7 @@ namespace game.world.units {
 			this.w = w;
 			this.h = h;
 			this.health = health;
+            this.maxHealth = health;
 			this.timer = 0f;
 
 			invincible = new TemporaryEffect();
@@ -103,8 +105,10 @@ namespace game.world.units {
 		}
 
         internal void ApplyHealing(int v, Unit source) {
-            GameManager.ntm.AddText(h.transform.position, "+" + v, Color.green);
-            h.unit.health += v;
+            var old = health;
+            health += v;
+            health = Math.Min(maxHealth, health);
+            GameManager.ntm.AddText(h.transform.position, "+" + (health - old), Color.green);
 
         }
 
