@@ -108,7 +108,7 @@ namespace game.world {
 					else model.sr.sprite = Resources.Load <Sprite>("Sprites/Tiles/T_Ground1");
 					break;
 				case TileType.Wall:
-				model.sr.sprite = Resources.Load <Sprite>("Sprites/Tiles/T_Forest");
+				model.sr.sprite = Resources.Load <Sprite>("Sprites/Tiles/T_Brick");
 					break;
 				case TileType.Water:
 				model.sr.sprite = Resources.Load <Sprite>("Sprites/Tiles/T_Water1");

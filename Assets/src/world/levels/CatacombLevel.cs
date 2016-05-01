@@ -2,10 +2,16 @@
 using System.Collections;
 
 namespace game.world.levels {
-	class MireLevel : BaseLevel {
-		public static Sprite t_sprite1 = Resources.Load<Sprite>("Sprites/Tiles/T_Mire1");
-		public static Sprite t_sprite2 = Resources.Load<Sprite>("Sprites/Tiles/T_Mire2");
+	class CatacombLevel : BaseLevel {
+		public static Sprite t_sprite1 = Resources.Load<Sprite>("Sprites/Tiles/T_Floor");
+		public static Sprite t_sprite2 = Resources.Load<Sprite>("Sprites/Tiles/T_Bricks");
 		public static Sprite t_water = Resources.Load<Sprite>("Sprites/Tiles/T_Water");
+
+		public static WorldMap Load() {
+			WorldMap map = SaveManager.LoadLevel (GameManager.l, "catacomb.txt", null);
+
+			return map;
+		}
 
 		public override Light GetLight() {
 			Light l = new GameObject ("Light").AddComponent<Light> ();
@@ -19,9 +25,9 @@ namespace game.world.levels {
 		}
 
 		public override string GetSceneName() {
-			return "Twilight Mire";
+			return "Forgotten Catacombs";
 		}
-			
+
 		public override Sprite GetPassableSprite() {
 			return t_sprite1;
 		}

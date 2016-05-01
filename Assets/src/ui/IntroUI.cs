@@ -10,7 +10,7 @@ namespace game.ui {
 		public string[] levels = new string[] {
 			"level1", "level2", 
 			"level3", "level1", 
-			"level2", "level3",
+			"level2", "test",
 		};
 
 		Vector2[] pos = new Vector2[] {

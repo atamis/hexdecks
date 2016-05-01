@@ -85,10 +85,18 @@ namespace game.world.units {
 			}
 		}
 
-		internal void ApplyDamage(int v) {
+		internal void ApplyDamage(int v, Unit source) {
 			if (!invincible.isActive()) {
 				print("Applying " + v + " damage");
-				GameManager.ntm.AddText(transform.position, "-" + v);
+                Color c;
+
+                if (source != null && source.GetType() == typeof(HeroUnit)) {
+                    c = Color.yellow;
+                } else {
+                    c = Color.red;
+                }
+
+				GameManager.ntm.AddText(transform.position, "-" + v, c);
 				health = health - v;
 			}
 			CheckDeath();

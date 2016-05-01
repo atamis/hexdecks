@@ -3,11 +3,15 @@ using System.Collections;
 
 namespace game.world.levels {
 	abstract class BaseLevel {
-		private Light light { get; set; }
-
 		public abstract string GetSceneName();
 
+		public abstract Sprite GetPassableSprite();
 
+		public abstract Sprite GetImpassableSprite();
+
+		public abstract Light GetLight();
+
+		public abstract void GetDeck();
 	}
 }
 

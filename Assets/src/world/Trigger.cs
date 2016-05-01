@@ -156,7 +156,7 @@ namespace game.world {
             if (u.GetType() == typeof(HeroUnit)) {
                 print("Added " + c + " to the player's deck");
                 GameManager.p.deck.Add(c);
-                GameManager.ntm.AddText(GameManager.l.HexPixel(h.loc), "+card");
+                GameManager.ntm.AddText(GameManager.l.HexPixel(h.loc), "+card", Color.black);
 				Suicide();
             }
         }
@@ -172,7 +172,7 @@ namespace game.world {
         }
 
         public override void UnitEnter(Unit u) {
-            u.ApplyDamage(5);
+            u.ApplyDamage(5, null);
             Suicide();
         }
 
