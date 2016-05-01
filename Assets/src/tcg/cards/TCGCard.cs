@@ -21,6 +21,10 @@ namespace game.tcg.cards {
         public abstract string getDescription();
 
 		public abstract string GetName();
+
+        public void Combo() {
+            GameManager.p.turns += 1;
+        }
 	}
 }
 
