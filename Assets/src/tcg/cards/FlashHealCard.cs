@@ -14,7 +14,7 @@ namespace game.tcg.cards {
 
 		public override void OnPlay (WorldMap wm, Hex h) {
 			GameManager.ntm.AddText (h.transform.position, "+2", Color.green);
-			h.unit.health += 2;
+			h.unit.health += 1;
 		}
 
         public override string getDescription()

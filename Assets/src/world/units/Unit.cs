@@ -102,7 +102,13 @@ namespace game.world.units {
 			CheckDeath();
 		}
 
-		public virtual Sprite getSprite() {
+        internal void ApplyHealing(int v, Unit source) {
+            GameManager.ntm.AddText(h.transform.position, "+" + v, Color.green);
+            h.unit.health += v;
+
+        }
+
+        public virtual Sprite getSprite() {
 			return Resources.Load<Sprite>("Sprites/Circle");
 		}
 
