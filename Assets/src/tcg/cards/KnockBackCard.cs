@@ -27,11 +27,11 @@ namespace game.tcg.cards {
                 dest.unit.ApplyDamage(1, w.hero);
             }
 
-            if (h.tileType == TileType.Wall) {
+            if (dest.tileType == TileType.Wall) {
                 h.unit.ApplyDamage(1, w.hero);
             }
 
-            if (h.tileType == TileType.Water) {
+            if (dest.tileType == TileType.Water) {
                 h.unit.health = 0;
                 h.unit.CheckDeath();
             }
