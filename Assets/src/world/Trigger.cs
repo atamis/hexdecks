@@ -171,8 +171,18 @@ namespace game.world {
             return Resources.Load<Sprite>("Sprites/Tiles/T_Trap");
         }
 
+        private void effect(Hex t) {
+            if (t.unit != null) {
+                t.unit.ApplyDamage(1, null);
+            }
+        }
+
         public override void UnitEnter(Unit u) {
-            u.ApplyDamage(5, null);
+            print("Trap triggered at " + h);
+            effect(h);
+            foreach(Hex n in h.Neighbors()) {
+                effect(n);
+            }
             Suicide();
         }
 
