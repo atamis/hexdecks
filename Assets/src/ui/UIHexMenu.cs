@@ -30,7 +30,7 @@ namespace game.ui {
 			}
 
 			void OnMouseDown() {
-				SceneManager.LoadSceneAsync("Reset");
+				SceneManager.LoadSceneAsync("Main");
 			}
 		}
 
@@ -52,7 +52,7 @@ namespace game.ui {
 
 		private class OtherPanel : MenuPanel {
 			public override string GetText() {
-				return "Quit";
+				return "Other";
 			}
 		}
 
@@ -69,7 +69,7 @@ namespace game.ui {
 				return "";
 			}
 
-			public void init(string label) {
+			public void init() {
 				sr = gameObject.AddComponent<SpriteRenderer> ();
 				sr.sprite = Resources.Load<Sprite> ("Sprites/Triangle");
 
@@ -83,14 +83,17 @@ namespace game.ui {
 				Font font = Resources.Load<Font>("Fonts/LeagueSpartan-Bold");
 
 				tm = textObj.AddComponent<TextMesh>();
-				tm.text = label;
-				tm.color = Color.black;
+				tm.text = GetText();
+				tm.color = Color.red;
 				tm.alignment = TextAlignment.Center;
 				tm.anchor = TextAnchor.MiddleCenter;
-				tm.fontSize = 148;
+				tm.fontSize = 74;
 				tm.characterSize = 0.04f;
 				tm.font = WorldUI.font;
 				tm.GetComponent<Renderer>().material = font.material;
+
+				tm.transform.localEulerAngles = new Vector3 (0, 0, -60);
+				tm.transform.localPosition = new Vector2 (.25f, .27f);
 			}
 
 			void OnMouseEnter() {
@@ -102,31 +105,44 @@ namespace game.ui {
 			}
 		}
 
+		List<MenuPanel> panels = new List<MenuPanel> ();
+
 		void Awake() {
-			List<MenuPanel> panels = new List<MenuPanel> ();
-		
 			Vector2[] locs = new Vector2[6] { 
 				new Vector2 (.45f, .25f), new Vector2 (0, .5f), new Vector2 (-.45f, .25f),
 				new Vector2 (-.45f, -.25f), new Vector2 (0, -.5f), new Vector2 (.45f, -.25f), 
 			};
+				
+			ExitPanel ep = new GameObject ("Exit Panel").AddComponent<ExitPanel> ();
+			ep.init ();
+			panels.Add (ep);
 
-			string[] labels = new string[] {
-				"Help", "Reset", "Library", 
-				"Quit", "Unknown", "Unknown",
-			};
+			HelpPanel hp = new GameObject ("Help Panel").AddComponent<HelpPanel> ();
+			hp.init ();
+			panels.Add (hp);
+
+			ResetPanel rp = new GameObject ("Reset Panel").AddComponent<ResetPanel> ();
+			rp.init ();
+			panels.Add (rp);
+
+			LibraryPanel lp = new GameObject ("Library Panel").AddComponent<LibraryPanel> ();
+			lp.init ();
+			panels.Add (lp);
+
+			SettingsPanel sp = new GameObject ("Settings Panel").AddComponent<SettingsPanel> ();
+			sp.init ();
+			panels.Add (sp);
 
 			float scale = 2.0f;
-			for (int i = 0; i < 6; i++) {
-				MenuPanel mp = new GameObject ("Panel").AddComponent<MenuPanel> ();
-				mp.init ("Words");
-
+			int i = 0;
+			foreach (MenuPanel mp in panels) {
 				mp.transform.parent = transform;
-
 				mp.transform.position = locs [i] * scale;
+
 				mp.transform.localScale = new Vector3 (scale, scale, 0);
 				mp.transform.localEulerAngles = new Vector3(0, 0, 60 * i);
 
-				panels.Add(mp);
+				i++;
 			}
 		}
 

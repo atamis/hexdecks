@@ -11,7 +11,7 @@ namespace game {
 		public static Layout l = new Layout(Orientation.Pointy, new Vector2(1, 1), new Vector2(0, 0));
 		public static Player p;
 		public static NotificationManager ntm;
-		public static string level = "level1";
+        public static string level = "level1";
 
 		private WorldUI ui;
 
@@ -36,7 +36,6 @@ namespace game {
 		void Start() {
 			ui = gameObject.AddComponent<WorldUI> ();
 			world = SaveManager.LoadLevel(l, level, this);
-            Debug.Log(world.enemies.Count);
 
 			p.hero = world.hero;
 
@@ -45,7 +44,9 @@ namespace game {
 
 			ui.init (this);
 			ui.gc.setLocation(l.HexPixel(world.hero.h.loc));
-		}
+
+
+        }
 			
         void Update() {
 			if (p.nextCommand != null) {

@@ -14,9 +14,8 @@ namespace game.tcg.cards {
         public override void OnPlay(WorldMap w, Hex h) {
             var dir = w.hero.h.loc - h.loc;
 
-
-            h.unit.ApplyDamage(1);
             h.unit.stunned.duration = 1;
+            h.unit.ApplyDamage(1);
 
             if (!w.map.ContainsKey(h.loc - dir)) {
                 return;

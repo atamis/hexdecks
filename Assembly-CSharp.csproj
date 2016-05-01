@@ -83,6 +83,9 @@
      <Compile Include="Assets\src\world\Trigger.cs" />
      <Compile Include="Assets\src\world\WorldMap.cs" />
      <Compile Include="Assets\src\world\WorldPathfinding.cs" />
+     <Compile Include="Assets\src\world\levels\BaseLevel.cs" />
+     <Compile Include="Assets\src\world\levels\MireLevel.cs" />
+     <Compile Include="Assets\src\world\levels\TutorialLevel.cs" />
      <Compile Include="Assets\src\world\units\EnemyHealthBar.cs" />
      <Compile Include="Assets\src\world\units\EnemyUnit.cs" />
      <Compile Include="Assets\src\world\units\HeroUnit.cs" />

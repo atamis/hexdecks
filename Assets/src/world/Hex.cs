@@ -108,7 +108,7 @@ namespace game.world {
 					else model.sr.sprite = Resources.Load <Sprite>("Sprites/Tiles/T_Ground1");
 					break;
 				case TileType.Wall:
-				model.sr.sprite = Resources.Load <Sprite>("Sprites/Tiles/T_Brick");
+				model.sr.sprite = Resources.Load <Sprite>("Sprites/Tiles/T_Forest");
 					break;
 				case TileType.Water:
 				model.sr.sprite = Resources.Load <Sprite>("Sprites/Tiles/T_Water1");
@@ -138,7 +138,6 @@ namespace game.world {
 		}
 
 		public class HexModel : MonoBehaviour {
-			
 			public SpriteRenderer sr;
 			private PolygonCollider2D coll;
 			private Rigidbody2D rig;
