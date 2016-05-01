@@ -25,7 +25,18 @@ namespace game.tcg.cards {
 
             if (dest.unit != null) {
                 dest.unit.ApplyDamage(1, w.hero);
-            } else if (h.unit != null && dest.Passable()) {
+            }
+
+            if (h.tileType == TileType.Wall) {
+                h.unit.ApplyDamage(1, w.hero);
+            }
+
+            if (h.tileType == TileType.Water) {
+                h.unit.health = 0;
+                h.unit.CheckDeath();
+            }
+
+            if (h.unit != null && dest.Passable()) {
                 h.unit.h = dest;
             }
         }
