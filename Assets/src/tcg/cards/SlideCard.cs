@@ -38,16 +38,11 @@ namespace game.tcg.cards {
 
                 var dest = h3;
                 var hexes = new Hex[] { h1, h2, h3 };
-
-                bool good = true;
-
+                
                 foreach (Hex t in hexes) {
-                    if (!t.Passable()) good = false;
-                    if (t.unit != null) good = false;
-                }
-
-                if (good) {
-                    targets.Add(dest);
+                    if (!t.Passable()) break;
+                    if (t.unit != null) break;
+                    targets.Add(t);
                 }
 
             }
