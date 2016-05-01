@@ -13,13 +13,14 @@ namespace game.tcg.cards {
 		}
 
 		public override void OnPlay (WorldMap wm, Hex h) {
-			GameManager.ntm.AddText (h.transform.position, "+2", Color.green);
-			h.unit.health += 1;
+			if (h.unit != null) {
+                h.unit.ApplyHealing(1, wm.hero);
+            }
 		}
 
         public override string getDescription()
         {
-            return "Gain 2 health.";
+            return "Gain 1 health.";
         }
     }
 }
