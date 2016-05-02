@@ -4,10 +4,8 @@ using game.world.units;
 using game.math;
 using System;
 
-namespace game.world
-{
-	class EnemyHealthBar : MonoBehaviour
-	{
+namespace game.world {
+	class EnemyHealthBar : MonoBehaviour {
 		public Unit u;
 		public HealthBarModel model;
 
