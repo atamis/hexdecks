@@ -109,10 +109,10 @@
      <None Include="Assets\Resources\Levels\levelx.txt" />
      <None Include="Assets\Resources\Levels\test.txt" />
      <None Include="Assets\Resources\Levels\level1.txt" />
-     <None Include="Assets\Resources\Sprites\Shaders\BloomShader.shader" />
-     <None Include="Assets\Resources\Sprites\Shaders\SceneShader.shader" />
+     <None Include="Assets\Resources\Shaders\BloomShader.shader" />
+     <None Include="Assets\Resources\Shaders\SceneShader.shader" />
      <None Include="Assets\Resources\Levels\river.txt" />
-     <None Include="Assets\Resources\Sprites\Shaders\OutlineShader.shader" />
+     <None Include="Assets\Resources\Shaders\OutlineShader.shader" />
      <None Include="Assets\Resources\Levels\crypt.txt" />
      <None Include="Assets\Resources\Levels\forest.txt" />
      <None Include="Assets\Resources\Levels\level2.txt" />
