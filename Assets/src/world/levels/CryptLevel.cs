@@ -6,8 +6,8 @@ namespace game.world.levels {
 	class CryptLevel : GameLevel {
 		public static Sprite t_sprite1 = Resources.Load<Sprite>("Sprites/Tiles/T_Ground1");
 		public static Sprite t_sprite1a = Resources.Load<Sprite>("Sprites/Tiles/T_Ground2");
-		public static Sprite t_sprite2 = Resources.Load<Sprite>("Sprites/Tiles/T_Bricks");
-		public static Sprite t_water = Resources.Load<Sprite>("Sprites/Tiles/T_Water");
+		public static Sprite t_sprite2 = Resources.Load<Sprite>("Sprites/Tiles/T_Brick");
+		public static Sprite t_water = Resources.Load<Sprite>("Sprites/Tiles/T_Water1");
 
 		public CryptLevel() {}
 

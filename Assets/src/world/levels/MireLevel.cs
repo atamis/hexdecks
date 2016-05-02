@@ -6,7 +6,7 @@ namespace game.world.levels {
 	class MireLevel : GameLevel {
 		public static Sprite t_sprite1 = Resources.Load<Sprite>("Sprites/Tiles/T_MireGround");
 		public static Sprite t_sprite2 = Resources.Load<Sprite>("Sprites/Tiles/T_Mire2");
-		public static Sprite t_water = Resources.Load<Sprite>("Sprites/Tiles/T_Water");
+		public static Sprite t_water = Resources.Load<Sprite>("Sprites/Tiles/T_MireWater");
 
 		public MireLevel() {}
 
