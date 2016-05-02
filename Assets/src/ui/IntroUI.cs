@@ -8,9 +8,9 @@ namespace game.ui {
 		private GameObject uiFeatures;
 
 		public string[] levels = new string[] {
-			"level1", "level2", 
-			"level3", "level1", 
-			"level2", "test",
+			"forest", "mire", 
+			"river", "volcano", 
+			"catacomb", "crypt",
 		};
 
 		Vector2[] pos = new Vector2[] {
@@ -106,7 +106,7 @@ namespace game.ui {
 
 			void OnMouseDown() {
 				//IntroManager.audio.PlayOneShot (Resources.Load<AudioClip> ("Audio/UI/MenuSelect"));
-				GameManager.level = level;
+				GameManager.LoadLevel(this.level);
 				SceneManager.LoadSceneAsync ("Main");
 			}
 		}

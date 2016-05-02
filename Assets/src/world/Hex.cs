@@ -105,17 +105,15 @@ namespace game.world {
 
 		internal void refreshSprite(){
 			switch (this.tileType) {
-				case TileType.Normal:
-					float random = Random.value;
-					if(random < .1f) model.sr.sprite = Resources.Load <Sprite>("Sprites/Tiles/T_Ground2");
-					else model.sr.sprite = Resources.Load <Sprite>("Sprites/Tiles/T_Ground1");
-					break;
-				case TileType.Wall:
+			case TileType.Normal:
+				model.sr.sprite = GameManager._level.GetPassableSprite ();
+				break;
+			case TileType.Wall:
 				model.sr.sprite = Resources.Load <Sprite>("Sprites/Tiles/T_Brick");
-					break;
-				case TileType.Water:
-				model.sr.sprite = Resources.Load <Sprite>("Sprites/Tiles/T_Water1");
-					break;
+				break;
+			case TileType.Water:
+				model.sr.sprite = GameManager._level.GetWaterSprite ();
+				break;
 			}
 		}
 

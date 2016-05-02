@@ -1,14 +1,18 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
+using game.tcg.cards;
 
 namespace game.world.levels {
-	class CryptLevel : BaseLevel {
-		public static Sprite t_sprite1 = Resources.Load<Sprite>("Sprites/Tiles/T_Floor");
+	class CryptLevel : GameLevel {
+		public static Sprite t_sprite1 = Resources.Load<Sprite>("Sprites/Tiles/T_Ground1");
+		public static Sprite t_sprite1a = Resources.Load<Sprite>("Sprites/Tiles/T_Ground2");
 		public static Sprite t_sprite2 = Resources.Load<Sprite>("Sprites/Tiles/T_Bricks");
 		public static Sprite t_water = Resources.Load<Sprite>("Sprites/Tiles/T_Water");
 
-		public static WorldMap Load() {
-			WorldMap map = SaveManager.LoadLevel (GameManager.l, "crypt.txt", null);
+		public CryptLevel() {}
+
+		public override WorldMap GetMap(GameManager gm) {
+			WorldMap map = SaveManager.LoadLevel (GameManager.l, "crypt", gm);
 
 			return map;
 		}
@@ -20,8 +24,12 @@ namespace game.world.levels {
 			return l;
 		}
 
-		public override void GetDeck() {
-			return;
+		public override List<TCGCard> GetDeck() {
+			List<TCGCard> deck = new List<TCGCard> ();
+			deck.Add (new FireballCard());
+			deck.Add (new FireballCard());
+
+			return deck;
 		}
 
 		public override string GetSceneName() {
@@ -29,6 +37,10 @@ namespace game.world.levels {
 		}
 
 		public override Sprite GetPassableSprite() {
+			float random = Random.value;
+			if (random < 0.1f) {
+				return t_sprite1a;
+			}
 			return t_sprite1;
 		}
 
@@ -36,7 +48,11 @@ namespace game.world.levels {
 			return t_sprite2;
 		}
 
-		public void GetNextLevel() {
+		public override Sprite GetWaterSprite() {
+			return t_water;
+		}
+
+		public override void GetNextLevel() {
 
 		}
 	}
