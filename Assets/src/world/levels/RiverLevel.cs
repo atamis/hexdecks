@@ -4,8 +4,8 @@ using game.tcg.cards;
 
 namespace game.world.levels {
 	class RiverLevel : GameLevel {
-		public static Sprite t_sprite1 = Resources.Load<Sprite>("Sprites/Tiles/T_River1");
-		public static Sprite t_sprite2 = Resources.Load<Sprite>("Sprites/Tiles/T_River2");
+		public static Sprite t_sprite1 = Resources.Load<Sprite>("Sprites/Tiles/T_Subland");
+		public static Sprite t_sprite2 = Resources.Load<Sprite>("Sprites/Tiles/T_Brick");
 		public static Sprite t_water = Resources.Load<Sprite>("Sprites/Tiles/T_RiverWater");
 
 		public RiverLevel() { }

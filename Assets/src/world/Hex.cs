@@ -109,7 +109,7 @@ namespace game.world {
 				model.sr.sprite = GameManager._level.GetPassableSprite ();
 				break;
 			case TileType.Wall:
-				model.sr.sprite = Resources.Load <Sprite>("Sprites/Tiles/T_Brick");
+				model.sr.sprite = GameManager._level.GetImpassableSprite ();
 				break;
 			case TileType.Water:
 				model.sr.sprite = GameManager._level.GetWaterSprite ();
@@ -154,14 +154,10 @@ namespace game.world {
 				transform.localScale = new Vector3 (1.9f, 1.9f, 1);
 
 				sr = gameObject.AddComponent<SpriteRenderer> ();
-				//sr.material = new Material(Shader.Find("Sprites/Diffuse"));
+				sr.material = new Material(Shader.Find("Sprites/Diffuse"));
 
 				float random = Random.value;
-				if(random < .25f) {
-					sr.sprite = Resources.Load <Sprite>("Sprites/Tiles/T_Ground2");
-				} else {
-					sr.sprite = Resources.Load <Sprite>("Sprites/Tiles/T_Ground1");
-				}
+				sr.sprite = GameManager._level.GetPassableSprite ();
 
 				coll = gameObject.AddComponent<PolygonCollider2D> ();
 				coll.isTrigger = true;

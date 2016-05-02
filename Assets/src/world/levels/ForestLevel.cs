@@ -4,8 +4,8 @@ using game.tcg.cards;
 
 namespace game.world.levels {
 	class ForestLevel : GameLevel {
-		public static Sprite t_sprite1 = Resources.Load<Sprite>("Sprites/Tiles/T_Grassy");
-		public static Sprite t_sprite2 = Resources.Load<Sprite>("Sprites/Tiles/T_Forest1");
+		public static Sprite t_sprite1 = Resources.Load<Sprite>("Sprites/Tiles/T_Forest");
+		public static Sprite t_sprite2 = Resources.Load<Sprite>("Sprites/Tiles/T_Mushroomed");
 		public static Sprite t_water = Resources.Load<Sprite>("Sprites/Tiles/T_Water1");
 
 		public ForestLevel() {}

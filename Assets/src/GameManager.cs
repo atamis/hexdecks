@@ -29,7 +29,7 @@ namespace game {
 
 		public static string level = "forest";
 		public static GameLevel _level = new ForestLevel();
-		private Light lit;
+		private Light lite;
 
 		void Awake() {
 			ntm = new GameObject ("Notification Manager").AddComponent<NotificationManager> ();
@@ -57,7 +57,8 @@ namespace game {
 			world = _level.GetMap (this);
 			//world = SaveManager.LoadLevel(l, level, this);
 
-			lit = _level.GetLight();
+			lite = _level.GetLight();
+			lite.type = LightType.Directional;
 
 			p.hero = world.hero;
 			p.deck = _level.GetDeck ();

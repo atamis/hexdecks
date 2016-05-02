@@ -4,8 +4,8 @@ using game.tcg.cards;
 
 namespace game.world.levels {
 	class VolcanoLevel : GameLevel {
-		public static Sprite t_sprite1 = Resources.Load<Sprite>("Sprites/Tiles/T_DarkEarth1");
-		public static Sprite t_sprite2 = Resources.Load<Sprite>("Sprites/Tiles/T_Volcano2");
+		public static Sprite t_sprite1 = Resources.Load<Sprite>("Sprites/Tiles/T_DarkEarth");
+		public static Sprite t_sprite2 = Resources.Load<Sprite>("Sprites/Tiles/T_Brick");
 		public static Sprite t_water = Resources.Load<Sprite>("Sprites/Tiles/T_Magma");
 
 		public VolcanoLevel() { }
@@ -18,8 +18,8 @@ namespace game.world.levels {
 
 		public override Light GetLight() {
 			Light l = new GameObject ("Light").AddComponent<Light> ();
-			l.color = new Color (1, 1, 1);
-
+			//l.color = new Color (.9296f, 0.2265f, .1093f);
+			l.color = Color.white;
 			return l;
 		}
 
