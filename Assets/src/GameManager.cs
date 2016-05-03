@@ -37,17 +37,17 @@ namespace game {
 		}
 
 		public static void LoadLevel(string tag) {
-			if (tag == "forest") {
+			if (tag == "Forest") {
 				 _level = new ForestLevel ();
-			} else if (tag == "mire") {
+			} else if (tag == "Mire") {
 				_level = new MireLevel ();
-			} else if (tag == "river") {
+			} else if (tag == "River") {
 				_level = new RiverLevel ();
-			} else if (tag == "volcano") {
+			} else if (tag == "Volcano") {
 				_level = new VolcanoLevel ();
-			} else if (tag == "catacomb") {
+			} else if (tag == "Catacomb") {
 				_level = new CatacombLevel ();
-			} else if (tag == "crypt") {
+			} else if (tag == "Crypt") {
 				_level = new CryptLevel ();
 			}
 		}
@@ -69,7 +69,7 @@ namespace game {
 			ui.init (this);
 			ui.gc.setLocation(l.HexPixel(world.hero.h.loc));
         }
-			
+
         void Update() {
 			if (p.nextCommand != null) {
 				print("Executing command " + p.nextCommand);
