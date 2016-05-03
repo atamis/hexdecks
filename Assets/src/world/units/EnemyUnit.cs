@@ -125,24 +125,27 @@ namespace game.world.units {
 
         void Update()
         {
-            transform.localPosition = Vector3.Lerp(transform.localPosition, Vector3.zero, 0.3f);
-            timer += Time.deltaTime;
-            attackDirection = transform.position - w.hero.transform.position;
-            float speed = Time.deltaTime * 5f;
-
-            if (attacking)
+            if (w.hero != null)
             {
-                if(timer - attackStart <= 0.1f)
+                transform.localPosition = Vector3.Lerp(transform.localPosition, Vector3.zero, 0.3f);
+                timer += Time.deltaTime;
+                attackDirection = transform.position - w.hero.transform.position;
+                float speed = Time.deltaTime * 5f;
+
+                if (attacking)
                 {
-                    transform.position += attackDirection.normalized * speed;
-                }
-                else if(timer - attackStart <= 0.2f)
-                {
-                    transform.position -= attackDirection.normalized * speed;
-                }
-                else
-                {
-                    attacking = false;
+                    if (timer - attackStart <= 0.1f)
+                    {
+                        transform.position += attackDirection.normalized * speed;
+                    }
+                    else if (timer - attackStart <= 0.2f)
+                    {
+                        transform.position -= attackDirection.normalized * speed;
+                    }
+                    else
+                    {
+                        attacking = false;
+                    }
                 }
             }
         }

@@ -45,7 +45,7 @@ namespace game.world
             }
 
 			void Update() {
-                float speed = Time.deltaTime * 20f;
+                float speed = Time.deltaTime * 25f;
 
                 if (a.u.w.hero != null)
                 {
