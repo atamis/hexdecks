@@ -8,15 +8,15 @@ namespace game.ui {
 		private GameObject uiFeatures;
 
 		public string[] levels = new string[] {
-			"forest", "mire", 
-			"river", "volcano", 
-			"catacomb", "crypt",
+			"Forest", "Mire",
+			"River", "Volcano",
+			"Catacomb", "Crypt",
 		};
 
 		Vector2[] pos = new Vector2[] {
-			new Vector2(-1.4f, 1.25f), new Vector2(-1.4f, 0f),
-			new Vector2(-1.4f, -1.25f), new Vector2(1.4f, 1.25f),
-			new Vector2(1.4f, 0f), new Vector2(1.4f, -1.25f),
+			new Vector2(-2.2f, 2f), new Vector2(-2.2f, 0f),
+			new Vector2(-2.2f, -2f), new Vector2(2.2f, 2f),
+			new Vector2(2.2f, 0f), new Vector2(2.2f, -2f)
 		};
 
 		public void init() {
@@ -34,7 +34,7 @@ namespace game.ui {
 			}
 		}
 
-		private class UILoadButton : MonoBehaviour { 
+		private class UILoadButton : MonoBehaviour {
 			[ExecuteInEditMode]
 			private class BloomEffect : MonoBehaviour {
 				private SpriteRenderer sr;
@@ -46,7 +46,7 @@ namespace game.ui {
 					sr = GetComponent<SpriteRenderer>();
 				}
 
-				void Update() { 
+				void Update() {
 					UpdateBloom (use);
 				}
 
@@ -70,7 +70,7 @@ namespace game.ui {
 			public void init(string level) {
 				this.level = level;
 
-				gameObject.transform.localScale = new Vector3 (.75f, .75f, 1);
+				gameObject.transform.localScale = new Vector3 (1.1f, 1.1f, 1);
 
 				sr = gameObject.AddComponent<SpriteRenderer> ();
 				sr.material = new Material (Shader.Find ("Custom/BloomShader"));
