@@ -5,15 +5,29 @@ namespace game {
 	class AudioManager : MonoBehaviour {
 
         private AudioSource soundtrack;
-        private AudioClip track;
+        private AudioClip startTrack;
+        private AudioClip loopTrack;
+        private bool looping = false;
 
         void Start()
         {
+            startTrack = Resources.Load<AudioClip>("Audio/Soundtrack/Track 1 part 1");
+            loopTrack = Resources.Load<AudioClip>("Audio/Soundtrack/Track 1 part 2");
+
             soundtrack = gameObject.AddComponent<AudioSource>();
-            track = Resources.Load<AudioClip>("Audio/Soundtrack/Track 1 Video game 2 Draft");
-            soundtrack.clip = track;
-            soundtrack.loop = true;
-            soundtrack.Play();
+
+            soundtrack.PlayOneShot(startTrack);
+            
+        }
+
+        void Update() {
+            if (!looping && !soundtrack.isPlaying) {
+                print("Beginning to loop track");
+                looping = true;
+                soundtrack.clip = loopTrack;
+                soundtrack.loop = true;
+                soundtrack.Play();
+            }
         }
 
         void Awake() {

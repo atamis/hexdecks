@@ -271,7 +271,6 @@ namespace game.world.units {
 
 				foreach(Hex t in targets) {
 					if (t.unit == target) {
-						target.ApplyDamage(1, this);
                         Arrow a = new GameObject("arrow").AddComponent<Arrow>();
                         a.transform.parent = transform;
                         a.init(this);

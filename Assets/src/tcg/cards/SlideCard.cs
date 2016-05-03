@@ -8,7 +8,7 @@ using game.math;
 namespace game.tcg.cards {
     class SlideCard : TCGCard {
         public override string getDescription() {
-            return "Slides 3 hexes";
+            return "Slides 3 hexes and attacks forwards";
         }
 
         public override string GetName() {
@@ -16,8 +16,19 @@ namespace game.tcg.cards {
         }
 
         public override void OnPlay(WorldMap wm, Hex h) {
+            var dir = (h.loc - wm.hero.h.loc).Normalize();
+
             if (h.unit == null) {
                 wm.hero.h = h;
+            }
+
+            var t_loc = h.loc + dir;
+            UnityEngine.Debug.Log(t_loc);
+            if (wm.map.ContainsKey(t_loc)) {
+                var t_h = wm.map[t_loc];
+                if (t_h.unit != null) {
+                    t_h.unit.ApplyDamage(1, wm.hero);
+                }
             }
         }
         public override List<Hex> ValidTargets(WorldMap w, Hex h) {

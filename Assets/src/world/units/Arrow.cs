@@ -46,16 +46,21 @@ namespace game.world
 
 			void Update() {
                 float speed = Time.deltaTime * 20f;
-                Vector3 direction = a.u.w.hero.transform.position - transform.position;
 
-                float angle = Mathf.Rad2Deg * Mathf.Atan2(direction.y, direction.x);
-
-                transform.eulerAngles = new Vector3(0, 0, angle + 180);
-                transform.localPosition += direction.normalized * speed;
-
-                if( (a.u.w.hero.transform.position - transform.position).magnitude < 0.1)
+                if (a.u.w.hero != null)
                 {
-                    Destroy(gameObject);
+                    Vector3 direction = a.u.w.hero.transform.position - transform.position;
+
+                    float angle = Mathf.Rad2Deg * Mathf.Atan2(direction.y, direction.x);
+
+                    transform.eulerAngles = new Vector3(0, 0, angle + 180);
+                    transform.localPosition += direction.normalized * speed;
+
+                    if ((a.u.w.hero.transform.position - transform.position).magnitude < 0.1)
+                    {
+                        a.u.w.hero.ApplyDamage(1, a.u);
+                        Destroy(gameObject);
+                    }
                 }
 			}
 		}
