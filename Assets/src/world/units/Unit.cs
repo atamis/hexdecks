@@ -86,7 +86,7 @@ namespace game.world.units {
 
 		public abstract List<Hex> GetAttackPattern ();
 
-		public void CheckDeath() {
+		public virtual void CheckDeath() {
 			if (health <= 0) {
 				Die();
 			}

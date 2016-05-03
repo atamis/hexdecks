@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using System;
 using System.Collections.Generic;
 using game.math;
@@ -71,6 +72,10 @@ namespace game {
         }
 
         void Update() {
+            if (world.hero.dead) {
+                return;
+            }
+
 			if (p.nextCommand != null) {
 				print("Executing command " + p.nextCommand);
 
