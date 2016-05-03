@@ -57,7 +57,7 @@ c = chest
 			case 'r':
 			case 'M':
 			case 'c':
-            case 's':
+      case 's':
 				return true;
 			default:
 				return false;
