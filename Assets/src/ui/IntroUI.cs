@@ -32,6 +32,41 @@ namespace game.ui {
 
 				i++;
 			}
+			Camera.main.backgroundColor = Color.black;
+			drawTitle();
+
+		}
+
+		private void drawTitle(){
+			GameObject textObj = new GameObject("Title Text");
+			textObj.transform.parent = transform;
+			textObj.transform.localPosition = new Vector3(0, 4, -0.1f);
+
+			TextMesh tm = textObj.AddComponent<TextMesh>();
+			tm.text = "HexDex";
+			tm.color = Color.white;
+			tm.font = IntroUI.font;
+			tm.alignment = TextAlignment.Center;
+			tm.anchor = TextAnchor.MiddleCenter;
+			tm.fontSize = 164;
+			tm.characterSize = 0.05f;
+			tm.GetComponent<Renderer>().material = font.material;
+			tm = textObj.AddComponent<TextMesh>();
+
+			GameObject textObj2 = new GameObject("Title Text");
+			textObj2.transform.parent = transform;
+			textObj2.transform.localPosition = new Vector3(0, -4, -0.1f);
+
+			TextMesh tm2 = textObj2.AddComponent<TextMesh>();
+			tm2.text = "Created By: Dan Marsh, Nick Care, Andrew Amis, Robert Tomcik, Dan Karcher";
+			tm2.color = Color.white;
+			tm2.font = IntroUI.font;
+			tm2.alignment = TextAlignment.Center;
+			tm2.anchor = TextAnchor.MiddleCenter;
+			tm2.fontSize = 64;
+			tm2.characterSize = 0.05f;
+			tm2.GetComponent<Renderer>().material = font.material;
+			tm2 = textObj.AddComponent<TextMesh>();
 		}
 
 		private class UILoadButton : MonoBehaviour {
