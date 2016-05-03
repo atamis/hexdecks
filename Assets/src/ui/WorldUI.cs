@@ -1,9 +1,11 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 using game.math;
 using game.world;
 using game.tcg;
 using game.tcg.cards;
+using System;
 
 namespace game.ui {
 	enum GameState {
@@ -37,7 +39,9 @@ namespace game.ui {
 			menu.transform.parent = gc.transform;
 
             magCard = new GameObject("Magnified Card").AddComponent<MagnifiedCardModel>();
-		}
+
+
+        }
 
         void Update() {
 			// UPDATE HUD LOCATION
@@ -119,7 +123,7 @@ namespace game.ui {
 				private SpriteRenderer sr;
 				private string text;
 
-				private TextMesh tm;
+				public TextMesh tm;
 				private GameObject textObj;
 
 				public void init(string text) {
@@ -151,12 +155,29 @@ namespace game.ui {
 			}
 		}
 
+        public class GameOverScreen : CustomUIFeature {
+            public override Sprite GetSprite() {
+                return null;
+            }
+
+            public override string GetText() {
+                return "YOU DIED";
+            }
+
+            public override string GetTooltip() {
+                return "YOU DIED";
+            }
+        }
+
         private class WorldHUD : MonoBehaviour {
 			private List<UICard> cards;
             private UIHealthFeature hf;
 			private UIBuffFeature bf;
 			private UIActionFeature af;
 			private SpriteRenderer sr;
+            private GameOverScreen goScreen;
+            private float deathTime;
+
 			public Vector3[] card_locs = new Vector3[] { 
 				new Vector3 (2f, .75f, 0), new Vector3 (1f, 1f, 0), new Vector3 (0f, 1.25f, 0), 
 				new Vector3 (-1f, 1f, 0), new Vector3 (-2f, .75f, 0),
@@ -191,9 +212,9 @@ namespace game.ui {
 
 				af.transform.parent = transform;
 				af.transform.localPosition = new Vector3 (1.5f, 0, -1);
-
-				// CARDS
-				cards = new List<UICard> ();
+                
+                // CARDS
+                cards = new List<UICard> ();
 				for (int i = 0; i < 5; i++) {
 					UICard c = new GameObject ("Card").AddComponent<UICard> ();
 					c.init (ui, i);
@@ -214,7 +235,22 @@ namespace game.ui {
 					i++;
 				}
 
-			}
+                if (goScreen == null && ui.gm.world.hero.dead) {
+                    goScreen = new GameObject("End Game Screen").AddComponent<GameOverScreen>();
+                    goScreen.init(ui);
+                    goScreen.tm.color = Color.red;
+
+                    goScreen.transform.parent = transform;
+                    goScreen.transform.localPosition = new Vector3(0, 4f, -1);
+
+                    deathTime = Time.time;
+                }
+
+                if (goScreen != null && Time.time - deathTime > 5) {
+                    SceneManager.LoadScene("Main");
+                }
+
+            }
 
             private class UIHealthFeature : CustomUIFeature {
                 public override Sprite GetSprite() {

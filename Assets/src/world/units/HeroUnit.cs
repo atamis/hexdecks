@@ -12,12 +12,19 @@ namespace game.world.units {
 		const float spriteInterval = .8f;
 		float lastSwitch;
 		int idx;
+        public bool dead = false;
 
         public void init(WorldMap w, Hex h)
         {
             base.init(w, h, 10);
             idx = 0;
             lastSwitch = timer;
+        }
+
+        public override void CheckDeath() {
+            if (health <= 0) {
+                dead = true;
+            }
         }
 
         public override Sprite getSprite()
