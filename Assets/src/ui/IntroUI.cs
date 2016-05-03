@@ -51,7 +51,6 @@ namespace game.ui {
 			tm.fontSize = 164;
 			tm.characterSize = 0.05f;
 			tm.GetComponent<Renderer>().material = font.material;
-			tm = textObj.AddComponent<TextMesh>();
 
 			GameObject textObj2 = new GameObject("Title Text");
 			textObj2.transform.parent = transform;
@@ -66,7 +65,6 @@ namespace game.ui {
 			tm2.fontSize = 64;
 			tm2.characterSize = 0.05f;
 			tm2.GetComponent<Renderer>().material = font.material;
-			tm2 = textObj.AddComponent<TextMesh>();
 		}
 
 		private class UILoadButton : MonoBehaviour {
