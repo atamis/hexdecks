@@ -137,7 +137,7 @@ namespace game.world {
 		}
 
 		public override Sprite getSprite() {
-			return Resources.Load<Sprite>("Sprites/Diamond");
+			return Resources.Load<Sprite>("Sprites/Tiles/T_Enterance");
 		}
 	}
 
