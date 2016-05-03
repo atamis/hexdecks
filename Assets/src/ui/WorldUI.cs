@@ -92,7 +92,7 @@ namespace game.ui {
 				textObj.transform.localPosition = new Vector3(0, 0, -0.5f);
 
 				tm = textObj.AddComponent<TextMesh>();
-				tm.text = GetText ();
+				//tm.text = GetText ();
 				tm.color = Color.black;
 				tm.alignment = TextAlignment.Center;
 				tm.anchor = TextAnchor.MiddleCenter;
@@ -128,7 +128,7 @@ namespace game.ui {
 
 				public void init(string text) {
 					this.text = text;
-				
+
 					sr = gameObject.AddComponent<SpriteRenderer> ();
 					sr.sprite = Resources.Load<Sprite> ("Sprites/UI/T_Wood");
 					gameObject.transform.localScale = new Vector3 (.5f, .5f, 1);
@@ -172,14 +172,14 @@ namespace game.ui {
         private class WorldHUD : MonoBehaviour {
 			private List<UICard> cards;
             private UIHealthFeature hf;
-			private UIBuffFeature bf;
-			private UIActionFeature af;
+			//private UIBuffFeature bf;
+			//private UIActionFeature af;
 			private SpriteRenderer sr;
             private GameOverScreen goScreen;
             private float deathTime;
 
-			public Vector3[] card_locs = new Vector3[] { 
-				new Vector3 (2f, .75f, 0), new Vector3 (1f, 1f, 0), new Vector3 (0f, 1.25f, 0), 
+			public Vector3[] card_locs = new Vector3[] {
+				new Vector3 (2f, .75f, 0), new Vector3 (1f, 1f, 0), new Vector3 (0f, 1.25f, 0),
 				new Vector3 (-1f, 1f, 0), new Vector3 (-2f, .75f, 0),
 			};
 
@@ -200,19 +200,19 @@ namespace game.ui {
 				hf.transform.localPosition = new Vector3 (0, 0, -1);
 
 				// BUFFs FEATURE
-				bf = new GameObject ("Buff Feature").AddComponent<UIBuffFeature> ();
-				bf.init (ui);
+				//bf = new GameObject ("Buff Feature").AddComponent<UIBuffFeature> ();
+				//bf.init (ui);
 
-				bf.transform.parent = transform;
-				bf.transform.localPosition = new Vector3 (-1.5f, 0, -1);
+				//bf.transform.parent = transform;
+				//bf.transform.localPosition = new Vector3 (-1.5f, 0, -1);
 
 				// ACTIONS FEATURE
-				af = new GameObject ("Action Feature").AddComponent<UIActionFeature> ();
-				af.init (ui);
+				//af = new GameObject ("Action Feature").AddComponent<UIActionFeature> ();
+				//af.init (ui);
 
-				af.transform.parent = transform;
-				af.transform.localPosition = new Vector3 (1.5f, 0, -1);
-                
+				//af.transform.parent = transform;
+				//af.transform.localPosition = new Vector3 (1.5f, 0, -1);
+
                 // CARDS
                 cards = new List<UICard> ();
 				for (int i = 0; i < 5; i++) {
@@ -226,7 +226,7 @@ namespace game.ui {
 					cards.Add(c);
 				}
             }
-				
+
 			void Update() {
 				// UPDATE THE CARD LOCATIONS
 				int i = 0;
@@ -370,7 +370,7 @@ namespace game.ui {
 
                 string builder = "";
                 descTm.text = "";
-                float rowLimit = 0.83f; //find the sweet spot    
+                float rowLimit = 0.83f; //find the sweet spot
                 string text = card.getDescription();
                 string[] parts = text.Split(' ');
                 for (int i = 0; i < parts.Length; i++) {
