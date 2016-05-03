@@ -46,7 +46,7 @@ namespace game.world
                 //transform.localScale = new Vector3(2, 2, 2);
                 transform.localPosition = LayerV.UnitFX + new Vector3(0, 0, 0);
                 sr = gameObject.AddComponent<SpriteRenderer>();
-                sr.sprite = Resources.Load<Sprite>("Sprites/UI/T_PlusIcon");
+                sr.sprite = Resources.Load<Sprite>("Sprites/Particles/Zzz");
 
                 sr.color = new Color(1, 1, 1);
                 sr.enabled = z.u.status.model.sr.enabled;
