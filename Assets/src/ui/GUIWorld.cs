@@ -297,7 +297,7 @@ namespace game.ui {
                 transform.localScale = new Vector3(3f, 3f, 1);
 
                 sr = gameObject.AddComponent<SpriteRenderer>();
-                sr.sprite = Resources.Load<Sprite>("Sprites/UI/T_CardBase");
+                sr.sprite = Resources.Load<Sprite>("Sprites/UI/T_CardBaseMagnify");
 
                 var font = Resources.Load<Font>("Fonts/LeagueSpartan-Bold");
 
