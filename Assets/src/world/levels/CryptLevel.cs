@@ -17,6 +17,8 @@ namespace game.world.levels {
 			return map;
 		}
 
+		public override int GetNextLevel() { return 1; }
+
 		public override List<TCGCard> GetDeck() {
 			List<TCGCard> deck = new List<TCGCard> ();
 			deck.Add (new FireballCard());
@@ -43,10 +45,6 @@ namespace game.world.levels {
 
 		public override Sprite GetWaterSprite() {
 			return t_water;
-		}
-
-		public override void GetNextLevel() {
-
 		}
 	}
 }

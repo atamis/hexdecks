@@ -8,7 +8,6 @@ namespace game.ui {
 		public static GameCamera gc;
 		public static NotificationManager ntm;
 		public static GUIBase gui { get; private set; }
-
 		private ScreenOverlay overlay;
 
 		void Awake() {
@@ -46,6 +45,7 @@ namespace game.ui {
 		public static void SetGUI(GUIType type) {
 			if (gui != null) {
 				gui.gameObject.SetActive (false);
+				gui.Delete ();
 				Destroy (gui.gameObject);
 				gui = null;
 			}
@@ -53,6 +53,12 @@ namespace game.ui {
 			switch (type) {
 			case GUIType.Intro:
 				gui = new GameObject ("Intro GUI").AddComponent<GUIIntro> ();
+				gc.SetLocation (new Vector3 (0, 0, 0));
+				gc.SetLock (true);
+				if (GameManager.world.hexes != null) {
+					Destroy (GameManager.world.hexes.gameObject);
+				}
+
 				break;
 			case GUIType.World:
 				gui = new GameObject ("World GUI").AddComponent<GUIWorld> ();

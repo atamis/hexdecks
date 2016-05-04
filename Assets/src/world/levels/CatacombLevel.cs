@@ -11,6 +11,8 @@ namespace game.world.levels {
 
 		public CatacombLevel() {}
 
+		public override int GetNextLevel() { return 5; }
+
 		public override string GetSceneName() {
 			return "Forgotten Catacombs";
 		}
@@ -42,10 +44,6 @@ namespace game.world.levels {
 
 		public override Sprite GetWaterSprite() {
 			return t_water;
-		}
-
-		public override void GetNextLevel() {
-
 		}
 	}
 }

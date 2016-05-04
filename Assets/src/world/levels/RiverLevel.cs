@@ -10,6 +10,8 @@ namespace game.world.levels {
 
 		public RiverLevel() { }
 
+		public override int GetNextLevel() { return 3; }
+
 		public override WorldMap GetMap(GameManager gm) {
 			WorldMap map = SaveManager.LoadLevel (GameManager.l, "river", gm);
 
@@ -38,10 +40,6 @@ namespace game.world.levels {
 
 		public override Sprite GetWaterSprite() {
 			return t_water;
-		}
-
-		public override void GetNextLevel() {
-
 		}
 	}
 }

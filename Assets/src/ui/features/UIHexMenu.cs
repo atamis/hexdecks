@@ -10,7 +10,7 @@ namespace game.ui.features {
 			}
 
 			void OnMouseDown() {
-				SceneManager.LoadSceneAsync("Intro");
+				UIManager.SetGUI (GUIType.Intro);
 			}
 		}
 

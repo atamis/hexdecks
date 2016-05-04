@@ -96,6 +96,7 @@
      <Compile Include="Assets\src\world\levels\MireLevel.cs" />
      <Compile Include="Assets\src\world\levels\RiverLevel.cs" />
      <Compile Include="Assets\src\world\levels\VolcanoLevel.cs" />
+     <Compile Include="Assets\src\world\triggers\NextLevelTrigger.cs" />
      <Compile Include="Assets\src\world\triggers\Trigger.cs" />
      <Compile Include="Assets\src\world\triggers\TutorialTrigger.cs" />
      <Compile Include="Assets\src\world\units\Arrow.cs" />

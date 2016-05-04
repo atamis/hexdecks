@@ -102,46 +102,6 @@ namespace game.world.triggers {
 		}
 	}
 
-	class EndLevelTrigger : Trigger {
-		bool endingGame;
-		float timer = 10;
-
-		public override void init(Hex h) {
-			base.init(h);
-		}
-
-		void Update() {
-			if (endingGame) {
-				timer -= Time.deltaTime;
-
-				if (timer <= 0) {
-					SceneManager.LoadSceneAsync("Main");
-				}
-			}
-		}
-
-		void OnGUI() {
-			if (endingGame) {
-				GUI.color = Color.red;
-				GUI.Label(new Rect(Screen.width / 2, Screen.height / 2, 120, 120), "You've got mail (1) " + timer);
-			}
-		}
-
-		public override void UnitEnter(Unit u) {
-			if (u.GetType() == typeof(HeroUnit)) {
-				endingGame = true;
-			}
-		}
-
-		public override void UnitLeave(Unit u) {
-
-		}
-
-		public override Sprite getSprite() {
-			return Resources.Load<Sprite>("Sprites/Tiles/T_Enterance");
-		}
-	}
-
     class ChestTrigger : Trigger {
         TCGCard c;
         public void init(Hex h, TCGCard c) {

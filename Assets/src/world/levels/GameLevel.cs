@@ -16,7 +16,7 @@ namespace game.world.levels {
 
 		public abstract List<TCGCard> GetDeck();
 
-		public abstract void GetNextLevel();
+		public abstract int GetNextLevel();
 	}
 }
 

@@ -54,6 +54,12 @@ namespace game.ui {
 			}
         }
 
+		public override void Delete () {
+			Destroy (ib.gameObject);
+			Destroy (menu.gameObject);
+			Destroy (magCard.gameObject);
+		}
+
 		public abstract class CustomUIFeature : MonoBehaviour {
 			internal SpriteRenderer sr;
 			private PolygonCollider2D coll;

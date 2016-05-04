@@ -10,6 +10,8 @@ namespace game.world.levels {
 
 		public VolcanoLevel() { }
 
+		public override int GetNextLevel() { return 4; }
+
 		public override WorldMap GetMap(GameManager gm) {
 			WorldMap map = SaveManager.LoadLevel (GameManager.l, "volcano", gm);
 
@@ -38,10 +40,6 @@ namespace game.world.levels {
 
 		public override Sprite GetWaterSprite() {
 			return t_water;
-		}
-
-		public override void GetNextLevel() {
-
 		}
 	}
 }

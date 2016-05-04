@@ -12,7 +12,7 @@ namespace game.world {
 
 	class WorldMap {
 		public Dictionary<HexLoc, Hex> map;
-		private GameObject hFolder;
+		public GameObject hexes;
 
 		public Layout l;
 		public HeroUnit hero;
@@ -27,7 +27,7 @@ namespace game.world {
 			this.turns = 0;
 
 			map = new Dictionary<HexLoc, Hex> ();
-			hFolder = new GameObject("Hexes");
+			hexes = new GameObject("Hexes");
 
             enemies = new List<EnemyUnit>();
             summoners = new List<SummonerEnemy>();
@@ -37,7 +37,7 @@ namespace game.world {
 			Hex h = new GameObject ("Hex " + hl.ToString ()).AddComponent<Hex> ();
 			h.init (this, hl);
 
-			h.transform.parent = hFolder.transform;
+			h.transform.parent = hexes.transform;
 
 			map.Add(hl, h);
 			return h;

@@ -27,10 +27,8 @@ namespace game.world.units {
             }
         }
 
-        public override Sprite getSprite()
-        {
-            if (timer >= lastSwitch + spriteInterval)
-            {
+        public override Sprite getSprite() {
+            if (timer >= lastSwitch + spriteInterval) {
                 lastSwitch = timer;
                 idx = idx + 1;
                 idx = idx % 3;
@@ -38,8 +36,7 @@ namespace game.world.units {
             return sprites[idx];
         }
 
-        public override List<Hex> GetAttackPattern ()
-		{
+        public override List<Hex> GetAttackPattern () {
 			return new List<Hex>();
 		}
 	}
