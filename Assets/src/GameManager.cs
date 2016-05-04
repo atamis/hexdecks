@@ -15,6 +15,7 @@ namespace game {
 		public static GameManager instance;
 		public static Layout l = new Layout(Orientation.Pointy, new Vector2(1, 1), new Vector2(0, 0));
 		public static Player p;
+		public static AudioManager audiom;
 		public static WorldMap world;
 		public static GameLevel level;
 
@@ -51,6 +52,8 @@ namespace game {
 
 			gameObject.AddComponent<RenderManager> ();
 			gameObject.AddComponent<UIManager> ();
+			audiom = gameObject.AddComponent<AudioManager>();
+
 			p = new Player();
 		}
 
