@@ -297,7 +297,7 @@ namespace game.ui {
                 transform.localScale = new Vector3(3f, 3f, 1);
 
                 sr = gameObject.AddComponent<SpriteRenderer>();
-                sr.sprite = Resources.Load<Sprite>("Sprites/UI/T_CardBase");
+                sr.sprite = Resources.Load<Sprite>("Sprites/UI/T_CardBaseMagnify");
 
                 var font = Resources.Load<Font>("Fonts/LeagueSpartan-Bold");
 
@@ -334,11 +334,11 @@ namespace game.ui {
 
                 artObj = new GameObject("Card Art");
                 artObj.transform.parent = transform;
-                artObj.transform.localPosition = new Vector3(-0.008f, 0.056f, -0.3f);
+                artObj.transform.localPosition = new Vector3(-0.008f, 0.079f, -0.3f);
                 artObj.transform.localScale = new Vector3(0.5561915f, 0.547473f, 0.5f);
 
                 artSr = artObj.AddComponent<SpriteRenderer>();
-                artSr.sprite = Resources.Load<Sprite>("Sprites/Cards/Boulder");
+                artSr.sprite = Resources.Load<Sprite>("Sprites/Cards/Boulder1");
                 
                 Hide();
             }

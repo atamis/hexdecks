@@ -37,7 +37,7 @@ namespace game.ui {
 			this.gameObject.layer = LayerMask.NameToLayer("CardLayer");
 
 			sr = gameObject.AddComponent<SpriteRenderer> ();
-			sr.sprite = Resources.Load<Sprite> ("Sprites/UI/T_CardBase");
+			sr.sprite = Resources.Load<Sprite> ("Sprites/UI/T_CardBaseHand");
 			sr.material = new Material (Shader.Find ("Sprites/Default"));
 			sr.color = Color.white;
 
