@@ -53,7 +53,7 @@ namespace game.world {
                     transform.localPosition += direction.normalized * speed;
 
                     if ((a.u.w.hero.transform.position - transform.position).magnitude < 0.5f) {
-						AudioManager.audioS.PlayOneShot(AudioManager.meleeSound);
+						AudioManager.audioS.PlayOneShot(AudioManager.arrowSound);
                         a.u.w.hero.ApplyDamage(1, a.u);
                         Destroy(gameObject);
                     }

@@ -8,7 +8,8 @@ namespace game {
         private AudioClip loopTrack;
 		public static AudioClip unlockSound = Resources.Load<AudioClip>("Audio/World/OpenLock");
 		public static AudioClip meleeSound = Resources.Load<AudioClip>("Audio/World/MeleeDamage");
-		public AudioClip arrowSound = Resources.Load<AudioClip>("Audio/World/RangedDamage");
+		public static AudioClip arrowSound = Resources.Load<AudioClip>("Audio/World/RangedDamage");
+        public static AudioClip aggroSound = Resources.Load<AudioClip>("Audio/World/Aggro Sound");
         //private bool looping = false;
 
         void Start() {
