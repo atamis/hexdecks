@@ -17,6 +17,7 @@ namespace game.ui {
 		public Vector3 origin;
 
 		private SpriteRenderer sr;
+        private SpriteRenderer artSr;
 		private BoxCollider2D bc;
 
 		private TCGCard card {
@@ -35,6 +36,7 @@ namespace game.ui {
             this.idx = idx;
 			this.tag = "Card";
 			this.gameObject.layer = LayerMask.NameToLayer("CardLayer");
+            this.transform.localPosition = new Vector3(0, 0, -1);
 
 			sr = gameObject.AddComponent<SpriteRenderer> ();
 			sr.sprite = Resources.Load<Sprite> ("Sprites/UI/T_CardBaseHand");
@@ -57,10 +59,19 @@ namespace game.ui {
 			tm.color = Color.black;
 			tm.font = UIManager.font;
 			tm.GetComponent<Renderer>().material = UIManager.font.material;
-		}
 
-		void Update() {
+            var artObj = new GameObject("Card Art");
+            artObj.transform.parent = transform;
+            artObj.transform.localPosition = new Vector3(-0.008f, 0.079f, -0.3f);
+            artObj.transform.localScale = new Vector3(0.5561915f, 0.547473f, 0.5f);
+
+            artSr = artObj.AddComponent<SpriteRenderer>();
+
+        }
+
+        void Update() {
 			tm.text = card.GetName();
+            artSr.sprite = card.GetSprite();
 
 			if (this.state != CardState.Dragging) {
 				transform.position = Vector3.MoveTowards (transform.position, origin, 1.0f);
