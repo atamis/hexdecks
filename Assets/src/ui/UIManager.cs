@@ -8,6 +8,7 @@ namespace game.ui {
 		public static GameCamera gc;
 		public static NotificationManager ntm;
 		public static GUIBase gui { get; private set; }
+
 		private ScreenOverlay overlay;
 
 		void Awake() {
@@ -58,17 +59,32 @@ namespace game.ui {
 				if (GameManager.world.hexes != null) {
 					Destroy (GameManager.world.hexes.gameObject);
 				}
-
 				break;
+
 			case GUIType.World:
 				gui = new GameObject ("World GUI").AddComponent<GUIWorld> ();
 				gc.SetLocation (GameManager.l.HexPixel (GameManager.world.hero.h.loc));
 				gc.SetLock (false);
 				instance.overlay.FadeToColor (Color.black, Color.clear);
 				break;
+
 			default:
 				break;
 			}
+		}
+
+		public static void MakeMessage(string msg) {
+			if (gui.GetType () != typeof(GUIWorld)) {
+				Debug.Log ("Can't make a message outside of World!");
+				return;
+			}
+			UIMessage m = new GameObject ("UI Message").AddComponent<UIMessage> ();
+			m.init (msg);
+
+			m.transform.parent = gc.transform;
+			m.transform.localPosition = new Vector3 (-3, -1, 0);
+
+			//gc.SetLock (true);
 		}
 	}
 }

@@ -25,17 +25,28 @@ namespace game.world.levels {
 		public override int GetNextLevel() { return 1; }
 
 		public override WorldMap GetMap(GameManager gm) {
-			WorldMap map = SaveManager.LoadLevel (GameManager.l, "forest", gm);
+			WorldMap world = SaveManager.LoadLevel (GameManager.l, "forest", gm);
 
-			// TRIGGER 1
-			TutorialTrigger tt0 = new GameObject ("Tutorial Trigger").AddComponent<TutorialTrigger> ();
-			tt0.init (map.map [new HexLoc (4, 1, -5)]);
+			// TUTORIAL TRIGGERS
+			int i = 0;
+			HexLoc[] tlocs = new HexLoc[] {
+				new HexLoc (4, 1, -5),
+				new HexLoc (3, 4, -7),
+				new HexLoc (13, 11, -24), // tactical manuvers
+				new HexLoc (22, 2, -24), // intro to cards
+				new HexLoc (23, 1, -24), // intro to 
+				new HexLoc (37, 12, -49),
+			};
 
-			// TRIGGER 2
-			//TutorialTrigger tt1 = new GameObject ("Tutorial Trigger").AddComponent<TutorialTrigger> ();
-			//tt1.init (map.map [new HexLoc (4, 1, -5)]);
+			foreach (HexLoc hl in tlocs) {
+				TutorialTrigger tt = new GameObject("Tutorial Trigger").AddComponent<TutorialTrigger>();
+				tt.init(world.map[hl]);
+				tt.id = i;
 
-			return map;
+				i++;
+			}
+
+			return world;
 		}
 			
 		public override List<TCGCard> GetDeck() {

@@ -2,6 +2,7 @@
 using System.Collections;
 using game.world.units;
 using game.ui;
+using game.math;
 
 /*
  * 0 - intro
@@ -23,35 +24,47 @@ namespace game.world.triggers {
 			"Your objective is to reach purple portal!",											// 1
 			"But vicious enemies stand in your way! Click on them to attack",						// 2
 			"Whenver you move, your enemies move as well, they get to attack too!",					// 3
-			"Scattered around the world are some chests filled with ancient magicks. Collect them", // 4
-			"They say that the fae are a slippery folk, you too can dash around quickly",			// 5
+			"Scattered around the world are some chests filled with ancient magicks. Collect them.", // 4
+			"It was a favorite prank of the merfolk to drop a boulder on an unsuspecting friend",			// 5
 			"Now that you've harnessed the power of the efreet, you can cast fireballs",			// 6
 			"You're as agile as a fish! You can jump around more!",									// 7
-			"It was a favorite prank of the merfolk to drop a boulder on an unsuspecting friend",	// 8
+			"",		// 8
 			"Remenants of the previous crusades are littered about the crypt",						// 9
 			"",
 		};
 
-		private int id = 0;
+		public int id { get; set; }
 
-		public void init (Hex h, int id) {
+		public GodrayModel model2;
+
+		public override void init (Hex h) {
 			base.init (h);
 			this.id = id;
-		}
 
+			model2 = new GameObject ("Godray Model").AddComponent<GodrayModel> ();
+			model2.transform.parent = h.transform;
+			model2.transform.localScale = new Vector3 (2f, 2f, 1);
+			model2.transform.localPosition = new Vector3 (0, 0, Layer.Hex - 0.1f);
+			model2.init ();
+		}
+			
 		public override void UnitEnter (Unit u) {
-			// Post Message
-			new GameObject("Message Box").AddComponent<UIMessageBox>().init(messages[this.id]);
+			// POST THE MESSAGE
+			UIManager.MakeMessage(messages[this.id]);
 
 			switch (this.id) {
 			case 0:
 				break;
 			case 1:
-				// move camera to objective location
+				UIManager.gc.SetGoal(GameManager.l.HexPixel (new HexLoc(37, 13, -50)));
+				UIManager.gc.SetLock (true);
 				break;
 			default:
 				break;
 			}
+
+			Destroy (model2.gameObject);
+			Suicide();
 		}
 
 		public override void UnitLeave (Unit u) {

@@ -21,7 +21,9 @@ namespace game.ui {
 		}
 
 		public void SetGoal(Vector3 dest) {
-			goal = dest;
+			if (!locked) {
+				goal = dest;
+			}
 		}
 
 		public void SetLock(bool locked) {
@@ -42,6 +44,7 @@ namespace game.ui {
 			if (goal.HasValue) {
 				if (closeToGoal()) {
 					goal = null;
+					locked = false;
 				} else {
 					transform.localPosition = Vector3.Slerp(transform.localPosition, goal.Value, 0.05f);
 				}

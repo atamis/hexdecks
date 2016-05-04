@@ -334,7 +334,6 @@ namespace game.ui {
 
 
                 Hide();
-
             }
 
             void Show() {
@@ -353,7 +352,6 @@ namespace game.ui {
                     }
                     builder = descTm.text;
                 }
-
             }
 
             void Hide() {

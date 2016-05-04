@@ -26,7 +26,7 @@ namespace game.world.triggers {
 			}
 		}
 
-		TriggerModel model;
+		internal TriggerModel model;
         private bool dead;
 
         public virtual void init(Hex h) {
@@ -64,8 +64,8 @@ namespace game.world.triggers {
             }
 		}
 
-		private class TriggerModel : MonoBehaviour {
-			SpriteRenderer sr;
+		internal class TriggerModel : MonoBehaviour {
+			public SpriteRenderer sr;
 			Trigger t;
 
 			public void init(Trigger t) {
@@ -154,4 +154,19 @@ namespace game.world.triggers {
         public override void UnitLeave(Unit u) {
         }
     }
+
+	public class GodrayModel : MonoBehaviour {
+		private SpriteRenderer sr;
+		private float ticks = 0.0f;
+
+		public void init() {
+			sr = gameObject.AddComponent<SpriteRenderer> ();
+			sr.sprite = Resources.Load<Sprite>("Sprites/godrays");
+		}
+
+		void Update() {
+			ticks += 0.005f;
+			sr.color = new Color(1, 1, 1, Mathf.Abs (Mathf.Sin (ticks)));
+		}
+	}
 }

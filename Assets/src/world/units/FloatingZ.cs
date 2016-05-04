@@ -4,10 +4,8 @@ using game.world.units;
 using game.math;
 using System;
 
-namespace game.world
-{
-	class FloatingZ : MonoBehaviour
-	{
+namespace game.world {
+	class FloatingZ : MonoBehaviour {
 		public Unit u;
 		public StatusModel model;
         private float deathTimer;
@@ -36,17 +34,17 @@ namespace game.world
 		}
 
 		public class StatusModel : MonoBehaviour {
+			private Sprite tex = Resources.Load<Sprite>("Sprites/Particles/Zzz");
 			public FloatingZ z;
 			public SpriteRenderer sr;
 
-            public void init(FloatingZ z)
-            {
+            public void init(FloatingZ z) {
                 this.z = z;
 
                 //transform.localScale = new Vector3(2, 2, 2);
                 transform.localPosition = LayerV.UnitFX + new Vector3(0, 0, 0);
                 sr = gameObject.AddComponent<SpriteRenderer>();
-                sr.sprite = Resources.Load<Sprite>("Sprites/Particles/Zzz");
+				sr.sprite = tex;
 
                 sr.color = new Color(1, 1, 1);
                 sr.enabled = z.u.status.model.sr.enabled;

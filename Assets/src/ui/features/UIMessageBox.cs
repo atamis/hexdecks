@@ -2,23 +2,22 @@
 using System.Collections;
 
 namespace game.ui {
-	class UIMessageBox : MonoBehaviour {
+	class UIMessage : MonoBehaviour {
 		private SpriteRenderer sr;
 		private GameObject textObj;
 		private TextMesh tm;
-		private string message;
 
 		UICloseButton cb;
 
 		private class UICloseButton : MonoBehaviour {
 			private SpriteRenderer sr;
 			private BoxCollider2D coll;
-			private UIMessageBox mb;
+			private UIMessage mb;
 
-			public void init(UIMessageBox mb) {
+			public void init(UIMessage mb) {
 				this.mb = mb;
 
-				transform.localPosition = new Vector3 (0, 0, Layer.HUDFX);
+				transform.localPosition = new Vector3 (1.5f, -.75f, Layer.HUDFX);
 
 				sr = gameObject.AddComponent<SpriteRenderer> ();
 				sr.sprite = Resources.Load<Sprite> ("Sprites/UI/T_Wood");
@@ -28,15 +27,12 @@ namespace game.ui {
 			}
 
 			void OnMouseDown() {
-				Debug.Log ("Boop!");
-				this.mb.Die ();
+				Destroy (this.mb.gameObject);
 			}
 		}
 
-		public void init(string message) {
-			this.message = message;
-
-			gameObject.transform.position = new Vector3 (0, 0, Layer.HUD);
+		public void init(string msg) {
+			transform.localPosition = new Vector3 (0, 0, Layer.HUD);
 
 			// BACKGROUND
 			sr = gameObject.AddComponent<SpriteRenderer> ();
@@ -45,27 +41,39 @@ namespace game.ui {
 			// EXIT Button
 			cb = new GameObject("Exit Button").AddComponent<UICloseButton> ();
 			cb.init (this);
-			cb.transform.parent = transform;
 
-			var font = Resources.Load<Font>("Fonts/LeagueSpartan-Bold");
+			cb.transform.localScale = new Vector3 (.25f, .5f, 1);
+
+			cb.transform.parent = transform;
 
 			textObj = new GameObject("Card Text");
 			textObj.transform.parent = transform;
-			textObj.transform.localPosition = new Vector3(-0.40f, 0.5f, -0.1f);
+			textObj.transform.localPosition = new Vector3(0, 0, -.1f);
 
 			tm = textObj.AddComponent<TextMesh>();
-			tm.text = message;
-			tm.fontSize = 148;
-			tm.characterSize = 0.008f;
+			tm.fontSize = 64;
+			tm.characterSize = 0.04f;
 			tm.color = Color.black;
-			tm.font = font;
-			tm.GetComponent<Renderer>().material = font.material;
-		}
+			tm.alignment = TextAlignment.Center;
+			tm.anchor = TextAnchor.MiddleCenter;
+			tm.font = UIManager.font;
+			tm.GetComponent<Renderer>().material = UIManager.font.material;
 
-		public void Die() {
-			gameObject.SetActive (false);
-			Destroy (this);
-			Debug.Log ("Died");
+			float rowLimit = 2.0f; //find the sweet spot
+			string builder = "";
+			string text = msg;
+			string[] parts = text.Split(' ');
+			tm.text = "";
+
+			for (int i = 0; i < parts.Length; i++) {
+				tm.text += parts[i] + " ";
+
+				if (tm.GetComponent<Renderer>().bounds.extents.x > rowLimit) {
+					tm.text = builder.TrimEnd() + System.Environment.NewLine + parts[i] + " ";
+				}
+
+				builder = tm.text;
+			}
 		}
 	}
 }
