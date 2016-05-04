@@ -4,38 +4,26 @@ using game.world.units;
 using game.ui;
 using game.math;
 
-/*
- * 0 - intro
- * 1 - move camera to location
- * 2 - enemy basics
- * 3 - enemy movement
- * 4 - chests
- * 5 - description of a card
- * 6 -
- * 7 -
- * 
- * 
- */
-
 namespace game.world.triggers {
 	class TutorialTrigger : Trigger {
 		private string[] messages = new string[] {
-			"Hello Player! To move around the world click on and of the tiles!", 					// 0
-			"Your objective is to reach purple portal!",											// 1
-			"But vicious enemies stand in your way! Click on them to attack",						// 2
-			"Whenver you move, your enemies move as well, they get to attack too!",					// 3
-			"Scattered around the world are some chests filled with ancient magicks. Collect them.", // 4
-			"It was a favorite prank of the merfolk to drop a boulder on an unsuspecting friend",			// 5
-			"Now that you've harnessed the power of the efreet, you can cast fireballs",			// 6
-			"You're as agile as a fish! You can jump around more!",									// 7
-			"",		// 8
-			"Remenants of the previous crusades are littered about the crypt",						// 9
+			"Greetings Summoner! To move around the world click on and of the tiles!", 					// 0
+			"Your objective is to reach purple portal!",												// 1
+			"But vicious enemies stand in your way! Click on them to attack",							// 2
+			"Whenver you move, your enemies move as well, they get to attack too!",						// 3
+			"You also have special cards that you can play! To see where you can use it hover over it",	// 4
+			"Scattered around the world are some chests filled with ancient magicks. Collect them.", 	// 5
+			"It was a favorite prank of the merfolk to drop a boulder on an unsuspecting friend",		// 6
+			"Now that you've harnessed the power of the efreet, you can cast fireballs",				// 7
+			"You're as agile as a fish! You can jump around more!",										// 8
+			"",																// 9		
+			"Remenants of the previous crusades are littered about the crypt",							// 10
 			"",
+			"You can't travel through some terrain.",
 		};
-
-		public int id { get; set; }
-
+			
 		public GodrayModel model2;
+		public int id { get; set; }
 
 		public override void init (Hex h) {
 			base.init (h);
@@ -67,13 +55,9 @@ namespace game.world.triggers {
 			Suicide();
 		}
 
-		public override void UnitLeave (Unit u) {
-			
-		}
+		public override void UnitLeave (Unit u) { }
 
-		public override Sprite getSprite () {
-			return null;
-		}
+		public override Sprite getSprite () { return null; }
 	}
 }
 
