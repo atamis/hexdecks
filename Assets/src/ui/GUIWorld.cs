@@ -190,30 +190,14 @@ namespace game.ui {
 				hf.transform.parent = transform;
 				hf.transform.localPosition = new Vector3 (0, 0, -1);
 
-				// BUFFs FEATURE
-				//bf = new GameObject ("Buff Feature").AddComponent<UIBuffFeature> ();
-				//bf.init (ui);
-
-				//bf.transform.parent = transform;
-				//bf.transform.localPosition = new Vector3 (-1.5f, 0, -1);
-
-				// ACTIONS FEATURE
-				//af = new GameObject ("Action Feature").AddComponent<UIActionFeature> ();
-				//af.init (ui);
-
-				//af.transform.parent = transform;
-				//af.transform.localPosition = new Vector3 (1.5f, 0, -1);
-
                 // CARDS
                 cards = new List<UICard> ();
 				for (int i = 0; i < 5; i++) {
 					UICard c = new GameObject ("Card").AddComponent<UICard> ();
 					c.init (ui, i);
-					//c.SetColor (cs [i]);
 
 					c.transform.localPosition = new Vector3 (0, 1, 0);
 					c.transform.parent = transform;
-					//c.SetOrigin (Camera.main.ScreenToWorldPoint(new Vector3(px, py, 1)));
 					cards.Add(c);
 				}
             }

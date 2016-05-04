@@ -62,6 +62,10 @@ namespace game {
 		}
 
 		public static void LoadLevel(int id) {
+			if (world != null) {
+				Destroy (world.hexes.gameObject);
+			}
+
 			level = LevelRegistery<GameLevel>.Create (id);
 			world = level.GetMap (instance);
 
