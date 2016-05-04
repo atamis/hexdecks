@@ -3,11 +3,10 @@ using System.Collections;
 
 namespace game.ui {
 	class GameCamera : MonoBehaviour {
-		private ScreenOverlay overlay;
 		private Camera cam;
 		float speed = 1f;
 		private Vector3? goal;
-		private bool locked;
+		public bool locked { get; private set; }
 
         public void init(Camera cam) {
 			this.cam = cam;
@@ -17,14 +16,12 @@ namespace game.ui {
 			locked = false;
 		}
 
-		void Start() {
-			overlay = new GameObject("Overlay").AddComponent<ScreenOverlay> ();
-			overlay.transform.parent = transform;
-			overlay.init (this);
-        }
+		public void SetLocation(Vector3 dest) {
+			transform.localPosition = dest;
+		}
 
-		public void setLocation(Vector3 v) {
-			goal = v;
+		public void SetGoal(Vector3 dest) {
+			goal = dest;
 		}
 
 		public void SetLock(bool locked) {
@@ -53,7 +50,7 @@ namespace game.ui {
 			// Ensure 1 <= size <= 20.
 			cam.orthographicSize = System.Math.Min(System.Math.Max(1, cam.orthographicSize), 20);
 
-			if (locked == false) {
+			if (!locked) {
 				var control = new Vector3(0, 0, 0);
 				if (Input.GetKey(KeyCode.A)) {
 					control.x -= speed;
@@ -73,39 +70,6 @@ namespace game.ui {
 
 				// Include zoom-level to make zoomed-out movement faster.
 				transform.localPosition += control * Time.deltaTime * cam.orthographicSize;
-			}
-		}
-
-		private class ScreenOverlay : MonoBehaviour {
-			public SpriteRenderer sr;
-			private GameCamera gc;
-			private float fadeSpeed = 1.5f;
-
-			public void init(GameCamera gc) {
-				this.gc = gc;
-
-				sr = gameObject.AddComponent<SpriteRenderer> ();
-				sr.sprite = Resources.Load<Sprite> ("Sprites/Square");
-				sr.color = Color.black;
-			}
-
-			void Start() {
-				float h_screen = Camera.main.orthographicSize * 2;
-				float w_screen = h_screen / Screen.height * Screen.width;
-				transform.localScale = new Vector3(w_screen / sr.sprite.bounds.size.x, h_screen * sr.sprite.bounds.size.y, 1);
-			}
-
-			public void FadeToClear(Color start) {
-				sr.color = Color.Lerp (sr.color, Color.clear, fadeSpeed * Time.deltaTime);
-				/*
-				if (sr.color.a == 0) {
-					this.gc.locked = false;
-				}
-				*/
-			}
-
-			void Update() {
-				FadeToClear (Color.black);
 			}
 		}
 	}

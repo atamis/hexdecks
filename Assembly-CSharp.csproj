@@ -83,6 +83,7 @@
      <Compile Include="Assets\src\ui\features\UIContinueMenu.cs" />
      <Compile Include="Assets\src\ui\features\UIHexMenu.cs" />
      <Compile Include="Assets\src\ui\features\UIMessageBox.cs" />
+     <Compile Include="Assets\src\ui\features\UIOverlay.cs" />
      <Compile Include="Assets\src\ui\features\UITooltip.cs" />
      <Compile Include="Assets\src\world\Hex.cs" />
      <Compile Include="Assets\src\world\SaveManager.cs" />

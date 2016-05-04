@@ -9,6 +9,8 @@ namespace game.ui {
 		public static NotificationManager ntm;
 		public static GUIBase gui { get; private set; }
 
+		private ScreenOverlay overlay;
+
 		void Awake() {
 			if (instance != null) { 
 				Debug.Log ("Can't have more than one UIManager!");
@@ -22,6 +24,12 @@ namespace game.ui {
 		void Start() {
 			gc = new GameObject ("Game Camera").AddComponent<GameCamera> ();
 			gc.init (Camera.main);
+			gc.SetLock (true);
+
+			overlay = new GameObject ("Screen Overlay").AddComponent<ScreenOverlay> ();
+			overlay.init ();
+			overlay.transform.localPosition = new Vector3 (0, 0, -4);
+			overlay.transform.parent = gc.transform;
 		}
 
 		void Update() {
@@ -30,7 +38,7 @@ namespace game.ui {
 					Application.Quit ();
 
 				} else if (gui.GetType () == typeof(GUIWorld)) {
-					gc.SetLock (true);
+					gc.SetLock (!gc.locked);
 				}
 			}
 		}
@@ -48,7 +56,9 @@ namespace game.ui {
 				break;
 			case GUIType.World:
 				gui = new GameObject ("World GUI").AddComponent<GUIWorld> ();
-				gc.setLocation(GameManager.l.HexPixel(GameManager.world.hero.h.loc));
+				gc.SetLocation (GameManager.l.HexPixel (GameManager.world.hero.h.loc));
+				gc.SetLock (false);
+				instance.overlay.FadeToColor (Color.black, Color.clear);
 				break;
 			default:
 				break;
