@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 using game.tcg.cards;
+using game.world.triggers;
 
 namespace game.world {
 	class SaveManager {

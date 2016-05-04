@@ -23,7 +23,7 @@ namespace game.tcg.cards {
                 if (hex.unit != null) continue;
 
                 var mid = origin.loc + (hex.loc - origin.loc).Normalize();
-                UnityEngine.Debug.Log((hex.loc - origin.loc) + ", " + (hex.loc - origin.loc).Normalize() + ", " + mid);
+                //UnityEngine.Debug.Log((hex.loc - origin.loc) + ", " + (hex.loc - origin.loc).Normalize() + ", " + mid);
 
                 if (w.map.ContainsKey(mid) && w.map[mid].tileType == TileType.Wall) continue;
 

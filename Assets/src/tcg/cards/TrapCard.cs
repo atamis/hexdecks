@@ -1,9 +1,10 @@
-﻿using System;
+﻿using UnityEngine;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using game.world;
-using UnityEngine;
+using game.world.triggers;
 
 namespace game.tcg.cards {
     class TrapCard : TCGCard {

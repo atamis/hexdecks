@@ -3,8 +3,9 @@ using game.world.units;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using game.tcg.cards;
+using game.ui;
 
-namespace game.world {
+namespace game.world.triggers {
 	abstract class Trigger : MonoBehaviour {
 		private Hex _h;
 		public Hex h {
@@ -156,7 +157,7 @@ namespace game.world {
             if (u.GetType() == typeof(HeroUnit)) {
                 print("Added " + c + " to the player's deck");
                 GameManager.p.deck.Add(c);
-                GameManager.ntm.AddText(GameManager.l.HexPixel(h.loc), "+card", Color.black);
+                UIManager.ntm.AddText(GameManager.l.HexPixel(h.loc), "+card", Color.black);
 				Suicide();
             }
         }

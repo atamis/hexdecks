@@ -12,9 +12,7 @@ namespace game.world.levels {
 
 		public abstract Sprite GetImpassableSprite();
 
-		public abstract Sprite GetWaterSprite();
-
-		public abstract Light GetLight();
+		public abstract Sprite GetWaterSprite ();
 
 		public abstract List<TCGCard> GetDeck();
 

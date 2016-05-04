@@ -4,6 +4,7 @@ using game.math;
 using game.tcg;
 using System;
 using game.render;
+using game.ui;
 
 namespace game.world.units {
 	[System.Serializable]
@@ -57,6 +58,8 @@ namespace game.world.units {
 		public bool mousedOver;
 		public bool lastFrameMousedOver;
 
+		public abstract List<Hex> GetAttackPattern ();
+
 		public void init(WorldMap w, Hex h, int health) {
 			this.w = w;
 			this.h = h;
@@ -84,10 +87,9 @@ namespace game.world.units {
 
 		}
 
-		public abstract List<Hex> GetAttackPattern ();
-
 		public virtual void CheckDeath() {
 			if (health <= 0) {
+				RenderManager.instance.DustCloud (new Vector3(transform.position.x, transform.position.y, Layer.UnitsFX));
 				Die();
 			}
 		}
@@ -103,7 +105,7 @@ namespace game.world.units {
                     c = Color.red;
                 }
 
-				GameManager.ntm.AddText(transform.position, "-" + v, c);
+				UIManager.ntm.AddText(transform.position, "-" + v, c);
 				health = health - v;
 			}
 			CheckDeath();
@@ -113,8 +115,7 @@ namespace game.world.units {
             var old = health;
             health += v;
             health = Math.Min(maxHealth, health);
-            GameManager.ntm.AddText(h.transform.position, "+" + (health - old), Color.green);
-
+            UIManager.ntm.AddText(h.transform.position, "+" + (health - old), Color.green);
         }
 
         public virtual Sprite getSprite() {
@@ -130,8 +131,7 @@ namespace game.world.units {
             stunned.NewTurn();
         }
 
-        public virtual void TurnActions()
-        {
+        public virtual void TurnActions() {
 
         }
 

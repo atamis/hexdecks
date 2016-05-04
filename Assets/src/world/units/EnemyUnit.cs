@@ -35,17 +35,16 @@ namespace game.world.units {
     }
 
 	class MeleeEnemy : EnemyUnit {
-
-        Sprite[] sprites = new Sprite[2] {
+        private Sprite[] sprites = new Sprite[2] {
             Resources.Load<Sprite>("Sprites/Enemies/T_GoblinIdle1"),
             Resources.Load<Sprite>("Sprites/Enemies/T_GoblinIdle2")
         };
+
         const float spriteInterval = .8f;
         float lastSwitch;
         int idx;
 
-        public new void init(WorldMap w, Hex h)
-        {
+        public new void init(WorldMap w, Hex h) {
             base.init(w, h, 1);
             status.model.sr.enabled = true;
 
@@ -54,10 +53,8 @@ namespace game.world.units {
 
         }
 
-        public override Sprite getSprite()
-        {
-            if (timer >= lastSwitch + spriteInterval)
-            {
+        public override Sprite getSprite() {
+            if (timer >= lastSwitch + spriteInterval) {
                 lastSwitch = timer;
                 idx = idx + 1;
                 idx = idx % 2;
@@ -66,27 +63,21 @@ namespace game.world.units {
         }
 
 
-        private void attackAnimation()
-        {
+        private void attackAnimation() {
             Vector2 direction = w.hero.transform.position - transform.position;
 
         }
 
 
         public override void TurnActions() {
-
-			if (!persuing)
-			{
+			if (!persuing) {
 				var hero = w.hero;
 				Hex heroHex = hero.h;
 				var path = WorldPathfinding.Pathfind(w, h, heroHex);
 
-				if (path.Count <= 4)
-				{
+				if (path.Count <= 4) {
                     setPersuing();
-				}
-                else
-                {
+				} else {
                     Updated = true;
                 }
 			}
@@ -151,8 +142,7 @@ namespace game.world.units {
         }
     }
 
-	class BigMeleeEnemy: MeleeEnemy
-	{
+	class BigMeleeEnemy: MeleeEnemy {
         Sprite[] sprites = new Sprite[2] {
             Resources.Load<Sprite>("Sprites/Enemies/T_ShieldGoblinIdle1"),
             Resources.Load<Sprite>("Sprites/Enemies/T_ShieldGoblinIdle2")
@@ -160,7 +150,7 @@ namespace game.world.units {
         const float spriteInterval = .8f;
         float lastSwitch;
         int idx;
-				bool gotHit;
+		bool gotHit;
 
         public new void init(WorldMap w, Hex h)
         {
@@ -173,9 +163,8 @@ namespace game.world.units {
 
         }
 
-        public override Sprite getSprite()
-        {
-						if(gotHit == false && health == 1){
+        public override Sprite getSprite() {
+			if(gotHit == false && health == 1){
 								sprites = new Sprite[2] {
 				            Resources.Load<Sprite>("Sprites/Enemies/T_GoblinIdle1"),
 				            Resources.Load<Sprite>("Sprites/Enemies/T_GoblinIdle2")

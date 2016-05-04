@@ -19,7 +19,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>Temp\bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE;UNITY_5_3_1;UNITY_5_3;UNITY_5;ENABLE_NEW_BUGREPORTER;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_DUCK_TYPING;ENABLE_FRAME_DEBUGGER;ENABLE_GENERICS;ENABLE_HOME_SCREEN;ENABLE_IMAGEEFFECTS;ENABLE_LIGHT_PROBES_LEGACY;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_PLUGIN_INSPECTOR;ENABLE_SHADOWS;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;ENABLE_SPRITERENDERER_FLIPPING;ENABLE_SPRITES;ENABLE_SPRITE_POLYGON;ENABLE_TERRAIN;ENABLE_RAKNET;ENABLE_UNET;ENABLE_UNITYEVENTS;ENABLE_VR;ENABLE_WEBCAM;ENABLE_WWW;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_HUB;ENABLE_CLOUD_PROJECT_ID;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_METRICS;ENABLE_EDITOR_METRICS_CACHING;INCLUDE_DYNAMIC_GI;INCLUDE_GI;INCLUDE_IL2CPP;INCLUDE_DIRECTX12;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;ENABLE_LOCALIZATION;ENABLE_ANDROID_ATLAS_ETC1_COMPRESSION;ENABLE_EDITOR_TESTS_RUNNER;UNITY_STANDALONE_LINUX;UNITY_STANDALONE;UNITY_STANDALONE_LINUX_API;ENABLE_SUBSTANCE;ENABLE_TEXTUREID_MAP;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_UNITYWEBREQUEST;ENABLE_CLUSTERINPUT;ENABLE_WEBSOCKET_HOST;ENABLE_MONO;ENABLE_PROFILER;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_OSX</DefineConstants>
+    <DefineConstants>DEBUG;TRACE;UNITY_5_3_1;UNITY_5_3;UNITY_5;UNITY_64;ENABLE_NEW_BUGREPORTER;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_DUCK_TYPING;ENABLE_FRAME_DEBUGGER;ENABLE_GENERICS;ENABLE_HOME_SCREEN;ENABLE_IMAGEEFFECTS;ENABLE_LIGHT_PROBES_LEGACY;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_PLUGIN_INSPECTOR;ENABLE_SHADOWS;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;ENABLE_SPRITERENDERER_FLIPPING;ENABLE_SPRITES;ENABLE_SPRITE_POLYGON;ENABLE_TERRAIN;ENABLE_RAKNET;ENABLE_UNET;ENABLE_UNITYEVENTS;ENABLE_VR;ENABLE_WEBCAM;ENABLE_WWW;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_HUB;ENABLE_CLOUD_PROJECT_ID;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_METRICS;ENABLE_EDITOR_METRICS_CACHING;INCLUDE_DYNAMIC_GI;INCLUDE_GI;INCLUDE_IL2CPP;INCLUDE_DIRECTX12;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;ENABLE_LOCALIZATION;ENABLE_ANDROID_ATLAS_ETC1_COMPRESSION;ENABLE_EDITOR_TESTS_RUNNER;UNITY_STANDALONE_LINUX;UNITY_STANDALONE;UNITY_STANDALONE_LINUX_API;ENABLE_SUBSTANCE;ENABLE_TEXTUREID_MAP;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_UNITYWEBREQUEST;ENABLE_CLUSTERINPUT;ENABLE_WEBSOCKET_HOST;ENABLE_MONO;DEVELOPMENT_BUILD;ENABLE_PROFILER;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_OSX</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <NoWarn>0169</NoWarn>
@@ -55,6 +55,7 @@
      <Compile Include="Assets\src\math\Layout.cs" />
      <Compile Include="Assets\src\math\MathLib.cs" />
      <Compile Include="Assets\src\math\Orientation.cs" />
+     <Compile Include="Assets\src\render\RenderManager.cs" />
      <Compile Include="Assets\src\render\ScreenFilter.cs" />
      <Compile Include="Assets\src\render\SpriteOutline.cs" />
      <Compile Include="Assets\src\tcg\CardLib.cs" />
@@ -72,18 +73,20 @@
      <Compile Include="Assets\src\tcg\cards\TeleportCard.cs" />
      <Compile Include="Assets\src\tcg\cards\TrapCard.cs" />
      <Compile Include="Assets\src\tcg\cards\WhirlwindCard.cs" />
+     <Compile Include="Assets\src\ui\GUIBase.cs" />
+     <Compile Include="Assets\src\ui\GUIIntro.cs" />
+     <Compile Include="Assets\src\ui\GUILibrary.cs" />
+     <Compile Include="Assets\src\ui\GUIWorld.cs" />
      <Compile Include="Assets\src\ui\GameCamera.cs" />
-     <Compile Include="Assets\src\ui\IntroUI.cs" />
-     <Compile Include="Assets\src\ui\LibraryUI.cs" />
      <Compile Include="Assets\src\ui\NotificationManager.cs" />
-     <Compile Include="Assets\src\ui\UICard.cs" />
-     <Compile Include="Assets\src\ui\UIHexMenu.cs" />
-     <Compile Include="Assets\src\ui\UIMessageBox.cs" />
-     <Compile Include="Assets\src\ui\UITooltip.cs" />
-     <Compile Include="Assets\src\ui\WorldUI.cs" />
+     <Compile Include="Assets\src\ui\UIManager.cs" />
+     <Compile Include="Assets\src\ui\features\UICard.cs" />
+     <Compile Include="Assets\src\ui\features\UIContinueMenu.cs" />
+     <Compile Include="Assets\src\ui\features\UIHexMenu.cs" />
+     <Compile Include="Assets\src\ui\features\UIMessageBox.cs" />
+     <Compile Include="Assets\src\ui\features\UITooltip.cs" />
      <Compile Include="Assets\src\world\Hex.cs" />
      <Compile Include="Assets\src\world\SaveManager.cs" />
-     <Compile Include="Assets\src\world\Trigger.cs" />
      <Compile Include="Assets\src\world\WorldMap.cs" />
      <Compile Include="Assets\src\world\WorldPathfinding.cs" />
      <Compile Include="Assets\src\world\levels\CatacombLevel.cs" />
@@ -93,6 +96,8 @@
      <Compile Include="Assets\src\world\levels\MireLevel.cs" />
      <Compile Include="Assets\src\world\levels\RiverLevel.cs" />
      <Compile Include="Assets\src\world\levels\VolcanoLevel.cs" />
+     <Compile Include="Assets\src\world\triggers\Trigger.cs" />
+     <Compile Include="Assets\src\world\triggers\TutorialTrigger.cs" />
      <Compile Include="Assets\src\world\units\Arrow.cs" />
      <Compile Include="Assets\src\world\units\BoulderUnit.cs" />
      <Compile Include="Assets\src\world\units\EnemyHealthBar.cs" />

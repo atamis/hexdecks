@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using game.world.units;
+using game.world.triggers;
 using game.math;
 
 namespace game.world {
@@ -106,13 +107,13 @@ namespace game.world {
 		internal void refreshSprite(){
 			switch (this.tileType) {
 			case TileType.Normal:
-				model.sr.sprite = GameManager._level.GetPassableSprite ();
+				model.sr.sprite = GameManager.level.GetPassableSprite ();
 				break;
 			case TileType.Wall:
-				model.sr.sprite = GameManager._level.GetImpassableSprite ();
+				model.sr.sprite = GameManager.level.GetImpassableSprite ();
 				break;
 			case TileType.Water:
-				model.sr.sprite = GameManager._level.GetWaterSprite ();
+				model.sr.sprite = GameManager.level.GetWaterSprite ();
 				break;
 			}
 		}
@@ -154,10 +155,9 @@ namespace game.world {
 				transform.localScale = new Vector3 (1.9f, 1.9f, 1);
 
 				sr = gameObject.AddComponent<SpriteRenderer> ();
-				sr.material = new Material(Shader.Find("Sprites/Diffuse"));
 
 				float random = Random.value;
-				sr.sprite = GameManager._level.GetPassableSprite ();
+				sr.sprite = GameManager.level.GetPassableSprite ();
 
 				coll = gameObject.AddComponent<PolygonCollider2D> ();
 				coll.isTrigger = true;

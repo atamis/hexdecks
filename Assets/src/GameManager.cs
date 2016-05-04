@@ -6,70 +6,68 @@ using game.math;
 using game.ui;
 using game.world;
 using game.world.levels;
+using game.world.triggers;
 using game.tcg.cards;
+using game.render;
 
 namespace game {
     class GameManager : MonoBehaviour {
+		public static GameManager instance;
 		public static Layout l = new Layout(Orientation.Pointy, new Vector2(1, 1), new Vector2(0, 0));
 		public static Player p;
-		public static NotificationManager ntm;
-		private WorldUI ui;
+		public static WorldMap world;
+		public static GameLevel level;
 
-		private WorldMap _world;
-		public WorldMap world {
-			get {
-				if (ui.GetType() != typeof(WorldUI)) {
-					throw new Exception ("Can't access world in IntroUI!");
+		private class LevelRegistery<T> {
+			static readonly Dictionary<int, Func<T>> _dict = new Dictionary<int, Func<T>>();
+
+			private LevelRegistery() { }
+
+			public static T Create(int id) {
+				Func<T> constructor = null;
+				if (_dict.TryGetValue (id, out constructor)) {
+					return constructor();
 				}
-				return _world;
+				throw new ArgumentException (String.Format("No level is registered for id {0}", 0));
 			}
-			private set {
-				_world = value;
+
+			public static void Register(int id, Func<T> constructor) {
+				_dict.Add (id, constructor);
 			}
 		}
 
-		public static string level = "forest";
-		public static GameLevel _level = new ForestLevel();
-		private Light lite;
-
 		void Awake() {
-			ntm = new GameObject ("Notification Manager").AddComponent<NotificationManager> ();
+			if (instance != null) {
+				Debug.Log ("GameManager is a singleton.");
+			}
+			instance = this;
+
+			LevelRegistery<GameLevel>.Register (0, () => new ForestLevel());
+			LevelRegistery<GameLevel>.Register (1, () => new MireLevel());
+			LevelRegistery<GameLevel>.Register (2, () => new RiverLevel());
+			LevelRegistery<GameLevel>.Register (3, () => new VolcanoLevel());
+			LevelRegistery<GameLevel>.Register (4, () => new CatacombLevel());
+			LevelRegistery<GameLevel>.Register (5, () => new CryptLevel());
+
+			gameObject.AddComponent<RenderManager> ();
+			gameObject.AddComponent<UIManager> ();
 			p = new Player();
 		}
 
-		public static void LoadLevel(string tag) {
-			if (tag == "Forest") {
-				 _level = new ForestLevel ();
-			} else if (tag == "Mire") {
-				_level = new MireLevel ();
-			} else if (tag == "River") {
-				_level = new RiverLevel ();
-			} else if (tag == "Volcano") {
-				_level = new VolcanoLevel ();
-			} else if (tag == "Catacomb") {
-				_level = new CatacombLevel ();
-			} else if (tag == "Crypt") {
-				_level = new CryptLevel ();
-			}
+		public static GameLevel GetLevel(int id) {
+			return LevelRegistery<GameLevel>.Create (id);
 		}
 
-		void Start() {
-			ui = gameObject.AddComponent<WorldUI> ();
-			world = _level.GetMap (this);
-			//world = SaveManager.LoadLevel(l, level, this);
-
-			lite = _level.GetLight();
-			lite.type = LightType.Directional;
+		public static void LoadLevel(int id) {
+			level = LevelRegistery<GameLevel>.Create (id);
+			world = level.GetMap (instance);
 
 			p.hero = world.hero;
-			p.deck = _level.GetDeck ();
-
-			var trigger = new GameObject("Trigger").AddComponent<LogTrigger>();
-			trigger.init(world.map[new HexLoc(2, 2)]);
-
-			ui.init (this);
-			ui.gc.setLocation(l.HexPixel(world.hero.h.loc));
-        }
+			p.deck = level.GetDeck ();
+			
+			// TODO
+			// Set GUI
+		}
 
         void Update() {
             if (world.hero.dead) {

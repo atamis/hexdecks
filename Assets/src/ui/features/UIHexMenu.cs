@@ -80,8 +80,6 @@ namespace game.ui {
 				textObj.transform.parent = transform;
 				textObj.transform.localPosition = new Vector3(0, 0, -0.5f);
 
-				Font font = Resources.Load<Font>("Fonts/LeagueSpartan-Bold");
-
 				tm = textObj.AddComponent<TextMesh>();
 				tm.text = GetText();
 				tm.color = Color.red;
@@ -89,8 +87,8 @@ namespace game.ui {
 				tm.anchor = TextAnchor.MiddleCenter;
 				tm.fontSize = 74;
 				tm.characterSize = 0.04f;
-				tm.font = WorldUI.font;
-				tm.GetComponent<Renderer>().material = font.material;
+				tm.font = UIManager.font;
+				tm.GetComponent<Renderer>().material = UIManager.font.material;
 
 				tm.transform.localEulerAngles = new Vector3 (0, 0, -60);
 				tm.transform.localPosition = new Vector2 (.25f, .27f);

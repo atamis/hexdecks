@@ -28,9 +28,9 @@ namespace game.ui {
 		private List<Hex> targets;
         private GameObject textObj;
         private TextMesh tm;
-		private WorldUI ui;
+		private GUIWorld ui;
 
-		public void init(WorldUI ui, int idx) {
+		public void init(GUIWorld ui, int idx) {
 			this.ui = ui;
             this.idx = idx;
 			this.tag = "Card";
@@ -45,8 +45,6 @@ namespace game.ui {
 			bc.size = new Vector3 (1.0f, 1.33f, 0);
 			bc.isTrigger = true;
 
-			var font = Resources.Load<Font>("Fonts/LeagueSpartan-Bold");
-
             textObj = new GameObject("Card Text");
             textObj.transform.parent = transform;
             textObj.transform.localPosition = new Vector3(-0.40f, 0.5f, -0.1f);
@@ -57,9 +55,8 @@ namespace game.ui {
 			tm.fontSize = 148;
 			tm.characterSize = 0.008f;
 			tm.color = Color.black;
-			tm.font = font;
-
-			tm.GetComponent<Renderer>().material = font.material;
+			tm.font = UIManager.font;
+			tm.GetComponent<Renderer>().material = UIManager.font.material;
 		}
 
 		void Update() {
@@ -91,7 +88,7 @@ namespace game.ui {
 		}
 
 		void OnMouseUp() {
-			Hex h = MathLib.GetHexAtMouse (ui.gm.world);
+			Hex h = MathLib.GetHexAtMouse (GameManager.world);
 			if (h != null && targets.Contains(h)) {
                 GameManager.p.Play(card, h);
 			}
@@ -100,7 +97,7 @@ namespace game.ui {
 
 		void OnMouseEnter() {
             ui.magCard.card = card;
-			this.targets = card.ValidTargets (ui.gm.world, ui.gm.world.hero.h);
+			this.targets = card.ValidTargets (GameManager.world, GameManager.world.hero.h);
 			foreach (Hex h in this.targets) {
 				h.Highlight (Color.red);
 			}

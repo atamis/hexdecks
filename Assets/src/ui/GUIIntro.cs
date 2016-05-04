@@ -3,38 +3,30 @@ using System.Collections;
 using UnityEngine.SceneManagement;
 
 namespace game.ui {
-	class IntroUI : MonoBehaviour {
-		public static Font font = Resources.Load<Font>("Fonts/LeagueSpartan-Bold");
+	class GUIIntro : GUIBase {
 		private GameObject uiFeatures;
 
-		public string[] levels = new string[] {
-			"Forest", "Mire",
-			"River", "Volcano",
-			"Catacomb", "Crypt",
-		};
-
-		Vector2[] pos = new Vector2[] {
+		private Vector2[] b_locs = new Vector2[] {
 			new Vector2(-2.2f, 2f), new Vector2(-2.2f, 0f),
 			new Vector2(-2.2f, -2f), new Vector2(2.2f, 2f),
 			new Vector2(2.2f, 0f), new Vector2(2.2f, -2f)
 		};
 
-		public void init() {
+		void Awake() {
 			this.name = "UI";
 
-			int i = 0;
-			foreach (string lvl in levels) {
-				UILoadButton b = new GameObject ("UI Load Button").AddComponent<UILoadButton> ();
-				b.init (lvl);
+			for (int i = 0; i < 6; i++) {
+				UILoadButton b = new GameObject ("LoadButton").AddComponent<UILoadButton> ();
+				b.init (i);
 
-				b.transform.localPosition = pos [i];
+				b.transform.position = b_locs [i];
 				b.transform.parent = transform;
 
 				i++;
 			}
+
 			Camera.main.backgroundColor = Color.black;
 			drawTitle();
-
 		}
 
 		private void drawTitle(){
@@ -45,12 +37,12 @@ namespace game.ui {
 			TextMesh tm = textObj.AddComponent<TextMesh>();
 			tm.text = "HexDex";
 			tm.color = Color.white;
-			tm.font = IntroUI.font;
 			tm.alignment = TextAlignment.Center;
 			tm.anchor = TextAnchor.MiddleCenter;
 			tm.fontSize = 164;
 			tm.characterSize = 0.05f;
-			tm.GetComponent<Renderer>().material = font.material;
+			tm.font = UIManager.font;
+			tm.GetComponent<Renderer>().material = UIManager.font.material;
 
 			GameObject textObj2 = new GameObject("Title Text");
 			textObj2.transform.parent = transform;
@@ -59,12 +51,12 @@ namespace game.ui {
 			TextMesh tm2 = textObj2.AddComponent<TextMesh>();
 			tm2.text = "Created By: Dan Marsh, Nick Care, Andrew Amis, Robert Tomcik, Dan Karcher";
 			tm2.color = Color.white;
-			tm2.font = IntroUI.font;
+			tm2.font = UIManager.font;
 			tm2.alignment = TextAlignment.Center;
 			tm2.anchor = TextAnchor.MiddleCenter;
 			tm2.fontSize = 64;
 			tm2.characterSize = 0.05f;
-			tm2.GetComponent<Renderer>().material = font.material;
+			tm2.GetComponent<Renderer>().material = UIManager.font.material;
 		}
 
 		private class UILoadButton : MonoBehaviour {
@@ -94,14 +86,14 @@ namespace game.ui {
 
 			private SpriteRenderer sr;
 			private BoxCollider2D coll;
-			private string level;
+			private int lvl;
 
 			private GameObject textObj;
 			private TextMesh tm;
 			private BloomEffect be;
 
-			public void init(string level) {
-				this.level = level;
+			public void init(int lvl) {
+				this.lvl = lvl;
 
 				gameObject.transform.localScale = new Vector3 (1.1f, 1.1f, 1);
 
@@ -119,14 +111,14 @@ namespace game.ui {
 				textObj.transform.localPosition = new Vector3(0, 0, -0.1f);
 
 				tm = textObj.AddComponent<TextMesh>();
-				tm.text = level;
+				tm.text = GameManager.GetLevel(lvl).GetSceneName();
 				tm.color = Color.black;
-				tm.font = IntroUI.font;
+				tm.font = UIManager.font;
 				tm.alignment = TextAlignment.Center;
 				tm.anchor = TextAnchor.MiddleCenter;
 				tm.fontSize = 148;
 				tm.characterSize = 0.05f;
-				tm.GetComponent<Renderer>().material = font.material;
+				tm.GetComponent<Renderer>().material = UIManager.font.material;
 			}
 
 			void OnMouseEnter() {
@@ -139,8 +131,7 @@ namespace game.ui {
 
 			void OnMouseDown() {
 				//IntroManager.audio.PlayOneShot (Resources.Load<AudioClip> ("Audio/UI/MenuSelect"));
-				GameManager.LoadLevel(this.level);
-				SceneManager.LoadSceneAsync ("Main");
+				GameManager.LoadLevel(lvl);
 			}
 		}
 	}

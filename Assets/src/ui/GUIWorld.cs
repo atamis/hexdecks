@@ -13,10 +13,8 @@ namespace game.ui {
 		Paused
 	};
 
-	class WorldUI : MonoBehaviour {
-		public static Font font = Resources.Load<Font>("Fonts/LeagueSpartan-Bold");
+	class GUIWorld : GUIBase {
 		internal GameCamera gc;
-
 		public GameManager gm;
         public MagnifiedCardModel magCard;
         private WorldHUD ib;
@@ -27,9 +25,6 @@ namespace game.ui {
 			this.gm = gm;
 			this.name = "UI";
 
-			gc = new GameObject ("Game Camera").AddComponent<GameCamera> ();
-			gc.init (Camera.main);
-
 			ib = new GameObject("Infobar").AddComponent<WorldHUD>();
 			ib.init(this);
 			ib.transform.parent = gc.transform;
@@ -39,8 +34,6 @@ namespace game.ui {
 			menu.transform.parent = gc.transform;
 
             magCard = new GameObject("Magnified Card").AddComponent<MagnifiedCardModel>();
-
-
         }
 
         void Update() {
@@ -58,10 +51,10 @@ namespace game.ui {
 				RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
 				if (hit.collider != null) {
 					if (hit.collider.gameObject.tag == "Hex") {
-						Hex h = MathLib.GetHexAtMouse(gm.world);
+						Hex h = MathLib.GetHexAtMouse(GameManager.world);
 
-						if (h != null && gm.world.hero.h != h && GameManager.p.nextCommand == null) {
-							GameManager.p.nextCommand = new MoveCommand(gm.world.hero, h);
+						if (h != null && GameManager.world.hero.h != h && GameManager.p.nextCommand == null) {
+							GameManager.p.nextCommand = new MoveCommand(GameManager.world.hero, h);
 						}
 					}
 				}
@@ -74,7 +67,7 @@ namespace game.ui {
 			internal TextMesh tm;
 			private GameObject textObj;
 			private UITooltip tooltip;
-			public WorldUI ui;
+			public GUIWorld ui;
 
 			public abstract string GetText();
 
@@ -82,7 +75,7 @@ namespace game.ui {
 
 			public abstract Sprite GetSprite();
 
-			public void init(WorldUI ui) {
+			public void init(GUIWorld ui) {
 				this.ui = ui;
 				sr = gameObject.AddComponent<SpriteRenderer> ();
 				sr.sprite = GetSprite();
@@ -98,8 +91,8 @@ namespace game.ui {
 				tm.anchor = TextAnchor.MiddleCenter;
 				tm.fontSize = 148;
 				tm.characterSize = 0.04f;
-				tm.font = WorldUI.font;
-				tm.GetComponent<Renderer>().material = font.material;
+				tm.font = UIManager.font;
+				tm.GetComponent<Renderer>().material = UIManager.font.material;
 
 				coll = gameObject.AddComponent<PolygonCollider2D> ();
 				coll.isTrigger = true;
@@ -144,8 +137,8 @@ namespace game.ui {
 					tm.anchor = TextAnchor.MiddleCenter;
 					tm.fontSize = 148;
 					tm.characterSize = 0.03f;
-					tm.font = WorldUI.font;
-					tm.GetComponent<Renderer>().material = font.material;
+					tm.font = UIManager.font;
+					tm.GetComponent<Renderer>().material = UIManager.font.material;
 				}
 
 				void Update() {
@@ -183,9 +176,9 @@ namespace game.ui {
 				new Vector3 (-1f, 1f, 0), new Vector3 (-2f, .75f, 0),
 			};
 
-			private WorldUI ui;
+			private GUIWorld ui;
 
-			public void init(WorldUI ui) {
+			public void init(GUIWorld ui) {
 				this.ui = ui;
 				this.gameObject.layer = LayerMask.NameToLayer ("UI");
 
@@ -235,7 +228,7 @@ namespace game.ui {
 					i++;
 				}
 
-                if (goScreen == null && ui.gm.world.hero.dead) {
+                if (goScreen == null && GameManager.world.hero.dead) {
                     goScreen = new GameObject("End Game Screen").AddComponent<GameOverScreen>();
                     goScreen.init(ui);
                     goScreen.tm.color = Color.red;
@@ -258,7 +251,7 @@ namespace game.ui {
                 }
 
 				public override string GetText() {
-					return ui.gm.world.hero.health.ToString();
+					return GameManager.world.hero.health.ToString();
 				}
 
 				public override string GetTooltip () {
@@ -336,8 +329,6 @@ namespace game.ui {
                 titleTm.font = font;
 
                 titleTm.GetComponent<Renderer>().material = font.material;
-
-
 
                 descObj = new GameObject("Card Text");
                 descObj.transform.parent = transform;

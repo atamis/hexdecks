@@ -16,13 +16,6 @@ namespace game.world.levels {
 			return map;
 		}
 
-		public override Light GetLight() {
-			Light l = new GameObject ("Light").AddComponent<Light> ();
-			//l.color = new Color (.9296f, 0.2265f, .1093f);
-			l.color = Color.white;
-			return l;
-		}
-
 		public override List<TCGCard> GetDeck() {
 			List<TCGCard> deck = new List<TCGCard> ();
 			deck.Add (new FireballCard());
