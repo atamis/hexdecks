@@ -9,7 +9,12 @@ namespace game.world.levels {
 		public static Sprite t_sprite1 = Resources.Load<Sprite>("Sprites/Tiles/T_Forest");
 		public static Sprite t_sprite2 = Resources.Load<Sprite>("Sprites/Tiles/T_Mushroomed");
 		public static Sprite t_water = Resources.Load<Sprite>("Sprites/Tiles/T_Water1");
-		//public static Sprite t_melee1;
+
+		public static Sprite[] t_melee = new Sprite[] {
+			Resources.Load<Sprite>("Sprites/Units/T_Mushboroom0"),
+			Resources.Load<Sprite>("Sprites/Units/T_Mushboroom1"),
+			Resources.Load<Sprite>("Sprites/Units/T_Mushboroom2"),
+		};
 
 		public ForestLevel() {}
 
@@ -50,7 +55,5 @@ namespace game.world.levels {
 		public override Sprite GetWaterSprite() {
 			return t_water;
 		}
-
-
 	}
 }
