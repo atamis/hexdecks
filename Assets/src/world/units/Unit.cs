@@ -127,6 +127,10 @@ namespace game.world.units {
             {
                 TurnActions();
             }
+        }
+
+        public virtual void BuffUpdate()
+        {
             invincible.NewTurn();
             stunned.NewTurn();
         }

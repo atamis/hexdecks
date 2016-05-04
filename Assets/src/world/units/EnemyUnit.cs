@@ -367,13 +367,14 @@ namespace game.world.units {
     class SummonerEnemy : EnemyUnit
     {
         public int spawnTimer;
+        private const int numSprites = 2;
         private const int spawnCD = 3;
         private const int maxMinions = 2;
         private List<MeleeEnemy> minions;
 
-        Sprite[] sprites = new Sprite[2] {
-            Resources.Load<Sprite>("Sprites/Enemies/T_BowGoblinIdle1"),
-            Resources.Load<Sprite>("Sprites/Enemies/T_BowGoblinIdle2")
+        Sprite[] sprites = new Sprite[ numSprites ] {
+            Resources.Load<Sprite>("Sprites/Enemies/T_Summoner1"),
+            Resources.Load<Sprite>("Sprites/Enemies/T_Summoner2")
         };
         const float spriteInterval = .8f;
         float lastSwitch;
@@ -396,7 +397,7 @@ namespace game.world.units {
             {
                 lastSwitch = timer;
                 idx = idx + 1;
-                idx = idx % 2;
+                idx = idx % numSprites;
             }
             return sprites[idx];
         }
@@ -439,7 +440,9 @@ namespace game.world.units {
                     MeleeEnemy minion = new GameObject("MeleeEvilTim").AddComponent<MeleeEnemy>();
                     minion.init(w, openNeighbs[i]);
                     minion.setPersuing();
+                    minion.Updated = true;
                     minions.Add(minion);
+                    w.enemies.Add(minion);
                     return true;
                 }
                 else
