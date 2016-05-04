@@ -39,6 +39,15 @@ namespace game.world.units {
         public override List<Hex> GetAttackPattern () {
 			return new List<Hex>();
 		}
-	}
+
+        public new void NewTurn()
+        {
+            if (!stunned.isActive())
+            {
+                TurnActions();
+            }
+            BuffUpdate();
+        }
+    }
 }
 
