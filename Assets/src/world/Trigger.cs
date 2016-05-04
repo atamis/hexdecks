@@ -44,7 +44,7 @@ namespace game.world {
 		}
 
         internal void Suicide() {
-            this.dead = true;
+            dead = true;
         }
 
 		// These are called before the move. See Hex#unit
@@ -57,6 +57,7 @@ namespace game.world {
 		void Update() {
 			transform.localPosition = new Vector3(0, 0, 0);
             if (dead) {
+                h.w.triggers.Remove(this);
                 h = null;
                 Destroy(gameObject);
             }

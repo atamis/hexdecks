@@ -149,11 +149,15 @@ c = chest
                             w.summoners.Add(senemy);
                             break;
                         case 'e':
-							new GameObject("EndLevelTrigger").AddComponent<EndLevelTrigger>().init(h);
+                            var end = new GameObject("EndLevelTrigger").AddComponent<EndLevelTrigger>();
+                            end.init(h);
+                            w.triggers.Add(end);
 							break;
                         case 'c':
-                                new GameObject("EndLevelTrigger").AddComponent<ChestTrigger>().init(h, randomCard(r));
-                                break;
+                            var chest = new GameObject("EndLevelTrigger").AddComponent<ChestTrigger>();
+                            chest.init(h, randomCard(r));
+                            w.triggers.Add(chest);
+                            break;
 						default:
 							// Not Implemented: e, M, c
 							break;
@@ -161,6 +165,8 @@ c = chest
 					}
 				}
 			}
+
+            w.setNoWallMap();
 
 			return w;
 		}

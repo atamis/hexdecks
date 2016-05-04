@@ -12,12 +12,14 @@ namespace game.world {
 
 	class WorldMap {
 		public Dictionary<HexLoc, Hex> map;
-		private GameObject hFolder;
+        public Dictionary<HexLoc, Hex> noWallMap;
+        private GameObject hFolder;
 
 		public Layout l;
 		public HeroUnit hero;
         public List<EnemyUnit> enemies;
         public List<SummonerEnemy> summoners;
+        public List<Trigger> triggers;
 		public GameManager gm;
 		public int turns { get; set; }
 
@@ -27,10 +29,12 @@ namespace game.world {
 			this.turns = 0;
 
 			map = new Dictionary<HexLoc, Hex> ();
-			hFolder = new GameObject("Hexes");
+            noWallMap = new Dictionary<HexLoc, Hex>();
+            hFolder = new GameObject("Hexes");
 
             enemies = new List<EnemyUnit>();
             summoners = new List<SummonerEnemy>();
+            triggers = new List<Trigger>();
 		}
 
 		public Hex addHex(HexLoc hl) {
@@ -43,7 +47,19 @@ namespace game.world {
 			return h;
 		}
 
+        public void setNoWallMap()
+        {
+            foreach (KeyValuePair<HexLoc, Hex> kv in map)
+            {
+                if (kv.Value.tileType != TileType.Wall)
+                {
+                    noWallMap.Add(kv.Key, kv.Value);
+                }
+            }
+        }
+
 		internal void NewTurn() {
+
 			foreach (KeyValuePair<HexLoc, Hex> kv in map) {
 				kv.Value.Updated = false;
 			}
@@ -80,12 +96,12 @@ namespace game.world {
             }
 
             // Consider updating from the hero outward.
-            foreach (KeyValuePair<HexLoc, Hex> kv in map)
+            foreach (Trigger t in triggers)
             {
-                if (!kv.Value.Updated)
+                if (!t.h.Updated)
                 {
-                    kv.Value.Updated = true;
-                    kv.Value.NewTurn();
+                    t.h.Updated = true;
+                    t.h.NewTurn();
                 }
             }
 		}
