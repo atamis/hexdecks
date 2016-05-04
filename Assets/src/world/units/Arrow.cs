@@ -10,10 +10,15 @@ namespace game.world
 	{
 		public Unit u;
 		public ArrowModel model;
+        private AudioSource audioS;
+        private AudioClip attackSound;
 
-		public void init(Unit u) {
+        public void init(Unit u) {
 			this.u = u;
-			transform.localPosition = LayerV.UnitFX;
+            audioS = u.w.gm.GetComponent<AudioSource>();
+            attackSound = Resources.Load<AudioClip>("Audio/World/RangedDamage");
+
+            transform.localPosition = LayerV.UnitFX;
 
             var obj = new GameObject("Arrow model");
 			obj.transform.parent = transform;
@@ -56,8 +61,9 @@ namespace game.world
                     transform.eulerAngles = new Vector3(0, 0, angle + 180);
                     transform.localPosition += direction.normalized * speed;
 
-                    if ((a.u.w.hero.transform.position - transform.position).magnitude < 0.1)
+                    if ((a.u.w.hero.transform.position - transform.position).magnitude < 0.5f)
                     {
+                        a.audioS.PlayOneShot(a.attackSound);
                         a.u.w.hero.ApplyDamage(1, a.u);
                         Destroy(gameObject);
                     }
