@@ -170,8 +170,8 @@ namespace game.ui {
             private float deathTime;
 
 			public Vector3[] card_locs = new Vector3[] {
-				new Vector3 (2f, .75f, 0), new Vector3 (1f, 1f, 0), new Vector3 (0f, 1.25f, 0),
-				new Vector3 (-1f, 1f, 0), new Vector3 (-2f, .75f, 0),
+				new Vector3 (2f, .75f, -1), new Vector3 (1f, 1f, -1), new Vector3 (0f, 1.25f, -1),
+				new Vector3 (-1f, 1f, -1), new Vector3 (-2f, .75f, -1),
 			};
 
 			private GUIWorld ui;
@@ -188,7 +188,8 @@ namespace game.ui {
                 hf.init(ui);
 
 				hf.transform.parent = transform;
-				hf.transform.localPosition = new Vector3 (0, 0, -1);
+				hf.transform.localPosition = new Vector3 (0, -0.3f, -1);
+                hf.transform.localScale = new Vector3(0.75f, 0.75f, 1);
 
                 // CARDS
                 cards = new List<UICard> ();
@@ -331,21 +332,20 @@ namespace game.ui {
 
                 descTm.GetComponent<Renderer>().material = font.material;
 
-
                 artObj = new GameObject("Card Art");
                 artObj.transform.parent = transform;
                 artObj.transform.localPosition = new Vector3(-0.008f, 0.079f, -0.3f);
                 artObj.transform.localScale = new Vector3(0.5561915f, 0.547473f, 0.5f);
 
                 artSr = artObj.AddComponent<SpriteRenderer>();
-                artSr.sprite = Resources.Load<Sprite>("Sprites/Cards/Boulder1");
-                
+
                 Hide();
             }
 
             void Show() {
                 sr.enabled = true;
                 artSr.enabled = true;
+                artSr.sprite = card.GetSprite();
                 titleTm.text = card.GetName();
 
                 string builder = "";
