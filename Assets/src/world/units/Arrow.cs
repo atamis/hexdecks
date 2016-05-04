@@ -4,19 +4,14 @@ using game.world.units;
 using game.math;
 using System;
 
-namespace game.world
-{
-	class Arrow : MonoBehaviour
-	{
+namespace game.world {
+	class Arrow : MonoBehaviour {
 		public Unit u;
 		public ArrowModel model;
-        private AudioSource audioS;
-        private AudioClip attackSound;
+        private AudioManager am;
 
         public void init(Unit u) {
 			this.u = u;
-            audioS = u.w.gm.GetComponent<AudioSource>();
-            attackSound = Resources.Load<AudioClip>("Audio/World/RangedDamage");
 
             transform.localPosition = LayerV.UnitFX;
 
@@ -26,19 +21,15 @@ namespace game.world
 
 			model.init(this);
 		}
-
-		// Update is called once per frame
-		void Update() {
-
-		}
+			
+		void Update() { }
 
 		public class ArrowModel : MonoBehaviour {
 			public Arrow a;
 			public SpriteRenderer sr;
             public static Vector3 defaultArrowDirection = new Vector3(-1, 0, 0);
 
-            public void init(Arrow a)
-            {
+            public void init(Arrow a) {
                 this.a = a;
 
                 //transform.localScale = new Vector3(2, 2, 2);
@@ -61,9 +52,8 @@ namespace game.world
                     transform.eulerAngles = new Vector3(0, 0, angle + 180);
                     transform.localPosition += direction.normalized * speed;
 
-                    if ((a.u.w.hero.transform.position - transform.position).magnitude < 0.5f)
-                    {
-                        a.audioS.PlayOneShot(a.attackSound);
+                    if ((a.u.w.hero.transform.position - transform.position).magnitude < 0.5f) {
+						AudioManager.audioS.PlayOneShot(AudioManager.meleeSound);
                         a.u.w.hero.ApplyDamage(1, a.u);
                         Destroy(gameObject);
                     }

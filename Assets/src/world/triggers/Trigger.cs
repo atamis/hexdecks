@@ -45,7 +45,7 @@ namespace game.world.triggers {
 		}
 
         internal void Suicide() {
-            this.dead = true;
+            dead = true;
         }
 
 		// These are called before the move. See Hex#unit
@@ -58,6 +58,7 @@ namespace game.world.triggers {
 		void Update() {
 			transform.localPosition = new Vector3(0, 0, 0);
             if (dead) {
+                h.w.triggers.Remove(this);
                 h = null;
                 Destroy(gameObject);
             }
@@ -104,6 +105,8 @@ namespace game.world.triggers {
 
     class ChestTrigger : Trigger {
         TCGCard c;
+        private AudioManager am;
+
         public void init(Hex h, TCGCard c) {
             base.init(h);
             this.c = c;
@@ -116,6 +119,7 @@ namespace game.world.triggers {
         public override void UnitEnter(Unit u) {
             if (u.GetType() == typeof(HeroUnit)) {
                 print("Added " + c + " to the player's deck");
+                AudioManager.audioS.PlayOneShot(AudioManager.unlockSound);
                 GameManager.p.deck.Add(c);
                 UIManager.ntm.AddText(GameManager.l.HexPixel(h.loc), "+card", Color.black);
 				Suicide();

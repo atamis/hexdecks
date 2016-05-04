@@ -13,7 +13,9 @@ namespace game.tcg.cards {
         }
 
         public override void OnPlay(WorldMap wm, Hex h) {
-            new GameObject("Trap Card").AddComponent<TrapTrigger>().init(h);
+            var trap = new GameObject("Trap Card").AddComponent<TrapTrigger>();
+            trap.init(h);
+            wm.triggers.Add(trap);
         }
 
         public override List<Hex> ValidTargets(WorldMap wm, Hex h) {

@@ -17,7 +17,7 @@ namespace game.world {
 	class Hex : MonoBehaviour {
 		private HexModel model;
 		public TileType tileType;
-		private WorldMap w;
+		public WorldMap w;
 		public List<Trigger> triggers;
 		private bool selected { get; set; }
 
