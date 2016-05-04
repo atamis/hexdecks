@@ -280,24 +280,28 @@ namespace game.ui {
         public class MagnifiedCardModel : MonoBehaviour {
             public TCGCard card;
             private SpriteRenderer sr;
+
             private GameObject titleObj;
             private TextMesh titleTm;
 
             private GameObject descObj;
             private TextMesh descTm;
 
+            private GameObject artObj;
+            private SpriteRenderer artSr;
+
             private bool hovered;
             private BoxCollider2D bc;
 
             void Start() {
-                transform.localScale = new Vector3(2f, 2f, 1);
+                transform.localScale = new Vector3(3f, 3f, 1);
 
                 sr = gameObject.AddComponent<SpriteRenderer>();
                 sr.sprite = Resources.Load<Sprite>("Sprites/UI/T_CardBase");
 
                 var font = Resources.Load<Font>("Fonts/LeagueSpartan-Bold");
 
-                titleObj = new GameObject("Card Text");
+                titleObj = new GameObject("Card Title");
                 titleObj.transform.parent = transform;
                 titleObj.transform.localPosition = new Vector3(-0.40f, 0.5f, -0.3f);
                 titleObj.transform.localScale = new Vector3(1f, 1f, 1f);
@@ -314,35 +318,39 @@ namespace game.ui {
 
                 descObj = new GameObject("Card Text");
                 descObj.transform.parent = transform;
-                descObj.transform.localPosition = new Vector3(-0.40f, 0.25f, -0.3f);
+                descObj.transform.localPosition = new Vector3(-0.41f, -0.26f, -0.3f);
                 descObj.transform.localScale = new Vector3(1f, 1f, 1f);
 
                 descTm = descObj.AddComponent<TextMesh>();
 
                 //titleTm.text = card.GetName();
                 descTm.fontSize = 148;
-                descTm.characterSize = 0.006f;
+                descTm.characterSize = 0.004f;
                 descTm.color = Color.black;
                 descTm.font = font;
 
                 descTm.GetComponent<Renderer>().material = font.material;
 
 
-                bc = gameObject.AddComponent<BoxCollider2D>();
-                bc.size = new Vector3(1.0f, 1.33f, 0);
-                bc.isTrigger = true;
+                artObj = new GameObject("Card Art");
+                artObj.transform.parent = transform;
+                artObj.transform.localPosition = new Vector3(-0.008f, 0.056f, -0.3f);
+                artObj.transform.localScale = new Vector3(0.5561915f, 0.547473f, 0.5f);
 
-
+                artSr = artObj.AddComponent<SpriteRenderer>();
+                artSr.sprite = Resources.Load<Sprite>("Sprites/Cards/Boulder");
+                
                 Hide();
             }
 
             void Show() {
                 sr.enabled = true;
+                artSr.enabled = true;
                 titleTm.text = card.GetName();
 
                 string builder = "";
                 descTm.text = "";
-                float rowLimit = 0.83f; //find the sweet spot
+                float rowLimit = 1.25f; //find the sweet spot
                 string text = card.getDescription();
                 string[] parts = text.Split(' ');
                 for (int i = 0; i < parts.Length; i++) {
@@ -356,6 +364,7 @@ namespace game.ui {
 
             void Hide() {
                 sr.enabled = false;
+                artSr.enabled = false;
                 titleTm.text = "";
                 descTm.text = "";
             }
