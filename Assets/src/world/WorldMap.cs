@@ -63,13 +63,13 @@ namespace game.world {
 			foreach (KeyValuePair<HexLoc, Hex> kv in map) {
 				kv.Value.Updated = false;
 			}
-
+            
             bool notDone = true;
             while (notDone)
             {
                 notDone = false;
 
-                foreach (EnemyUnit e in enemies)
+                foreach (EnemyUnit e in enemies.ToArray())
                 {
                     if (e.Updated == false)
                     {
@@ -85,6 +85,7 @@ namespace game.world {
             foreach (EnemyUnit e in enemies)
             {
                 e.Updated = true;
+                e.BuffUpdate();
             }
 
             foreach (SummonerEnemy s in summoners)
@@ -96,7 +97,7 @@ namespace game.world {
             }
 
             // Consider updating from the hero outward.
-            foreach (Trigger t in triggers)
+            foreach (Trigger t in triggers.ToArray())
             {
                 if (!t.h.Updated)
                 {
