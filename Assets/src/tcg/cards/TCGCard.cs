@@ -22,6 +22,10 @@ namespace game.tcg.cards {
 
 		public abstract string GetName();
 
+        public Sprite GetSprite() {
+            return Resources.Load<Sprite>("Sprites/Cards/" + GetName());
+        }
+
         public void Combo() {
             GameManager.p.turns += 1;
         }
