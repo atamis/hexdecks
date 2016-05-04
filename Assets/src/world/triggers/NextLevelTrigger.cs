@@ -31,8 +31,9 @@ namespace game.world.triggers {
 		// Glorious "You've got mail message box"
 
 		public override void UnitEnter(Unit u) {
-			
 			if (u.GetType() == typeof(HeroUnit)) {
+				UIManager.gc.SetLock (true);
+
 				var menu = new GameObject ("Continue Menu").AddComponent<UIContinueMenu> ();
 				menu.transform.parent = UIManager.gc.transform;
 				menu.transform.localPosition = new Vector3 (0, 0, Layer.HUD);

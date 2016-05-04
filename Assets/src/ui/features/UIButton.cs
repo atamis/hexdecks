@@ -53,7 +53,7 @@ namespace game.ui.features {
             be.use = false;
         }
 
-        void OnMouseDown() {
+        void OnMouseUp() {
             func();
         }
     }
