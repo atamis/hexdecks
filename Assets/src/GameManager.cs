@@ -96,7 +96,7 @@ namespace game {
 						world.NewTurn();
 						p.turns = 1;
 					}
-
+					UIManager.gc.SetGoal (GameManager.l.HexPixel (GameManager.world.hero.h.loc));
 				}
 			}
         }
