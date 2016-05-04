@@ -36,6 +36,8 @@ namespace game.world.units {
 
 	class MeleeEnemy : EnemyUnit {
 
+        private AudioManager am;
+
         Sprite[] sprites = new Sprite[2] {
             Resources.Load<Sprite>("Sprites/Enemies/T_GoblinIdle1"),
             Resources.Load<Sprite>("Sprites/Enemies/T_GoblinIdle2")
@@ -66,13 +68,6 @@ namespace game.world.units {
         }
 
 
-        private void attackAnimation()
-        {
-            Vector2 direction = w.hero.transform.position - transform.position;
-
-        }
-
-
         public override void TurnActions() {
 
 			if (!persuing)
@@ -96,7 +91,9 @@ namespace game.world.units {
 				var dist = h.loc.Distance(target.h.loc);
 				if (dist == 1)
 				{
-					target.ApplyDamage(1, this);
+                    am = w.gm.audiom;
+                    am.audioS.PlayOneShot(am.meleeSound);
+                    target.ApplyDamage(1, this);
                     attacking = true;
                     attackStart = timer;
                     Updated = true;

@@ -10,13 +10,12 @@ namespace game.world
 	{
 		public Unit u;
 		public ArrowModel model;
-        private AudioSource audioS;
-        private AudioClip attackSound;
+        private AudioManager am;
 
         public void init(Unit u) {
 			this.u = u;
-            audioS = u.w.gm.GetComponent<AudioSource>();
-            attackSound = Resources.Load<AudioClip>("Audio/World/RangedDamage");
+
+            am = u.w.gm.audiom;
 
             transform.localPosition = LayerV.UnitFX;
 
@@ -63,7 +62,7 @@ namespace game.world
 
                     if ((a.u.w.hero.transform.position - transform.position).magnitude < 0.5f)
                     {
-                        a.audioS.PlayOneShot(a.attackSound);
+                        a.am.audioS.PlayOneShot(a.am.meleeSound);
                         a.u.w.hero.ApplyDamage(1, a.u);
                         Destroy(gameObject);
                     }

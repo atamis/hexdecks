@@ -4,23 +4,29 @@ using System.Collections;
 namespace game {
 	class AudioManager : MonoBehaviour {
 
-        private AudioSource soundtrack;
+        public AudioSource audioS;
         private AudioClip startTrack;
         private AudioClip loopTrack;
+        public AudioClip unlockSound;
+        public AudioClip meleeSound;
+        public AudioClip arrowSound;
         //private bool looping = false;
 
         void Start()
         {
             startTrack = Resources.Load<AudioClip>("Audio/Soundtrack/Track 1 part 1");
             loopTrack = Resources.Load<AudioClip>("Audio/Soundtrack/Track 1 part 2");
+            unlockSound = Resources.Load<AudioClip>("Audio/World/OpenLock");
+            meleeSound = Resources.Load<AudioClip>("Audio/World/MeleeDamage");
+            arrowSound = Resources.Load<AudioClip>("Audio/World/RangedDamage");
 
-            soundtrack = gameObject.AddComponent<AudioSource>();
+            audioS = gameObject.AddComponent<AudioSource>();
 
             //soundtrack.PlayOneShot(startTrack);
-            soundtrack.clip = loopTrack;
-            soundtrack.loop = true;
-            soundtrack.time = 1;
-            soundtrack.Play();
+            audioS.clip = loopTrack;
+            audioS.loop = true;
+            audioS.time = 1;
+            audioS.Play();
         }
 
         void Update() {

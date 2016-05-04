@@ -14,7 +14,7 @@ namespace game {
 		public static Player p;
 		public static NotificationManager ntm;
 		private WorldUI ui;
-        public static AudioManager audiom;
+        public AudioManager audiom;
 
         private WorldMap _world;
 		public WorldMap world {

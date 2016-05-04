@@ -17,14 +17,11 @@ namespace game.tcg {
 	class MoveCommand : Command {
 		private Hex h;
 		private HeroUnit u;
-		private AudioSource audioS;
-		private AudioClip attackSound;
+        private AudioManager am;
 
 		public MoveCommand(HeroUnit u, Hex h) : base() {
 			this.u = u;
 			this.h = h;
-			audioS = u.w.gm.GetComponent<AudioSource>();
-			attackSound = Resources.Load<AudioClip>("Audio/World/MeleeDamage");
 		}
 
 		public override void Act(WorldMap w) {
@@ -37,7 +34,8 @@ namespace game.tcg {
 
 
 			if (next.unit != null && next.unit != u) {
-				audioS.PlayOneShot(attackSound);
+                //am = h.w.gm.audiom;
+				//am.audioS.PlayOneShot(heroAttackSound);
 				next.unit.ApplyDamage(1, w.hero);
 			}
 

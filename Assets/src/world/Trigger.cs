@@ -144,6 +144,8 @@ namespace game.world {
 
     class ChestTrigger : Trigger {
         TCGCard c;
+        private AudioManager am;
+
         public void init(Hex h, TCGCard c) {
             base.init(h);
             this.c = c;
@@ -156,6 +158,8 @@ namespace game.world {
         public override void UnitEnter(Unit u) {
             if (u.GetType() == typeof(HeroUnit)) {
                 print("Added " + c + " to the player's deck");
+                am = h.w.gm.audiom;
+                am.audioS.PlayOneShot(am.unlockSound);
                 GameManager.p.deck.Add(c);
                 GameManager.ntm.AddText(GameManager.l.HexPixel(h.loc), "+card", Color.black);
 				Suicide();
