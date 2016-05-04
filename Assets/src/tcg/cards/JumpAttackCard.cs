@@ -16,7 +16,7 @@ namespace game.tcg.cards {
                 var loc = kv.Key;
                 var hex = kv.Value;
 
-                if (loc.Distance(h.loc) != 2) continue;
+                if (loc.Distance(h.loc) > 2 || loc.Distance(h.loc) == 0) continue;
 
                 if (!hex.Passable()) continue;
 
@@ -36,7 +36,7 @@ namespace game.tcg.cards {
 		public override string GetName () {
 			return "Jump";
 		}
-			
+
 		public override void OnPlay (WorldMap w, Hex h) {
             if (h.unit != null) {
                 throw new Exception("Can't jump on top of unit");
