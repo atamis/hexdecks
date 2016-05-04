@@ -2,7 +2,13 @@
 using System.Collections;
 
 namespace game.ui {
-	class GUIBase : MonoBehaviour {
+	enum GUIType {
+		Intro,
+		World,
+		Library,
+	}
 
+	class GUIBase : MonoBehaviour {
+		public virtual void Delete() {}
 	}
 }

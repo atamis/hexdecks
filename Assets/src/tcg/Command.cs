@@ -5,13 +5,9 @@ using UnityEngine;
 
 namespace game.tcg {
     abstract class Command {
-
-		public Command() {
-
-		}
+		public Command() {}
 
 		public abstract void Act(WorldMap w);
-
 	}
 
 	class MoveCommand : Command {

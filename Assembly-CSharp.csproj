@@ -46,7 +46,6 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\src\GameManager.cs" />
-     <Compile Include="Assets\src\IntroManager.cs" />
      <Compile Include="Assets\src\Player.cs" />
      <Compile Include="Assets\src\common\AudioManager.cs" />
      <Compile Include="Assets\src\common\EventManager.cs" />

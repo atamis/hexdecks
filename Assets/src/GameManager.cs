@@ -64,32 +64,33 @@ namespace game {
 
 			p.hero = world.hero;
 			p.deck = level.GetDeck ();
-			
-			// TODO
-			// Set GUI
+
+			UIManager.SetGUI (GUIType.World);
 		}
 
         void Update() {
-            if (world.hero.dead) {
-                return;
-            }
-
-			if (p.nextCommand != null) {
-				print("Executing command " + p.nextCommand);
-
-				// We need to null out Player#nextCommand before executing
-				// command because otherwise, if the command errors out,
-				// the null out statement won't get executed, and the game
-				// will attempt to execute the command again next turn.
-				var cmd = p.nextCommand;
-				p.turns--;
-				p.nextCommand = null;
-				cmd.Act(world);
-				if (p.turns <= 0) {
-					world.NewTurn();
-					p.turns = 1;
+			if (UIManager.gui.GetType () == typeof(GUIWorld)) {
+				if (world.hero.dead) {
+					return;
 				}
 
+				if (p.nextCommand != null) {
+					print("Executing command " + p.nextCommand);
+
+					// We need to null out Player#nextCommand before executing
+					// command because otherwise, if the command errors out,
+					// the null out statement won't get executed, and the game
+					// will attempt to execute the command again next turn.
+					var cmd = p.nextCommand;
+					p.turns--;
+					p.nextCommand = null;
+					cmd.Act(world);
+					if (p.turns <= 0) {
+						world.NewTurn();
+						p.turns = 1;
+					}
+
+				}
 			}
         }
     }

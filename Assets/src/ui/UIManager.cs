@@ -7,8 +7,7 @@ namespace game.ui {
 		public static Font font = Resources.Load<Font>("Fonts/LeagueSpartan-Bold");
 		public static GameCamera gc;
 		public static NotificationManager ntm;
-
-		public GUIBase gui { get; set; } 
+		public static GUIBase gui { get; private set; }
 
 		void Awake() {
 			if (instance != null) { 
@@ -17,8 +16,7 @@ namespace game.ui {
 			instance = this;
 
 			ntm = new GameObject ("Notification Manager").AddComponent<NotificationManager> ();
-
-			this.gui = new GameObject ("Intro GUI").AddComponent<GUIIntro> ();
+			gui = new GameObject ("Intro GUI").AddComponent<GUIIntro> ();
 		}
 
 		void Start() {
@@ -37,6 +35,25 @@ namespace game.ui {
 			}
 		}
 
+		public static void SetGUI(GUIType type) {
+			if (gui != null) {
+				gui.gameObject.SetActive (false);
+				Destroy (gui.gameObject);
+				gui = null;
+			}
+
+			switch (type) {
+			case GUIType.Intro:
+				gui = new GameObject ("Intro GUI").AddComponent<GUIIntro> ();
+				break;
+			case GUIType.World:
+				gui = new GameObject ("World GUI").AddComponent<GUIWorld> ();
+				gc.setLocation(GameManager.l.HexPixel(GameManager.world.hero.h.loc));
+				break;
+			default:
+				break;
+			}
+		}
 	}
 }
 

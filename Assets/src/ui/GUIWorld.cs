@@ -1,40 +1,33 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System;
 using System.Collections.Generic;
 using game.math;
 using game.world;
 using game.tcg;
 using game.tcg.cards;
-using System;
+using game.ui.features;
 
 namespace game.ui {
-	enum GameState {
-		Default,
-		Paused
-	};
-
 	class GUIWorld : GUIBase {
-		internal GameCamera gc;
-		public GameManager gm;
         public MagnifiedCardModel magCard;
         private WorldHUD ib;
 		private UIHexMenu menu;
 		private bool starting;
 
-		public void init(GameManager gm) {
-			this.gm = gm;
+		void Awake() {
 			this.name = "UI";
 
 			ib = new GameObject("Infobar").AddComponent<WorldHUD>();
 			ib.init(this);
-			ib.transform.parent = gc.transform;
+			ib.transform.parent = UIManager.gc.transform;
 
 			menu = new GameObject ("Menu").AddComponent<UIHexMenu>();
 			menu.gameObject.SetActive (false);
-			menu.transform.parent = gc.transform;
+			menu.transform.parent = UIManager.gc.transform;
 
-            magCard = new GameObject("Magnified Card").AddComponent<MagnifiedCardModel>();
-        }
+			magCard = new GameObject("Magnified Card").AddComponent<MagnifiedCardModel>();
+		}
 
         void Update() {
 			// UPDATE HUD LOCATION
@@ -85,7 +78,6 @@ namespace game.ui {
 				textObj.transform.localPosition = new Vector3(0, 0, -0.5f);
 
 				tm = textObj.AddComponent<TextMesh>();
-				//tm.text = GetText ();
 				tm.color = Color.black;
 				tm.alignment = TextAlignment.Center;
 				tm.anchor = TextAnchor.MiddleCenter;

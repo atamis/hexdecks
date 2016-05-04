@@ -1,19 +1,21 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 
 namespace game.ui {
 	class GUIIntro : GUIBase {
-		private GameObject uiFeatures;
-
 		private Vector2[] b_locs = new Vector2[] {
 			new Vector2(-2.2f, 2f), new Vector2(-2.2f, 0f),
 			new Vector2(-2.2f, -2f), new Vector2(2.2f, 2f),
 			new Vector2(2.2f, 0f), new Vector2(2.2f, -2f)
 		};
 
+		private List<UILoadButton> buttons;
+		private GameObject title; private GameObject credits;
+
 		void Awake() {
 			this.name = "UI";
+			this.buttons = new List<UILoadButton> ();
 
 			for (int i = 0; i < 6; i++) {
 				UILoadButton b = new GameObject ("LoadButton").AddComponent<UILoadButton> ();
@@ -22,7 +24,7 @@ namespace game.ui {
 				b.transform.position = b_locs [i];
 				b.transform.parent = transform;
 
-				i++;
+				buttons.Add (b);
 			}
 
 			Camera.main.backgroundColor = Color.black;
@@ -30,11 +32,11 @@ namespace game.ui {
 		}
 
 		private void drawTitle(){
-			GameObject textObj = new GameObject("Title Text");
-			textObj.transform.parent = transform;
-			textObj.transform.localPosition = new Vector3(0, 4, -0.1f);
+			title = new GameObject("Title Text");
+			title.transform.parent = transform;
+			title.transform.localPosition = new Vector3(0, 4, -0.1f);
 
-			TextMesh tm = textObj.AddComponent<TextMesh>();
+			TextMesh tm = title.AddComponent<TextMesh>();
 			tm.text = "HexDex";
 			tm.color = Color.white;
 			tm.alignment = TextAlignment.Center;
@@ -44,11 +46,11 @@ namespace game.ui {
 			tm.font = UIManager.font;
 			tm.GetComponent<Renderer>().material = UIManager.font.material;
 
-			GameObject textObj2 = new GameObject("Title Text");
-			textObj2.transform.parent = transform;
-			textObj2.transform.localPosition = new Vector3(0, -4, -0.1f);
+			credits = new GameObject("Title Text");
+			credits.transform.parent = transform;
+			credits.transform.localPosition = new Vector3(0, -4, -0.1f);
 
-			TextMesh tm2 = textObj2.AddComponent<TextMesh>();
+			TextMesh tm2 = credits.AddComponent<TextMesh>();
 			tm2.text = "Created By: Dan Marsh, Nick Care, Andrew Amis, Robert Tomcik, Dan Karcher";
 			tm2.color = Color.white;
 			tm2.font = UIManager.font;
@@ -116,7 +118,7 @@ namespace game.ui {
 				tm.font = UIManager.font;
 				tm.alignment = TextAlignment.Center;
 				tm.anchor = TextAnchor.MiddleCenter;
-				tm.fontSize = 148;
+				tm.fontSize = 89;
 				tm.characterSize = 0.05f;
 				tm.GetComponent<Renderer>().material = UIManager.font.material;
 			}
@@ -130,7 +132,7 @@ namespace game.ui {
 			}
 
 			void OnMouseDown() {
-				//IntroManager.audio.PlayOneShot (Resources.Load<AudioClip> ("Audio/UI/MenuSelect"));
+				//AudioManager.effects.PlayOneShot (Resources.Load<AudioClip> ("Audio/UI/MenuSelect"));
 				GameManager.LoadLevel(lvl);
 			}
 		}

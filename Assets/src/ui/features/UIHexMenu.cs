@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 
-namespace game.ui {
+namespace game.ui.features {
 	class UIHexMenu : MonoBehaviour {
 		private class ExitPanel : MenuPanel {
 			public override string GetText() {

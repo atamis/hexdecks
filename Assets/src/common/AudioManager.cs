@@ -3,7 +3,7 @@ using System.Collections;
 
 namespace game {
 	class AudioManager : MonoBehaviour {
-
+		
         private AudioSource soundtrack;
         private AudioClip startTrack;
         private AudioClip loopTrack;
