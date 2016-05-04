@@ -7,7 +7,7 @@ namespace game {
         private AudioSource soundtrack;
         private AudioClip startTrack;
         private AudioClip loopTrack;
-        private bool looping = false;
+        //private bool looping = false;
 
         void Start()
         {
@@ -16,18 +16,21 @@ namespace game {
 
             soundtrack = gameObject.AddComponent<AudioSource>();
 
-            soundtrack.PlayOneShot(startTrack);
-            
+            //soundtrack.PlayOneShot(startTrack);
+            soundtrack.clip = loopTrack;
+            soundtrack.loop = true;
+            soundtrack.time = 1;
+            soundtrack.Play();
         }
 
         void Update() {
-            if (!looping && !soundtrack.isPlaying) {
-                print("Beginning to loop track");
-                looping = true;
-                soundtrack.clip = loopTrack;
-                soundtrack.loop = true;
-                soundtrack.Play();
-            }
+            //if (!looping && !soundtrack.isPlaying) {
+            //    print("Beginning to loop track");
+            //    looping = true;
+            //    soundtrack.clip = loopTrack;
+            //    soundtrack.loop = true;
+            //    soundtrack.Play();
+            //}
         }
 
         void Awake() {

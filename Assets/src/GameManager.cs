@@ -14,8 +14,9 @@ namespace game {
 		public static Player p;
 		public static NotificationManager ntm;
 		private WorldUI ui;
+        public static AudioManager audiom;
 
-		private WorldMap _world;
+        private WorldMap _world;
 		public WorldMap world {
 			get {
 				if (ui.GetType() != typeof(WorldUI)) {
@@ -69,6 +70,8 @@ namespace game {
 
 			ui.init (this);
 			ui.gc.setLocation(l.HexPixel(world.hero.h.loc));
+
+            audiom = gameObject.AddComponent<AudioManager>();
         }
 
         void Update() {
