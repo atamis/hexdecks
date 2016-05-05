@@ -19,6 +19,7 @@ namespace game.world {
 		public HeroUnit hero;
         public List<EnemyUnit> enemies;
         public List<SummonerEnemy> summoners;
+        public bool alerted;
         public List<Trigger> triggers;
 		public GameManager gm;
 		public int turns { get; set; }
@@ -35,6 +36,7 @@ namespace game.world {
             enemies = new List<EnemyUnit>();
             summoners = new List<SummonerEnemy>();
             triggers = new List<Trigger>();
+            alerted = false;
 		}
 
 		public Hex addHex(HexLoc hl) {
@@ -80,6 +82,12 @@ namespace game.world {
                         }
                     }
                 }
+            }
+
+            if (alerted)
+            {
+                AudioManager.audioS.PlayOneShot(AudioManager.aggroSound, 2f);
+                alerted = false;
             }
 
             foreach (EnemyUnit e in enemies)

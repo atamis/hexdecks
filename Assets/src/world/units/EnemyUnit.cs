@@ -28,7 +28,7 @@ namespace game.world.units {
             target = w.hero;
             status.asleep = false;
             status.alert = true;
-            AudioManager.audioS.PlayOneShot(AudioManager.aggroSound, 2f);
+            w.alerted = true;
             status.model.destroyZs();
         }
 

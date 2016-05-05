@@ -4,17 +4,24 @@ using System.Collections;
 namespace game {
 	class AudioManager : MonoBehaviour {
         public static AudioSource audioS;
+        public static AudioSource waterS;
         private AudioClip startTrack;
         private AudioClip loopTrack;
+        private AudioClip waterTrack;
 		public static AudioClip unlockSound = Resources.Load<AudioClip>("Audio/World/OpenLock");
 		public static AudioClip meleeSound = Resources.Load<AudioClip>("Audio/World/MeleeDamage");
 		public static AudioClip arrowSound = Resources.Load<AudioClip>("Audio/World/RangedDamage");
         public static AudioClip aggroSound = Resources.Load<AudioClip>("Audio/World/Aggro Sound");
+        //public static AudioClip[] water = new AudioClip[] {
+
+        //};
+        public static AudioClip waterLoop;
         //private bool looping = false;
 
         void Start() {
             startTrack = Resources.Load<AudioClip>("Audio/Soundtrack/Track 1 part 1");
             loopTrack = Resources.Load<AudioClip>("Audio/Soundtrack/Track 1 part 2");
+            waterLoop = Resources.Load<AudioClip>("Audio/World/water/water sound good for loop");
 
             audioS = gameObject.AddComponent<AudioSource>();
 
@@ -23,6 +30,12 @@ namespace game {
             audioS.loop = true;
             audioS.time = 1;
             audioS.Play();
+
+            waterS = gameObject.AddComponent<AudioSource>();
+
+            waterS.clip = waterLoop;
+            waterS.loop = true;
+            //waterS.Play();
         }
 
         void Update() {
