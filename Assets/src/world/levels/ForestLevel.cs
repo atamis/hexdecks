@@ -10,6 +10,10 @@ namespace game.world.levels {
 		public static Sprite t_sprite2 = Resources.Load<Sprite>("Sprites/Tiles/T_Mushroomed");
 		public static Sprite t_water = Resources.Load<Sprite>("Sprites/Tiles/T_Water1");
 
+		public static Sprite t_ranged1 = Resources.Load<Sprite>("Sprites/Enemies/T_BowGoblin1");
+		public static Sprite t_ranged2 = Resources.Load<Sprite>("Sprites/Enemies/T_BowGoblin2");
+		public static Sprite t_arrow = Resources.Load<Sprite>("Sprites/Enemies/Arrow");
+
 		public static Sprite[] t_melee = new Sprite[] {
 			Resources.Load<Sprite>("Sprites/Units/T_Mushboroom0"),
 			Resources.Load<Sprite>("Sprites/Units/T_Mushboroom1"),
@@ -34,7 +38,7 @@ namespace game.world.levels {
 				new HexLoc (3, 4, -7),
 				new HexLoc (13, 11, -24), // tactical manuvers
 				new HexLoc (22, 2, -24), // intro to cards
-				new HexLoc (23, 1, -24), // intro to 
+				new HexLoc (23, 1, -24), // intro to
 				new HexLoc (37, 12, -49),
 			};
 
@@ -48,7 +52,7 @@ namespace game.world.levels {
 
 			return world;
 		}
-			
+
 		public override List<TCGCard> GetDeck() {
 			List<TCGCard> deck = new List<TCGCard> ();
 
@@ -61,6 +65,17 @@ namespace game.world.levels {
 
 		public override Sprite GetImpassableSprite() {
 			return t_sprite2;
+		}
+
+		public override Sprite GetArrowSprite(){
+			return t_arrow;
+		}
+
+		public override Sprite[] GetRangedSprite(){
+			Sprite[] sprites = new Sprite[2] {
+					t_ranged1, t_ranged2
+			};
+			return sprites;
 		}
 
 		public override Sprite GetWaterSprite() {

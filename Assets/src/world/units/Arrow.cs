@@ -21,7 +21,7 @@ namespace game.world {
 
 			model.init(this);
 		}
-			
+
 		void Update() { }
 
 		public class ArrowModel : MonoBehaviour {
@@ -35,7 +35,7 @@ namespace game.world {
                 //transform.localScale = new Vector3(2, 2, 2);
                 transform.localPosition = LayerV.UnitFX + new Vector3(0, 0, 0);
                 sr = gameObject.AddComponent<SpriteRenderer>();
-                sr.sprite = Resources.Load<Sprite>("Sprites/Enemies/Arrow");
+                sr.sprite = GameManager.level.GetArrowSprite ();
 
                 sr.color = new Color(1, 1, 1);
             }
@@ -62,4 +62,3 @@ namespace game.world {
 		}
 	}
 }
-

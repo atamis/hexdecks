@@ -9,6 +9,10 @@ namespace game.world.levels {
 		public static Sprite t_sprite2 = Resources.Load<Sprite>("Sprites/Tiles/T_Brick");
 		public static Sprite t_water = Resources.Load<Sprite>("Sprites/Tiles/T_Water1");
 
+		public static Sprite t_ranged1 = Resources.Load<Sprite>("Sprites/Enemies/T_BowGoblin1");
+		public static Sprite t_ranged2 = Resources.Load<Sprite>("Sprites/Enemies/T_BowGoblin2");
+		public static Sprite t_arrow = Resources.Load<Sprite>("Sprites/Enemies/Arrow");
+
 		public CryptLevel() {}
 
 		public override WorldMap GetMap(GameManager gm) {
@@ -39,6 +43,17 @@ namespace game.world.levels {
 			return t_sprite1;
 		}
 
+		public override Sprite[] GetRangedSprite(){
+			Sprite[] sprites = new Sprite[2] {
+					t_ranged1, t_ranged2
+			};
+			return sprites;
+		}
+
+		public override Sprite GetArrowSprite(){
+			return t_arrow;
+		}
+
 		public override Sprite GetImpassableSprite() {
 			return t_sprite2;
 		}
@@ -48,4 +63,3 @@ namespace game.world.levels {
 		}
 	}
 }
-
