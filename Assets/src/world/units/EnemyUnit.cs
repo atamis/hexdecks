@@ -71,7 +71,7 @@ namespace game.world.units {
         }
 			
         public override void TurnActions() {
-			if (!persuing) {
+			if (!persuing && w.hero.h.loc.Distance(h.loc) < 5) {
 				var hero = w.hero;
 				Hex heroHex = hero.h;
 				var path = WorldPathfinding.Pathfind(w, h, heroHex);
@@ -243,7 +243,7 @@ namespace game.world.units {
             List<Hex> neighbs = h.Neighbors();
             List<Hex> hneighbs = w.hero.h.Neighbors();
 
-            if (!persuing) {
+            if (!persuing && w.hero.h.loc.Distance(h.loc) < 6) {
 				var hero = w.hero;
 				Hex heroHex = hero.h;
 				var path = WorldPathfinding.Pathfind(w, h, heroHex);
@@ -460,7 +460,7 @@ namespace game.world.units {
         {
             List<Hex> neighbs = h.Neighbors();
 
-            if (!persuing)
+            if (!persuing && w.hero.h.loc.Distance(h.loc) < 6)
             {
                 var hero = w.hero;
                 Hex heroHex = hero.h;
