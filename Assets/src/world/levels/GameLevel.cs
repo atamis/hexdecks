@@ -16,6 +16,8 @@ namespace game.world.levels {
 
 		public abstract Sprite[] GetRangedSprite();
 
+		public abstract Sprite[] GetMeleeSprite();
+
 		public abstract List<TCGCard> GetDeck();
 
 		public abstract Sprite GetArrowSprite();

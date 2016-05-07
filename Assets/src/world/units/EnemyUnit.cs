@@ -41,10 +41,7 @@ namespace game.world.units {
 
 	class MeleeEnemy : EnemyUnit {
         private AudioManager am;
-        Sprite[] sprites = new Sprite[2] {
-            Resources.Load<Sprite>("Sprites/Enemies/T_GoblinIdle1"),
-            Resources.Load<Sprite>("Sprites/Enemies/T_GoblinIdle2")
-        };
+				Sprite[] sprites = GameManager.level.GetMeleeSprite ();
 
         const float spriteInterval = .8f;
         float lastSwitch;
