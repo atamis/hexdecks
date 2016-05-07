@@ -14,7 +14,7 @@ namespace game.world.levels {
 		public override int GetNextLevel() { return 5; }
 
 		public override string GetSceneName() {
-			return "Forgotten Catacombs";
+			return "Lost Catacombs";
 		}
 
 		public override WorldMap GetMap(GameManager gm) {
@@ -29,7 +29,7 @@ namespace game.world.levels {
 
 			return deck;
 		}
-			
+
 		public override Sprite GetPassableSprite() {
 			float random = Random.value;
 			if (random < 0.1f) {
@@ -47,4 +47,3 @@ namespace game.world.levels {
 		}
 	}
 }
-

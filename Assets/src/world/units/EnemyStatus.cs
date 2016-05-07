@@ -62,7 +62,7 @@ namespace game.world
             private void asleepAnimation()
             {
                 asleepTimer += Time.deltaTime;
-                if(asleepTimer >= nextZ)
+                if(zz.Count < 3 && asleepTimer >= nextZ)
                 {
                     FloatingZ newZ = new GameObject("floating z").AddComponent<FloatingZ>();
                     newZ.transform.parent = status.u.transform;
@@ -75,13 +75,15 @@ namespace game.world
 
             public void destroyZs()
             {
-                foreach(FloatingZ z in zz.ToArray())
+                foreach(FloatingZ z in zz)
                 {
                     if(z != null)
                     {
                         Destroy(z.gameObject);
                     }   
                 }
+
+                zz.Clear();
             }
 
             private void alertAnimation()

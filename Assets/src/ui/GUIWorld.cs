@@ -345,7 +345,7 @@ namespace game.ui {
             void Show() {
                 sr.enabled = true;
                 artSr.enabled = true;
-                artSr.sprite = card.GetSprite();
+                artSr.sprite = card.sprite;
                 titleTm.text = card.GetName();
 
                 string builder = "";
