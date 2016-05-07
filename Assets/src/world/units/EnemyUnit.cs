@@ -265,7 +265,19 @@ namespace game.world.units {
 					if (t.unit == target) {
                         Arrow a = new GameObject("arrow").AddComponent<Arrow>();
                         a.transform.parent = transform;
-                        a.init(this);
+
+                        Hex middleHex = w.map[h.loc + ( (target.h.loc - h.loc) / 2 )];
+                        if(middleHex.unit != null)
+                        {
+                            if(middleHex.unit.GetType() == typeof(BoulderUnit))
+                            {
+                                a.init(this, middleHex.unit);
+                                Updated = true;
+                                return;
+                            }
+                        }
+
+                        a.init(this, target);
                         Updated = true;
 						return;
 					}
