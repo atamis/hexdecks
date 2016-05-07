@@ -32,7 +32,7 @@ namespace game.world.units {
             status.model.destroyZs();
         }
 
-        
+
     }
 
 	class MeleeEnemy : EnemyUnit {
@@ -69,7 +69,7 @@ namespace game.world.units {
             Vector2 direction = w.hero.transform.position - transform.position;
 
         }
-			
+
         public override void TurnActions() {
 			if (!persuing && w.hero.h.loc.Distance(h.loc) < 5) {
 				var hero = w.hero;
@@ -187,10 +187,7 @@ namespace game.world.units {
 
 	class RangedEnemy : EnemyUnit {
 
-        Sprite[] sprites = new Sprite[2] {
-            Resources.Load<Sprite>("Sprites/Enemies/T_BowGoblinIdle1"),
-            Resources.Load<Sprite>("Sprites/Enemies/T_BowGoblinIdle2")
-        };
+        Sprite[] sprites = GameManager.level.GetRangedSprite ();
         const float spriteInterval = .8f;
         float lastSwitch;
         int idx;
@@ -285,7 +282,7 @@ namespace game.world.units {
                         }
                     }
 
-                    if (!Updated) { 
+                    if (!Updated) {
 
                         bool isSafe;
 
@@ -422,7 +419,7 @@ namespace game.world.units {
             if(minions.Count < maxMinions)
             {
                 List<Hex> neighbs = h.Neighbors();
-                List<Hex> openNeighbs = new List<Hex>(); 
+                List<Hex> openNeighbs = new List<Hex>();
 
                 foreach(Hex neighb in neighbs)
                 {
@@ -448,7 +445,7 @@ namespace game.world.units {
                 else
                 {
                     return false;
-                }   
+                }
             }
             else
             {

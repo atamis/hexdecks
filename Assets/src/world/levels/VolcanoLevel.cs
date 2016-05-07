@@ -8,6 +8,10 @@ namespace game.world.levels {
 		public static Sprite t_sprite2 = Resources.Load<Sprite>("Sprites/Tiles/T_Brick");
 		public static Sprite t_water = Resources.Load<Sprite>("Sprites/Tiles/T_Magma");
 
+		public static Sprite t_ranged1 = Resources.Load<Sprite>("Sprites/Enemies/T_BowGoblin1");
+		public static Sprite t_ranged2 = Resources.Load<Sprite>("Sprites/Enemies/T_BowGoblin2");
+		public static Sprite t_arrow = Resources.Load<Sprite>("Sprites/Enemies/Arrow");
+
 		public VolcanoLevel() { }
 
 		public override int GetNextLevel() { return 4; }
@@ -26,8 +30,19 @@ namespace game.world.levels {
 			return deck;
 		}
 
+		public override Sprite[] GetRangedSprite(){
+			Sprite[] sprites = new Sprite[2] {
+					t_ranged1, t_ranged2
+			};
+			return sprites;
+		}
+
 		public override string GetSceneName() {
 			return "Subsea Volcano";
+		}
+
+		public override Sprite GetArrowSprite(){
+			return t_arrow;
 		}
 
 		public override Sprite GetPassableSprite() {
@@ -43,4 +58,3 @@ namespace game.world.levels {
 		}
 	}
 }
-

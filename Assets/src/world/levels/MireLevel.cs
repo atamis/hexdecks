@@ -8,6 +8,10 @@ namespace game.world.levels {
 		public static Sprite t_sprite2 = Resources.Load<Sprite>("Sprites/Tiles/T_Mire2");
 		public static Sprite t_water = Resources.Load<Sprite>("Sprites/Tiles/T_MireWater");
 
+		public static Sprite t_ranged1 = Resources.Load<Sprite>("Sprites/Enemies/T_FishFlinger1");
+		public static Sprite t_ranged2 = Resources.Load<Sprite>("Sprites/Enemies/T_FishFlinger2");
+		public static Sprite t_arrow = Resources.Load<Sprite>("Sprites/Enemies/FlungFish");
+
 		public MireLevel() {}
 
 		public override int GetNextLevel() { return 2; }
@@ -29,9 +33,20 @@ namespace game.world.levels {
 		public override string GetSceneName() {
 			return "Twilight Mire";
 		}
-			
+
+		public override Sprite GetArrowSprite(){
+			return t_arrow;
+		}
+
 		public override Sprite GetPassableSprite() {
 			return t_sprite1;
+		}
+
+		public override Sprite[] GetRangedSprite(){
+			Sprite[] sprites = new Sprite[2] {
+					t_ranged1, t_ranged2
+			};
+			return sprites;
 		}
 
 		public override Sprite GetImpassableSprite() {
@@ -43,4 +58,3 @@ namespace game.world.levels {
 		}
 	}
 }
-
