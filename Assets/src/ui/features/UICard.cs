@@ -71,7 +71,7 @@ namespace game.ui {
 
         void Update() {
 			tm.text = card.GetName();
-            artSr.sprite = card.GetSprite();
+            artSr.sprite = card.sprite;
 
 			if (this.state != CardState.Dragging) {
 				transform.position = Vector3.MoveTowards (transform.position, origin, 1.0f);

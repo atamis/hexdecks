@@ -24,6 +24,9 @@ namespace game.tcg.cards {
 
             var boulder = new GameObject("Boulder").AddComponent<BoulderUnit>();
             boulder.init(wm, h);
+
+            Debug.Log("Hex: " + h);
+            Debug.Log("Hex.unit: " + h.unit);
         }
 
         public override List<Hex> ValidTargets(WorldMap wm, Hex h) {

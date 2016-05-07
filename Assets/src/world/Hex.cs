@@ -164,26 +164,10 @@ namespace game.world {
 
 				rig = gameObject.AddComponent<Rigidbody2D> ();
 				rig.gravityScale = 0.0f;
-			}
+                
+            }
 
 			void Update() {
-				switch (h.tileType) {
-				case TileType.Normal:
-					if (Input.GetKeyDown (KeyCode.LeftShift)) {
-						if (h.selected) {
-							sr.color = Color.yellow;
-						} else {
-							sr.color = Color.white;
-						}
-					}
-					break;
-				case TileType.Wall:
-					sr.color = new Color(0.4f, 0.4f, 0.4f);
-					break;
-				case TileType.Water:
-					sr.color = new Color(1f, 1f, 1f);
-					break;
-				}
 			}
 
 			public void SetColor(Color c) {

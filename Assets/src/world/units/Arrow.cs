@@ -27,6 +27,7 @@ namespace game.world {
 		public class ArrowModel : MonoBehaviour {
 			public Arrow a;
 			public SpriteRenderer sr;
+            public Hex current;
             public static Vector3 defaultArrowDirection = new Vector3(-1, 0, 0);
 
             public void init(Arrow a) {
@@ -42,6 +43,24 @@ namespace game.world {
 
 			void Update() {
                 float speed = Time.deltaTime * 25f;
+                HexLoc loc = a.u.w.l.PixelHex(transform.position);
+
+                if (a.u.w.map.ContainsKey(loc))
+                {
+                    Debug.Log("key hit");
+                    current = a.u.w.map[loc];
+                    
+                    if (current.unit != null)
+                    {
+                        Debug.Log("unit hit: " + current.unit.GetType());
+                        if (current.unit.GetType().Equals(typeof(BoulderUnit)))
+                        {
+                            Debug.Log("boulder hit");
+                            current.unit.ApplyDamage(1, a.u);
+                            Destroy(gameObject);
+                        }
+                    }
+                }
 
                 if (a.u.w.hero != null)
                 {

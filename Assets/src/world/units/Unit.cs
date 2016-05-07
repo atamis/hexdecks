@@ -172,7 +172,7 @@ namespace game.world.units {
 				sr = gameObject.AddComponent<SpriteRenderer>();
 				//sr.material = new Material(Shader.Find("Custom/OutlineShader"));
 				sr.sprite = u.getSprite();
-				gameObject.AddComponent<SpriteOutline>();
+				//gameObject.AddComponent<SpriteOutline>();
 
 				sr.color = new Color(1, 1, 1);
 

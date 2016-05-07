@@ -4,9 +4,11 @@ using game.world;
 
 namespace game.tcg.cards {
 	abstract class TCGCard {
-		public TCGCard() {
+        public readonly Sprite sprite;
 
-		}
+		public TCGCard() {
+            sprite = Resources.Load<Sprite>("Sprites/Cards/" + GetName());
+        }
 
 		public abstract List<Hex> ValidTargets(WorldMap wm, Hex h);
 
@@ -21,10 +23,6 @@ namespace game.tcg.cards {
         public abstract string getDescription();
 
 		public abstract string GetName();
-
-        public Sprite GetSprite() {
-            return Resources.Load<Sprite>("Sprites/Cards/" + GetName());
-        }
 
         public void Combo() {
             GameManager.p.turns += 1;
