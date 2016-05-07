@@ -24,7 +24,9 @@ namespace game.world {
 			model.init(this);
 		}
 
-		void Update() { }
+		void Update() {
+
+        }
 
 		public class ArrowModel : MonoBehaviour {
 			public Arrow a;
@@ -78,6 +80,10 @@ namespace game.world {
                         a.target.ApplyDamage(1, a.u);
                         Destroy(gameObject);
                     }
+                }
+                else
+                {
+                    Destroy(gameObject);
                 }
 			}
 		}
