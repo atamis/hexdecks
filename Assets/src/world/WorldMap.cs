@@ -85,8 +85,8 @@ namespace game.world {
 
                         if (enemies[i].Updated == true) {
                             notDone = true;
+                            break;
                         }
-                        break;
                     }
                 }
             }
