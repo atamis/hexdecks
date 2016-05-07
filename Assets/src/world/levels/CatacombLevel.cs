@@ -12,7 +12,10 @@ namespace game.world.levels {
 		public static Sprite t_ranged1 = Resources.Load<Sprite>("Sprites/Enemies/T_BowGoblin1");
 		public static Sprite t_ranged2 = Resources.Load<Sprite>("Sprites/Enemies/T_BowGoblin2");
 		public static Sprite t_arrow = Resources.Load<Sprite>("Sprites/Enemies/Arrow");
-		
+
+		public static Sprite t_melee1 = Resources.Load<Sprite>("Sprites/Enemies/T_Bat1");
+		public static Sprite t_melee2 = Resources.Load<Sprite>("Sprites/Enemies/T_Bat2");
+
 		public CatacombLevel() {}
 
 		public override int GetNextLevel() { return 5; }
@@ -53,6 +56,13 @@ namespace game.world.levels {
 		public override Sprite[] GetRangedSprite(){
 			Sprite[] sprites = new Sprite[2] {
 					t_ranged1, t_ranged2
+			};
+			return sprites;
+		}
+
+		public override Sprite[] GetMeleeSprite(){
+			Sprite[] sprites = new Sprite[2] {
+					t_melee1, t_melee2
 			};
 			return sprites;
 		}
