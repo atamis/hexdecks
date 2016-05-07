@@ -157,7 +157,10 @@ namespace game.world.units {
 			h = null;
 			Destroy(model);
 			Destroy(this.gameObject);
+            this.OnDeath();
 		}
+
+        public virtual void OnDeath() { }
 
 		private class UnitModel : MonoBehaviour {
 			private SpriteRenderer sr;

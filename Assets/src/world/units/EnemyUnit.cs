@@ -32,6 +32,10 @@ namespace game.world.units {
             status.model.destroyZs();
         }
 
+        public override void OnDeath() {
+            base.OnDeath();
+            w.enemies.Remove(this);
+        }
 
     }
 
@@ -386,6 +390,11 @@ namespace game.world.units {
             lastSwitch = timer;
             spawnTimer = 0;
             minions = new List<MeleeEnemy>();
+        }
+
+        public override void OnDeath() {
+            base.OnDeath();
+            w.summoners.Remove(this);
         }
 
         public override Sprite getSprite()
