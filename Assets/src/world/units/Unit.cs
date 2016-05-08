@@ -154,10 +154,10 @@ namespace game.world.units {
 				hex.Highlight (Color.white);
 			}
 
-			h = null;
+            OnDeath();
+            h = null;
 			Destroy(model);
-			Destroy(this.gameObject);
-            this.OnDeath();
+			Destroy(gameObject);
 		}
 
         public virtual void OnDeath() { }

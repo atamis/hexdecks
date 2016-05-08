@@ -30,7 +30,8 @@ namespace game.ui {
 			overlay.init ();
 			overlay.transform.localPosition = new Vector3 (0, 0, -4);
 			overlay.transform.parent = gc.transform;
-		}
+
+        }
 
 		void Update() {
 			if (Input.GetKeyUp (KeyCode.Escape)) {
@@ -59,7 +60,10 @@ namespace game.ui {
 				if (GameManager.world.hexes != null) {
 					Destroy (GameManager.world.hexes.gameObject);
 				}
-				break;
+
+                AudioManager.playTrack2();
+
+                break;
 
 			case GUIType.World:
 				gui = new GameObject ("World GUI").AddComponent<GUIWorld> ();

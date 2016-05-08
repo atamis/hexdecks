@@ -6,14 +6,16 @@ namespace game {
         public static AudioSource audioS;
         public static AudioSource waterS;
         private AudioClip startTrack;
-        private AudioClip loopTrack;
-        private AudioClip waterTrack;
+        public static AudioClip track1;
+        public static AudioClip track2;
+        public static AudioClip waterTrack;
 		public static AudioClip drawSound = Resources.Load<AudioClip>("Audio/UI/DrawCard");
 		public static AudioClip shuffleSound = Resources.Load<AudioClip> ("Audio/UI/Shuffle");
 		public static AudioClip unlockSound = Resources.Load<AudioClip>("Audio/World/OpenLock");
 		public static AudioClip meleeSound = Resources.Load<AudioClip>("Audio/World/MeleeDamage");
 		public static AudioClip arrowSound = Resources.Load<AudioClip>("Audio/World/RangedDamage");
         public static AudioClip aggroSound = Resources.Load<AudioClip>("Audio/World/Aggro Sound");
+        public static AudioClip deathSound = Resources.Load<AudioClip>("Audio/PlayerDies");
         //public static AudioClip[] water = new AudioClip[] {
 
         //};
@@ -21,23 +23,45 @@ namespace game {
         //private bool looping = false;
 
         void Start() {
-            startTrack = Resources.Load<AudioClip>("Audio/Soundtrack/Track 1 part 1");
-            loopTrack = Resources.Load<AudioClip>("Audio/Soundtrack/Track 1 part 2");
+            track1 = Resources.Load<AudioClip>("Audio/Soundtrack/Track 1 part 2");
+            track2 = Resources.Load<AudioClip>("Audio/Soundtrack/Track 2");
             waterLoop = Resources.Load<AudioClip>("Audio/World/water/water sound good for loop");
 
             audioS = gameObject.AddComponent<AudioSource>();
-
-            //soundtrack.PlayOneShot(startTrack);
-            audioS.clip = loopTrack;
-            audioS.loop = true;
-            audioS.time = 1;
-            audioS.Play();
-
             waterS = gameObject.AddComponent<AudioSource>();
 
+            playTrack2();
+   
+        }
+
+        public static void playTrack1()
+        {
+            if (audioS.clip != track1 || !audioS.isPlaying)
+            {
+                audioS.Stop();
+                audioS.clip = track1;
+                audioS.loop = true;
+                audioS.time = 1;
+                audioS.Play();
+            }
+        }
+
+        public static void playTrack2()
+        {
+            if (audioS.clip != track2 || !audioS.isPlaying)
+            {
+                audioS.Stop();
+                audioS.clip = track2;
+                audioS.loop = true;
+                audioS.Play();
+            }
+        }
+
+        public static void playWaterLoop()
+        {
             waterS.clip = waterLoop;
             waterS.loop = true;
-            //waterS.Play();
+            waterS.Play();
         }
 
         void Update() {
