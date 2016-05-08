@@ -71,12 +71,9 @@ namespace game {
 				Destroy (world.hexes.gameObject);
 			}
 
-            if(id == 0 || id == 2 || id == 4)
-            {
+            if(id == 0 || id == 2 || id == 4) {
                 AudioManager.playTrack2();
-            }
-            else
-            {
+            } else {
                 AudioManager.playTrack1();
             }
 			level = LevelRegistery<GameLevel>.Create (id);
