@@ -7,11 +7,11 @@ using game.math;
 namespace game.world.triggers {
 	class TutorialTrigger : Trigger {
 		private string[] messages = new string[] {
-			"Greetings! Use WASD to move the camera, or press shift to lock the camera on you.", 					// 0
+			"Greetings! Use WASD to move the camera, or press shift to lock the camera on you (the hero).", 					// 0
 			"The enemy has seen you! Click on an adjacent enemy to attack them!",						// 3
-			"The enemies attack too! Mouse over them to see where they can attack.",							// 2
+			"The enemies attack too! Mousing over an enemy shows their health and attack pattern.",							// 2
 			"Sleeping enemies don't move, but if you're close enough they wake up!",
-			"Play cards to use special attacks! Hovering over a card shows where you can use it.",	// 4
+			"Play cards to use special attacks! Hovering over a card highlights where you can use it.",	// 4
 			"Open chests to unlock new cards!", 	// 5
 			"Your objective is to reach purple portal!",
 			"It was a favorite prank of the merfolk to drop a boulder on an unsuspecting friend",		// 6
