@@ -83,6 +83,7 @@ namespace game {
 			p.hero = world.hero;
             p.hero.health = p.hero.maxHealth = level.playerMaxHealth;
 			p.deck = level.GetDeck ();
+            p.hand.Clear();
 			p.DrawCards(5);
 
 			UIManager.SetGUI (GUIType.World);
