@@ -39,7 +39,14 @@ namespace game.world {
 				}
 
 				if (old != null && value == null) {
-					foreach (Trigger t in triggers) {
+
+                    old.ShowHealth(false);
+                    foreach (Hex hex in old.GetAttackPattern()) {
+                        hex.Highlight(Color.white);
+                    }
+
+
+                    foreach (Trigger t in triggers) {
 						t.UnitLeave(unit);
 					}
 				}
