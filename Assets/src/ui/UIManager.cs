@@ -12,7 +12,7 @@ namespace game.ui {
 		private ScreenOverlay overlay;
 
 		void Awake() {
-			if (instance != null) { 
+			if (instance != null) {
 				Debug.Log ("Can't have more than one UIManager!");
 			}
 			instance = this;
@@ -35,7 +35,7 @@ namespace game.ui {
 
 		void Update() {
 			if (Input.GetKeyUp (KeyCode.Escape)) {
-				if (gui.GetType () == typeof(GUIIntro)) { 
+				if (gui.GetType () == typeof(GUIIntro)) {
 					Application.Quit ();
 
 				} else if (gui.GetType () == typeof(GUIWorld)) {
@@ -91,4 +91,3 @@ namespace game.ui {
 		}
 	}
 }
-

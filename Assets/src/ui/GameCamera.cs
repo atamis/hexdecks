@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using game;
 
 namespace game.ui {
 	class GameCamera : MonoBehaviour {
@@ -7,6 +8,7 @@ namespace game.ui {
 		float speed = 1f;
 		private Vector3? goal;
 		public bool locked { get; private set; }
+		public bool CamLock;
 
         public void init(Camera cam) {
 			this.cam = cam;
@@ -14,6 +16,8 @@ namespace game.ui {
 			this.cam.backgroundColor = new Color(0.05f, 0.05f, 0.05f);
 			goal = null;
 			locked = false;
+			this.cam.orthographicSize = 5.5f;
+			CamLock = false;
 		}
 
 		public void SetLocation(Vector3 dest) {
@@ -41,6 +45,15 @@ namespace game.ui {
 
 		// Update is called once per frame
 		void Update() {
+			if(Input.GetKey(KeyCode.LeftShift)){
+				CamLock = !CamLock;
+			}
+			if(CamLock){
+			 	SetGoal(new Vector3(GameManager.l.HexPixel(GameManager.world.hero.h.loc).x,
+				GameManager.l.HexPixel(GameManager.world.hero.h.loc).y - 1, .05f
+				));
+			}
+
 			if (goal.HasValue) {
 				if (closeToGoal()) {
 					goal = null;
