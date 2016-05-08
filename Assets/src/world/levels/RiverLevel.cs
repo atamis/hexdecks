@@ -39,8 +39,7 @@ namespace game.world.levels {
 			deck.Add(new DisengageCard());
 			deck.Add(new JumpAttackCard());
 			deck.Add(new JumpAttackCard());
-			deck.Add(new BoulderCard());
-			deck.Add(new BoulderCard());
+			deck.Add(new DiscardHandCard());
 
 			deck.Shuffle();
 

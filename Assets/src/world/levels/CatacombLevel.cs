@@ -49,7 +49,7 @@ namespace game.world.levels {
 			deck.Add (new FireballCard());
 			deck.Add (new FireballCard());
 			deck.Add (new FlashHealCard());
-			deck.Add (new FlashHealCard());
+			deck.Add(new DiscardHandCard());
 
 			deck.Shuffle();
 
