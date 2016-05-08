@@ -20,8 +20,8 @@ p = player
 m = melee
 r = range
 M = big melee
-c = chest
-*/
+0...9 = chest types
+ */
 
 		public static WorldMap Default(Layout l, GameManager gm) {
 			WorldMap w = new WorldMap(l, gm);
@@ -49,7 +49,7 @@ c = chest
 
 		private static bool isTileChar(char c) {
 			switch (c) {
-			case '_':
+            case '_':
 			case 'W':
 			case 'w':
 			case 'e':
@@ -58,39 +58,23 @@ c = chest
 			case 'r':
 			case 'M':
 			case 'c':
-      case 's':
+            case 's':
+            case '1':
+            case '2':
+            case '3':
+            case '4':
+            case '5':
+            case '6':
+            case '7':
+            case '8':
+            case '9':
+            case '0':
 				return true;
 			default:
 				return false;
 			}
 		}
-
-        private static TCGCard randomCard(System.Random r) {
-            int i = r.Next(9);
-            switch(i) {
-                case 0:
-                    return new FireballCard();
-                case 1:
-                    return new FlashHealCard();
-                case 2:
-                    return new JumpAttackCard();
-                case 3:
-                    return new KnockBackCard();
-                case 4:
-                    return new DoubleActionCard();
-                case 5:
-                    return new DiscardHandCard();
-                case 6:
-                    return new TrapCard();
-                case 7:
-                    return new TeleportCard();
-                case 8:
-                    return new WhirlwindCard();
-                default:
-                    return new FlashHealCard();
-            }
-        }
-
+        
 		public static WorldMap LoadLevel(Layout l, string name, GameManager gm) {
 			TextAsset lvl = Resources.Load<TextAsset>("Levels/" + name);
 
@@ -154,13 +138,21 @@ c = chest
                             end.init(h);
                             w.triggers.Add(end);
 							break;
-                        case 'c':
-                            var chest = new GameObject("EndLevelTrigger").AddComponent<ChestTrigger>();
-                            chest.init(h, randomCard(r));
+                        case '1':
+                        case '2':
+                        case '3':
+                        case '4':
+                        case '5':
+                        case '6':
+                        case '7':
+                        case '8':
+                        case '9':
+                        case '0':
+                                var chest = new GameObject("ChestTrigger").AddComponent<ChestTrigger>();
+                            chest.init(h, chr - '0');
                             w.triggers.Add(chest);
                             break;
 						default:
-							// Not Implemented: e, M, c
 							break;
 						}
 					}

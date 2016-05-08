@@ -169,8 +169,8 @@ namespace game.world.units {
         public override Sprite getSprite() {
 			if(gotHit == false && health == 1){
 								sprites = new Sprite[2] {
-				            Resources.Load<Sprite>("Sprites/Enemies/T_GoblinIdle1"),
-				            Resources.Load<Sprite>("Sprites/Enemies/T_GoblinIdle2")
+				            Resources.Load<Sprite>("Sprites/Enemies/T_Goblin1"),
+				            Resources.Load<Sprite>("Sprites/Enemies/T_Goblin2")
 				        };
 								gotHit = true;
 

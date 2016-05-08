@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using game.tcg;
 using game.tcg.cards;
+using System;
 
 namespace game.world.levels {
 	class MireLevel : GameLevel {
@@ -37,8 +38,7 @@ namespace game.world.levels {
 			deck.Add(new TeleportCard());
 			deck.Add(new TrapCard());
 			deck.Add(new DisengageCard());
-			deck.Add(new JumpAttackCard());
-			deck.Add(new JumpAttackCard());
+			deck.Add(new DisengageCard());
 
 			deck.Shuffle();
 
@@ -78,5 +78,21 @@ namespace game.world.levels {
 		public override Sprite GetWaterSprite() {
 			return t_water;
 		}
-	}
+
+        public override List<TCGCard> GetChestContents(int chestType) {
+            var cards = new List<TCGCard>();
+
+            switch (chestType) {
+                case 0:
+                    cards.Add(new JumpAttackCard());
+                    cards.Add(new JumpAttackCard());
+                    break;
+                case 1:
+                    cards.Add(new DiscardHandCard());
+                    break;
+            }
+
+            return cards;
+        }
+    }
 }

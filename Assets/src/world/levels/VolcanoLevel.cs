@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using game.tcg;
 using game.tcg.cards;
+using System;
 
 namespace game.world.levels {
 	class VolcanoLevel : GameLevel {
@@ -41,8 +42,8 @@ namespace game.world.levels {
 			deck.Add(new JumpAttackCard());
 			deck.Add(new BoulderCard());
 			deck.Add(new BoulderCard());
-			deck.Add (new FireballCard());
-			deck.Add (new FireballCard());
+			deck.Add (new FlashHealCard());
+			deck.Add(new DiscardHandCard());
 
 			deck.Shuffle();
 
@@ -82,5 +83,21 @@ namespace game.world.levels {
 		public override Sprite GetWaterSprite() {
 			return t_water;
 		}
-	}
+
+        public override List<TCGCard> GetChestContents(int chestType) {
+            var cards = new List<TCGCard>();
+
+            switch (chestType) {
+                case 0:
+                    cards.Add(new FireballCard());
+                    cards.Add(new FireballCard());
+                    break;
+                case 1:
+                    cards.Add(new WhirlwindCard());
+                    break;
+            }
+
+            return cards;
+        }
+    }
 }

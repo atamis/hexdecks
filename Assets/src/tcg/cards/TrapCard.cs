@@ -19,7 +19,7 @@ namespace game.tcg.cards {
         }
 
         public override List<Hex> ValidTargets(WorldMap wm, Hex h) {
-            return h.Neighbors();
+            return h.Neighbors().Where(n => n.Passable()).ToList();
         }
 
         public override string getDescription()
