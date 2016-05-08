@@ -16,6 +16,7 @@ namespace game {
 		public static AudioClip arrowSound = Resources.Load<AudioClip>("Audio/World/RangedDamage");
         public static AudioClip aggroSound = Resources.Load<AudioClip>("Audio/World/Aggro Sound");
         public static AudioClip deathSound = Resources.Load<AudioClip>("Audio/World/PlayerDies");
+        public static AudioClip victorySound = Resources.Load<AudioClip>("Audio/World/VictoryMusic");
         //public static AudioClip[] water = new AudioClip[] {
 
         //};
@@ -73,6 +74,14 @@ namespace game {
             audioS.Stop();
             audioS.clip = null;
             audioS.PlayOneShot(deathSound, 2f);
+        }
+
+        public static void playerVictory()
+        {
+            audioS.Stop();
+            audioS.clip = victorySound;
+            audioS.loop = true;
+            audioS.Play();
         }
 
         void Update() {
