@@ -28,19 +28,20 @@ namespace game.world.units {
             target = w.hero;
             status.asleep = false;
             status.alert = true;
-            AudioManager.audioS.PlayOneShot(AudioManager.aggroSound, 2f);
+            w.alerted = true;
             status.model.destroyZs();
         }
 
-        
+        public override void OnDeath() {
+            base.OnDeath();
+            w.enemies.Remove(this);
+        }
+
     }
 
 	class MeleeEnemy : EnemyUnit {
         private AudioManager am;
-        Sprite[] sprites = new Sprite[2] {
-            Resources.Load<Sprite>("Sprites/Enemies/T_GoblinIdle1"),
-            Resources.Load<Sprite>("Sprites/Enemies/T_GoblinIdle2")
-        };
+				Sprite[] sprites = GameManager.level.GetMeleeSprite ();
 
         const float spriteInterval = .8f;
         float lastSwitch;
@@ -69,9 +70,9 @@ namespace game.world.units {
             Vector2 direction = w.hero.transform.position - transform.position;
 
         }
-			
+
         public override void TurnActions() {
-			if (!persuing) {
+			if (!persuing && w.hero.h.loc.Distance(h.loc) < 5) {
 				var hero = w.hero;
 				Hex heroHex = hero.h;
 				var path = WorldPathfinding.Pathfind(w, h, heroHex);
@@ -187,10 +188,7 @@ namespace game.world.units {
 
 	class RangedEnemy : EnemyUnit {
 
-        Sprite[] sprites = new Sprite[2] {
-            Resources.Load<Sprite>("Sprites/Enemies/T_BowGoblinIdle1"),
-            Resources.Load<Sprite>("Sprites/Enemies/T_BowGoblinIdle2")
-        };
+        Sprite[] sprites = GameManager.level.GetRangedSprite ();
         const float spriteInterval = .8f;
         float lastSwitch;
         int idx;
@@ -243,7 +241,7 @@ namespace game.world.units {
             List<Hex> neighbs = h.Neighbors();
             List<Hex> hneighbs = w.hero.h.Neighbors();
 
-            if (!persuing) {
+            if (!persuing && w.hero.h.loc.Distance(h.loc) < 6) {
 				var hero = w.hero;
 				Hex heroHex = hero.h;
 				var path = WorldPathfinding.Pathfind(w, h, heroHex);
@@ -267,7 +265,19 @@ namespace game.world.units {
 					if (t.unit == target) {
                         Arrow a = new GameObject("arrow").AddComponent<Arrow>();
                         a.transform.parent = transform;
-                        a.init(this);
+
+                        Hex middleHex = w.map[h.loc + ( (target.h.loc - h.loc) / 2 )];
+                        if(middleHex.unit != null)
+                        {
+                            if(middleHex.unit.GetType() == typeof(BoulderUnit))
+                            {
+                                a.init(this, middleHex.unit);
+                                Updated = true;
+                                return;
+                            }
+                        }
+
+                        a.init(this, target);
                         Updated = true;
 						return;
 					}
@@ -285,7 +295,7 @@ namespace game.world.units {
                         }
                     }
 
-                    if (!Updated) { 
+                    if (!Updated) {
 
                         bool isSafe;
 
@@ -391,6 +401,11 @@ namespace game.world.units {
             minions = new List<MeleeEnemy>();
         }
 
+        public override void OnDeath() {
+            base.OnDeath();
+            w.summoners.Remove(this);
+        }
+
         public override Sprite getSprite()
         {
             if (timer >= lastSwitch + spriteInterval)
@@ -422,7 +437,7 @@ namespace game.world.units {
             if(minions.Count < maxMinions)
             {
                 List<Hex> neighbs = h.Neighbors();
-                List<Hex> openNeighbs = new List<Hex>(); 
+                List<Hex> openNeighbs = new List<Hex>();
 
                 foreach(Hex neighb in neighbs)
                 {
@@ -448,7 +463,7 @@ namespace game.world.units {
                 else
                 {
                     return false;
-                }   
+                }
             }
             else
             {
@@ -460,7 +475,7 @@ namespace game.world.units {
         {
             List<Hex> neighbs = h.Neighbors();
 
-            if (!persuing)
+            if (!persuing && w.hero.h.loc.Distance(h.loc) < 6)
             {
                 var hero = w.hero;
                 Hex heroHex = hero.h;

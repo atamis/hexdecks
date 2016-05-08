@@ -11,9 +11,12 @@ namespace game.world {
         private float deathTimer;
         private const float lifespan = 2f;
 
+        private Vector3 origin;
+
 		public void init(Unit u) {
 			this.u = u;
 			transform.localPosition = LayerV.UnitFX + new Vector3(0, .5f, 0);
+            origin = LayerV.UnitFX;
 
             var obj = new GameObject("Z model");
 			obj.transform.parent = transform;
@@ -29,12 +32,13 @@ namespace game.world {
             deathTimer += Time.deltaTime;
             if(deathTimer > lifespan)
             {
-                Destroy(gameObject);
+                model.transform.localPosition = origin;
+                deathTimer = 0;
             }
 		}
 
 		public class StatusModel : MonoBehaviour {
-			private Sprite tex = Resources.Load<Sprite>("Sprites/Particles/Zzz");
+			private Sprite tex = Resources.Load<Sprite>("Particle/Zzz");
 			public FloatingZ z;
 			public SpriteRenderer sr;
 

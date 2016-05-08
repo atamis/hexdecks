@@ -19,6 +19,7 @@ namespace game.world {
 		public HeroUnit hero;
         public List<EnemyUnit> enemies;
         public List<SummonerEnemy> summoners;
+        public bool alerted;
         public List<Trigger> triggers;
 		public GameManager gm;
 		public int turns { get; set; }
@@ -35,6 +36,7 @@ namespace game.world {
             enemies = new List<EnemyUnit>();
             summoners = new List<SummonerEnemy>();
             triggers = new List<Trigger>();
+            alerted = false;
 		}
 
 		public Hex addHex(HexLoc hl) {
@@ -60,11 +62,37 @@ namespace game.world {
 
 		internal void NewTurn() {
 
-			foreach (KeyValuePair<HexLoc, Hex> kv in map) {
+            /*foreach (KeyValuePair<HexLoc, Hex> kv in map) {
 				kv.Value.Updated = false;
-			}
-            
+			}*/
+
+            foreach(EnemyUnit e in enemies) {
+                e.Updated = false;
+            }
+
+            foreach (Trigger t in triggers) {
+                t.h.Updated = false;
+            }
+
+
             bool notDone = true;
+             
+            while (notDone) {
+                notDone = false;
+                for (int i = 0; i < enemies.Count; i++) {
+                    if (enemies[i].Updated == false) {
+                        enemies[i].NewTurn();
+
+                        if (enemies[i].Updated == true) {
+                            notDone = true;
+                            break;
+                        }
+                    }
+                }
+            }
+            
+
+            /*bool notDone = true;
             while (notDone)
             {
                 notDone = false;
@@ -80,6 +108,12 @@ namespace game.world {
                         }
                     }
                 }
+            }*/
+
+            if (alerted)
+            {
+                AudioManager.audioS.PlayOneShot(AudioManager.aggroSound, 2f);
+                alerted = false;
             }
 
             foreach (EnemyUnit e in enemies)

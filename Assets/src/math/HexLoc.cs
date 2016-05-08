@@ -84,7 +84,17 @@ namespace game.math {
 			return new HexLoc(a.q - b.q, a.r - b.r, a.s - b.s);
 		}
 
-		public int Length() {
+        public static HexLoc operator /(HexLoc a, int b)
+        {
+            return new HexLoc(a.q / b, a.r / b, a.s / b);
+        }
+
+        public static HexLoc operator *(HexLoc a, int b)
+        {
+            return new HexLoc(a.q * b, a.r * b, a.s * b);
+        }
+
+        public int Length() {
 			return (int) (Math.Abs(q) + Math.Abs(r) + Math.Abs(s)) / 2;
 		}
 
