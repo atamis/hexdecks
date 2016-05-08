@@ -124,14 +124,15 @@ namespace game.world.triggers {
                     print("Added " + c + " to the player's deck");
                     AudioManager.audioS.PlayOneShot(AudioManager.unlockSound);
                     GameManager.p.deck.Insert(0, c);
-                    UIManager.ntm.AddText(GameManager.l.HexPixel(h.loc), "+card" + c.GetName(), Color.black);
+                    UIManager.ntm.AddText(new Vector3(GameManager.l.HexPixel(h.loc).x - 4,
+										GameManager.l.HexPixel(h.loc).y, 0), "You found a " + c.GetName() + " card!", Color.black);
                 }
 				Suicide();
             }
         }
 
         public override void UnitLeave(Unit u) {
-            
+
         }
     }
 
