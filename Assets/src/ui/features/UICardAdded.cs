@@ -29,7 +29,7 @@ namespace game.ui.features {
 			title.transform.localPosition = new Vector3(0, 0, -0.1f);
 
 			TextMesh tm = title.AddComponent<TextMesh>();
-			tm.text = "You've got mail!";
+			tm.text = "Your journey \n continues!";
 			tm.color = Color.black;
 			tm.alignment = TextAlignment.Center;
 			tm.anchor = TextAnchor.MiddleCenter;
