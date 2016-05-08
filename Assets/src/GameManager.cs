@@ -74,8 +74,9 @@ namespace game {
             if(id == 0 || id == 2 || id == 4) {
                 AudioManager.playTrack2();
             } else {
-                AudioManager.playTrack1();
+				AudioManager.playTrack1();
             }
+
 			level = LevelRegistery<GameLevel>.Create (id);
 			world = level.GetMap (instance);
 

@@ -225,6 +225,7 @@ namespace game.ui {
                 }
 
                 if (goScreen != null && Time.time - deathTime > 5) {
+                    Debug.Log("hit2");
 					GameManager.LoadLevel (GameManager.lvl_id);
                 }
 
