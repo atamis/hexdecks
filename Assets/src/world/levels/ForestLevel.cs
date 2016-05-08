@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using game.tcg;
 using game.tcg.cards;
 using game.world.triggers;
 using game.math;
@@ -51,6 +52,17 @@ namespace game.world.levels {
 			
 		public override List<TCGCard> GetDeck() {
 			List<TCGCard> deck = new List<TCGCard> ();
+
+			deck.Add(new SlideCard());
+			deck.Add(new SlideCard());
+			deck.Add(new KnockBackCard());
+			deck.Add(new KnockBackCard());
+			deck.Add(new WhirlwindCard());
+			deck.Add(new TeleportCard());
+			deck.Add(new TrapCard());
+			deck.Add(new DisengageCard());
+
+			deck.Shuffle();
 
 			return deck;
 		}

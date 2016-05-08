@@ -21,26 +21,6 @@ namespace game {
             hand = new List<TCGCard>();
             deck = new List<TCGCard>();
             graveyard = new List<TCGCard>();
-
-            deck.Add(new FireballCard());
-            deck.Add(new FireballCard());
-            deck.Add(new FlashHealCard());
-            deck.Add(new JumpAttackCard());
-            deck.Add(new JumpAttackCard());
-            deck.Add(new KnockBackCard());
-            deck.Add(new KnockBackCard());
-            deck.Add(new DoubleActionCard());
-            deck.Add(new DiscardHandCard());
-            deck.Add(new TrapCard());
-            deck.Add(new TeleportCard());
-            deck.Add(new WhirlwindCard());
-            deck.Add(new BoulderCard());
-            deck.Add(new SlideCard());
-            deck.Add(new DisengageCard());
-
-            deck.Shuffle();
-
-            DrawCards(5);
         }
 
         public void DiscardHand() {

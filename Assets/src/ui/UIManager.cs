@@ -82,8 +82,7 @@ namespace game.ui {
 			m.init (msg);
 
 			m.transform.parent = gc.transform;
-			m.transform.localPosition = new Vector3 (-3, -1, 0);
-
+			m.transform.localPosition = new Vector3 (-3, -1, Layer.HUD);
 			//gc.SetLock (true);
 		}
 	}

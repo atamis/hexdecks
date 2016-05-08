@@ -11,6 +11,7 @@ namespace game.render {
 		public static RenderManager instance;
 		public ParticleSystem dust = Resources.Load<ParticleSystem> ("Particle/DustParticle");
 		public ParticleSystem bubbles = Resources.Load<ParticleSystem> ("Particle/BubbleParticle");
+		public ParticleSystem smoke = Resources.Load<ParticleSystem> ("Particle/SmokeParticle");
 
 		void Awake() {
 			if (instance != null) {

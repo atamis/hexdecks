@@ -25,6 +25,7 @@ namespace game.ui {
 			menu = new GameObject ("Menu").AddComponent<UIHexMenu>();
 			menu.gameObject.SetActive (false);
 			menu.transform.parent = UIManager.gc.transform;
+			//menu.transform.localPosition = LayerV.HUD
 
 			magCard = new GameObject("Magnified Card").AddComponent<MagnifiedCardModel>();
 		}

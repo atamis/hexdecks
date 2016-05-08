@@ -78,7 +78,7 @@ namespace game.ui.features {
 
 				textObj = new GameObject("UI Text");
 				textObj.transform.parent = transform;
-				textObj.transform.localPosition = new Vector3(0, 0, -0.5f);
+				textObj.transform.localPosition = new Vector3(0, 0, 0);
 
 				tm = textObj.AddComponent<TextMesh>();
 				tm.text = GetText();

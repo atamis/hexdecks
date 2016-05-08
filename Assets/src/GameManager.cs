@@ -71,6 +71,7 @@ namespace game {
 
 			p.hero = world.hero;
 			p.deck = level.GetDeck ();
+			p.DrawCards(5);
 
 			UIManager.SetGUI (GUIType.World);
 		}

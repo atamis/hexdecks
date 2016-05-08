@@ -168,7 +168,6 @@ namespace game.world.units {
 
 				transform.localPosition = LayerV.HeroUnit;
 
-
 				sr = gameObject.AddComponent<SpriteRenderer>();
 				//sr.material = new Material(Shader.Find("Custom/OutlineShader"));
 				sr.sprite = u.getSprite();

@@ -17,7 +17,7 @@ namespace game.ui {
 			public void init(UIMessage mb) {
 				this.mb = mb;
 
-				transform.localPosition = new Vector3 (1.5f, -.75f, Layer.HUDFX);
+				transform.localPosition = new Vector3 (1.5f, -.75f, -0.1f);
 
 				sr = gameObject.AddComponent<SpriteRenderer> ();
 				sr.sprite = Resources.Load<Sprite> ("Sprites/UI/T_Wood");
@@ -32,7 +32,7 @@ namespace game.ui {
 		}
 
 		public void init(string msg) {
-			transform.localPosition = new Vector3 (0, 0, Layer.HUD);
+			//transform.localPosition = new Vector3 (0, 0, 0);
 
 			// BACKGROUND
 			sr = gameObject.AddComponent<SpriteRenderer> ();
