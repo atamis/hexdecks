@@ -81,6 +81,7 @@ namespace game {
 			world = level.GetMap (instance);
 
 			p.hero = world.hero;
+            p.hero.health = p.hero.maxHealth = level.playerMaxHealth;
 			p.deck = level.GetDeck ();
 			p.DrawCards(5);
 

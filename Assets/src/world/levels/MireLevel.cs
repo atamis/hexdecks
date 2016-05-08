@@ -17,7 +17,13 @@ namespace game.world.levels {
 		public static Sprite t_melee1 = Resources.Load<Sprite>("Sprites/Enemies/T_Goblin1");
 		public static Sprite t_melee2 = Resources.Load<Sprite>("Sprites/Enemies/T_Goblin2");
 
-		public MireLevel() {}
+        public override int playerMaxHealth {
+            get {
+                return 6;
+            }
+        }
+
+        public MireLevel() {}
 
 		public override int GetNextLevel() { return 2; }
 
