@@ -15,7 +15,7 @@ namespace game {
 		public static AudioClip meleeSound = Resources.Load<AudioClip>("Audio/World/MeleeDamage");
 		public static AudioClip arrowSound = Resources.Load<AudioClip>("Audio/World/RangedDamage");
         public static AudioClip aggroSound = Resources.Load<AudioClip>("Audio/World/Aggro Sound");
-        public static AudioClip deathSound = Resources.Load<AudioClip>("Audio/PlayerDies");
+        public static AudioClip deathSound = Resources.Load<AudioClip>("Audio/World/PlayerDies");
         //public static AudioClip[] water = new AudioClip[] {
 
         //};
@@ -36,8 +36,10 @@ namespace game {
 
         public static void playTrack1()
         {
+            
             if (audioS.clip != track1 || !audioS.isPlaying)
             {
+                
                 audioS.Stop();
                 audioS.clip = track1;
                 audioS.loop = true;
@@ -48,8 +50,10 @@ namespace game {
 
         public static void playTrack2()
         {
+            Debug.Log(audioS.isPlaying);
             if (audioS.clip != track2 || !audioS.isPlaying)
             {
+                Debug.Log("hit3");
                 audioS.Stop();
                 audioS.clip = track2;
                 audioS.loop = true;
@@ -62,6 +66,13 @@ namespace game {
             waterS.clip = waterLoop;
             waterS.loop = true;
             waterS.Play();
+        }
+
+        public static void playerDeath()
+        {
+            audioS.Stop();
+            audioS.clip = null;
+            audioS.PlayOneShot(deathSound, 2f);
         }
 
         void Update() {
