@@ -33,7 +33,7 @@ namespace game {
         public static bool vfade;
         public static bool t1fade;
         public static bool t2fade;
-        public static float vtimer;
+        public static bool wfade;
         //public static AudioClip[] water = new AudioClip[] {
 
         //};
@@ -52,6 +52,8 @@ namespace game {
             t2.clip = track2;
             t2.loop = true;
             waterS = gameObject.AddComponent<AudioSource>();
+            waterS.clip = waterLoop;
+            waterS.loop = true;
             victoryS = gameObject.AddComponent<AudioSource>();
             victoryS.clip = victorySound;
             victoryS.loop = true;
@@ -67,6 +69,7 @@ namespace game {
 
         public static void playTrack1()
         {
+            wfade = true;
             if (!t1.isPlaying)
             {
                 vfade = true;
@@ -78,6 +81,7 @@ namespace game {
 
         public static void playTrack2()
         {
+            wfade = true;
             if (!t2.isPlaying)
             {
                 vfade = true;
@@ -90,9 +94,11 @@ namespace game {
 
         public static void playWaterLoop()
         {
-            waterS.clip = waterLoop;
-            waterS.loop = true;
-            waterS.Play();
+            if (!waterS.isPlaying || waterS.volume < 1)
+            {
+                waterS.volume = 1;
+                waterS.Play();
+            }
         }
 
         public static void playerDeath()
@@ -144,6 +150,15 @@ namespace game {
                 {
                     t2fade = false;
                     t2.Stop();
+                }
+            }
+            if (wfade)
+            {
+                waterS.volume -= Time.deltaTime * .33f;
+                if (waterS.volume <= 0)
+                {
+                    wfade = false;
+                    waterS.Stop();
                 }
             }
 
