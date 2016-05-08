@@ -45,7 +45,7 @@ namespace game.ui {
 
 		// Update is called once per frame
 		void Update() {
-			if(Input.GetKey(KeyCode.LeftShift)){
+			if(Input.GetKeyUp(KeyCode.LeftShift)){
 				CamLock = !CamLock;
 			}
 			if(CamLock){
@@ -54,7 +54,7 @@ namespace game.ui {
 				));
 			}
 
-			if (goal.HasValue) {
+			if (goal.HasValue && CamLock) {
 				if (closeToGoal()) {
 					goal = null;
 					locked = false;
