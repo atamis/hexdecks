@@ -8,6 +8,8 @@ namespace game {
         private AudioClip startTrack;
         private AudioClip loopTrack;
         private AudioClip waterTrack;
+		public static AudioClip drawSound = Resources.Load<AudioClip>("Audio/UI/DrawCard");
+		public static AudioClip shuffleSound = Resources.Load<AudioClip> ("Audio/UI/Shuffle");
 		public static AudioClip unlockSound = Resources.Load<AudioClip>("Audio/World/OpenLock");
 		public static AudioClip meleeSound = Resources.Load<AudioClip>("Audio/World/MeleeDamage");
 		public static AudioClip arrowSound = Resources.Load<AudioClip>("Audio/World/RangedDamage");

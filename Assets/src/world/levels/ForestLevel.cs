@@ -38,12 +38,12 @@ namespace game.world.levels {
 			// TUTORIAL TRIGGERS
 			int i = 0;
 			HexLoc[] tlocs = new HexLoc[] {
-				new HexLoc (4, 1, -5),
+				new HexLoc (2, 2, -4),
 				new HexLoc (3, 4, -7),
-				new HexLoc (13, 11, -24), // tactical manuvers
-				new HexLoc (22, 2, -24), // intro to cards
-				new HexLoc (23, 1, -24), // intro to
-				new HexLoc (37, 12, -49),
+				new HexLoc (6, 8, -14),
+				new HexLoc (7, 9, -16),
+				new HexLoc (12, 11, -23),
+				new HexLoc (23, 2, -25),
 			};
 
 			foreach (HexLoc hl in tlocs) {

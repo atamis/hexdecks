@@ -18,6 +18,7 @@ namespace game {
 		public static AudioManager audiom;
 		public static WorldMap world;
 		public static GameLevel level;
+		public static int lvl_id;
 
 		private class LevelRegistery<T> {
 			static readonly Dictionary<int, Func<T>> _dict = new Dictionary<int, Func<T>>();
@@ -33,7 +34,11 @@ namespace game {
 			}
 
 			public static void Register(int id, Func<T> constructor) {
-				_dict.Add (id, constructor);
+				if (!_dict.ContainsKey (id)) {
+					_dict.Add (id, constructor);
+				} else {
+					Debug.Log (String.Format ("A level is already registered for id \"{0}\"", id));
+				}
 			}
 		}
 
@@ -74,6 +79,7 @@ namespace game {
 			p.DrawCards(5);
 
 			UIManager.SetGUI (GUIType.World);
+			lvl_id = id;
 		}
 
         void Update() {

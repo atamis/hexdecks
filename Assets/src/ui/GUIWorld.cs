@@ -224,7 +224,7 @@ namespace game.ui {
                 }
 
                 if (goScreen != null && Time.time - deathTime > 5) {
-                    SceneManager.LoadScene("Main");
+					GameManager.LoadLevel (GameManager.lvl_id);
                 }
 
             }
