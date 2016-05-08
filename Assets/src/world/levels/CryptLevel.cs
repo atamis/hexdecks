@@ -36,6 +36,7 @@ namespace game.world.levels {
 			deck.Add (new KnockBackCard());
 			deck.Add (new KnockBackCard());
 			deck.Add (new WhirlwindCard());
+			deck.Add (new WhirlwindCard());
 			deck.Add (new TeleportCard());
 			deck.Add (new TrapCard());
 			deck.Add (new DisengageCard());
@@ -47,6 +48,8 @@ namespace game.world.levels {
 			deck.Add (new FireballCard());
 			deck.Add (new FlashHealCard());
 			deck.Add (new FlashHealCard());
+			deck.Add(new DiscardHandCard());
+			deck.Add(new DiscardHandCard());
 
 			deck.Shuffle();
 

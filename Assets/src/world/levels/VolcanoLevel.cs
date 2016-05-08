@@ -42,8 +42,8 @@ namespace game.world.levels {
 			deck.Add(new JumpAttackCard());
 			deck.Add(new BoulderCard());
 			deck.Add(new BoulderCard());
-			deck.Add (new FireballCard());
-			deck.Add (new FireballCard());
+			deck.Add (new FlashHealCard());
+			deck.Add(new DiscardHandCard());
 
 			deck.Shuffle();
 

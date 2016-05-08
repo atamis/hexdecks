@@ -38,8 +38,7 @@ namespace game.world.levels {
 			deck.Add(new TeleportCard());
 			deck.Add(new TrapCard());
 			deck.Add(new DisengageCard());
-			deck.Add(new JumpAttackCard());
-			deck.Add(new JumpAttackCard());
+			deck.Add(new DisengageCard());
 
 			deck.Shuffle();
 
