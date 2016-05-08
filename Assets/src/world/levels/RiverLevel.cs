@@ -17,7 +17,13 @@ namespace game.world.levels {
 		public static Sprite t_melee1 = Resources.Load<Sprite>("Sprites/Enemies/T_Merfolk1");
 		public static Sprite t_melee2 = Resources.Load<Sprite>("Sprites/Enemies/T_Merfolk2");
 
-		public RiverLevel() { }
+        public override int playerMaxHealth {
+            get {
+                return 7;
+            }
+        }
+
+        public RiverLevel() { }
 
 		public override int GetNextLevel() { return 3; }
 

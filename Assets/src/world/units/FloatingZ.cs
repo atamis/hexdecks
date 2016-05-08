@@ -15,7 +15,7 @@ namespace game.world {
 
 		public void init(Unit u) {
 			this.u = u;
-			transform.localPosition = LayerV.UnitFX + new Vector3(0, .5f, 0);
+			transform.localPosition = new Vector3 (0, .5f, -1);
             origin = LayerV.UnitFX;
 
             var obj = new GameObject("Z model");

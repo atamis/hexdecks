@@ -32,6 +32,7 @@ namespace game.world.triggers {
 
 		public override void UnitEnter(Unit u) {
 			if (u.GetType() == typeof(HeroUnit)) {
+                AudioManager.playerVictory();
 				UIManager.gc.SetLock (true);
 
 				var menu = new GameObject ("Continue Menu").AddComponent<UIContinueMenu> ();

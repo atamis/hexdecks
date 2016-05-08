@@ -18,7 +18,13 @@ namespace game.world.levels {
 		public static Sprite t_melee1 = Resources.Load<Sprite>("Sprites/Enemies/T_Bat1");
 		public static Sprite t_melee2 = Resources.Load<Sprite>("Sprites/Enemies/T_Bat2");
 
-		public CryptLevel() {}
+        public override int playerMaxHealth {
+            get {
+                return 10;
+            }
+        }
+
+        public CryptLevel() {}
 
 		public override WorldMap GetMap(GameManager gm) {
 			WorldMap map = SaveManager.LoadLevel (GameManager.l, "crypt", gm);

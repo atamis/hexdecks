@@ -25,7 +25,13 @@ namespace game.world.levels {
 			Resources.Load<Sprite>("Sprites/Units/T_Mushboroom2"),
 		};
 
-		public ForestLevel() {}
+        public override int playerMaxHealth {
+            get {
+                return 5;
+            }
+        }
+
+        public ForestLevel() {}
 
 		public override string GetSceneName() {
 			return "Faerie Forest";

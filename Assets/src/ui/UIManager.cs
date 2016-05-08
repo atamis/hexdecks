@@ -8,8 +8,8 @@ namespace game.ui {
 		public static GameCamera gc;
 		public static NotificationManager ntm;
 		public static GUIBase gui { get; private set; }
-
 		private ScreenOverlay overlay;
+		private static UIMessage _msg;
 
 		void Awake() {
 			if (instance != null) {
@@ -78,6 +78,10 @@ namespace game.ui {
 		}
 
 		public static void MakeMessage(string msg) {
+			if (_msg != null) {
+				Destroy (_msg.gameObject);
+			}
+
 			if (gui.GetType () != typeof(GUIWorld)) {
 				Debug.Log ("Can't make a message outside of World!");
 				return;
@@ -88,6 +92,8 @@ namespace game.ui {
 			m.transform.parent = gc.transform;
 			m.transform.localPosition = new Vector3 (-3, -1, Layer.HUD);
 			//gc.SetLock (true);
+
+			_msg = m;
 		}
 	}
 }

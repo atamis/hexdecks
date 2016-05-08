@@ -18,7 +18,13 @@ namespace game.world.levels {
 		public static Sprite t_melee1 = Resources.Load<Sprite>("Sprites/Enemies/T_Bat1");
 		public static Sprite t_melee2 = Resources.Load<Sprite>("Sprites/Enemies/T_Bat2");
 
-		public CatacombLevel() {}
+        public override int playerMaxHealth {
+            get {
+                return 9;
+            }
+        }
+
+        public CatacombLevel() {}
 
 		public override int GetNextLevel() { return 5; }
 

@@ -30,29 +30,13 @@ namespace game.ui.features {
 			}
 
 			void OnMouseDown() {
-				SceneManager.LoadSceneAsync("Main");
-			}
-		}
-
-		private class LibraryPanel : MenuPanel {
-			public override string GetText() {
-				return "Library";
-			}
-
-			void OnMouseDown() {
-				SceneManager.LoadSceneAsync("Library");
+				GameManager.LoadLevel (GameManager.lvl_id);
 			}
 		}
 			
 		private class SettingsPanel : MenuPanel {
 			public override string GetText() {
 				return "Quit";
-			}
-		}
-
-		private class OtherPanel : MenuPanel {
-			public override string GetText() {
-				return "Other";
 			}
 		}
 
@@ -122,10 +106,6 @@ namespace game.ui.features {
 			ResetPanel rp = new GameObject ("Reset Panel").AddComponent<ResetPanel> ();
 			rp.init ();
 			panels.Add (rp);
-
-			LibraryPanel lp = new GameObject ("Library Panel").AddComponent<LibraryPanel> ();
-			lp.init ();
-			panels.Add (lp);
 
 			SettingsPanel sp = new GameObject ("Settings Panel").AddComponent<SettingsPanel> ();
 			sp.init ();

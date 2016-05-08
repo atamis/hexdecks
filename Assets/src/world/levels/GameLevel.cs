@@ -24,5 +24,9 @@ namespace game.world.levels {
 
 		public abstract int GetNextLevel();
         public abstract List<TCGCard> GetChestContents(int chestType);
+
+        public abstract int playerMaxHealth {
+            get;
+        }
     }
 }

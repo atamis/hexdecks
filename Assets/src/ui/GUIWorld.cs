@@ -92,6 +92,7 @@ namespace game.ui {
 				tm.characterSize = 0.04f;
 				tm.font = UIManager.font;
 				tm.GetComponent<Renderer>().material = UIManager.font.material;
+                tm.text = GetText();
 
 				coll = gameObject.AddComponent<PolygonCollider2D> ();
 				coll.isTrigger = true;
@@ -204,7 +205,7 @@ namespace game.ui {
 				}
             }
 
-			void Update() {
+            void Update() {
 				// UPDATE THE CARD LOCATIONS
 				int i = 0;
 				while (i < 5) {
@@ -224,6 +225,7 @@ namespace game.ui {
                 }
 
                 if (goScreen != null && Time.time - deathTime > 5) {
+                    Debug.Log("hit2");
 					GameManager.LoadLevel (GameManager.lvl_id);
                 }
 

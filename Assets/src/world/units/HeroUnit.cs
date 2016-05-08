@@ -24,8 +24,7 @@ namespace game.world.units {
         public override void CheckDeath() {
             if (health <= 0) {
                 dead = true;
-                AudioManager.audioS.Stop();
-                AudioManager.audioS.PlayOneShot(AudioManager.deathSound, 2f);
+                AudioManager.playerDeath();
             }
         }
 
