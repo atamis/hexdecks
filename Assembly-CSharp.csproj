@@ -81,6 +81,7 @@
      <Compile Include="Assets\src\ui\UIManager.cs" />
      <Compile Include="Assets\src\ui\features\UIButton.cs" />
      <Compile Include="Assets\src\ui\features\UICard.cs" />
+     <Compile Include="Assets\src\ui\features\UICardAdded.cs" />
      <Compile Include="Assets\src\ui\features\UIContinueMenu.cs" />
      <Compile Include="Assets\src\ui\features\UIHexMenu.cs" />
      <Compile Include="Assets\src\ui\features\UIMessage.cs" />
