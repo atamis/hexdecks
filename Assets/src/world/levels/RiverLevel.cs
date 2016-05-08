@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using game.tcg;
 using game.tcg.cards;
+using System;
 
 namespace game.world.levels {
 	class RiverLevel : GameLevel {
@@ -80,5 +81,22 @@ namespace game.world.levels {
 		public override Sprite GetWaterSprite() {
 			return t_water;
 		}
-	}
+
+        public override List<TCGCard> GetChestContents(int chestType) {
+            var cards = new List<TCGCard>();
+
+            switch (chestType) {
+                case 0:
+                    cards.Add(new BoulderCard());
+                    cards.Add(new BoulderCard());
+                    break;
+                case 1:
+                    cards.Add(new FlashHealCard());
+                    break;
+            }
+
+            return cards;
+
+        }
+    }
 }

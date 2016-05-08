@@ -23,5 +23,6 @@ namespace game.world.levels {
 		public abstract Sprite GetArrowSprite();
 
 		public abstract int GetNextLevel();
-	}
+        public abstract List<TCGCard> GetChestContents(int chestType);
+    }
 }

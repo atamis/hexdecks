@@ -4,6 +4,7 @@ using game.tcg;
 using game.tcg.cards;
 using game.world.triggers;
 using game.math;
+using System;
 
 namespace game.world.levels {
 	class ForestLevel : GameLevel {
@@ -103,5 +104,19 @@ namespace game.world.levels {
 		public override Sprite GetWaterSprite() {
 			return t_water;
 		}
-	}
+
+        public override List<TCGCard> GetChestContents(int chestType) {
+            var cards = new List<TCGCard>();
+
+            switch (chestType) {
+                case 0:
+                    cards.Add(new SlideCard());
+                    cards.Add(new SlideCard());
+                    break;
+            }
+
+            return cards;
+
+        }
+    }
 }

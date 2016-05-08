@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using game.tcg.cards;
 using game.ui;
+using System.Collections.Generic;
 
 namespace game.world.triggers {
 	abstract class Trigger : MonoBehaviour {
@@ -104,12 +105,12 @@ namespace game.world.triggers {
 	}
 
     class ChestTrigger : Trigger {
-        TCGCard c;
         private AudioManager am;
+        private int chestType;
 
-        public void init(Hex h, TCGCard c) {
+        public void init(Hex h, int chestType) {
             base.init(h);
-            this.c = c;
+            this.chestType = chestType;
         }
 
         public override Sprite getSprite() {
@@ -118,10 +119,13 @@ namespace game.world.triggers {
 
         public override void UnitEnter(Unit u) {
             if (u.GetType() == typeof(HeroUnit)) {
-                print("Added " + c + " to the player's deck");
-                AudioManager.audioS.PlayOneShot(AudioManager.unlockSound);
-                GameManager.p.deck.Add(c);
-                UIManager.ntm.AddText(GameManager.l.HexPixel(h.loc), "+card", Color.black);
+                List<TCGCard> cards = GameManager.level.GetChestContents(chestType);
+                foreach (TCGCard c in cards) {
+                    print("Added " + c + " to the player's deck");
+                    AudioManager.audioS.PlayOneShot(AudioManager.unlockSound);
+                    GameManager.p.deck.Insert(0, c);
+                    UIManager.ntm.AddText(GameManager.l.HexPixel(h.loc), "+card" + c.GetName(), Color.black);
+                }
 				Suicide();
             }
         }
