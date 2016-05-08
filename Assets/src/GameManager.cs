@@ -72,9 +72,9 @@ namespace game {
 			}
 
             if(id == 0 || id == 2 || id == 4) {
-                AudioManager.playTrack2();
+                AudioManager.playTrack1();
             } else {
-				AudioManager.playTrack1();
+				AudioManager.playTrack2();
             }
 
 			level = LevelRegistery<GameLevel>.Create (id);

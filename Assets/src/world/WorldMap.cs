@@ -112,7 +112,7 @@ namespace game.world {
 
             if (alerted)
             {
-                AudioManager.audioS.PlayOneShot(AudioManager.aggroSound, 2f);
+                AudioManager.effects.PlayOneShot(AudioManager.aggroSound, 2f);
                 alerted = false;
             }
 

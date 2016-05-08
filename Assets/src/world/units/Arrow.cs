@@ -76,7 +76,7 @@ namespace game.world {
                     transform.localPosition += direction.normalized * speed;
 
                     if ((a.target.transform.position - transform.position).magnitude < 0.5f) {
-						AudioManager.audioS.PlayOneShot(AudioManager.arrowSound);
+						AudioManager.effects.PlayOneShot(AudioManager.arrowSound);
                         a.target.ApplyDamage(1, a.u);
                         Destroy(gameObject);
                     }
