@@ -197,7 +197,7 @@ namespace game.world.units {
 
 	class RangedEnemy : EnemyUnit {
 
-        Sprite[] sprites = GameManager.level.GetRangedSprite ();
+        Sprite[] sprites = GameManager.level.GetRangedSprite();
         const float spriteInterval = .8f;
         float lastSwitch;
         int idx;
