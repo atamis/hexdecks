@@ -71,6 +71,14 @@ namespace game {
 				Destroy (world.hexes.gameObject);
 			}
 
+            if(id == 0 || id == 2 || id == 4)
+            {
+                AudioManager.playTrack2();
+            }
+            else
+            {
+                AudioManager.playTrack1();
+            }
 			level = LevelRegistery<GameLevel>.Create (id);
 			world = level.GetMap (instance);
 
@@ -81,6 +89,8 @@ namespace game {
 			UIManager.SetGUI (GUIType.World);
 			lvl_id = id;
 		}
+
+
 
         void Update() {
 			if (UIManager.gui.GetType () == typeof(GUIWorld)) {
