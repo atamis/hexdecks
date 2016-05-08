@@ -1,7 +1,7 @@
         WWWWWWWWWWWWWwwwwWWWWWWWWWWWWWW
        WWW___________WWwwwWWWWW_____WWWWW         
-      WWW_c_______W___WWwwwWW_____m_____WW        
-       WWW_c____WWWW___WwwwW____WWW____WWWW       
+      WWW_1_______W___WWwwwWW_____m_____WW        
+       WWW______WWWW___WwwwW____WWW____WWWW       
    WWWWWWWWWWW___WWWWW___Wwwww___WWWW___WWWW
  WWWWWWWWWWWWWWWW   WWW___Www_ww_wWWWW__WWWWW
 WW_______MwwWWW    WWw____w__w_wwwWWWW____WWWW
@@ -9,7 +9,7 @@ W___wwwwr___rWWWWWWW___w___w__w_wwwwWWW____WWWW
 WrrrWWWWW______WWWWWW_r__r_wr__WWwwwwWWWW____WWW
 W___WWWWWWW_____WWWWW____w___WWWWWWwwwWWWWW____WW
 W___WW   WWW__M_WWWWWWW_M__WWWW   WWwwwww__m_____WW
-W___WWW   WWWW___WWWWW___WWWWW   WWWWWwwwwww______W
+W___WWW   WWWW_0_WWWWW___WWWWW   WWWWWwwwwww______W
 WmmmWW    WWWWW_____w_______WWW   WWWWW_www_wmw___W
 W___WWW     WWWW__M__w__r_____WWW   WW____mw_w_ww_W
 W____WWWWW     WWWW_w______WWWW    WWWW_____w_mwwww

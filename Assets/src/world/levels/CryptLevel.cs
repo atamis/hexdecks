@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using game.tcg;
 using game.tcg.cards;
+using System;
 
 namespace game.world.levels {
 	class CryptLevel : GameLevel {
@@ -60,7 +61,7 @@ namespace game.world.levels {
 		}
 
 		public override Sprite GetPassableSprite() {
-			float random = Random.value;
+			float random = UnityEngine.Random.value;
 			if (random < 0.1f) {
 				return t_sprite1a;
 			}
@@ -92,5 +93,20 @@ namespace game.world.levels {
 		public override Sprite GetWaterSprite() {
 			return t_water;
 		}
-	}
+
+        public override List<TCGCard> GetChestContents(int chestType) {
+            var cards = new List<TCGCard>();
+
+            switch (chestType) {
+                case 0:
+                    cards.Add(new DoubleActionCard());
+                    break;
+                case 1:
+                    cards.Add(new WhirlwindCard());
+                    break;
+            }
+
+            return cards;
+        }
+    }
 }
