@@ -53,7 +53,7 @@ namespace game.tcg.cards {
 
         public override string getDescription()
         {
-            return "Jump to an unoccupied hex. Combo.";
+            return "Jump to an unoccupied hex and gain an extra action.";
         }
     }
 }
