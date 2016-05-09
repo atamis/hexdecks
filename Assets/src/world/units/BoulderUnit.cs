@@ -17,5 +17,13 @@ namespace game.world.units {
             return Resources.Load<Sprite>("Sprites/Tiles/T_Boulder");
         }
 
+        public override void ApplyDamage(int v, Unit source)
+        {
+            if(v >= 0)
+            {
+                AudioManager.effects.PlayOneShot(AudioManager.boulderDamage);
+            }
+            base.ApplyDamage(v, source);
+        }
     }
 }

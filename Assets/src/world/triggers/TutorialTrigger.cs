@@ -7,12 +7,12 @@ using game.math;
 namespace game.world.triggers {
 	class TutorialTrigger : Trigger {
 		private string[] messages = new string[] {
-			"Greetings! To move around the world click on the tiles!", 					// 0
-			"Whenver you move, your enemies move as well, they get to attack too!",						// 3
-			"A vicious enemies stand in your way! Navigate to them to attack!",							// 2
-			"The enemy has seen you! Now everytime you move, they will move as well!",
-			"You also have special cards that you can play! Hover over a card to see where you can use it.",	// 4
-			"Scattered around the world are some chests filled with ancient magicks. Collect them.", 	// 5
+			"Greetings! Use WASD to move the camera, or press shift to lock the camera on you (the hero).", 					// 0
+			"The enemy has seen you! Click on an adjacent enemy to attack them!",						// 3
+			"The enemies attack too! Mousing over an enemy shows their health and attack pattern.",							// 2
+			"Sleeping enemies don't move, but if you're close enough they wake up!",
+			"Play cards to use special attacks! Hovering over a card highlights where you can use it.",	// 4
+			"Open chests to unlock new cards!", 	// 5
 			"Your objective is to reach purple portal!",
 			"It was a favorite prank of the merfolk to drop a boulder on an unsuspecting friend",		// 6
 			"Now that you've harnessed the power of the efreet, you can cast fireballs",				// 7

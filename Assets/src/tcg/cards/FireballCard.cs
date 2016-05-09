@@ -49,7 +49,7 @@ namespace game.tcg.cards {
 
         public override string getDescription()
         {
-            return "Deal 3 damage to an adjacent enemy.";
+            return "Deal 3 damage to an enemy up to 2 hexes away.";
         }
     }
 }

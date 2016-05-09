@@ -37,6 +37,15 @@ namespace game.world.units {
             w.enemies.Remove(this);
         }
 
+        public override void ApplyDamage(int v, Unit source)
+        {
+            if (v >= 0)
+            {
+                AudioManager.enemyDamage();
+            }
+            base.ApplyDamage(v, source);
+        }
+
     }
 
 	class MeleeEnemy : EnemyUnit {
@@ -89,7 +98,7 @@ namespace game.world.units {
 				var dist = h.loc.Distance(target.h.loc);
 				if (dist == 1)
 				{
-					AudioManager.audioS.PlayOneShot(AudioManager.meleeSound);
+					AudioManager.effects.PlayOneShot(AudioManager.meleeSound);
                     target.ApplyDamage(1, this);
                     attacking = true;
                     attackStart = timer;
@@ -188,7 +197,7 @@ namespace game.world.units {
 
 	class RangedEnemy : EnemyUnit {
 
-        Sprite[] sprites = GameManager.level.GetRangedSprite ();
+        Sprite[] sprites = GameManager.level.GetRangedSprite();
         const float spriteInterval = .8f;
         float lastSwitch;
         int idx;

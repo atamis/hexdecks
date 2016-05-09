@@ -122,7 +122,7 @@ namespace game.world.triggers {
                 List<TCGCard> cards = GameManager.level.GetChestContents(chestType);
                 foreach (TCGCard c in cards) {
                     print("Added " + c + " to the player's deck");
-                    AudioManager.audioS.PlayOneShot(AudioManager.unlockSound);
+                    AudioManager.effects.PlayOneShot(AudioManager.unlockSound);
                     GameManager.p.deck.Insert(0, c);
                     UIManager.ntm.AddText(new Vector3(GameManager.l.HexPixel(h.loc).x - 4,
 										GameManager.l.HexPixel(h.loc).y, 0), "You found a " + c.GetName() + " card!", Color.black);

@@ -61,7 +61,7 @@ namespace game.ui {
 					Destroy (GameManager.world.hexes.gameObject);
 				}
 
-                AudioManager.playTrack2();
+                AudioManager.playTrack1();
 
                 break;
 

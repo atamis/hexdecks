@@ -94,7 +94,7 @@ namespace game.world.units {
 			}
 		}
 
-		internal void ApplyDamage(int v, Unit source) {
+		public virtual void ApplyDamage(int v, Unit source) {
 			if (!invincible.isActive()) {
 				print("Applying " + v + " damage");
                 Color c;

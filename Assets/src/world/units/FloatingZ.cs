@@ -9,7 +9,7 @@ namespace game.world {
 		public Unit u;
 		public StatusModel model;
         private float deathTimer;
-        private const float lifespan = 2f;
+        private const float lifespan = 2.4f;
 
         private Vector3 origin;
 
