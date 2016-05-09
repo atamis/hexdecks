@@ -32,7 +32,7 @@ namespace game.ui {
 
         void Update() {
 			// UPDATE HUD LOCATION
-			Vector3 pos = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width / 2, Screen.height * .1f, 10));
+			Vector3 pos = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width / 2, Screen.height * .09f, 10));
 			ib.transform.position = new Vector3 (pos.x, pos.y, Layer.HUD);
 
 			if (Input.GetKeyDown (KeyCode.Escape)) {

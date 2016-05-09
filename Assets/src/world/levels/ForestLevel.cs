@@ -44,7 +44,9 @@ namespace game.world.levels {
 
 			// TUTORIAL TRIGGERS
 			int i = 0;
+
 			HexLoc[] tlocs = new HexLoc[] {
+				new HexLoc (0, 3, -3),
 				new HexLoc (2, 2, -4),
 				new HexLoc (3, 4, -7),
 				new HexLoc (6, 8, -14),
@@ -52,6 +54,7 @@ namespace game.world.levels {
 				new HexLoc (12, 11, -23),
 				new HexLoc (23, 2, -25),
 			};
+
 
 			foreach (HexLoc hl in tlocs) {
 				TutorialTrigger tt = new GameObject("Tutorial Trigger").AddComponent<TutorialTrigger>();

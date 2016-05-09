@@ -171,7 +171,7 @@ namespace game.world.triggers {
 
 		void Update() {
 			ticks += 0.005f;
-			sr.color = new Color(1, 1, 1, Mathf.Abs (Mathf.Sin (ticks)));
+			sr.color = new Color(1, 1, 1, Mathf.Abs (Mathf.Sin (ticks)) + 0.25f);
 		}
 	}
 }

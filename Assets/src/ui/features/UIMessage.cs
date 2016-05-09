@@ -13,19 +13,35 @@ namespace game.ui {
 			private SpriteRenderer sr;
 			private BoxCollider2D coll;
 			private UIMessage mb;
+			private GameObject textObj;
+			private TextMesh tm;
 
 			public void init(UIMessage mb) {
 				this.mb = mb;
 
-				transform.localPosition = new Vector3 (1.5f, -.75f, -0.1f);
+				transform.localPosition = new Vector3 (0, -1f, -0.1f);
 
 				sr = gameObject.AddComponent<SpriteRenderer> ();
 				sr.sprite = Resources.Load<Sprite> ("Sprites/UI/T_Wood");
 
 				coll = gameObject.AddComponent<BoxCollider2D> ();
 				coll.isTrigger = true;
-			}
 
+				textObj = new GameObject("Card Text");
+				textObj.transform.parent = transform;
+				textObj.transform.localPosition = new Vector3(0, 0, -.1f);
+
+				tm = textObj.AddComponent<TextMesh>();
+				tm.fontSize = 168;
+				tm.characterSize = 0.04f;
+				tm.color = Color.black;
+				tm.alignment = TextAlignment.Center;
+				tm.anchor = TextAnchor.MiddleCenter;
+				tm.text = "Exit";
+				tm.font = UIManager.font;
+				tm.GetComponent<Renderer>().material = UIManager.font.material;
+			}
+				
 			void OnMouseDown() {
 				Destroy (this.mb.gameObject);
 			}
@@ -42,7 +58,7 @@ namespace game.ui {
 			cb = new GameObject("Exit Button").AddComponent<UICloseButton> ();
 			cb.init (this);
 
-			cb.transform.localScale = new Vector3 (.25f, .5f, 1);
+			cb.transform.localScale = new Vector3 (.5f, .5f, 1);
 
 			cb.transform.parent = transform;
 
