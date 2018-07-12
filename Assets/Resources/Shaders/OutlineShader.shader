@@ -1,4 +1,6 @@
-﻿Shader "Custom/OutlineShader" {
+﻿// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
+
+Shader "Custom/OutlineShader" {
 	Properties {
 		[PerRendererData] _MainTex ("Texture", 2D) = "white" {}
 		_Color ("Tint", Color) = (1,1,1,1)
@@ -51,7 +53,7 @@
 
 			v2f vert (appdata_t v) {
 				v2f o;
-				o.pos = mul(UNITY_MATRIX_MVP, v.pos);
+				o.pos = UnityObjectToClipPos(v.pos);
 				o.uv = v.uv;
 				o.col = v.col * _Color;
 
