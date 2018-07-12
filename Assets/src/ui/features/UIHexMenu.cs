@@ -33,12 +33,6 @@ namespace game.ui.features {
 				GameManager.LoadLevel (GameManager.lvl_id);
 			}
 		}
-			
-		private class SettingsPanel : MenuPanel {
-			public override string GetText() {
-				return "Quit";
-			}
-		}
 
 		private class MenuPanel : MonoBehaviour {
 			private SpriteRenderer sr;
@@ -106,10 +100,6 @@ namespace game.ui.features {
 			ResetPanel rp = new GameObject ("Reset Panel").AddComponent<ResetPanel> ();
 			rp.init ();
 			panels.Add (rp);
-
-			SettingsPanel sp = new GameObject ("Settings Panel").AddComponent<SettingsPanel> ();
-			sp.init ();
-			panels.Add (sp);
 
 			float scale = 2.0f;
 			int i = 0;
