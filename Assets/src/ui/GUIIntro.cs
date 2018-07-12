@@ -43,22 +43,22 @@ namespace game.ui {
 			tm.anchor = TextAnchor.MiddleCenter;
 			tm.fontSize = 164;
 			tm.characterSize = 0.05f;
-			tm.font = UIManager.font;
-			tm.GetComponent<Renderer>().material = UIManager.font.material;
+			tm.font = UIManager.GetFont();
+			tm.GetComponent<Renderer>().material = UIManager.GetFont().material;
 
-			credits = new GameObject("Title Text");
+            credits = new GameObject("Title Text");
 			credits.transform.parent = transform;
 			credits.transform.localPosition = new Vector3(0, -4, -0.1f);
 
 			TextMesh tm2 = credits.AddComponent<TextMesh>();
 			tm2.text = "Created By: Dan Marsh, Nick Care, Andrew Amis, Robert Tomcik, Dan Karcher";
 			tm2.color = Color.white;
-			tm2.font = UIManager.font;
+			tm2.font = UIManager.GetFont();
 			tm2.alignment = TextAlignment.Center;
 			tm2.anchor = TextAnchor.MiddleCenter;
 			tm2.fontSize = 64;
 			tm2.characterSize = 0.05f;
-			tm2.GetComponent<Renderer>().material = UIManager.font.material;
+			tm2.GetComponent<Renderer>().material = UIManager.GetFont().material;
 		}
 
 		private class UILoadButton : MonoBehaviour {
@@ -115,12 +115,12 @@ namespace game.ui {
 				tm = textObj.AddComponent<TextMesh>();
 				tm.text = GameManager.GetLevel(lvl).GetSceneName();
 				tm.color = Color.black;
-				tm.font = UIManager.font;
+				tm.font = UIManager.GetFont();
 				tm.alignment = TextAlignment.Center;
 				tm.anchor = TextAnchor.MiddleCenter;
 				tm.fontSize = 89;
 				tm.characterSize = 0.05f;
-				tm.GetComponent<Renderer>().material = UIManager.font.material;
+				tm.GetComponent<Renderer>().material = UIManager.GetFont().material;
 			}
 
 			void OnMouseEnter() {

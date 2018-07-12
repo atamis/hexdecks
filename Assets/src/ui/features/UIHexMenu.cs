@@ -71,8 +71,8 @@ namespace game.ui.features {
 				tm.anchor = TextAnchor.MiddleCenter;
 				tm.fontSize = 74;
 				tm.characterSize = 0.04f;
-				tm.font = UIManager.font;
-				tm.GetComponent<Renderer>().material = UIManager.font.material;
+				tm.font = UIManager.GetFont();
+				tm.GetComponent<Renderer>().material = UIManager.GetFont().material;
 
 				tm.transform.localEulerAngles = new Vector3 (0, 0, -60);
 				tm.transform.localPosition = new Vector2 (.25f, .27f);

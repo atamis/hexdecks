@@ -14,12 +14,17 @@ namespace game.world.triggers {
 		const float spriteInterval = .8f;
 		float lastSwitch;
 
-		private Sprite[] sprites = new Sprite[] {
-			Resources.Load<Sprite>("Sprites/Tiles/T_Entrance0"),
-			Resources.Load<Sprite>("Sprites/Tiles/T_Entrance1"),
-		};
+        private Sprite[] sprites;
+
+        private void loadResources() {
+            sprites = new Sprite[] {
+                Resources.Load<Sprite>("Sprites/Tiles/T_Entrance0"),
+                Resources.Load<Sprite>("Sprites/Tiles/T_Entrance1"),
+            };
+        }
 
 		public override void init(Hex h) {
+            loadResources();
 			base.init(h);
 		}
 

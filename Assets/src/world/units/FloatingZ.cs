@@ -38,11 +38,16 @@ namespace game.world {
 		}
 
 		public class StatusModel : MonoBehaviour {
-			private Sprite tex = Resources.Load<Sprite>("Particle/Zzz");
+            private Sprite tex;
 			public FloatingZ z;
 			public SpriteRenderer sr;
 
+            private void loadResource() {
+                tex = Resources.Load<Sprite>("Particle/Zzz");
+            }
+
             public void init(FloatingZ z) {
+                loadResource();
                 this.z = z;
 
                 //transform.localScale = new Vector3(2, 2, 2);

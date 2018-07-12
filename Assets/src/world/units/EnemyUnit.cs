@@ -155,10 +155,7 @@ namespace game.world.units {
     }
 
 	class BigMeleeEnemy: MeleeEnemy {
-        Sprite[] sprites = new Sprite[2] {
-            Resources.Load<Sprite>("Sprites/Enemies/T_ShieldGoblinIdle1"),
-            Resources.Load<Sprite>("Sprites/Enemies/T_ShieldGoblinIdle2")
-        };
+        Sprite[] sprites;
         const float spriteInterval = .8f;
         float lastSwitch;
         int idx;
@@ -166,6 +163,11 @@ namespace game.world.units {
 
         public new void init(WorldMap w, Hex h)
         {
+            sprites = new Sprite[2] {
+                Resources.Load<Sprite>("Sprites/Enemies/T_ShieldGoblinIdle1"),
+                Resources.Load<Sprite>("Sprites/Enemies/T_ShieldGoblinIdle2")
+            };
+
             base.init(w, h, 2);
             status.model.sr.enabled = true;
 
@@ -391,16 +393,18 @@ namespace game.world.units {
         private const int maxMinions = 2;
         private List<MeleeEnemy> minions;
 
-        Sprite[] sprites = new Sprite[ numSprites ] {
-            Resources.Load<Sprite>("Sprites/Enemies/T_Summoner1"),
-            Resources.Load<Sprite>("Sprites/Enemies/T_Summoner2")
-        };
+        Sprite[] sprites;
         const float spriteInterval = .8f;
         float lastSwitch;
         int idx;
 
         public new void init(WorldMap w, Hex h)
         {
+            sprites = new Sprite[numSprites] {
+                Resources.Load<Sprite>("Sprites/Enemies/T_Summoner1"),
+                Resources.Load<Sprite>("Sprites/Enemies/T_Summoner2")
+            };
+
             base.init(w, h, 1);
             status.model.sr.enabled = true;
 

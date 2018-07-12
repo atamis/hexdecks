@@ -38,8 +38,8 @@ namespace game.ui {
 				tm.alignment = TextAlignment.Center;
 				tm.anchor = TextAnchor.MiddleCenter;
 				tm.text = "Exit";
-				tm.font = UIManager.font;
-				tm.GetComponent<Renderer>().material = UIManager.font.material;
+				tm.font = UIManager.GetFont();
+				tm.GetComponent<Renderer>().material = UIManager.GetFont().material;
 			}
 				
 			void OnMouseDown() {

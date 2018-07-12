@@ -91,7 +91,7 @@ namespace game.ui {
 				tm.fontSize = 148;
 				tm.characterSize = 0.04f;
 				tm.font = UIManager.font;
-				tm.GetComponent<Renderer>().material = UIManager.font.material;
+                tm.GetComponent<Renderer>().material = UIManager.font.material;
                 tm.text = GetText();
 
 				coll = gameObject.AddComponent<PolygonCollider2D> ();
@@ -137,8 +137,8 @@ namespace game.ui {
 					tm.anchor = TextAnchor.MiddleCenter;
 					tm.fontSize = 148;
 					tm.characterSize = 0.03f;
-					tm.font = UIManager.font;
-					tm.GetComponent<Renderer>().material = UIManager.font.material;
+                    tm.font = UIManager.GetFont(); ;
+					tm.GetComponent<Renderer>().material = UIManager.GetFont().material;
 				}
 
 				void Update() {

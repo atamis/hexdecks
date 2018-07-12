@@ -9,11 +9,18 @@ using System.Collections;
 namespace game.render {
 	class RenderManager : MonoBehaviour {
 		public static RenderManager instance;
-		public ParticleSystem dust = Resources.Load<ParticleSystem> ("Particle/DustParticle");
-		public ParticleSystem bubbles = Resources.Load<ParticleSystem> ("Particle/BubbleParticle");
-		public ParticleSystem smoke = Resources.Load<ParticleSystem> ("Particle/SmokeParticle");
+        public ParticleSystem dust;
+        public ParticleSystem bubbles;
+        public ParticleSystem smoke;
+
+        private void loadResources() {
+            dust = Resources.Load<ParticleSystem>("Particle/DustParticle");
+            bubbles = Resources.Load<ParticleSystem>("Particle/BubbleParticle");
+            smoke = Resources.Load<ParticleSystem>("Particle/SmokeParticle");
+        }
 
 		void Awake() {
+            loadResources();
 			if (instance != null) {
 				
 			}

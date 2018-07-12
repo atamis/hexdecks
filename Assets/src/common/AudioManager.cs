@@ -12,23 +12,16 @@ namespace game {
         public static AudioClip track1;
         public static AudioClip track2;
         public static AudioClip waterTrack;
-		public static AudioClip drawSound = Resources.Load<AudioClip>("Audio/UI/DrawCard");
-		public static AudioClip shuffleSound = Resources.Load<AudioClip> ("Audio/UI/Shuffle");
-		public static AudioClip unlockSound = Resources.Load<AudioClip>("Audio/World/OpenLock");
-		public static AudioClip meleeSound = Resources.Load<AudioClip>("Audio/World/MeleeDamage");
-		public static AudioClip arrowSound = Resources.Load<AudioClip>("Audio/World/RangedDamage");
-        public static AudioClip aggroSound = Resources.Load<AudioClip>("Audio/World/Aggro Sound");
-        public static AudioClip deathSound = Resources.Load<AudioClip>("Audio/World/PlayerDies");
-        public static AudioClip victorySound = Resources.Load<AudioClip>("Audio/World/VictoryMusic");
-        public static AudioClip boulderDamage = Resources.Load<AudioClip>("Audio/World/enemy damage sounds/boulder damage");
-        public static AudioClip[] enemySounds = new AudioClip[5]
-        {
-            Resources.Load<AudioClip>("Audio/World/enemy damage sounds/goblin 1"),
-            Resources.Load<AudioClip>("Audio/World/enemy damage sounds/goblin 2"),
-            Resources.Load<AudioClip>("Audio/World/enemy damage sounds/goblin 3"),
-            Resources.Load<AudioClip>("Audio/World/enemy damage sounds/goblin 4"),
-            Resources.Load<AudioClip>("Audio/World/enemy damage sounds/goblin 5")
-        };
+        public static AudioClip drawSound;
+        public static AudioClip shuffleSound;
+        public static AudioClip unlockSound;
+        public static AudioClip meleeSound;
+        public static AudioClip arrowSound;
+        public static AudioClip aggroSound;
+        public static AudioClip deathSound;
+        public static AudioClip victorySound;
+        public static AudioClip boulderDamage;
+        public static AudioClip[] enemySounds;
         public static int i;
         public static bool vfade;
         public static bool t1fade;
@@ -40,10 +33,33 @@ namespace game {
         public static AudioClip waterLoop;
         //private bool looping = false;
 
-        void Start() {
+        private void loadResources() {
+            drawSound = Resources.Load<AudioClip>("Audio/UI/DrawCard");
+            shuffleSound = Resources.Load<AudioClip>("Audio/UI/Shuffle");
+            unlockSound = Resources.Load<AudioClip>("Audio/World/OpenLock");
+            meleeSound = Resources.Load<AudioClip>("Audio/World/MeleeDamage");
+            arrowSound = Resources.Load<AudioClip>("Audio/World/RangedDamage");
+            aggroSound = Resources.Load<AudioClip>("Audio/World/Aggro Sound");
+            deathSound = Resources.Load<AudioClip>("Audio/World/PlayerDies");
+            victorySound = Resources.Load<AudioClip>("Audio/World/VictoryMusic");
+
+            enemySounds = new AudioClip[5] {
+                Resources.Load<AudioClip>("Audio/World/enemy damage sounds/goblin 1"),
+                Resources.Load<AudioClip>("Audio/World/enemy damage sounds/goblin 2"),
+                Resources.Load<AudioClip>("Audio/World/enemy damage sounds/goblin 3"),
+                Resources.Load<AudioClip>("Audio/World/enemy damage sounds/goblin 4"),
+                Resources.Load<AudioClip>("Audio/World/enemy damage sounds/goblin 5")
+            };
+
             track1 = Resources.Load<AudioClip>("Audio/Soundtrack/Track 2");
             track2 = Resources.Load<AudioClip>("Audio/Soundtrack/Track 1 part 2");
             waterLoop = Resources.Load<AudioClip>("Audio/World/water/water sound good for loop");
+
+            
+        }
+
+        void Start() {
+            loadResources();
 
             t1 = gameObject.AddComponent<AudioSource>();
             t1.clip = track1;

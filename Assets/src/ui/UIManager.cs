@@ -4,12 +4,31 @@ using System.Collections;
 namespace game.ui {
 	class UIManager : MonoBehaviour {
 		public static UIManager instance;
-		public static Font font = Resources.Load<Font>("Fonts/LeagueSpartan-Bold");
 		public static GameCamera gc;
 		public static NotificationManager ntm;
 		public static GUIBase gui { get; private set; }
 		private ScreenOverlay overlay;
 		private static UIMessage _msg;
+
+
+        private static Font _font;
+
+        public static Font font {
+            get {
+                if (!_font) {
+                    _font = GetFont();
+                }
+                return _font;
+            }
+        }
+
+        public static Font GetFont() {
+            return Resources.Load<Font>("Fonts/leaguespartan-bold");
+        }
+
+        private void loadResources() {
+            _font = GetFont();
+        }
 
 		void Awake() {
 			if (instance != null) {

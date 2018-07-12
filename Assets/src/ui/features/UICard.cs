@@ -57,8 +57,8 @@ namespace game.ui {
 			tm.fontSize = 148;
 			tm.characterSize = 0.008f;
 			tm.color = Color.black;
-			tm.font = UIManager.font;
-			tm.GetComponent<Renderer>().material = UIManager.font.material;
+			tm.font = UIManager.GetFont();
+			tm.GetComponent<Renderer>().material = UIManager.GetFont().material;
 
             var artObj = new GameObject("Card Art");
             artObj.transform.parent = transform;
