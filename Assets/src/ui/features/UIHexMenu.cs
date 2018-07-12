@@ -56,7 +56,7 @@ namespace game.ui.features {
 
 				textObj = new GameObject("UI Text");
 				textObj.transform.parent = transform;
-				textObj.transform.localPosition = new Vector3(0, 0, 0);
+                textObj.transform.localPosition = new Vector3(0, 0, Layer.HUD);
 
 				tm = textObj.AddComponent<TextMesh>();
 				tm.text = GetText();
