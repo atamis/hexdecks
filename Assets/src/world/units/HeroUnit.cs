@@ -27,10 +27,10 @@ namespace game.world.units {
         }
 
         public override void CheckDeath() {
-            /*if (health <= 0) {
+            if (health <= 0) {
                 dead = true;
                 AudioManager.playerDeath();
-            }*/
+            }
         }
 
         public override Sprite getSprite() {
